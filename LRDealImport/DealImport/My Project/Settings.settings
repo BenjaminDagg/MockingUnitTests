@@ -1,0 +1,57 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="EdealDBCatalog" Type="System.String" Scope="User">
+      <Value Profile="(Default)">eDeal</Value>
+    </Setting>
+    <Setting Name="DatabaseUserID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mas</Value>
+    </Setting>
+    <Setting Name="DatabasePassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">J~6Gl#hJ</Value>
+    </Setting>
+    <Setting Name="DataFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">E:\Data\</Value>
+    </Setting>
+    <Setting Name="DataSourceFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}_ExportData.xml</Value>
+    </Setting>
+    <Setting Name="FreeSpaceCheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AppAuthList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LRDealImport.exe,DgeSqlDataAccess.dll,DgeHashLib.dll</Value>
+    </Setting>
+    <Setting Name="MDIStartLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">60, 60</Value>
+    </Setting>
+    <Setting Name="MDIStartSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1200, 800</Value>
+    </Setting>
+    <Setting Name="MDIStartFWS" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="MinDealGenVersion" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">5006006004</Value>
+    </Setting>
+    <Setting Name="AddBankLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">60, 60</Value>
+    </Setting>
+    <Setting Name="AddBankSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">594, 370</Value>
+    </Setting>
+    <Setting Name="AboutFormLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">160, 60</Value>
+    </Setting>
+    <Setting Name="AboutFormSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">540, 400</Value>
+    </Setting>
+    <Setting Name="LotteryRetailDBCatalog" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LotteryRetail</Value>
+    </Setting>
+    <Setting Name="DatabaseServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(local)</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

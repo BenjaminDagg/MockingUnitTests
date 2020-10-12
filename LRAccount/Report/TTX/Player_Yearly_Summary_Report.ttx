@@ -1,0 +1,12 @@
+PlayerId	Long
+LastName	String	30	
+FirstName	String	20	
+Sex	String	1
+DOB	Date
+AccountNo	String	16
+TransAmt	Currency
+Balance		Currency
+TransID	Short
+TransDesc	String	16
+PlayCost	Currency
+TransDate	Date

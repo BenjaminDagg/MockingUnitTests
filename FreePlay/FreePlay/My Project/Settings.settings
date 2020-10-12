@@ -1,0 +1,57 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="DBKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">o~dJJ@Ax/</Value>
+    </Setting>
+    <Setting Name="COMBaudRate" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">38400</Value>
+    </Setting>
+    <Setting Name="COMDataBits" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="COMParity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="COMStopBits" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="COMHandShake" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">XonXoff</Value>
+    </Setting>
+    <Setting Name="COMPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM1</Value>
+    </Setting>
+    <Setting Name="ReportWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:80/ReportServer/ReportService2005.asmx</Value>
+    </Setting>
+    <Setting Name="ReportPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">FreePlayReports</Value>
+    </Setting>
+    <Setting Name="ReportServerURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost/ReportServer</Value>
+    </Setting>
+    <Setting Name="ReportViewLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="ReportViewSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">550, 400</Value>
+    </Setting>
+    <Setting Name="ApplicationTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Restricted Credit</Value>
+    </Setting>
+    <Setting Name="VoucherTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Play-Only Credits</Value>
+    </Setting>
+    <Setting Name="AppAuthList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">FreePlay.exe,DgeSqlDataAccess.dll,DgeSmartForm.dll,DgeHashLib.dll</Value>
+    </Setting>
+    <Setting Name="EnableReports" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DBConnect" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=(local);Initial Catalog=LotteryRetail;User Id=tp;Password={0};</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

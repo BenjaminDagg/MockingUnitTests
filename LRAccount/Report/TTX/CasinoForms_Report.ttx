@@ -1,0 +1,10 @@
+FormNum	String	10	
+CostPerTab	Currency		
+NumbOfRolls	Number		
+TabsPerRoll	Number		
+TotalIn	Currency		
+TotalOut	Currency		
+TotalHold	Currency		
+PayOutPerc	String	5	
+HoldPerc	String	5	
+TotalWinningTabs	String	2	

@@ -1,0 +1,6 @@
+DollarsPlayed	Currency		
+PrizesWon	Currency		
+JackpotPrizesWon	Currency		
+NetRevenue	Currency		
+TotalVoucherPayments	Currency		
+RetailRevShare	Number		

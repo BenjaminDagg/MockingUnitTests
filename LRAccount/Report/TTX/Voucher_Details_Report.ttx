@@ -1,0 +1,6 @@
+VoucherId	Long		
+Barcode	String	18	
+CreateDt	Date		
+CreateLoc	String	16	
+VoucherAmt	Currency		
+VoucherStatus	String	100	

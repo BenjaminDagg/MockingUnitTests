@@ -1,0 +1,4 @@
+CASHIER_TRANS_ID	Long	
+TRANS_AMT	Currency		
+CREATED_BY	String	30	
+SESSION_ID	String	40	

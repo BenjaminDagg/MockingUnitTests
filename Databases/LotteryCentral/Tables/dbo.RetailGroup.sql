@@ -1,0 +1,9 @@
+CREATE TABLE [dbo].[RetailGroup]
+(
+[RetailGroupID] [int] NOT NULL IDENTITY(1, 1),
+[LEVEL_CODE] [varchar] (15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+[SECURITY_LEVEL] [smallint] NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[RetailGroup] ADD CONSTRAINT [PK_RetailGroup] PRIMARY KEY CLUSTERED  ([RetailGroupID]) WITH (FILLFACTOR=80) ON [PRIMARY]
+GO

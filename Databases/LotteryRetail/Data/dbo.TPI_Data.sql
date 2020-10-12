@@ -1,0 +1,5 @@
+INSERT INTO [dbo].[TPI] ([TPI_ID], [SHORT_NAME], [LONG_NAME]) VALUES (0, 'DGE', 'Diamond Game Backoffice')
+INSERT INTO [dbo].[TPI] ([TPI_ID], [SHORT_NAME], [LONG_NAME]) VALUES (1, 'SDG', 'Sierra Design Group')
+INSERT INTO [dbo].[TPI] ([TPI_ID], [SHORT_NAME], [LONG_NAME]) VALUES (2, 'MGAM', 'Multimedia Games Inc')
+INSERT INTO [dbo].[TPI] ([TPI_ID], [SHORT_NAME], [LONG_NAME]) VALUES (3, 'IAL', 'Iowa State Lottery')
+INSERT INTO [dbo].[TPI] ([TPI_ID], [SHORT_NAME], [LONG_NAME]) VALUES (4, 'SAS', 'Slot Accounting System')

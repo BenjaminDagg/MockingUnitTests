@@ -1,0 +1,14 @@
+; Field definition file for the Weekly Revenue By Game report
+GameDesc	string	64
+TabAmtDealType	string	32
+MachNo	string	5
+TabCost	currency
+TabAmount	currency
+TCMonday	long
+TCTuesday	long
+TCWednesday	long
+TCThursday	long
+TCFriday	long
+TCSatday	long
+TCSunday	long
+TCTotal	long

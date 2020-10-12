@@ -1,0 +1,11 @@
+; Field definition file for table: ADORecordset
+BANK_NO	long
+ACCT_DATE	datetime
+BANK_DESCR	string	128
+START_PROG_BAL	currency
+PROG_PLAY_AMT	currency
+PROG_PAYOUT_AMT	currency
+END_PROG_BAL	currency
+BASE_JP_AMOUNT	currency
+CREATE_DATE	datetime
+GAME_DESC	string	96

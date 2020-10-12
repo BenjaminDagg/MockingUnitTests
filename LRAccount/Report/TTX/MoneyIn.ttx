@@ -1,0 +1,9 @@
+MachineNbr	string	5
+CasinoMachineNbr	string	8
+AccountingDate	datetime
+MoneyInAmount	currency
+BillCount	long
+TicketInCount	long
+TicketInAmount	currency
+PromoInAmount	currency
+PromoInCount	long

@@ -1,0 +1,5 @@
+CardAccount	String	16
+PlayerName	String	52
+TransAmt	Currency
+TransDateTime	DateTime
+TransID	Short

@@ -1,0 +1,6 @@
+; Field definition file for the Weekly Invoice By Game report
+Description	string	64
+MachCount	long
+TabCount	long
+TabCost	currency
+ExtendedAMt	currency

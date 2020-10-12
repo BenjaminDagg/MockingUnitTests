@@ -1,0 +1,14 @@
+; Field definition file for table: ADORecordset
+MachineNo	string	16	string sample value
+ProductDesc	string	64	string sample value
+GameCode	string	3	string sample value
+GameCodeDesc	string	64	string sample value
+MinDenom	currency		1.00
+DenomRange	string	33	string sample value
+Net1	currency		1.00
+Net2	currency		1.00
+Net3	currency		1.00
+Net4	currency		1.00
+Net5	currency		1.00
+Net6	currency		1.00
+Net7	currency		1.00

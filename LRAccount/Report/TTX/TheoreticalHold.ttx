@@ -1,0 +1,29 @@
+; Field definition file for table: ADORecordset
+DealNbr	long
+ProductID	string	16
+Denomination	number
+CoinsBet	number
+LinesBet	number
+GameCode	string	10
+FormNumber	string	10
+TabsPerDeal	long
+TabAmount	currency
+DealType	string	10
+DealTypeName	string	48
+DealDesc	string	64
+GameDesc	string	64
+IsOpen	boolean
+CloseRecommended	boolean
+PlayCount	long
+PercentComplete	number
+ExpectedWins	long
+ActualWins	long
+DollarsPlayed	currency
+ExpectedPayout	currency
+ActualPayout	currency
+TheoreticalHold	currency
+ActualHold	currency
+TheoreticalHoldPC	number
+ActualHoldPC	number
+FirstPlay	datetime
+LastPlay	datetime

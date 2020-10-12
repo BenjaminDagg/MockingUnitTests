@@ -1,0 +1,4 @@
+; Field definition file for table: ADORecordset
+LOCATION_ID	long		1
+LOT_NUMBER	string	14	string sample value
+DATE_RECEIVED	datetime		Jan 5, 1994 1:23:45 PM

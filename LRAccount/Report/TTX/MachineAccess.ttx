@@ -1,0 +1,8 @@
+; Field definition file for table: ADORecordset
+MachNbr	string	5	string sample value
+CasinoMachNbr	string	8	string sample value
+AcctDate	datetime		Jan 5, 1994 1:23:45 PM
+MainDoorOpens	long		1
+CashDoorOpens	long		1
+LogicDoorOpens	long		1
+BaseDoorOpens	long		1

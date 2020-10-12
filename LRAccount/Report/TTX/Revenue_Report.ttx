@@ -1,0 +1,11 @@
+MachNo	String	5
+WINNINGTABS	Long
+LOSINGTABS	Long 
+DOLLARSIN	Long
+DOLLARSOUT	Long
+perc	String	15
+TYPEID	String	10
+Denom	Currency
+TypeName	String	48
+REINSERTTABS	Long
+TABSFORFEITED	Long

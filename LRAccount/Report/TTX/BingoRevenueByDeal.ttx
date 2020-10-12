@@ -1,0 +1,18 @@
+; Field definition file for table: ADORecordset
+DealNumber	long
+TypeID	string	1
+TabAmount	currency
+DealTypeName	string	48
+GameDesc	string	64
+LinesBet	short
+Denom	string	4
+TabsPerDeal	long
+TabsDispensed	long
+TabsTotal	long
+WinningTabs	long
+DollarsPlayed	currency
+DollarsWon	currency
+NetAmount	currency
+TabsForfeited	long
+TargetHoldPct	number
+HoldPct	currency

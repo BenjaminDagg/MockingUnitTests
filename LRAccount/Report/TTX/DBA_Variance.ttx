@@ -1,0 +1,6 @@
+; Field definition file for table: ADORecordset
+MachineNbr	String	8
+DropAmount	Number
+RevenueIn	Number
+CurrentVariance	Number
+PreviousVariance	Number

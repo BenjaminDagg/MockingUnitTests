@@ -1,0 +1,5 @@
+INSERT INTO [dbo].[AppRoleRetailGroup] ([AppRoleId], [RetailGroupId]) VALUES (9001, 1)
+INSERT INTO [dbo].[AppRoleRetailGroup] ([AppRoleId], [RetailGroupId]) VALUES (9002, 2)
+INSERT INTO [dbo].[AppRoleRetailGroup] ([AppRoleId], [RetailGroupId]) VALUES (9003, 3)
+INSERT INTO [dbo].[AppRoleRetailGroup] ([AppRoleId], [RetailGroupId]) VALUES (9005, 5)
+INSERT INTO [dbo].[AppRoleRetailGroup] ([AppRoleId], [RetailGroupId]) VALUES (9006, 6)

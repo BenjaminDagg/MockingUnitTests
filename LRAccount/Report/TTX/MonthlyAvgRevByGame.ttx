@@ -1,0 +1,19 @@
+; Field definition file for table: ADORecordset
+ProductID	string	1	string sample value
+ProductDesc	string	64	string sample value
+GameCode	string	3	string sample value
+GameTypeCode	string	2	string sample value
+GAME_DESC	string	64	string sample value
+MachineNbr	string	5	string sample value
+F2	currency		1.00
+F4	currency		1.00
+F6	currency		1.00
+F8	currency		1.00
+F10	currency		1.00
+F12	currency		1.00
+F14	currency		1.00
+F16	currency		1.00
+F18	currency		1.00
+F20	currency		1.00
+F22	currency		1.00
+F24	currency		1.00

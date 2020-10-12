@@ -1,0 +1,8 @@
+AccountId	String	30	
+Session	String	40	
+TranNo	Number		
+TimeStamp	Date		
+CardAcctNo	String	16
+WkStation	String	32
+TransAmt	Currency	
+Balance	Currency

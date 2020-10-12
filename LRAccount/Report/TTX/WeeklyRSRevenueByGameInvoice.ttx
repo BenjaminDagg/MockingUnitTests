@@ -1,0 +1,5 @@
+LineItemDesc	String	64
+MachineCount	Number
+WeeklyRevenue	Currency
+RevPercent	Number
+AmountDue	Currency

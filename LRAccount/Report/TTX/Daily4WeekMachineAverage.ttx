@@ -1,0 +1,21 @@
+; Field definition file for table: ADORecordset
+GameCode	string	3	string sample value
+GameTypeCode	string	2	string sample value
+GameDesc	string	64	string sample value
+MachineNbr	string	5	string sample value
+CasinoMachNbr	string	8	string sample value
+Net1	currency		1.00
+Play1	short		1
+WeeklyAvg1	currency		1.00
+Net2	currency		1.00
+Play2	short		1
+WeeklyAvg2	currency		1.00
+Net3	currency		1.00
+Play3	short		1
+WeeklyAvg3	currency		1.00
+Net4	currency		1.00
+Play4	short		1
+WeeklyAvg4	currency		1.00
+Net1_4	currency		1.00
+Play1_4	long		1
+WeeklyAvg1_4	currency		1.00

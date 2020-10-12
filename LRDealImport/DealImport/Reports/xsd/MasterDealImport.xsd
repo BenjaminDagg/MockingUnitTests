@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSMasterDealImport" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSMasterDealImport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DSMasterDealImport" msprop:Generator_DataSetName="DSMasterDealImport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DTMasterDealImport" msprop:Generator_UserTableName="DTMasterDealImport" msprop:Generator_RowDeletedName="DTMasterDealImportRowDeleted" msprop:Generator_TableClassName="DTMasterDealImportDataTable" msprop:Generator_RowChangedName="DTMasterDealImportRowChanged" msprop:Generator_RowClassName="DTMasterDealImportRow" msprop:Generator_RowChangingName="DTMasterDealImportRowChanging" msprop:Generator_RowEvArgName="DTMasterDealImportRowChangeEvent" msprop:Generator_RowEvHandlerName="DTMasterDealImportRowChangeEventHandler" msprop:Generator_TablePropName="DTMasterDealImport" msprop:Generator_TableVarName="tableDTMasterDealImport" msprop:Generator_RowDeletingName="DTMasterDealImportRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IMPORT_MD_HISTORY_ID" msprop:Generator_UserColumnName="IMPORT_MD_HISTORY_ID" msprop:Generator_ColumnPropNameInRow="IMPORT_MD_HISTORY_ID" msprop:Generator_ColumnVarNameInTable="columnIMPORT_MD_HISTORY_ID" msprop:Generator_ColumnPropNameInTable="IMPORT_MD_HISTORY_IDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="IMPORTED_BY" msprop:Generator_UserColumnName="IMPORTED_BY" msprop:Generator_ColumnPropNameInRow="IMPORTED_BY" msprop:Generator_ColumnVarNameInTable="columnIMPORTED_BY" msprop:Generator_ColumnPropNameInTable="IMPORTED_BYColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="IMPORT_DATE" msprop:Generator_UserColumnName="IMPORT_DATE" msprop:Generator_ColumnPropNameInRow="IMPORT_DATE" msprop:Generator_ColumnVarNameInTable="columnIMPORT_DATE" msprop:Generator_ColumnPropNameInTable="IMPORT_DATEColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CASINO_UPDATE" msprop:Generator_UserColumnName="CASINO_UPDATE" msprop:Generator_ColumnPropNameInRow="CASINO_UPDATE" msprop:Generator_ColumnVarNameInTable="columnCASINO_UPDATE" msprop:Generator_ColumnPropNameInTable="CASINO_UPDATEColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="BANK_MACHINE_UPDATE" msprop:Generator_UserColumnName="BANK_MACHINE_UPDATE" msprop:Generator_ColumnPropNameInRow="BANK_MACHINE_UPDATE" msprop:Generator_ColumnVarNameInTable="columnBANK_MACHINE_UPDATE" msprop:Generator_ColumnPropNameInTable="BANK_MACHINE_UPDATEColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="SUCCESSFUL" msprop:Generator_UserColumnName="SUCCESSFUL" msprop:Generator_ColumnPropNameInRow="SUCCESSFUL" msprop:Generator_ColumnVarNameInTable="columnSUCCESSFUL" msprop:Generator_ColumnPropNameInTable="SUCCESSFULColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IMPORT_MD_DETAIL_ID" msprop:Generator_UserColumnName="IMPORT_MD_DETAIL_ID" msprop:Generator_ColumnPropNameInRow="IMPORT_MD_DETAIL_ID" msprop:Generator_ColumnVarNameInTable="columnIMPORT_MD_DETAIL_ID" msprop:Generator_ColumnPropNameInTable="IMPORT_MD_DETAIL_IDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="TABLE_NAME" msprop:Generator_UserColumnName="TABLE_NAME" msprop:Generator_ColumnPropNameInRow="TABLE_NAME" msprop:Generator_ColumnVarNameInTable="columnTABLE_NAME" msprop:Generator_ColumnPropNameInTable="TABLE_NAMEColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="DETAIL_TEXT" msprop:Generator_UserColumnName="DETAIL_TEXT" msprop:Generator_ColumnPropNameInRow="DETAIL_TEXT" msprop:Generator_ColumnVarNameInTable="columnDETAIL_TEXT" msprop:Generator_ColumnPropNameInTable="DETAIL_TEXTColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="INSERT_COUNT" msprop:Generator_UserColumnName="INSERT_COUNT" msprop:Generator_ColumnPropNameInRow="INSERT_COUNT" msprop:Generator_ColumnVarNameInTable="columnINSERT_COUNT" msprop:Generator_ColumnPropNameInTable="INSERT_COUNTColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="UPDATE_COUNT" msprop:Generator_UserColumnName="UPDATE_COUNT" msprop:Generator_ColumnPropNameInRow="UPDATE_COUNT" msprop:Generator_ColumnVarNameInTable="columnUPDATE_COUNT" msprop:Generator_ColumnPropNameInTable="UPDATE_COUNTColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="IGNORED_COUNT" msprop:Generator_UserColumnName="IGNORED_COUNT" msprop:Generator_ColumnPropNameInRow="IGNORED_COUNT" msprop:Generator_ColumnVarNameInTable="columnIGNORED_COUNT" msprop:Generator_ColumnPropNameInTable="IGNORED_COUNTColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="ERROR_COUNT" msprop:Generator_UserColumnName="ERROR_COUNT" msprop:Generator_ColumnPropNameInRow="ERROR_COUNT" msprop:Generator_ColumnVarNameInTable="columnERROR_COUNT" msprop:Generator_ColumnPropNameInTable="ERROR_COUNTColumn" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

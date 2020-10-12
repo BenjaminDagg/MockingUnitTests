@@ -1,0 +1,4 @@
+PlayCount	Long		1234
+MachineNbr	String	8	00124688
+AmountPlayed	Currency		1234.00
+AmountWon	Currency		1172.00

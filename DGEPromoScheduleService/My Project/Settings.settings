@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="CasinoConnect" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=(local);Initial Catalog=Casino;User ID={0};Password={1}</Value>
+    </Setting>
+    <Setting Name="ConnectKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">J~6Gl#hJ</Value>
+    </Setting>
+    <Setting Name="PollingFrequency" Type="System.Decimal" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="TPServerList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.168.74:4551</Value>
+    </Setting>
+    <Setting Name="ConnectUID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mas</Value>
+    </Setting>
+    <Setting Name="AppAuthList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DGEPromoScheduleService.exe,DgeSqlDataAccess.dll,DgeHashLib.dll</Value>
+    </Setting>
+    <Setting Name="LogWhenNothingToDo" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

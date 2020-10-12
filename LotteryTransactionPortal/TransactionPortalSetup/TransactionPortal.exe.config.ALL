@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+   <appSettings>
+      <!-- Note : the "Password" field below is encrypted, to meet BMM cert. Do NOT change. -->
+      <add key="Accounting DB Connection String" value="Data Source=(local);Initial Catalog=Casino;User ID=tp;Password=o~dJJ@Ax/" />
+      <add key="Machine Port" value="4550" />
+      <add key="TPC Port" value="4551" />
+      <add key="Ping Timer" value="60" />
+      <add key="Ping Response Timer" value="5" />
+      <add key="TP IP Address" value="192.168.165.2" />
+      <add key="TPC Refresh Interval" value="5" />
+      <add key="Machine Listener Backlog" value="100" />
+      <add key="AppAuthList" value="TransactionPortal.exe,DataAccess.dll,DgeHashLib.dll,MGAM_Classlib.dll,Sdg.dll,SDG_CRC_ClassLib.dll,Tpi.dll,Messages.xml,Transactions.xml" />
+      <add key="Bingo Blower Machine Name" value="DBServer" />
+      
+      <!-- *************************************************************************************** -->
+      <!-- Bingo Parameters                                                                        -->
+      <!-- *************************************************************************************** -->
+      <add key="Bingo DB Connection String" value="Data Source=(local);Initial Catalog=CasinoBingo;User ID=tp;Password=o~dJJ@Ax/" />
+      <!-- value="0" for no logging, ="1" log Wins, ="2" log Wins & Forfeits, ="3" log Everything -->
+      <add key="Bingo Logging Level" value="3" />
+      <add key="Bingo Minimum Players" value="2" />
+
+      <!-- *************************************************************************************** -->
+      <!-- Uncomment these lines if this is a DGE or SAS Casino                                    -->
+      <!-- *************************************************************************************** -->
+      <!--
+      <add key="TPI Assembly Name" value="Tpi" />
+      <add key="TPI Server Class Name" value="TpiServer" />
+      <add key="TPI Client Class Name" value="TpiClient" />
+      -->
+                  
+      <!-- *************************************************************************************** -->
+      <!-- Uncomment these lines if this is a MGAM casino.                                         -->
+      <!-- *************************************************************************************** -->
+      <!--
+      <add key="TPI Assembly Name" value="MGAM_Classlib" />
+      <add key="TPI Server Class Name" value="MgamServer" />
+      <add key="TPI Client Class Name" value="MgamClient" />
+      <add key="3PGS Host" value="192.168.168.22" />
+      <add key="3PGS Port" value="6559" />
+      <add key="MGAM Service Name" value="MGAM 3PGS Device Service" />
+      <add key="MGAM Directory Service Port" value="47372" />
+      <add key="MGAM Directory Service Host" value="192.168.168.22" />
+      <add key="MGAM Socket Poll Interval" value="12" />
+      
+      <add key="FieldTestOverRide" value="0" />
+      <add key="FieldTestOverRidePort" value="8005" />
+      <add key="FieldTestOverRideHost" value="216.54.230.107" />
+      
+      -->
+      
+      <!-- *************************************************************************************** -->
+      <!-- Uncomment these lines if this is a SDG casino.                                          -->
+      <!-- *************************************************************************************** -->
+      <!--
+      <add key="TPI Assembly Name" value="Sdg" />
+      <add key="TPI Server Class Name" value="SdgServer" />
+      <add key="TPI Client Class Name" value="SdgClient" />
+      <add key="SDG Socket Open Timeout" value="10" />
+      <add key="SDG Connection Accepted Timeout" value="10" />
+      <add key="SDG Daily Meter Flag" value="1" />
+      <add key="SDG Max Validation Id Count" value="10" />
+      <add key="Sdg Client Startup Wait Time" value="10" />
+      <add key="SDG Validation Id Queue Timeout" value="15" />
+      <add key="SDG VoucherCreate Queue Timeout" value="60" />
+      <add key="SDG VoucherRedeem Queue Timeout" value="10" />
+      <add key="SDG VoucherRedeemed Queue Timeout" value="10" />
+      <add key="SDG VoucherNotRedeemed Queue Timeout" value="10" />
+      <add key="SDG CardInserted Queue Timeout" value="60" />
+      <add key="SDG CardRemoved Queue Timeout" value="10" />
+      <add key="SDG SessionStatus Queue Timeout" value="10" />
+      <add key="SDG AbandonedCard Queue Timeout" value="10" />
+      <add key="SDG HotPlayer Queue Timeout" value="10" />
+      <add key="SDG Queue Timeout" value="9" />
+      <add key="SDG Socket Poll Interval" value="5" />
+      <add key="SDG Port" value="6601" />
+      <add key="SDG IP Address" value="192.168.170.2" />
+      <add key="SDG eCoupon Handling" value="0" />
+      -->
+       
+   </appSettings>
+   <system.diagnostics>
+      <assert assertuienabled="false" logfilename="C:\Program Files\Diamond Game Enterprises\Transaction Portal\TransactionPortal.log" />
+      <switches>
+         <!-- Trace Switch Settings:
+                 value="1" for Minimal logging
+                 value="2" to echo machine transactions,
+                 value="3" to echo XML sent to MGAM/SDG,
+                 value="4" for Debugging output (NOT recommended) -->
+         <add name="goTraceSwitch" value="2" />
+      </switches>
+      <trace autoflush="false" indentsize="3" />
+   </system.diagnostics>
+</configuration>

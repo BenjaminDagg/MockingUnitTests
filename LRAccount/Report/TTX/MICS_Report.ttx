@@ -1,0 +1,22 @@
+; MICS report TTX file.  Maps rpt_MICS stored proc resultset to MICS report.
+; Field definition file for table: ADORecordset
+FormNumber	string	10	string sample value
+DealDesc	string	64	string sample value
+TabAmount	currency		1.00
+IsProgressive	boolean		TRUE
+PercentPlayed	number		1.00
+PayoutTier	currency		1.00
+TabsPlayed	long		1
+TabsPerDeal	long		1
+ExpectedWinsToDate	number		1.00
+ActualWinsToDate	long		1
+TotalTierWinners	long		1
+ExpectedPayoutToDate	currency		1.00
+BasePayoutToDate	currency		1.00
+ActualPayoutToDate	currency		1.00
+TotalTierPayout	currency		1.00
+ProgressiveTotal	currency		1.00
+Denomination	currency		1.00
+CoinsBet	short		1
+LinesBet	byte		1
+ProductDesc	string	64	string sample value

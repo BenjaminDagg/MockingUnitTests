@@ -1,0 +1,5602 @@
+VERSION 5.00
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Begin VB.Form frm_Payout_MV 
+   Caption         =   "Voucher Payout"
+   ClientHeight    =   8370
+   ClientLeft      =   60
+   ClientTop       =   345
+   ClientWidth     =   13005
+   ControlBox      =   0   'False
+   Icon            =   "frm_Payout_MV.frx":0000
+   ScaleHeight     =   8370
+   ScaleWidth      =   13005
+   ShowInTaskbar   =   0   'False
+   StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame Frame2 
+      Caption         =   "&Last Printed Receipt"
+      Height          =   1575
+      Left            =   240
+      TabIndex        =   77
+      Top             =   5040
+      Width           =   7095
+      Begin VB.TextBox txtLastTransAmount 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H8000000F&
+         Enabled         =   0   'False
+         Height          =   315
+         Left            =   3000
+         TabIndex        =   82
+         TabStop         =   0   'False
+         Top             =   1080
+         Width           =   1575
+      End
+      Begin VB.TextBox txtLastTransVoucherCount 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H8000000F&
+         Enabled         =   0   'False
+         Height          =   315
+         Left            =   3720
+         TabIndex        =   80
+         TabStop         =   0   'False
+         Top             =   720
+         Width           =   855
+      End
+      Begin VB.CommandButton cmd_Receipt_Reprint 
+         Caption         =   "&Reprint Last Receipt"
+         CausesValidation=   0   'False
+         Height          =   420
+         Left            =   5160
+         TabIndex        =   5
+         ToolTipText     =   "Click to Reprint the Last Receipt printed."
+         Top             =   1080
+         Width           =   1815
+      End
+      Begin VB.TextBox txtLastReceiptNumber 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H8000000F&
+         Enabled         =   0   'False
+         Height          =   315
+         Left            =   3720
+         TabIndex        =   78
+         TabStop         =   0   'False
+         Top             =   360
+         Width           =   855
+      End
+      Begin VB.Label Label6 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Last Receipt Total Payout:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   83
+         Top             =   1080
+         Width           =   2655
+      End
+      Begin VB.Label Label5 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Number of Vouchers:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   81
+         Top             =   750
+         Width           =   2655
+      End
+      Begin VB.Label Label4 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Receipt Number:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   79
+         Top             =   390
+         Width           =   2655
+      End
+   End
+   Begin VB.CommandButton cmdTransactionDetails 
+      Caption         =   "&Current Transaction Details"
+      Height          =   735
+      Left            =   9360
+      TabIndex        =   8
+      Top             =   7560
+      Width           =   1695
+   End
+   Begin VB.CommandButton btnVoidTransaction 
+      BackColor       =   &H00C0C0FF&
+      Caption         =   "&Void Transaction"
+      Height          =   495
+      Left            =   11640
+      MaskColor       =   &H0000FFFF&
+      TabIndex        =   9
+      Top             =   7680
+      Width           =   1215
+   End
+   Begin VB.CommandButton btnRemoveItem 
+      Caption         =   "&Remove Item"
+      Height          =   495
+      Left            =   7440
+      TabIndex        =   7
+      Top             =   7680
+      Width           =   1215
+   End
+   Begin VB.ListBox lstVoucherLock 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Courier New"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000007&
+      Height          =   5910
+      Left            =   7560
+      TabIndex        =   71
+      TabStop         =   0   'False
+      Top             =   960
+      Width           =   975
+   End
+   Begin VB.ListBox lstVoucherAmount 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Courier New"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   5910
+      Left            =   11160
+      TabIndex        =   70
+      TabStop         =   0   'False
+      Top             =   960
+      Width           =   1455
+   End
+   Begin VB.ListBox lstVoucherCode 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Courier New"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   5910
+      Left            =   8520
+      TabIndex        =   69
+      TabStop         =   0   'False
+      Top             =   960
+      Width           =   2655
+   End
+   Begin VB.Frame Frame1 
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "Current Transaction"
+      Height          =   7215
+      Left            =   7440
+      TabIndex        =   68
+      Top             =   240
+      Width           =   5415
+      Begin VB.Label lblVoucherTotalAmount 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "lblVoucherTotalAmount"
+         BeginProperty Font 
+            Name            =   "Courier New"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   3720
+         TabIndex        =   76
+         Top             =   6600
+         Width           =   1455
+      End
+      Begin VB.Label lblVoucherTotalLabel 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "Total Payout"
+         BeginProperty Font 
+            Name            =   "Courier New"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   1560
+         TabIndex        =   75
+         Top             =   6600
+         Width           =   1455
+      End
+      Begin VB.Label Label3 
+         BorderStyle     =   1  'Fixed Single
+         Caption         =   "    Amount"
+         BeginProperty Font 
+            Name            =   "Courier New"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   3720
+         TabIndex        =   74
+         Top             =   240
+         Width           =   1455
+      End
+      Begin VB.Label Label2 
+         BorderStyle     =   1  'Fixed Single
+         Caption         =   "      Validation ID"
+         BeginProperty Font 
+            Name            =   "Courier New"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   1080
+         TabIndex        =   73
+         Top             =   240
+         Width           =   2655
+      End
+      Begin VB.Label Label1 
+         BorderStyle     =   1  'Fixed Single
+         Caption         =   "Approval Required"
+         BeginProperty Font 
+            Name            =   "Courier New"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   120
+         TabIndex        =   72
+         Top             =   240
+         Width           =   975
+      End
+   End
+   Begin VB.CommandButton cmdPromoPoints 
+      Caption         =   "Promotional Points"
+      CausesValidation=   0   'False
+      Height          =   525
+      Left            =   240
+      Picture         =   "frm_Payout_MV.frx":0CCA
+      Style           =   1  'Graphical
+      TabIndex        =   12
+      TabStop         =   0   'False
+      ToolTipText     =   "Click to Redeem Promotional Points"
+      Top             =   6780
+      Visible         =   0   'False
+      Width           =   1815
+   End
+   Begin VB.Timer tmrButtonImage 
+      Enabled         =   0   'False
+      Interval        =   500
+      Left            =   3150
+      Top             =   120
+   End
+   Begin MSComctlLib.ImageList imgList 
+      Left            =   3630
+      Top             =   0
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      ImageWidth      =   105
+      ImageHeight     =   43
+      MaskColor       =   12632256
+      UseMaskColor    =   0   'False
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   2
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frm_Payout_MV.frx":0E14
+            Key             =   "PayoutBlack"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frm_Payout_MV.frx":437A
+            Key             =   "PayoutBlue"
+         EndProperty
+      EndProperty
+   End
+   Begin VB.CommandButton cmd_SuspendSession 
+      Caption         =   "&SUSPEND SESSION"
+      CausesValidation=   0   'False
+      Height          =   525
+      Left            =   2835
+      TabIndex        =   13
+      ToolTipText     =   "Click to Suspend this Session."
+      Top             =   6780
+      Visible         =   0   'False
+      Width           =   1095
+   End
+   Begin VB.OptionButton Opt_Mode 
+      Caption         =   "Manual"
+      Height          =   225
+      Index           =   1
+      Left            =   600
+      TabIndex        =   10
+      ToolTipText     =   "Click to manually select a Voucher Validation ID from the list."
+      Top             =   360
+      Width           =   1230
+   End
+   Begin VB.OptionButton Opt_Mode 
+      Caption         =   "Automatic"
+      Height          =   255
+      Index           =   0
+      Left            =   600
+      TabIndex        =   0
+      ToolTipText     =   "Click to use the Voucher Scanner to scan vouchers"
+      Top             =   75
+      Value           =   -1  'True
+      Width           =   1230
+   End
+   Begin VB.TextBox txt_Result 
+      Alignment       =   2  'Center
+      BackColor       =   &H80000004&
+      CausesValidation=   0   'False
+      BeginProperty Font 
+         Name            =   "Courier New"
+         Size            =   11.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   885
+      Left            =   120
+      Locked          =   -1  'True
+      MultiLine       =   -1  'True
+      TabIndex        =   15
+      TabStop         =   0   'False
+      Top             =   7440
+      Width           =   7095
+   End
+   Begin VB.Timer tmr_GetReaderStatus 
+      Enabled         =   0   'False
+      Interval        =   2000
+      Left            =   90
+      Top             =   45
+   End
+   Begin VB.CommandButton cmd_Close 
+      Caption         =   "&END SESSION"
+      CausesValidation=   0   'False
+      Height          =   525
+      Left            =   4035
+      TabIndex        =   6
+      ToolTipText     =   "Click to End this Session."
+      Top             =   6780
+      Visible         =   0   'False
+      Width           =   1095
+   End
+   Begin TabDlg.SSTab sst_Payouts 
+      Height          =   3615
+      Left            =   120
+      TabIndex        =   16
+      TabStop         =   0   'False
+      Top             =   1200
+      Width           =   7215
+      _ExtentX        =   12726
+      _ExtentY        =   6376
+      _Version        =   393216
+      Tab             =   2
+      TabHeight       =   520
+      TabCaption(0)   =   "Player Card"
+      TabPicture(0)   =   "frm_Payout_MV.frx":78E0
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "fr_SmartCard"
+      Tab(0).ControlCount=   1
+      TabCaption(1)   =   "Vouchers"
+      TabPicture(1)   =   "frm_Payout_MV.frx":78FC
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "fr_Authorize"
+      Tab(1).Control(1)=   "fr_Vouchers"
+      Tab(1).ControlCount=   2
+      TabCaption(2)   =   "Cash Drawer"
+      TabPicture(2)   =   "frm_Payout_MV.frx":7918
+      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).Control(0)=   "fr_CashDrawerTrans"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "fr_CashDrawerStatus"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).ControlCount=   2
+      Begin VB.Frame fr_CashDrawerStatus 
+         Caption         =   "Cash Drawer Status"
+         Height          =   2775
+         Left            =   120
+         TabIndex        =   34
+         Top             =   720
+         Width           =   3255
+         Begin VB.TextBox txt_TotalPayout 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   285
+            Left            =   1500
+            TabIndex        =   40
+            Top             =   1620
+            Width           =   1335
+         End
+         Begin VB.TextBox txt_CashRemoved 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   285
+            Left            =   1500
+            TabIndex        =   39
+            TabStop         =   0   'False
+            Top             =   1245
+            Width           =   1335
+         End
+         Begin VB.TextBox txt_CashAdded 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   285
+            Left            =   1500
+            TabIndex        =   38
+            TabStop         =   0   'False
+            Top             =   855
+            Width           =   1335
+         End
+         Begin VB.TextBox txt_CurrentBal 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   1
+            Left            =   1500
+            TabIndex        =   37
+            Top             =   1995
+            Width           =   1335
+         End
+         Begin VB.TextBox txt_StartBal 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   1
+            Left            =   1500
+            TabIndex        =   36
+            TabStop         =   0   'False
+            Top             =   480
+            Width           =   1335
+         End
+         Begin VB.Label lblTotalPayout 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Total Payout:"
+            Height          =   315
+            Left            =   240
+            TabIndex        =   45
+            Top             =   1620
+            Width           =   1215
+         End
+         Begin VB.Label lblCashRemoved 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Cash Removed:"
+            Height          =   255
+            Left            =   240
+            TabIndex        =   44
+            Top             =   1245
+            Width           =   1215
+         End
+         Begin VB.Label lblCashAdded 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Cash Added:"
+            Height          =   375
+            Left            =   480
+            TabIndex        =   43
+            Top             =   855
+            Width           =   975
+         End
+         Begin VB.Label lblCurrentBal 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Current Bal:"
+            Height          =   375
+            Index           =   1
+            Left            =   240
+            TabIndex        =   42
+            Top             =   1995
+            Width           =   1215
+         End
+         Begin VB.Label lblStartBal 
+            Alignment       =   1  'Right Justify
+            Caption         =   "    Starting Bal:"
+            Height          =   375
+            Index           =   1
+            Left            =   240
+            TabIndex        =   41
+            Top             =   480
+            Width           =   1215
+         End
+      End
+      Begin VB.Frame fr_CashDrawerTrans 
+         Caption         =   "Add Cash"
+         Height          =   2775
+         Left            =   3480
+         TabIndex        =   28
+         Top             =   720
+         Width           =   3615
+         Begin VB.TextBox txt_Password 
+            Height          =   285
+            IMEMode         =   3  'DISABLE
+            Left            =   1440
+            PasswordChar    =   "*"
+            TabIndex        =   30
+            Top             =   1200
+            Width           =   1335
+         End
+         Begin VB.TextBox txt_TransactionAmt 
+            Height          =   285
+            IMEMode         =   3  'DISABLE
+            Left            =   1440
+            TabIndex        =   29
+            Top             =   840
+            Width           =   1335
+         End
+         Begin VB.CommandButton cmd_CashTransSubmit 
+            Caption         =   "&OK"
+            Height          =   345
+            Left            =   600
+            TabIndex        =   32
+            Top             =   1680
+            Width           =   975
+         End
+         Begin VB.CommandButton cmd_CashTransCancel 
+            Caption         =   "&Cancel"
+            Height          =   345
+            Left            =   1800
+            TabIndex        =   35
+            Top             =   1680
+            Width           =   975
+         End
+         Begin VB.Label lblTransactionAmt 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Cash Amount:"
+            Height          =   195
+            Left            =   240
+            TabIndex        =   33
+            Top             =   840
+            Width           =   1035
+         End
+         Begin VB.Label lblPassword 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Password:"
+            Height          =   195
+            Left            =   240
+            TabIndex        =   31
+            Top             =   1200
+            Width           =   1035
+         End
+      End
+      Begin VB.Frame fr_Vouchers 
+         Height          =   2775
+         Left            =   -74880
+         TabIndex        =   17
+         Top             =   720
+         Width           =   6975
+         Begin VB.CommandButton cmd_VoucherDetails 
+            Caption         =   "&Details of Last Scan"
+            Height          =   495
+            Left            =   5040
+            TabIndex        =   4
+            Top             =   2040
+            Width           =   1575
+         End
+         Begin VB.TextBox txt_CurrentBal 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   0
+            Left            =   1380
+            TabIndex        =   21
+            TabStop         =   0   'False
+            Top             =   1725
+            Width           =   1335
+         End
+         Begin VB.TextBox txt_StartBal 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   0
+            Left            =   1380
+            TabIndex        =   20
+            TabStop         =   0   'False
+            Top             =   1320
+            Width           =   1335
+         End
+         Begin VB.CommandButton cmd_PayoutVoucher 
+            Height          =   645
+            Left            =   5040
+            Picture         =   "frm_Payout_MV.frx":7934
+            Style           =   1  'Graphical
+            TabIndex        =   3
+            ToolTipText     =   "Click to Pay Out for selected Voucher."
+            Top             =   1200
+            Visible         =   0   'False
+            Width           =   1575
+         End
+         Begin VB.CommandButton cmd_VoucherSearch 
+            Caption         =   "&Search"
+            Height          =   375
+            Left            =   5040
+            TabIndex        =   2
+            TabStop         =   0   'False
+            Top             =   690
+            Visible         =   0   'False
+            Width           =   1575
+         End
+         Begin VB.TextBox txt_VoucherAmt 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H8000000F&
+            CausesValidation=   0   'False
+            Enabled         =   0   'False
+            Height          =   315
+            Left            =   1380
+            TabIndex        =   19
+            TabStop         =   0   'False
+            Top             =   885
+            Visible         =   0   'False
+            Width           =   1335
+         End
+         Begin VB.TextBox txt_LastVoucher 
+            BackColor       =   &H8000000F&
+            Enabled         =   0   'False
+            Height          =   315
+            Left            =   1380
+            TabIndex        =   18
+            TabStop         =   0   'False
+            Top             =   2160
+            Width           =   3015
+         End
+         Begin VB.TextBox txt_VoucherCode 
+            Height          =   315
+            Left            =   1380
+            TabIndex        =   1
+            Top             =   480
+            Width           =   3195
+         End
+         Begin VB.ComboBox cboVouchers 
+            Height          =   315
+            Left            =   1380
+            Style           =   2  'Dropdown List
+            TabIndex        =   22
+            Top             =   480
+            Width           =   3195
+         End
+         Begin VB.Label lblCurrentBal 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Curr Cash Bal:"
+            Height          =   255
+            Index           =   0
+            Left            =   120
+            TabIndex        =   27
+            Top             =   1755
+            Width           =   1215
+         End
+         Begin VB.Label lblStartBal 
+            Alignment       =   1  'Right Justify
+            Caption         =   " Start Cash Bal:"
+            Height          =   255
+            Index           =   0
+            Left            =   120
+            TabIndex        =   26
+            Top             =   1350
+            Width           =   1215
+         End
+         Begin VB.Image imgLightVchr 
+            Height          =   270
+            Left            =   120
+            Picture         =   "frm_Payout_MV.frx":AE8A
+            Top             =   120
+            Width           =   270
+         End
+         Begin VB.Label lblVchrBalance 
+            Alignment       =   1  'Right Justify
+            Caption         =   "  Voucher Amt:"
+            Height          =   255
+            Left            =   120
+            TabIndex        =   25
+            Top             =   915
+            Visible         =   0   'False
+            Width           =   1215
+         End
+         Begin VB.Label lblLastVoucher 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Last Scan:"
+            Height          =   255
+            Left            =   240
+            TabIndex        =   24
+            Top             =   2190
+            Width           =   1095
+         End
+         Begin VB.Label lblVoucher 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Voucher:"
+            Height          =   255
+            Left            =   480
+            TabIndex        =   23
+            Top             =   510
+            Width           =   855
+         End
+      End
+      Begin VB.Frame fr_SmartCard 
+         Height          =   2775
+         Left            =   -74880
+         TabIndex        =   53
+         Top             =   720
+         Width           =   6975
+         Begin VB.TextBox txtPromoPoints 
+            BackColor       =   &H80000004&
+            Height          =   315
+            Left            =   1380
+            Locked          =   -1  'True
+            TabIndex        =   61
+            TabStop         =   0   'False
+            Top             =   1305
+            Width           =   1455
+         End
+         Begin VB.CommandButton cmdPayout 
+            Height          =   645
+            Left            =   5040
+            Picture         =   "frm_Payout_MV.frx":B2BC
+            Style           =   1  'Graphical
+            TabIndex        =   60
+            TabStop         =   0   'False
+            ToolTipText     =   "Click to Pay Out for selected account."
+            Top             =   1200
+            Width           =   1575
+         End
+         Begin VB.TextBox txt_PartialPayAmt 
+            Height          =   315
+            Left            =   2880
+            TabIndex        =   59
+            TabStop         =   0   'False
+            Top             =   2160
+            Visible         =   0   'False
+            Width           =   1215
+         End
+         Begin VB.CheckBox chk_PartialPayOut 
+            Caption         =   "Partial Pay Out"
+            Height          =   255
+            Left            =   1380
+            TabIndex        =   58
+            TabStop         =   0   'False
+            Top             =   2205
+            Visible         =   0   'False
+            Width           =   1410
+         End
+         Begin VB.TextBox txt_Status 
+            BackColor       =   &H80000004&
+            Height          =   315
+            Left            =   1380
+            Locked          =   -1  'True
+            TabIndex        =   57
+            TabStop         =   0   'False
+            Top             =   1725
+            Width           =   2895
+         End
+         Begin VB.TextBox txt_Balance 
+            BackColor       =   &H80000004&
+            Height          =   315
+            Left            =   1380
+            Locked          =   -1  'True
+            TabIndex        =   56
+            TabStop         =   0   'False
+            Top             =   885
+            Width           =   1455
+         End
+         Begin VB.CommandButton cmd_Search 
+            Caption         =   "&Search"
+            Height          =   375
+            Left            =   5040
+            TabIndex        =   55
+            TabStop         =   0   'False
+            Top             =   690
+            Visible         =   0   'False
+            Width           =   1575
+         End
+         Begin VB.TextBox txtOutStr 
+            Height          =   285
+            Left            =   6360
+            TabIndex        =   54
+            TabStop         =   0   'False
+            Top             =   2280
+            Visible         =   0   'False
+            Width           =   255
+         End
+         Begin VB.ComboBox cmb_CARD_ACCT_LIST 
+            Height          =   315
+            Left            =   1380
+            Style           =   2  'Dropdown List
+            TabIndex        =   66
+            TabStop         =   0   'False
+            Top             =   480
+            Width           =   3195
+         End
+         Begin VB.TextBox txt_SmartCardNo 
+            BackColor       =   &H80000004&
+            Height          =   315
+            Left            =   1380
+            TabIndex        =   67
+            Top             =   480
+            Width           =   3185
+         End
+         Begin VB.Label lblAccountNbr 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Account:"
+            Height          =   225
+            Left            =   480
+            TabIndex        =   65
+            Top             =   480
+            Width           =   840
+         End
+         Begin VB.Image imgLight 
+            Height          =   270
+            Left            =   120
+            Picture         =   "frm_Payout_MV.frx":E812
+            Top             =   120
+            Width           =   270
+         End
+         Begin VB.Label lblPromoPoints 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Promo Points:"
+            Height          =   225
+            Left            =   240
+            TabIndex        =   64
+            Top             =   1350
+            Width           =   1080
+         End
+         Begin VB.Label lbl_Status 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Status:"
+            Height          =   225
+            Left            =   480
+            TabIndex        =   63
+            Top             =   1770
+            Width           =   840
+         End
+         Begin VB.Label lbl_Balance 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Balance:"
+            Height          =   225
+            Left            =   480
+            TabIndex        =   62
+            Top             =   930
+            Width           =   840
+         End
+      End
+      Begin VB.Frame fr_Authorize 
+         Caption         =   "Enter Authorized User and Password"
+         Height          =   2775
+         Left            =   -74880
+         TabIndex        =   46
+         Top             =   720
+         Visible         =   0   'False
+         Width           =   6975
+         Begin VB.CommandButton cmd_AuthorizeCancel 
+            Cancel          =   -1  'True
+            Caption         =   "&Cancel"
+            CausesValidation=   0   'False
+            Height          =   330
+            Left            =   3735
+            TabIndex        =   51
+            Top             =   1875
+            Width           =   930
+         End
+         Begin VB.CommandButton cmd_AuthorizeOk 
+            Caption         =   "&OK"
+            Height          =   330
+            Left            =   2415
+            TabIndex        =   49
+            Top             =   1875
+            Width           =   930
+         End
+         Begin VB.TextBox txt_UserId 
+            Height          =   285
+            Left            =   2640
+            TabIndex        =   47
+            Top             =   960
+            Width           =   2055
+         End
+         Begin VB.TextBox txt_PssWd 
+            Height          =   285
+            IMEMode         =   3  'DISABLE
+            Left            =   2640
+            PasswordChar    =   "*"
+            TabIndex        =   48
+            Top             =   1395
+            Width           =   2055
+         End
+         Begin VB.Label lbl_UserId 
+            Alignment       =   1  'Right Justify
+            Caption         =   "User ID:"
+            Height          =   255
+            Left            =   1440
+            TabIndex        =   52
+            Top             =   975
+            Width           =   1095
+         End
+         Begin VB.Label lbl_Pwd 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Password:"
+            Height          =   255
+            Left            =   1440
+            TabIndex        =   50
+            Top             =   1440
+            Width           =   1095
+         End
+      End
+   End
+   Begin VB.CommandButton cmd_LeaveSession 
+      Caption         =   "&LEAVE SESSION"
+      CausesValidation=   0   'False
+      Height          =   525
+      Left            =   3435
+      TabIndex        =   14
+      ToolTipText     =   "Click to Leave this Session."
+      Top             =   6780
+      Width           =   1095
+   End
+   Begin VB.Image imgSource 
+      Height          =   270
+      Index           =   3
+      Left            =   2835
+      Picture         =   "frm_Payout_MV.frx":EC44
+      Top             =   180
+      Visible         =   0   'False
+      Width           =   270
+   End
+   Begin VB.Image imgSource 
+      Height          =   270
+      Index           =   2
+      Left            =   2520
+      Picture         =   "frm_Payout_MV.frx":F0A8
+      Top             =   180
+      Visible         =   0   'False
+      Width           =   270
+   End
+   Begin VB.Image imgSource 
+      Height          =   270
+      Index           =   1
+      Left            =   2205
+      Picture         =   "frm_Payout_MV.frx":F50A
+      Top             =   180
+      Visible         =   0   'False
+      Width           =   270
+   End
+   Begin VB.Image imgSource 
+      Height          =   270
+      Index           =   0
+      Left            =   1890
+      Picture         =   "frm_Payout_MV.frx":F96E
+      Top             =   180
+      Visible         =   0   'False
+      Width           =   270
+   End
+   Begin VB.Label lbl_Session 
+      Caption         =   "Session"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   13.5
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   345
+      Left            =   240
+      TabIndex        =   11
+      Top             =   660
+      Width           =   5775
+   End
+End
+Attribute VB_Name = "frm_Payout_MV"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Type CardState
+   AccountNumber     As String         ' Card Account Number
+   PinNumber         As String         ' Pin Number from CARD_ACCT table
+   CardStatus        As String         ' Card Status from CARD_ACCT table
+   CustomerFirstName As String         ' Customer First Name (if customer is associated with account)
+   CustomerLastName  As String         ' Customer Last Name (if customer is associated with account)
+   CustomerFullName  As String         ' Customer Full Name (if customer is associated with account)
+   CustomerDOB       As String         ' Customer Birthdate (if customer is associated with account)
+   MachineNumber     As String         ' Machine number associated with the Card Account
+   ExistsInDB        As Boolean        ' Flags if the Card Account exists in the CARD_ACCT table
+   AutoMode          As Boolean        ' Flags if card was read in reader or manually searched for.
+   ValidPrefix       As Boolean        ' Flags if the Card Account has a valid CasinoID prefix
+   HasValidPin       As Boolean        ' Flags if we have a valid card account pin number
+   Balance           As Currency       ' Card Account Balance
+   PromoAmount       As Currency       ' Accrued Promotional amount
+End Type
+
+Private Type VoucherData
+   VoucherID         As Long           ' Voucher Id from the Voucher table
+   VoucherType       As Integer        ' Voucher_Type 0: Normal, 1: Jackpot, 2: Hand Pay, 3: Jackpot Hand Pay
+   BarCode           As String         ' Barcode from the Voucher table
+   FormattedBarcode  As String         ' Barcode formatted as it appears on a printed voucher
+   VoucherAmt        As Currency       ' Amount of the Voucher
+   CreateDate        As Date           ' When was the Voucher created
+   CreatedLoc        As String         ' Where was the Voucher created
+   RedeemedLoc       As String         ' Where was the Voucher redeemed
+   RedeemedState     As Boolean        ' Indicates whether or not the Voucher been redeemed
+   RedeemedDate      As Date           ' When was the Voucher Redeemed
+   IsValid           As Boolean        ' System marked voucher as valid (successfully printed)
+   IsValidCheckValue As Boolean        ' Flag indicating if the CHECK_VALUE for the voucher is okay
+   UcvTransferred    As Boolean        ' Flag indicating if unpaid voucher was transferred to central office for payment
+   UcvTransferDate   As Date           ' Date voucher was transferred to central office for payment
+   ExpireDate As Date
+End Type
+
+Private mLastTransaction() As Long
+
+
+Private Const RETOK = 0                ' OK
+'Private Const RETNORESPONSE = -1      ' No response from reader
+Private Const RETPORTOPENERR = -2      ' Error open serial port
+'Private Const RETPORTCLOSEERR = -3    ' Port Close error
+'Private Const RETPORTNOTOPEN = -4     ' Port not open yet
+'Private Const RETERR = -255           ' Other errors
+
+Private mtCardState           As CardState
+Private mtVoucher             As VoucherData
+
+Private mcDollarsPerPoint     As Currency
+Private mcLockupAmt           As Currency    ' Casino Lockup_Amt used as amount requiring supervisor payout authorization
+Private mcPayoutThreshold     As Currency    ' DC Lottery Jackpot vouchers >= this amount may not be paid.
+Private mcStartingBalance     As Currency
+
+Private WithEvents oHrGnr     As HrGnr
+Attribute oHrGnr.VB_VarHelpID = -1
+
+Private msAuthUID             As String   ' UID of user that authorized lockup payout or PIN override
+'Private msCardInMachine       As String   ' Machine number found during card account lookup
+Private msCustName            As String   ' Customer Name
+Private msLastVoucher         As String
+Private msPaymentType         As String   ' Payment type (A)utomatic or (M)anual
+'Private msReceiptPayoutName   As String   ' Name to print on Lottery Jackpot Vouchers
+'Private msReceiptPayoutSSN    As String   ' SSN to print on Lottery Jackpot Vouchers
+Private msPrnDevName          As String   ' Default printer
+Private msSecondaryCasID      As String   ' Secondary Casino ID, allows use of electronic cards with a second Casino ID.
+Private msSessionID           As String   ' Session Identifier
+Private msUserEnteredPinValue As String   ' User entered Pin Number as a string
+Private msVoucherCasinoID     As String   ' Stores the first six character from the Voucher Code.
+
+
+Private miButtonIndex         As Integer  ' Index of the image in the imgList to use for the Payout button.
+Private miDataLen             As Integer  ' Length of card account data on a mag stripe card.
+Private miDataStart           As Integer  ' Starting position of data on a mag stripe card.
+Private miKeyLen              As Integer  ' Length of key data on a mag stripe card.
+Private miKeyStart            As Integer  ' Starting position of key data on a mag stripe card.
+Private miRedeemMultiple      As Integer  ' Points redeemed must be a multiple of this value.
+Private miPayoutsLastTab      As Integer  ' Last tab. Used to enable the correct tab after a detail report.
+Private miVoucherExpDays      As Integer  ' Days of expiration for Vouchers
+Private miPayoutTabs          As Integer  ' Payouts 1=Voucher, 2=Magnetic Card, 3=Both
+
+Private mlElapsedTime         As Long     ' Time in milliseconds since data arrived from card reader.
+Private mlLocationID          As Long     ' DC Lottery Location identifier.
+Private mlTimeout             As Long     ' Non-Activity timeout in milliseconds to clear screen.
+
+Private mbNameAndSSNLabels    As Boolean  ' Flags if receipt should show labels for name and SSN.
+Private mbActiveSession       As Boolean
+Private mbCardInUse           As Boolean  ' Flags if card is already in use at a player terminal
+Private mbCashierCanActivate  As Boolean  ' Flags if cashier can activate when Pins are required
+Private mbHasCashDrawer       As Boolean  ' Cash Drawer support required flag
+Private mbIsCashier           As Boolean  ' The user is a cashier flag
+Private mbManualMode          As Boolean  ' Flags if we are in manual lookup mode
+Private mbPartialPay          As Boolean  ' Flags if partial payments are allowed
+Private mbPayAuthorized       As Boolean  ' Flags if the user has been authorized to make a lockup payout
+Private mbPinEntryCancelled   As Boolean  ' Flags if user cancelled Pin entry
+Private mbPinOkay             As Boolean  ' Flags if user entered Pin = Card_Acct Pin
+Private mbPinRequired         As Boolean  ' Flags if a PIN number is required for Play and Cashout
+Private mbPromoPlay           As Boolean  ' Flags if Promotional Play is enabled
+Private mbRestartingSS        As Boolean  ' Form opened with user restarting a suspended session flag
+Private mbShowReprint         As Boolean  ' Flags if Reprint Receipt button is visible
+Private mbStoreInserts        As Boolean  ' Flags if all card inserts are to be recorded in CASHIER_TRANS
+Private mbValidVoucher        As Boolean  ' Flags if the voucher is a valid one.
+
+Dim mMD5Hasher                As MD5Hash  ' Class to MD5 password string
+
+'--------------------------------------------------------------------------------
+' End of module level declarations
+'--------------------------------------------------------------------------------
+
+Private Function OpenReader(asErrText As String) As Boolean
+'--------------------------------------------------------------------------------
+' Opens the SmartCard reader.
+' Returns True or False to indicate success or failure.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lbReturn      As Boolean
+
+Dim llPortNbr     As Long
+Dim llResult      As Long
+
+Dim lsBaudRate    As String
+Dim lsPortNbr     As String
+Dim lsReturnMsg   As String
+
+Dim lsaPortData() As String
+
+   ' Turn on error checking.
+   On Error GoTo LocalError
+
+   ' Assume open will succeed.
+   lbReturn = True
+   asErrText = ""
+
+   ' Store a local copy of the port number.
+   lsaPortData = Split(gsMSPortData, ",")
+   ' We expect 2 data elements in gsMSPortData, the port and baud rate (2,38400)
+   If UBound(lsaPortData) = 1 Then
+      lsPortNbr = Trim(lsaPortData(0))
+      lsBaudRate = Trim(lsaPortData(1))
+   End If
+
+   ' Validate port number...
+   If Len(lsPortNbr) = 0 Then
+       asErrText = "Port value has not been setup."
+   ElseIf Not IsNumeric(lsPortNbr) Then
+      asErrText = "Port number is not numeric."
+   Else
+      llPortNbr = CLng(lsPortNbr)
+      If llPortNbr < 1 Or llPortNbr > 8 Then
+         asErrText = "Port Number out of range (1 to 8)"
+      End If
+   End If
+
+   ' Validate Baud Rate.
+   If Len(asErrText) = 0 Then
+      If Not (lsBaudRate = "9600" Or lsBaudRate = "38400") Then
+         asErrText = "Invalid Baud Rate, must be 9600 or 38400."
+      End If
+   End If
+
+   ' If no errors, attempt to instantiate and open the reader object...
+   lbReturn = (Len(asErrText) = 0)
+
+   If lbReturn Then
+      If oHrGnr Is Nothing Then Set oHrGnr = New HrGnr
+      llResult = oHrGnr.OpenReader(lsPortNbr, lsBaudRate)
+      Select Case llResult
+         Case RETOK
+            lbReturn = True
+         Case RETPORTOPENERR
+            asErrText = Replace("Unable to open Com Port %s.", SR_STD, lsPortNbr, 1, 1)
+            lbReturn = False
+         Case Else
+            asErrText = "Unable to open Card Reader."
+            lbReturn = False
+      End Select
+   End If
+
+ExitFunction:
+   ' Assign the function return value.
+   OpenReader = lbReturn
+
+   ' Exit to avoid error handler.
+   Exit Function
+
+LocalError:
+   lbReturn = False
+   asErrText = Me.Name & "::OpenReader Error: " & Err.Description
+   GoTo ExitFunction
+
+End Function
+
+Private Sub Print_Receipt(asTransNo As String, acPayoutAmount As Currency)
+'--------------------------------------------------------------------------------
+' This routine will print the receipt
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lcBalance        As Currency
+Dim lcPartialAmt     As Currency
+Dim liPayoutFunction As Integer
+
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   ' Use the Barcode in the account nbr field for printing.
+   mtCardState.AccountNumber = mtVoucher.BarCode
+   
+   ' Vouchers
+   liPayoutFunction = 1
+   
+   ' Init Report Viewer form properties...
+   With frm_RepViewer
+      .PayoutFunction = liPayoutFunction
+      .ReprintReceipt = False        ' This is not a reprint.
+      .CardAccountNumber = mtCardState.AccountNumber
+      .TransactionID = asTransNo
+      .Amount = Format(acPayoutAmount, "###,##0.00")
+      .PromoOn = mbPromoPlay
+      .ReportName = "PayOutReceipt"
+      .ShowNameAndSSNLabels = mbNameAndSSNLabels
+   End With
+   
+   If sst_Payouts.Tab = 0 Then
+      ' Is it a partial payout?
+      If chk_PartialPayOut.Value = 1 Then
+         ' Yes, Partial payout.
+         ' Get the balance...
+         If Len(txt_Balance.Text) = 0 Then
+            lcBalance = 0
+         Else
+            lcBalance = CCur(txt_Balance.Text)
+         End If
+         
+         ' Get the Partial Payout amount...
+         If Len(txt_PartialPayAmt.Text) = 0 Then
+            lcPartialAmt = 0
+         Else
+            lcPartialAmt = CCur(txt_PartialPayAmt.Text)
+         End If
+         
+         ' Show the new balance.
+         txt_Balance.Text = Format(lcBalance - lcPartialAmt, "###,##0.00")
+      Else
+         ' No, it's a Full payout.
+         txt_Balance.Text = "0.00"
+      End If
+   
+      ' Reset the Partial payout display to an empty string.
+      txt_PartialPayAmt.Text = ""
+   End If
+   
+   ' Print the receipt...
+   Load frm_RepViewer
+   Unload frm_RepViewer
+   
+ExitFunction:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::Print_Receipt" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+   
+End Sub
+
+Private Sub btnRemoveItem_Click()
+    Dim lsMessage As String
+    Dim liVoucherIndex As Integer
+    
+    If lstVoucherLock.ListIndex > -1 Then
+    
+        liVoucherIndex = lstVoucherLock.ListIndex
+        
+        If lstVoucherCode.ListIndex = liVoucherIndex And lstVoucherAmount.ListIndex = liVoucherIndex Then
+                    
+            lsMessage = "Are you sure you want to remove this voucher entry?" & vbCrLf & "Code:   " & lstVoucherCode.Text & vbCrLf & "Amount: " & lstVoucherAmount.Text
+            
+            
+             If MsgBox(lsMessage, vbYesNo, "Remove voucher from transaction?") = vbYes Then
+                
+                lstVoucherLock.RemoveItem (liVoucherIndex)
+                lstVoucherCode.RemoveItem (liVoucherIndex)
+                lstVoucherAmount.RemoveItem (liVoucherIndex)
+                Call ValidateTransaction
+            End If
+    
+        Else
+            MsgBox "btnRemoveItem_Click::SelectedIndex out of sync. Please try again.", vbCritical
+            Call lstVoucherLock_Click
+        End If
+    Else
+            MsgBox "No vouchers selected from transaction list or transaction list is empty.", vbCritical
+    End If
+    
+    Call UpdatePayoutStatusMessage
+    
+    Call SetVoucherInputFocus
+    
+End Sub
+
+Private Sub UpdatePayoutStatusMessage()
+
+    If lstVoucherLock.ListCount > 0 Then
+         txt_Result.Text = "Ready to Payout or Append Additonal Voucher."
+    ElseIf Not mbManualMode Then
+         txt_Result.Text = "Ready to Scan Voucher."
+    Else
+         txt_Result.Text = "Select a voucher from the list."
+    End If
+    
+End Sub
+Private Sub btnVoidTransaction_Click()
+     
+   Dim lfProceed As Boolean
+   
+   lfProceed = False
+   If lstVoucherLock.ListCount > 0 Then
+   
+    If MsgBox("Are you sure you want to clear all items from current transaction?", vbYesNo, "Void Transaction?") = vbYes Then
+        lfProceed = True
+    End If
+   Else
+      lfProceed = True
+   End If
+   
+   If lfProceed = True Then
+        Call lstVoucherLock.Clear
+        Call lstVoucherCode.Clear
+        Call lstVoucherAmount.Clear
+        Call ValidateTransaction
+        Call ClearVoucherState
+        
+   End If
+   
+   Call UpdatePayoutStatusMessage
+      
+   ' Implemented in 3.0.8
+   ' Return focus for next barcode scan
+   Call SetVoucherInputFocus
+            
+End Sub
+
+
+Private Sub ValidateTransaction()
+
+    Dim lcTotalAmount As Currency
+    Dim i As Integer
+    
+    
+    
+    If lstVoucherCode.ListCount > 0 Then
+   
+        cmd_PayoutVoucher.Visible = True
+        cmd_PayoutVoucher.Enabled = True
+        
+        For i = 0 To lstVoucherAmount.ListCount - 1
+            
+           lcTotalAmount = lcTotalAmount + CCur(lstVoucherAmount.List(i))
+                    
+        Next
+                 
+        ' Turn on the button image timer.
+        tmrButtonImage.Enabled = True
+        
+   Else
+        lcTotalAmount = 0
+        cmd_PayoutVoucher.Visible = False
+        cmd_PayoutVoucher.Enabled = False
+        
+        ' Turn on the button image timer.
+        tmrButtonImage.Enabled = False
+        
+        txt_Result.Text = "Ready to Scan."
+        
+   End If
+   
+   
+   lblVoucherTotalAmount.Caption = Format$(Format$(lcTotalAmount, "Standard"), "@@@@@@@@@@@@")
+   
+   
+End Sub
+
+Private Sub chk_PartialPayOut_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the Partial Payout checkbox control.
+'--------------------------------------------------------------------------------
+
+   mlElapsedTime = 0
+   If gCardStatus <> "2" Then
+      ' If Jackpot, no partial payout is allowed...
+      If chk_PartialPayOut.Value = 1 Then
+         ' Partial payout...
+         txt_PartialPayAmt.Visible = mbPartialPay
+         txt_PartialPayAmt.Enabled = True
+         txt_PartialPayAmt.SetFocus
+      Else
+         ' Full payout.
+         txt_PartialPayAmt.Visible = False
+      End If
+   End If
+
+End Sub
+
+Private Sub cmb_CARD_ACCT_LIST_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the Card Account ComboBox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   If cmb_CARD_ACCT_LIST.ListIndex > -1 Then
+      Call cmd_Search_Click
+   End If
+   mlElapsedTime = 0
+   tmr_GetReaderStatus.Enabled = True
+
+End Sub
+
+Private Sub cmb_CARD_ACCT_LIST_KeyPress(KeyAscii As Integer)
+'--------------------------------------------------------------------------------
+' KeyPress event handler for the Card Account ComboBox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   If Len(cmb_CARD_ACCT_LIST) > 9 Then KeyAscii = 0
+
+End Sub
+
+Private Sub cboVouchers_Change()
+'--------------------------------------------------------------------------------
+' Change event handler for the Voucher ComboBox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsValidationID As String
+
+   lsValidationID = cboVouchers.Text
+   If Len(lsValidationID) = 24 Then
+     On Error Resume Next
+     Call GetVoucherInfo
+   End If
+
+End Sub
+
+Private Sub cboVouchers_KeyPress(KeyCode As Integer)
+
+    If KeyCode = vbKeyRight Or KeyCode = vbKeyLeft Or _
+            KeyCode = vbKeyUp Or KeyCode = vbKeyDown Or _
+            KeyCode = vbKeyPageUp Or KeyCode = vbKeyPageDown Then
+                
+    Else
+        KeyCode = 0
+    End If
+    
+
+
+End Sub
+
+Private Sub cboVouchers_Click()
+'--------------------------------------------------------------------------------
+' Change event handler for the Voucher ComboBox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsValidationID As String
+   
+   lsValidationID = cboVouchers.Text
+   If Len(lsValidationID) = 24 Then
+      On Error Resume Next
+      Call GetVoucherInfo
+   End If
+
+End Sub
+
+Private Sub cmd_CashTransCancel_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the Cancel Transaction entry button.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   ' Initialize text control values.
+   txt_TransactionAmt.Text = ""
+   txt_Password.Text = ""
+   
+   ' Set visibility of controls...
+   ' sst_Payouts.Tab = miPayoutsLastTab
+   
+   ' Make the option buttons visible only if the user is not a cashier...
+   If Not mbIsCashier Then
+      ' User is not a cashier...
+      Opt_Mode(0).Visible = gAllowManualPayout
+      Opt_Mode(1).Visible = gAllowManualPayout
+   End If
+   
+End Sub
+
+Private Sub cmd_CashTransSubmit_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the OK button.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lobjRS        As ADODB.Recordset
+
+Dim llPos         As Long
+Dim llRefNbr      As Long
+
+Dim lcValue       As Currency
+
+Dim lsErrText     As String
+Dim lsSQL         As String
+Dim lsTransType   As String
+Dim lsValue       As String
+
+   
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   ' Store the transaction amount.
+   lsValue = txt_TransactionAmt.Text
+   
+
+   
+     ' Is it a valid number?
+     If IsNumeric(lsValue) Then
+         ' Check for no more than two digits after the decimal place...
+         llPos = InStr(lsValue, ".")
+         If llPos > 0 And (Len(lsValue) - llPos > 2) Then
+            ' Too many numbers after the decimal point, so set the error text string.
+            lsErrText = "Please enter no more than 2 digits after the decimal point."
+         ElseIf mMD5Hasher.MD5(txt_Password.Text) <> gUserPswd Then
+            ' The password is not valid, so set the error text string.
+            lsErrText = "Invalid Password."
+         Else
+            ' Yes, convert it to a currency datatype.
+            lcValue = CCur(lsValue)
+            
+            ' If a password is required then retrieve and validate it.
+            If lcValue < 0 Then
+               ' Transaction type is R - Remove Money
+               lsTransType = "R"
+               
+               ' Only positive amount values are inserted into CASHIER_TRANS.
+               lcValue = (lcValue * -1)
+            Else
+               ' Transaction type is A - Add Money
+               lsTransType = "A"
+            End If
+         End If
+     Else
+        ' User has made an invalid (non-numeric) entry, so set the error text string.
+        lsErrText = "Invalid amount entry."
+     End If
+
+   If Len(lsErrText) Then
+      MsgBox lsErrText, vbExclamation, "Bank Status"
+   Else
+      ' Open the drawer.
+      Call OpenDrawer
+      
+      ' Log the transaction.
+      lsValue = CStr(lcValue)
+      lsSQL = "INSERT INTO CASHIER_TRANS (TRANS_TYPE, TRANS_AMT, SESSION_ID, CREATED_BY, CASHIER_STN, LOCATION_ID) " & _
+         "VALUES ('%tt', %ta, '%sid', '%cb', '%cs', %lid)"
+      lsSQL = Replace(lsSQL, "%tt", lsTransType, 1, 1)
+      lsSQL = Replace(lsSQL, "%ta", lsValue, 1, 1)
+      lsSQL = Replace(lsSQL, "%sid", msSessionID, 1, 1)
+      lsSQL = Replace(lsSQL, "%cb", gUserId, 1, 1)
+      lsSQL = Replace(lsSQL, "%cs", gWKStation, 1, 1)
+      lsSQL = Replace(lsSQL, "%lid", mlLocationID, 1, 1)
+      
+      ' Execute it.
+      gConn.Execute lsSQL, , adExecuteNoRecords
+      
+      ' Go get the CASHIER_TRANS_ID for the row we just inserted, this will be the reference number for
+      ' the cashier receipt we will print...
+      lsSQL = "SELECT MAX(CASHIER_TRANS_ID) FROM CASHIER_TRANS WHERE SESSION_ID='%sid' AND TRANS_TYPE='%tt'"
+      lsSQL = Replace(lsSQL, "%sid", msSessionID, 1, 1)
+      lsSQL = Replace(lsSQL, "%tt", lsTransType, 1, 1)
+   
+      ' Execute the retrieval.
+      Set lobjRS = gConn.Execute(lsSQL)
+      
+      Call GetCashiersSummary
+      If Len(mtVoucher.BarCode) > 1 Then
+         ' Call function to update cashier summary.
+         If CCur(txt_CurrentBal(1)) < mtVoucher.VoucherAmt Then
+            txt_Result.Text = ""
+            Call VoucherValidation(5)
+         Else
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & "is ready to be Cashed."
+            'cmd_VoucherDetails.Visible = False
+            cmd_PayoutVoucher.Visible = True
+            cmd_PayoutVoucher.Enabled = True
+            
+            ' Turn on the button image timer.
+            tmrButtonImage.Enabled = True
+            'sst_Payouts.Tab = 1
+            
+            sst_Payouts.Tab = 1
+         End If
+      End If
+      llRefNbr = lobjRS(0)
+      If lobjRS.State Then lobjRS.Close
+      Set lobjRS = Nothing
+      
+      ' Print a cash drawer transaction receipt.
+      Call Print_CD_AddRemove_Receipt(lsValue, lsTransType, llRefNbr)
+      
+      ' Implemented in 3.0.8
+      ' Go to Vouchers tab
+      sst_Payouts.Tab = 1
+      
+      ' Return focus for next barcode scan
+      Call SetVoucherInputFocus
+      
+      ' Call the cancel button event handler to reset screen for payout functions.
+      Call cmd_CashTransCancel_Click
+   End If
+ExitFunction:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::cmb_CashTransSubmit" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+   
+End Sub
+
+Private Sub cmd_Close_Click()
+'--------------------------------------------------------------------------------
+' This routine will end the session and then print the Session Summary, then,
+' if the user is a cashier, it will log them off.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsEndBalance  As String
+Dim lsReportID    As String
+Dim lsSQL         As String
+
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   ' Show the default mouse cursor.
+   MousePointer = vbDefault
+   
+   ' Is this user operating with a cash drawer?
+   If mbHasCashDrawer Then
+      ' Retrieve and then log session totals for this user...
+      ' GetCashDrawerBalance returns the cash drawser balance for the current session.
+      lsEndBalance = CStr(GetCashDrawerBalance())
+      
+      ' Build the 'E'nd session CASHIER_TRANS insert string...
+      lsSQL = "INSERT INTO CASHIER_TRANS (TRANS_TYPE, TRANS_AMT, SESSION_ID, CREATED_BY, CASHIER_STN, LOCATION_ID) " & _
+         "VALUES ('E', %ta, '%sid', '%cb', '%cs', %lid)"
+      lsSQL = Replace(lsSQL, "%ta", lsEndBalance, 1, 1)
+      lsSQL = Replace(lsSQL, "%sid", msSessionID, 1, 1)
+      lsSQL = Replace(lsSQL, "%cb", gUserId, 1, 1)
+      lsSQL = Replace(lsSQL, "%cs", gWKStation, 1, 1)
+      lsSQL = Replace(lsSQL, "%lid", mlLocationID, 1, 1)
+      
+      ' Execute it.
+      gConn.Execute lsSQL, , adExecuteNoRecords
+      
+      ' Report identifier is session summary with cash drawer.
+      lsReportID = "Session_Summary_CD"
+      
+      ' Open the cash drawer.
+      Call OpenDrawer
+   Else
+      ' Report identifier is just session summary.
+      lsReportID = "Session_Summary"
+   End If
+   
+   ' Print the session summary...
+   With frm_RepViewer
+      .ReportName = lsReportID
+      .UserSession = msSessionID
+      .DirectToPrinter = True
+   End With
+   Load frm_RepViewer
+   Unload frm_RepViewer
+   
+   ' Terminate the session.
+   Call gConnection.SessionTracker("Delete", "", "", "")
+   
+   ' If user is a cashier, log them out...
+   If mbIsCashier Then
+      Call gConnection.LogOffUser(gUserId, gUserPswd)
+      gLoggedOffCashier = True
+   End If
+   
+   mbActiveSession = False
+   Unload Me
+   
+ExitSub:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::cmd_Close_Click" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+Private Sub cmd_LeaveSession_Click()
+'--------------------------------------------------------------------------------
+'
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   cmd_LeaveSession.Visible = False
+   cmd_SuspendSession.Visible = True
+   cmd_Close.Visible = True
+   txt_Result.Text = "Please End or Suspend the Session."
+
+End Sub
+
+Private Sub PerformPayout()
+'--------------------------------------------------------------------------------
+' Click event for the pay button.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsAuthUID        As String
+Dim lsRefNbr         As String
+Dim lsUserMsg        As String
+Dim lsValue          As String
+
+Dim llRC             As Long
+Dim llCTransID       As Long
+
+Dim lcDrawerBalance  As Currency
+Dim lcCardBalance    As Currency
+Dim lcPartialAmount  As Currency
+Dim lcPayAmount      As Currency
+
+   MousePointer = vbHourglass
+   On Error GoTo LocalError
+   
+   ' Assume pay override will not be required.
+   lsAuthUID = ""
+   
+   If mbCardInUse Then
+      lsUserMsg = "This account can not be paid out. Reference Machine No: " & mtCardState.MachineNumber
+      MsgBox lsUserMsg, vbExclamation, gMsgTitle
+      GoTo ExitSub
+   End If
+   
+   ' Store the card balance, note that the format function handles any rounding.
+   lcCardBalance = CCur(Format(txt_Balance.Text, "###,##0.00"))
+   
+   ' Is the user making a partial payment?
+   If chk_PartialPayOut.Value = vbChecked Then
+      ' Yes, so evaluate the partial payment amount...
+      If IsNumeric(txt_PartialPayAmt.Text) Then
+         ' We will use the format function to handle rounding.
+         lcPartialAmount = CCur(Format(txt_PartialPayAmt.Text, "###,##0.00"))
+         If lcPartialAmount <> CCur(Format(txt_PartialPayAmt.Text, "###,##0.0000")) Then
+            lsUserMsg = "You may not enter fractions of a penny."
+            MsgBox lsUserMsg, vbExclamation, gMsgTitle
+            txt_PartialPayAmt.SetFocus
+            GoTo ExitSub
+         End If
+      Else
+         lcPartialAmount = 0
+      End If
+      
+      ' Is the amount less than a penny?
+      If lcPartialAmount < 0.01 Then
+         ' Yes, inform the user and bail out...
+         lsUserMsg = "The payout amount must be greater than $0.01."
+         MsgBox lsUserMsg, vbExclamation, gMsgTitle
+         txt_PartialPayAmt.SetFocus
+         GoTo ExitSub
+      End If
+      
+      If lcPartialAmount > lcCardBalance Then
+         lsUserMsg = "The amount you entered to pay is greater than the current balance."
+         MsgBox lsUserMsg, vbExclamation, gMsgTitle
+         txt_PartialPayAmt.SetFocus
+         GoTo ExitSub
+      End If
+   End If
+   
+   If lcCardBalance > 0 Then
+      ' gCardStatus will be "2" if the card account is locked due
+      ' to winning tab amount greater than the lockup amount.
+      
+      If (gbPayOverrideRequired = True) And (gCardStatus = "2") Then
+         If gSecurityLevel < giSupervisorLevel Then
+            ' Requires supervisor level (or greater) authorization.
+            lsUserMsg = "A full payout plus supervisor authorization is required." & vbCrLf & _
+               "Please have a user with supervisor level (or greater) permissions authorize this payment."
+            MsgBox lsUserMsg, vbInformation, "Authorization Required"
+            
+            ' Setup and show the authorization form.
+            With frm_Login
+               .OpenedBy = Me.Name
+               .IsAuthorizationMode = True
+               .AuthorizationAction = "AuthorizeLockupPayout"
+            End With
+            
+            ' Initialize the Authorized Flag and Authorization UID in case the user cancels
+            ' on the authorization entry form (frm_Login)...
+            mbPayAuthorized = False
+            msAuthUID = ""
+            
+            ' Show the form for authorization...
+            frm_Login.Show vbModal
+            
+            ' If invalid authorization or user cancelled, bail out without making the payment.
+            If (mbPayAuthorized = False) Or (Len(msAuthUID) = 0) Then
+               GoTo ExitSub
+            Else
+               ' Reset the local authorizing user id string variable.
+               lsAuthUID = msAuthUID
+            End If
+         Else
+            ' Current user already has payout override privilege, so use the current users
+            ' login ID as the authorizing user.
+            lsAuthUID = gUserId
+         End If
+      End If
+      
+     ' The format function is used in the next code block to handle rounding to the nearest penny.
+      If chk_PartialPayOut.Value = vbChecked Then
+         lcPayAmount = lcPartialAmount
+      Else
+         lcPayAmount = lcCardBalance
+      End If
+      
+      ' Show formatted partial payment amount...
+      txt_PartialPayAmt.Text = Format(lcPartialAmount, "###,##0.00")
+      
+      ' If using a cash drawer, check that the amount to be paid is less than
+      ' or equal to the remaining balance in the cash drawer...
+      If mbHasCashDrawer Then
+         lcDrawerBalance = GetCashDrawerBalance()
+         If lcPayAmount > lcDrawerBalance Then
+            lsUserMsg = "The amount to pay exceeds the cash drawer balance." & vbCrLf & _
+               "Click the 'Add / Remove $' button and add cash to the cash drawer."
+            MsgBox lsUserMsg, vbExclamation, gMsgTitle
+            GoTo ExitSub
+         End If
+      End If
+      
+      ' gConnection.AccountPayOut will return 0 to indicate success or a non-zero error code if it fails.
+      ' If it fails, the failure reason is logged in the CASINO_EVENT_LOG table.
+      llRC = gConnection.AccountPayOut(mtCardState.AccountNumber, lcPayAmount, msSessionID, msPaymentType, lsAuthUID, llCTransID)
+      
+      ' Was there an error?
+      If llRC = 0 Then
+         ' No, so we can continue...
+         ' The last argument to AccountPayOut will be returned containing the
+         ' CASHIER_TRANS_ID value for the newly inserted CASHIER_TRANS table row.
+         ' That value is printed on cashier receipts as the 'RefNbr'.
+         lsRefNbr = CStr(llCTransID)
+         
+         ' Open the cash drawer if appropriate...
+         If mbHasCashDrawer Then Call OpenDrawer
+         
+         If (gCardStatus = "2") And gDisplayIRSForm = True Then
+            frm_IRS_Warning.Show vbModal
+         End If
+         
+         ' Call print receipt function.
+         Call Print_Receipt(lsRefNbr, lcPayAmount)
+         
+         ' Reset txt_Status.Text if it was 'Active - Lockup' to 'Active'.
+         lsValue = txt_Status.Text
+         If InStr(1, lsValue, "Lockup", vbTextCompare) > 6 Then
+            txt_Status.Text = "Active"
+         End If
+         
+         ' Make sure reprint button is visible if allowed.
+         cmd_Receipt_Reprint.Visible = mbShowReprint
+         
+         'refresh amounts on the Cash Drawer Tab
+         Call GetCashiersSummary
+      Else
+         ' The payout failed, probably due to a duplicate key insertion error...
+         MsgBox "Payout failed, please retry.", vbCritical, gMsgTitle
+      End If
+   Else
+       MsgBox "Nothing to pay.", vbInformation, gMsgTitle
+   End If
+   
+   txt_PartialPayAmt.Text = ""
+   
+ExitSub:
+   mbPayAuthorized = False
+   msAuthUID = ""
+   MousePointer = vbDefault
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::PerformPayout" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+
+
+Private Sub PerformVoucherPayout()
+'--------------------------------------------------------------------------------
+' Click event for the pay button.
+' Added by MZ - 08/14/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lADOCmd          As ADODB.Command
+Dim lVoucherPayoutRS As ADODB.Recordset
+
+Dim lsErrorText      As String
+Dim lsPayoutUser     As String
+Dim lsRefNbr         As String
+Dim lsUserMsg        As String
+
+Dim llRC             As Long
+Dim llCTransID       As Long
+
+Dim lcDrawerBalance  As Currency
+Dim lcVoucherBalance As Currency
+
+   ' Turn on error checking.
+   On Error GoTo LocalError
+
+mdlCasino.GetSysParameters ("SiteStatusPayoutsActive")
+
+If gSiteStatusPayoutsActive Then
+
+   ' Show an hourglass cursor.
+   MousePointer = vbHourglass
+   
+   ' Set Authorizing user to an empty string.
+   msAuthUID = ""
+   lsPayoutUser = gUserId
+   
+   Dim liNumberOfVouchers As Integer
+   Dim mLastTransaction() As VoucherData
+   Dim i As Integer
+   Dim lfIsSupervisorRequired As Boolean
+   Dim lsBarcodes As String
+   Dim liArraySize As Integer
+      Dim lfIsPayoutFailure As Boolean
+      
+   For i = 0 To lstVoucherCode.ListCount - 1
+      lsBarcodes = lsBarcodes & Replace(lstVoucherCode.List(i), "-", "")
+            
+      If i < lstVoucherCode.ListCount - 1 Then
+         lsBarcodes = lsBarcodes & ","
+      End If
+            
+   Next
+   
+   mLastTransaction = GetVoucherData(lsBarcodes)
+   liArraySize = GetArraySize(mLastTransaction, "PerformVoucherPayout")
+   lfIsSupervisorRequired = False
+   
+   lfIsPayoutFailure = False
+   mbNameAndSSNLabels = False
+   For i = 0 To liArraySize - 1
+        
+        With mLastTransaction(i)
+            lcVoucherBalance = CCur(Format(.VoucherAmt, "###,##0.00"))
+            
+            If mbNameAndSSNLabels = False Then
+                ' Set flag to show or hide Name and SSN on receipt
+                If .VoucherType = 1 And .VoucherAmt >= 600# Then
+                    mbNameAndSSNLabels = True
+                End If
+                
+            End If
+               
+            If .RedeemedState = True Then
+                txt_Result.Text = "Payout failure. Voucher already redeemed." & vbCrLf & "Remove the voucher and try again." & vbCrLf & .FormattedBarcode
+                MsgBox "Payout failure. Voucher already redeemed. Remove this voucher and try again. " & vbCrLf & "Voucher ID:" & .VoucherID & vbCrLf & "Barcode: " & .FormattedBarcode, vbCritical, "Payout Failure. Voucher Redeemed."
+                lfIsPayoutFailure = True
+                
+            End If
+            
+            If (.VoucherType = 1) And (lcVoucherBalance > (mcLockupAmt - 0.001)) Then
+                If (gSecurityLevel < giSupervisorLevel) Or (InStr(1, "~ADMIN~ADMINISTRATOR~SUPERVISOR~SUPER~", lsPayoutUser, vbTextCompare) > 0) Then
+                    lfIsSupervisorRequired = True
+                End If
+            End If
+            
+            
+        End With
+        
+   Next i
+   
+   ' If using a cash drawer, check that the amount to be paid is less than
+   ' or equal to the remaining balance in the cash drawer...
+   If mbHasCashDrawer And Not lfIsPayoutFailure Then
+      lcDrawerBalance = GetCashDrawerBalance()
+      If CCur(Format(lblVoucherTotalAmount.Caption, "###,##0.00")) > lcDrawerBalance Then
+         lsUserMsg = "The amount to pay exceeds the cash drawer balance." & vbCrLf & _
+            "Please add cash to the cash drawer via the cash drawer tab."
+         MsgBox lsUserMsg, vbExclamation, gMsgTitle
+         lfIsPayoutFailure = True
+      End If
+   End If
+   
+   If lfIsSupervisorRequired = True And lfIsPayoutFailure = False Then
+        lsUserMsg = "One or more voucher amount Exceeds the Lockup Amount." & vbCrLf & _
+            "Please have a user with supervisor level (or greater) permissions authorize this payment."
+         MsgBox lsUserMsg, vbInformation, "Authorization Required"
+         
+         ' Setup and show the authorization form.
+         With frm_Login
+            .OpenedBy = Me.Name
+            .IsAuthorizationMode = True
+            .AuthorizationAction = "AuthorizeLockupPayout"
+         End With
+         
+         ' Initialize the Authorized Flag and Authorization UID in case the user cancels
+         ' on the authorization entry form (frm_Login)...
+         mbPayAuthorized = False
+         
+         ' Show the form for authorization...
+         frm_Login.Show vbModal
+         
+         ' If invalid authorization or user cancelled, bail out without making the payment.
+         If (mbPayAuthorized = False) Or (Len(msAuthUID) = 0) Then
+            txt_Result.Text = "Payout failure. Supervisor authorization required on one or more vouchers. Please try payout again."
+            lfIsPayoutFailure = True
+         End If
+            
+   End If
+   
+   If lfIsPayoutFailure = True Then
+        GoTo FailedPayout
+   End If
+   
+   Dim liVoucherRecieptNum As Long
+   
+   gConn.BeginTrans
+   Set lADOCmd = New ADODB.Command
+   With lADOCmd
+      Set .ActiveConnection = gConn
+      .CommandType = adCmdStoredProc
+      .CommandText = "dbo.Post_Voucher_Receipt"
+      lcVoucherBalance = CCur(Format(lblVoucherTotalAmount.Caption, "###,##0.00"))
+      
+      .Parameters.Append .CreateParameter(Name:="@VoucherCount", Type:=adInteger, Direction:=adParamInput, Value:=liArraySize)
+      .Parameters.Append .CreateParameter(Name:="@PayoutAmount", Type:=adCurrency, Direction:=adParamInput, Value:=lcVoucherBalance)
+   End With
+   
+   ' Execute the stored procedure and storing returned row in lVoucherPayoutRS.
+   Set lVoucherPayoutRS = lADOCmd.Execute()
+   With lVoucherPayoutRS
+      liVoucherRecieptNum = .Fields("VOUCHER_RECEIPT_NO").Value
+   End With
+   
+   
+   If liVoucherRecieptNum <= 0 Then
+        GoTo FailedPayout
+   End If
+      
+   For i = 0 To liArraySize - 1
+    
+        With mLastTransaction(i)
+        
+            ' Create a new instance of an ADODB.Command object.
+            Set lADOCmd = New ADODB.Command
+            
+            ' Initialize the command object so we can call the Post_Voucher_Payout stored procedure.
+            With lADOCmd
+               Set .ActiveConnection = gConn
+               .CommandType = adCmdStoredProc
+               .CommandText = "dbo.Post_Voucher_Payout"
+               .Parameters.Append .CreateParameter(Name:="@VoucherID", Type:=adInteger, Direction:=adParamInput, Value:=mLastTransaction(i).VoucherID)
+               .Parameters.Append .CreateParameter(Name:="@PayoutUser", Type:=adVarChar, Direction:=adParamInput, Size:=10, Value:=gUserId)
+               .Parameters.Append .CreateParameter(Name:="@AuthUser", Type:=adVarChar, Direction:=adParamInput, Size:=10, Value:=msAuthUID)
+               .Parameters.Append .CreateParameter(Name:="@PayoutAmount", Type:=adInteger, Direction:=adParamInput, Value:=CLng(CCur(Format(mLastTransaction(i).VoucherAmt, "###,##0.00")) * 100))
+               .Parameters.Append .CreateParameter(Name:="@SessionID", Type:=adVarChar, Direction:=adParamInput, Size:=40, Value:=msSessionID)
+               .Parameters.Append .CreateParameter(Name:="@WorkStation", Type:=adVarChar, Direction:=adParamInput, Size:=32, Value:=gWKStation)
+               .Parameters.Append .CreateParameter(Name:="@PaymentType", Type:=adChar, Direction:=adParamInput, Size:=1, Value:=msPaymentType)
+               .Parameters.Append .CreateParameter(Name:="@LocationID", Type:=adInteger, Direction:=adParamInput, Value:=mlLocationID)
+               .Parameters.Append .CreateParameter(Name:="@VoucherRecieptNo", Type:=adInteger, Direction:=adParamInput, Value:=liVoucherRecieptNum)
+            End With
+            
+            ' Execute the stored procedure and storing returned row in lVoucherPayoutRS.
+            Set lVoucherPayoutRS = lADOCmd.Execute()
+            With lVoucherPayoutRS
+               llRC = .Fields("ErrorID").Value
+               llCTransID = .Fields("CashierTransID").Value
+               lsErrorText = .Fields("ErrorDescription").Value
+            End With
+   
+        End With
+        
+        If llRC = 0 Then
+        
+        Else
+            ' The Post_Voucher_Payout procedure returned a non-zero ErrorID value...
+            lsUserMsg = lsErrorText
+            lfIsPayoutFailure = True
+            Exit For
+            
+        End If
+        
+         
+   Next
+   
+   If lfIsPayoutFailure = True Then
+           
+    If Len(lsUserMsg) = 0 Then lsUserMsg = "Nothing to pay."
+    MsgBox lsUserMsg, vbExclamation, gMsgTitle
+    
+    GoTo FailedPayout
+    
+   End If
+   
+   
+   gConn.CommitTrans
+   lsRefNbr = CStr(liVoucherRecieptNum)
+   
+   ' Open the cash drawer if appropriate...
+   If mbHasCashDrawer Then Call OpenDrawer
+   
+   Call Print_Receipt_Transaction(lsRefNbr, CCur(Format(lblVoucherTotalAmount.Caption, "###,##0.00")), liArraySize)
+   
+   ' Make sure reprint button is visible if allowed.
+   cmd_Receipt_Reprint.Visible = mbShowReprint
+   
+   
+   
+   ' Voucher was paid out successfully so set mbValidVoucher to false
+   mbValidVoucher = False
+   
+   For i = 0 To liArraySize - 1
+        
+        With mLastTransaction(i)
+        
+            ' Record the fact that voucher paid
+            Call gConnection.AppEventLog(gUserId, AppEventType.AccountingEvent, "Voucher successfully paid out. Reciept No:" & liVoucherRecieptNum & " VoucherID: " & .VoucherID & " Amount: " & .VoucherAmt & " Barcode: ****" & Right(.BarCode, 4) & ".")
+            
+        End With
+   Next
+     
+   txtLastReceiptNumber.Text = liVoucherRecieptNum
+   txtLastTransVoucherCount.Text = liArraySize
+   txtLastTransAmount.Text = lblVoucherTotalAmount.Caption
+   
+   Call lstVoucherLock.Clear
+   Call lstVoucherCode.Clear
+   Call lstVoucherAmount.Clear
+   Call ValidateTransaction
+   
+   ' Implemented in 3.0.8
+   ' Refresh Cash Drawer amounts
+   Call GetCashiersSummary
+   
+   If Opt_Mode(0) Then
+         ' Automatic
+         cboVouchers.Visible = False
+         txt_VoucherCode.Visible = True
+         txt_VoucherCode.Enabled = True
+         Call SetVoucherInputFocus
+         txt_Result.Text = "Ready to Scan Voucher."
+   Else
+         ' Manual
+         txt_VoucherCode.Visible = False
+         cboVouchers.Visible = True
+         cboVouchers.Enabled = True
+         Call SetVoucherInputFocus
+         txt_Result.Text = "Select a Voucher from the list."
+         If mbValidVoucher = False Then Call LoadVouchers
+   End If
+      
+      
+   GoTo ExitSub
+   
+   
+    
+   
+  
+   ' Did Post_Voucher_Payout return a zero ErrorID?
+   If llRC = 0 Then
+      ' Yes, so we can continue.
+      
+   
+      
+   
+   Else
+      ' The Post_Voucher_Payout procedure returned a non-zero ErrorID value...
+      lsUserMsg = lsErrorText
+      If Len(lsUserMsg) = 0 Then lsUserMsg = "Nothing to pay."
+      MsgBox lsUserMsg, vbExclamation, gMsgTitle
+   End If
+   
+Else
+
+   MsgBox "Site has been disabled and voucher payouts are no longer available.", vbCritical, gMsgTitle
+
+End If
+   
+ExitSub:
+   mbPayAuthorized = False
+   msAuthUID = ""
+   
+   Call ValidateTransaction
+   
+   MousePointer = vbDefault
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::PerformVoucherPayout" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo FailedPayout
+FailedPayout:
+    Erase mLastTransaction
+    
+    On Error GoTo ExitSub
+    gConn.RollbackTrans
+    
+    GoTo ExitSub
+
+End Sub
+
+
+Private Sub Print_Receipt_Transaction(asTransNo As String, acPayoutAmount As Currency, aiVoucherCount As Integer)
+'--------------------------------------------------------------------------------
+' This routine will print the receipt
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lcBalance        As Currency
+Dim liPayoutFunction As Integer
+
+   ' Turn on error checking.
+   On Error GoTo LocalError
+      
+   ' Vouchers
+   liPayoutFunction = 1
+   
+   ' Init Report Viewer form properties...
+   With frm_RepViewer
+      .PayoutFunction = liPayoutFunction
+      .ReprintReceipt = False        ' This is not a reprint.
+      .TransactionID = asTransNo
+      .PromoOn = mbPromoPlay
+      .ReportName = "PayOutReceipt"
+      .Amount = Format(acPayoutAmount, "###,##0.00")
+      .ShowNameAndSSNLabels = mbNameAndSSNLabels
+      .TransactioVoucherCount = aiVoucherCount
+   End With
+   
+   If sst_Payouts.Tab = 0 Then
+      ' Is it a partial payout?
+      If chk_PartialPayOut.Value = 1 Then
+         ' Yes, Partial payout.
+         ' Get the balance...
+         If Len(txt_Balance.Text) = 0 Then
+            lcBalance = 0
+         Else
+            lcBalance = CCur(txt_Balance.Text)
+         End If
+                 
+      Else
+         ' No, it's a Full payout.
+         txt_Balance.Text = "0.00"
+      End If
+   
+      ' Reset the Partial payout display to an empty string.
+      txt_PartialPayAmt.Text = ""
+   End If
+   
+   ' Print the receipt...
+   Load frm_RepViewer
+   Unload frm_RepViewer
+   
+ExitFunction:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::Print_Receipt" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+   
+End Sub
+
+
+Private Sub cmd_AuthorizeOk_Click()
+'--------------------------------------------------------------------------------
+' Sub VoucherDatails, provides more information on a Voucher
+' that has been redeemed and/or expired.
+' Added for the Voucher payouts functionality
+' Added by MZ - 08/19/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim loRS        As ADOR.Recordset
+Dim lsUID       As String
+Dim lsPWD       As String
+Dim lsSQL       As String
+Dim lsTest      As String
+
+Dim liUserLevel As Long
+
+lsUID = txt_UserId
+lsPWD = txt_PssWd
+lsTest = "~" & lsUID & "~"
+
+
+   'Turn on error catcher
+   On Error GoTo LocalError
+   If (Len(lsUID) < 4) Or (Len(lsPWD) < 4) Then
+      ' Make sure we have at least 4 Characters for uid and pwd...
+      MsgBox "UserID and password must both contain a minimum of 4 characters."
+      Exit Sub
+   Else
+      ' See if the authorizing user is valid. Build the SQL SELECT statement.
+      lsSQL = "SELECT lp.Security_Level AS UserSecLevel FROM CASINO_USERS cu " & _
+         "JOIN LEVEL_PERMISSIONS lp ON cu.LEVEL_CODE = lp.LEVEL_CODE " & _
+         "WHERE cu.ACCOUNTID = '" & lsUID & "' AND cu.PHASH = '" & mMD5Hasher.MD5(lsPWD) & "' AND cu.ACTIVE = 1"
+      
+      ' Use the gConnection object to create the recordset...
+      Set loRS = New ADODB.Recordset
+      loRS.Open lsSQL, gConn, adOpenStatic, adLockReadOnly
+      
+      ' Was the authorizing user found?
+      If Not loRS Is Nothing Then
+         If loRS.RecordCount > 0 Then
+            ' Yes, does the user have sufficient privilege for authorization?
+            liUserLevel = loRS.Fields("UserSecLevel").Value
+            If liUserLevel < giSupervisorLevel Then
+               MsgBox "You do not have sufficient privileges to view this information."
+            Else
+               MousePointer = vbHourglass
+               frm_RepViewer.ReportName = "Voucher_Details"
+               frm_RepViewer.BarCode = mtVoucher.BarCode
+               frm_RepViewer.DirectToPrinter = False
+               frm_RepViewer.Show vbModal
+               MousePointer = vbDefault
+            End If
+         Else
+            ' No, not found.
+            MsgBox "Invalid User ID and/or Password."
+            Exit Sub
+         End If
+      End If
+      
+      If Not loRS Is Nothing Then
+         If loRS.State Then loRS.Close
+         Set loRS = Nothing
+      End If
+
+   End If
+   
+   'display login authorization
+   txt_UserId = ""
+   txt_PssWd = ""
+   fr_Authorize.Visible = False
+   fr_Vouchers.Visible = True
+   sst_Payouts.Tab = 1
+  
+ExitSub:
+   Exit Sub
+
+   
+LocalError:
+   MsgBox Me.Name & "::cmb_Ok" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+Private Function CheckPrinter() As Boolean
+
+   Dim lsPrintDevice As String
+   Dim isPrinterFound As Boolean
+   Dim lPrinterObj As Printer
+   
+   isPrinterFound = False
+   lsPrintDevice = gsReceiptPrinter
+   If Len(gsReceiptPrinter) > 0 Then
+        For Each lPrinterObj In Printers
+             If InStr(1, lPrinterObj.DeviceName, lsPrintDevice, vbTextCompare) > 0 Then
+                 isPrinterFound = True
+                 Exit For
+             End If
+        Next
+   End If
+   
+   CheckPrinter = isPrinterFound
+End Function
+
+Private Sub cmd_PayoutVoucher_Click()
+'--------------------------------------------------------------------------------
+' Click event for the voucher payout button.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   ' Disable and hide the cmd_PayoutVoucher button
+   cmd_PayoutVoucher.Enabled = False
+   cmd_PayoutVoucher.Visible = False
+   
+   ' Turn on error checking
+   On Error GoTo LocalError
+            
+   If CheckPrinter = False Then
+        MsgBox "Payout request failed. Printer not found or is not configured.", vbCritical, gMsgTitle
+        Call ValidateTransaction
+        GoTo ExitSub
+   Else
+         ' Call function to execute Voucher payout
+        Call PerformVoucherPayout
+         
+        ' Call routine to re-initialize voucherState
+        Call ClearVoucherState
+        txt_VoucherAmt.Text = "0"
+        txt_VoucherCode.Text = ""
+   End If
+   
+ExitSub:
+   ' Implemented in 3.0.8
+   ' Return focus for next barcode scan
+   
+      Call SetVoucherInputFocus
+      
+   Exit Sub
+LocalError:
+   MsgBox Me.Name & "::cmd_PayoutVoucher" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+
+End Sub
+
+Public Sub SetVoucherInputFocus()
+
+   ' Set focus back to the voucher validation id TextBox control.
+   
+   ' Automatic
+   If txt_VoucherCode.Visible = True Then
+      txt_VoucherCode.SetFocus
+   End If
+   
+    ' Manual
+   If cboVouchers.Visible = True Then
+      cboVouchers.SetFocus
+   End If
+ 
+End Sub
+'Private Sub cmd_Print_Click()
+''--------------------------------------------------------------------------------
+'' This Print routine will print the activity for a card account.
+''--------------------------------------------------------------------------------
+'' Allocate local vars...
+'Dim lsCardAccount As String
+'
+'   If Opt_Mode(0).Value = True Then
+'      lsCardAccount = Trim(txt_SmartCardNo.Text)
+'   Else
+'      lsCardAccount = gCasinoPrefix & Trim(cmb_CARD_ACCT_LIST.Text)
+'   End If
+'
+'   With frm_Printing
+'      .CardAccountNumber = lsCardAccount
+'      .ReportName = "PlayerActivity"
+'      .Show vbModal
+'   End With
+'
+'End Sub
+
+Private Sub cmd_Receipt_Reprint_Click()
+'--------------------------------------------------------------------------------
+' Reprints the last receipt.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsKeyName  As String
+Dim lsValue    As String
+Dim lsPayoutUserID As String
+Dim lsLastTransNumber As String
+Dim liLastTransNumber As Long
+Dim lsUserMsg As String
+
+   On Error GoTo LocalError
+   
+   If CheckPrinter = False Then
+        MsgBox "Unable to print reciept. Printer not found or is not configured.", vbCritical, gMsgTitle
+        GoTo ExitSub
+   End If
+   
+   lsKeyName = "SOFTWARE\Diamond Game Enterprises\Millennium Accounting System\Last Receipt"
+   lsValue = GetKeyValue(HKEY_LOCAL_MACHINE, lsKeyName, "NameAndSSN")
+   lsPayoutUserID = GetKeyValue(HKEY_LOCAL_MACHINE, lsKeyName, "PayoutUserID")
+   lsLastTransNumber = GetKeyValue(HKEY_LOCAL_MACHINE, lsKeyName, "ReceiptNumber")
+   
+   If Len(lsLastTransNumber) = 0 Then
+      liLastTransNumber = 0
+   Else
+      liLastTransNumber = CLng(lsLastTransNumber)
+   End If
+   
+   If Len(txtLastReceiptNumber.Text) = 0 Then
+   
+      If liLastTransNumber <= 0 Then
+        MsgBox "Unable to reprint previous receipt because could not find one." & vbCrLf & "No prior reciept found that was printed from this station.", vbCritical, gMsgTitle
+        GoTo ExitSub
+      ElseIf liLastTransNumber >= 0 Then
+            Call GetLastPrintedTransaction
+      End If
+   
+   End If
+      
+   
+   ' Were Name and SSN labels required for the last receipt?
+   
+   If lsPayoutUserID <> gUserId Then
+      If (gSecurityLevel < giSupervisorLevel) Or (InStr(1, "~ADMIN~ADMINISTRATOR~SUPERVISOR~SUPER~", gUserId, vbTextCompare) > 0) Then
+         
+         lsUserMsg = "You are attempting to reprint a reciept paid out by another cashier." & vbCrLf & _
+            "Please have a user with supervisor level (or greater) permissions authorize this payment."
+         MsgBox lsUserMsg, vbInformation, "Authorization Required"
+         
+         ' Setup and show the authorization form.
+         With frm_Login
+            .OpenedBy = Me.Name
+            .IsAuthorizationMode = True
+            .AuthorizationAction = "AuthorizeLockupPayout"
+         End With
+         
+         ' Initialize the Authorized Flag and Authorization UID in case the user cancels
+         ' on the authorization entry form (frm_Login)...
+         mbPayAuthorized = False
+         
+         ' Show the form for authorization...
+         frm_Login.Show vbModal
+         
+         ' If invalid authorization or user cancelled, bail out without making the payment.
+         If (mbPayAuthorized = False) Or (Len(msAuthUID) = 0) Then
+            GoTo ExitSub
+         End If
+         
+         
+      End If
+   End If
+   
+   MousePointer = vbHourglass
+   With frm_RepViewer
+      .TransactionID = CLng(txtLastReceiptNumber.Text)
+      .ReportName = "PayOutReceipt"
+      .ReprintReceipt = True
+      .ShowNameAndSSNLabels = (lsValue = "Yes")
+   End With
+   
+   Load frm_RepViewer
+   Unload frm_RepViewer
+   MousePointer = vbDefault
+   
+   ' Set focus back to the voucher validation id TextBox control.
+   If Opt_Mode(0).Value = True Then
+      ' Automatic
+      Call SetVoucherInputFocus
+   Else
+      ' Manual
+      Call SetVoucherInputFocus
+   End If
+   
+ExitSub:
+   ' Implemented in 3.0.8
+   ' Return focus for next barcode scan
+   Call SetVoucherInputFocus
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::cmd_Receipt_Reprint_Click" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+Private Sub cmd_Search_Click()
+'--------------------------------------------------------------------------------
+' This routine searches for Card Account information
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lAccountRS    As ADODB.Recordset
+
+Dim liPinLen      As Integer
+
+Dim llPromoPoints As Long
+Dim llPinNumber   As Long
+
+Dim lsCardCasID   As String
+Dim lsSQL         As String
+Dim lsValue       As String
+
+   ' Turn on error checking.
+   On Error GoTo LocalError
+      
+   txt_Result.Text = ""
+   txtPromoPoints.Text = ""
+   
+   chk_PartialPayOut.Value = 0
+   chk_PartialPayOut.Visible = False
+   
+   mtCardState.AutoMode = Not mbManualMode
+   
+   ' What processing mode are we in (Auto = Card Reader, Manual = User Entry)?
+   If mbManualMode Then
+      ' Manual Process
+      If Len(cmb_CARD_ACCT_LIST.Text) > 0 Then
+         If IsNumeric(cmb_CARD_ACCT_LIST.Text) Then
+            mtCardState.AccountNumber = gCasinoPrefix & cmb_CARD_ACCT_LIST.Text
+         Else
+            mtCardState.AccountNumber = cmb_CARD_ACCT_LIST.Text
+         End If
+      Else
+         MsgBox "You must enter an account. ", vbInformation, gMsgTitle
+         GoTo ExitSub
+      End If
+   Else
+      ' Automatic Process
+      lsCardCasID = Left(mtCardState.AccountNumber, 6)
+      
+      ' If using the secondary casino id, change the card id...
+      If lsCardCasID = msSecondaryCasID Then
+         Mid(mtCardState.AccountNumber, 1, 7) = gCasinoPrefix & "9"
+         txt_SmartCardNo = Mid(mtCardState.AccountNumber, 7, 10)
+      End If
+      
+      If Left(mtCardState.AccountNumber, 3) = "\FF" Then
+         txt_Result.Text = "Blank Card"
+         txt_Balance.Text = ""
+         txt_SmartCardNo.Text = ""
+         txt_Status.Text = ""
+         txtPromoPoints.Text = ""
+         
+         ' Show a Yellow light.
+         With imgLight
+            .Picture = imgSource(1).Picture
+            .Refresh
+         End With
+         GoTo ExitSub
+      End If
+   End If
+   
+   If Len(mtCardState.AccountNumber) > 0 Then
+      If Left(mtCardState.AccountNumber, 6) <> gCasinoPrefix Then
+         ' The prefix is not valid.
+         txt_Result.Text = "Invalid Card"
+         txt_Balance.Text = ""
+         txt_SmartCardNo.Text = ""
+         txt_Status.Text = ""
+         txtPromoPoints.Text = ""
+         
+         ' Show a Yellow light.
+         If Not mbManualMode Then
+            With imgLight
+               .Picture = imgSource(1).Picture
+               .Refresh
+            End With
+         End If
+         
+         Exit Sub
+      Else
+         ' The Prefix is valid.
+         mtCardState.ValidPrefix = True
+      End If
+      
+      ' Build the SQL SELECT statement to retrieve Card Account information.
+      lsSQL = "SELECT ISNULL(ca.STATUS, '') AS STATUS, ISNULL(ca.BALANCE, 0) AS ACCT_BALANCE, " & _
+         "RTRIM(ISNULL(ca.MACH_NO, '0')) AS MACH_NO, ca.PROMO_AMOUNT, ISNULL(ca.PIN_NUMBER, 0) AS PIN_NBR, " & _
+         "ISNULL(pt.FNAME, '') AS FIRST_NAME, ISNULL(pt.LNAME, '') AS LAST_NAME, " & _
+         "ISNULL(CONVERT(CHAR(10), pt.DOB, 110), '') AS BIRTH_DATE FROM CARD_ACCT ca " & _
+         "LEFT OUTER JOIN PLAYER_TRACK pt ON ca.PLAYER_ID = pt.PLAYER_ID WHERE ca.CARD_ACCT_NO = '%s'"
+      lsSQL = Replace(lsSQL, SR_STD, mtCardState.AccountNumber, 1, 1)
+      
+      ' Retrieve the information.
+      Set lAccountRS = gConn.Execute(lsSQL)
+      
+      If Not (lAccountRS.EOF) Then
+         mtCardState.ExistsInDB = True
+         
+         mbCardInUse = False
+         txt_Result.Text = ""
+         
+         ' Store Card Status and Machine Number associated with the Card Account in local vars...
+         With lAccountRS.Fields
+            mtCardState.Balance = .Item("ACCT_BALANCE").Value
+            mtCardState.CardStatus = .Item("STATUS").Value & ""
+            mtCardState.PromoAmount = .Item("PROMO_AMOUNT").Value
+            mtCardState.CustomerFirstName = Trim(.Item("FIRST_NAME").Value & " ")
+            mtCardState.CustomerLastName = Trim(.Item("LAST_NAME").Value & " ")
+            mtCardState.CustomerFullName = Trim(mtCardState.CustomerFirstName & " " & mtCardState.CustomerLastName)
+            mtCardState.CustomerDOB = Trim(.Item("BIRTH_DATE").Value & " ")
+            mtCardState.MachineNumber = Trim(.Item("MACH_NO").Value & "")
+            lsValue = Trim(.Item("PIN_NBR").Value & "")
+            If Len(lsValue) > 0 Then
+               mtCardState.PinNumber = DecryptPIN(lsValue)
+            Else
+               mtCardState.PinNumber = ""
+            End If
+            
+            If mbPinRequired Then
+               ' We have a valid pin number if it is between 0 and 999999 and
+               ' has a length of 4 to 6 numeric characters
+               If IsNumeric(mtCardState.PinNumber) Then
+                  llPinNumber = CLng(mtCardState.PinNumber)
+                  liPinLen = Len(mtCardState.PinNumber)
+               Else
+                  llPinNumber = -1
+                  liPinLen = 0
+               End If
+               mtCardState.HasValidPin = (llPinNumber > -1 And llPinNumber < 1000000) _
+                                     And (liPinLen > 3 And liPinLen < 7)
+            Else
+               mtCardState.HasValidPin = True
+            End If
+         End With
+         
+         If (mbPinRequired = True And mtCardState.HasValidPin = False) Then
+            ' A Pin is required but not properly setup.
+            txt_Result.Text = "No PIN Number has been assigned to this Card Account"
+         ElseIf (mtCardState.MachineNumber <> "0") And (mtCardState.CardStatus <> "2") Then
+            txt_Result.Text = "This Account is being used in Machine Nbr: " & mtCardState.MachineNumber
+            mbCardInUse = True
+         ElseIf (mtCardState.CardStatus = "2") Then
+            txt_Result.Text = "Valid Card - Lockup - Pay out in full"
+         Else
+            If Not mbManualMode Then txt_Result.Text = "Valid Card"
+         End If
+         
+         gCardStatus = mtCardState.CardStatus
+         txt_Balance.Text = CStr(mtCardState.Balance)
+         
+         Select Case mtCardState.CardStatus
+            Case "1"
+               txt_Status.Text = "Active"
+            Case "2"
+               txt_Status.Text = "Active - Lockup"
+            Case Else
+               txt_Status.Text = "Inactive"
+         End Select
+         
+         ' If Promo Play is on, show points.
+         If mbPromoPlay Then
+            llPromoPoints = mtCardState.PromoAmount \ mcDollarsPerPoint
+            txtPromoPoints.Text = Format(llPromoPoints, "#,##0")
+         Else
+            txtPromoPoints.Text = ""
+         End If
+      Else
+         ' No record was found in the CARD_ACCT table...
+         If Not (mbManualMode) Then
+            txt_Result.Text = "Account Not Found"
+            txt_Balance.Text = ""
+            txt_SmartCardNo.Text = ""
+            txt_Status.Text = ""
+            txtPromoPoints.Text = ""
+            
+            ' Show a Yellow light.
+            If Not mbManualMode Then
+               With imgLight
+                  .Picture = imgSource(1).Picture
+                  .Refresh
+               End With
+               ' This may be the place to allow a cashier to setup the account.
+               ' If mbIsCashier = True and mbPinRequired = True and mbCashierHasPinAuthority = True
+               
+            End If
+         Else
+            txt_Result.Text = "No Transactions Found for this Account."
+            txt_Balance.Text = "0.00"
+         End If
+      End If
+      
+   Else
+      ' No card number text...
+      txt_Result.Text = "Invalid Card"
+      txt_Balance.Text = ""
+      txt_SmartCardNo.Text = ""
+      txt_Status.Text = ""
+      txtPromoPoints.Text = ""
+      
+      ' Show a Yellow light.
+      If Not mbManualMode Then
+         With imgLight
+            .Picture = imgSource(1).Picture
+            .Refresh
+         End With
+      End If
+   End If
+   
+   ' Show the activate button if appropriate...
+'   If mbPinRequired And mbCashierCanActivate Then
+'      With mtCardState
+'         If Len(.AccountNumber) > 0 And .AutoMode = True And .ValidPrefix = True And (.MachineNumber = "0" Or .MachineNumber = "") Then
+'            CmdActivate.Visible = True
+'         End If
+'      End With
+'   End If
+
+ExitSub:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::cmd_Search_Click" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+Private Sub cmd_SuspendSession_Click()
+'--------------------------------------------------------------------------------
+' Click event for the Suspend Session command button control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   ' Call SessionTracker method to mark the current session as suspended.
+   Call gConnection.SessionTracker("Write", msSessionID, "S", gWKStation)
+   
+   ' Turn off active session flag and turn on exiting flag.
+   mbActiveSession = False
+   gExitingflg = True
+   
+   ' Close the reader.
+   If Not oHrGnr Is Nothing Then oHrGnr.CloseReader
+   
+   If mbIsCashier Then
+      Call gConnection.LogOffUser(gUserId, gUserPswd)
+      gLoggedOffCashier = True
+   End If
+   
+   Unload Me
+   
+ExitSub:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::cmd_SuspendSession_Click" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+Private Function InitPrinter()
+'--------------------------------------------------------------------------------
+' Attempts to set the default application printer to the receipt printer.
+' Note that it sets the APPLICATION DEFAULT printer, not the system default printer.
+' Returns True or False to indicate success or failure.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lPrinter         As Printer
+
+Dim lbPrnFound       As Boolean
+Dim lbReturn         As Boolean
+
+Dim llSLen           As Long
+
+Dim lsPrintDevName   As String
+Dim lsUserMsg        As String
+
+   ' Assume function will return value of True.
+   lbReturn = True
+   
+   If Printers.Count < 1 Then
+      ' No printers are setup on this computer.
+      msPrnDevName = ""
+      lsUserMsg = "There are no printers setup for this computer." & vbCrLf & _
+         "Please contact your computer support personnel to setup the appropriate printer(s)."
+      MsgBox lsUserMsg, vbExclamation, gMsgTitle
+      
+      ' Reset function return value to indicate failure.
+      lbReturn = False
+   Else
+      ' Is the AutoCashDrawer enabled?
+      If mbHasCashDrawer Then
+         ' Yes, so store the current default printer.
+         msPrnDevName = Printer.DeviceName
+         
+         If Len(gsReceiptPrinter) = 0 Then
+            lsUserMsg = "No cash bank printer driver has been specified in the Millennium Accounting application printer setup." & _
+               vbCrLf & "Please contact the Millennium Accounting application administrator."
+            MsgBox lsUserMsg, vbCritical, gMsgTitle
+         Else
+            ' See if the current application default printer is the same as what is setup
+            ' as the receipt printer device name in the database.
+            lbPrnFound = (msPrnDevName = gsReceiptPrinter)
+            
+            ' If not, see if it is available on this workstation...
+            If Not lbPrnFound Then
+               llSLen = Len(gsReceiptPrinter)
+               For Each lPrinter In Printers
+                  lsPrintDevName = lPrinter.DeviceName
+                  If StrComp(lsPrintDevName, gsReceiptPrinter, vbTextCompare) = 0 Then
+                     ' We found it so set found flag.
+                     lbPrnFound = True
+                     ' Now, make it the application default printer.
+                     Set Printer = lPrinter
+                     ' Bail out of search loop.
+                     Exit For
+                  End If
+               Next
+            End If
+            
+            If Not lbPrnFound Then
+               ' The correct printer driver has not been setup...
+               lsUserMsg = "The printer driver: " & gsReceiptPrinter & vbCrLf & _
+                  "which is required to operate the cash drawer" & vbCrLf & _
+                  "has not been installed at this workstation."
+               MsgBox lsUserMsg, vbCritical, gMsgTitle
+               ' lbReturn = False
+            End If
+         End If
+      End If
+   End If
+   
+   ' Set the function return value.
+   InitPrinter = lbReturn
+   
+End Function
+
+Public Sub Form_Preload()
+'--------------------------------------------------------------------------------
+' Form_Preload - Initialization routine.
+' If initialization if successful, show this form, otherwise, unload it.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lRS              As ADODB.Recordset
+
+Dim lbAllowPartial   As Boolean     ' Local boolean used to see if Partial Payouts are allowed.
+Dim lbOpenSuccess    As Boolean     ' Flag - Card reader open success.
+Dim lbSessionWrite   As Boolean     ' Flag - New session written to CASINO_USERS via gConnection.SessionTracker...
+Dim lbShowForm       As Boolean     ' Flags whether to show this form or not.
+Dim lbTimedOutSS     As Boolean     ' User has a suspended session that has timed out flag.
+
+Dim lsErrText        As String
+Dim lsReportName     As String
+Dim lsSQL            As String
+Dim lsStartBalance   As String
+
+Dim lsaData()        As String
+
+Dim llCount          As Long
+Dim llMinutesElapsed As Long
+
+Dim lcBalance        As Currency
+   
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   miButtonIndex = 2
+   
+   ' Init show form flag, assume that we will show it.
+   lbShowForm = True
+   
+   ' Assign data and key positions and length.
+   lsaData() = Split(gsMSDataInfo, ",")
+   
+   ' We expect exactly 4 parameters, start and length of data and key elements.
+   If UBound(lsaData()) = 3 Then
+      miDataStart = CInt(lsaData(0))
+      miDataLen = CInt(lsaData(1))
+      miKeyStart = CInt(lsaData(2))
+      miKeyLen = CInt(lsaData(3))
+   Else
+      lbShowForm = False
+      MsgBox "Invalid magnetic stripe setup, contact the system administrator.", vbExclamation, "Payout Status"
+      GoTo NoShow
+   End If
+   
+   ' Get the timeout value (clear screen after this many seconds of inactivity).
+   If IsNumeric(gsMSTimeout) Then
+      mlTimeout = CLng(gsMSTimeout) * 1000
+      ' Make sure it is at least 5 seconds.
+      If mlTimeout < 5000 Then mlTimeout = 5000
+   Else
+      ' No value, default to 20 seconds.
+      mlTimeout = 20000
+   End If
+   
+   ' Initialize Promotional Play values...
+   mbPromoPlay = False
+   mcDollarsPerPoint = 0
+   miRedeemMultiple = 0
+   
+   ' Check to see if Partial Payout is enabled.
+   ' Assume that partial payments will be allowed.
+   mbPartialPay = True
+   lbAllowPartial = True
+   
+   ' Now see if there is a db partial payment flag...
+   ' lsSQL = "SELECT VALUE1 FROM CASINO_SYSTEM_PARAMETERS WHERE PAR_NAME='ALLOW_PARTIAL_PAYOUT'"
+   lsSQL = "EXEC GetPayoutSetup"
+   Set lRS = New ADODB.Recordset
+   With lRS
+      .CursorLocation = adUseClient
+      .CursorType = adOpenStatic
+      .LockType = adLockReadOnly
+      .source = lsSQL
+      .ActiveConnection = gConn
+      .Open
+      llCount = .RecordCount
+   End With
+   
+   ' Did we get a row back from the database?
+   If llCount > 0 Then
+      ' Yes, so we can set returned values...
+      With lRS
+         lbAllowPartial = .Fields("ALLOW_PARTIAL_PAYOUT").Value
+         mbPartialPay = lbAllowPartial
+         mbShowReprint = .Fields("ALLOW_RECEIPT_REPRINT").Value
+         mbStoreInserts = .Fields("SAVE_POS_CARD_INSERTS").Value
+         mbPromoPlay = .Fields("PROMOTIONAL_PLAY").Value
+         mbPinRequired = .Fields("PIN_REQUIRED").Value
+         mcDollarsPerPoint = .Fields("DOLLARS_PER_POINT").Value
+         miRedeemMultiple = .Fields("REDEEM_MULTIPLE").Value
+         ' msSecondaryCasID = .Fields("SECONDARY_CASINO_ID").Value
+         mbCashierCanActivate = .Fields("CASHIER_CAN_ACTIVATE_ACCT").Value
+         miVoucherExpDays = .Fields("VOUCHER_EXPIRATION_DAYS").Value
+         miPayoutTabs = .Fields("PAYOUT_TABS").Value
+         mcLockupAmt = .Fields("LOCKUP_AMT").Value
+         mcPayoutThreshold = .Fields("PAYOUT_THRESHOLD").Value
+         mlLocationID = .Fields("LOCATION_ID").Value
+      End With
+   End If
+   
+   ' If no pin required, pin ok flag is true, otherwise init to false.
+   mbPinOkay = Not mbPinRequired
+   
+   ' If Pins are not required, cashier cannot activate a card account.
+   If Not mbPinRequired Then mbCashierCanActivate = False
+   
+   ' Close and free the recordset object...
+   lRS.Close
+   Set lRS = Nothing
+   
+   ' Set visibility of the Receipt Reprint button.
+   cmd_Receipt_Reprint.Visible = mbShowReprint
+   
+   ' If Promo Play values are not set correctly, disable Promo Play.
+   If mbPromoPlay Then
+      If mcDollarsPerPoint < 0.01 Or miRedeemMultiple < 1 Then
+         mbPromoPlay = False
+         MsgBox "PromotionalPlay disabled due to incorrect system settings.", vbExclamation, "Promotional Play Status"
+      End If
+   End If
+   
+   ' If using auto cash drawer, set app default printer to the receipt printer...
+   ' If it fails, bail out...
+   If mbHasCashDrawer Then
+      If Not InitPrinter Then
+         lbShowForm = False
+         GoTo NoShow
+      End If
+   End If
+   
+   ' Open reader only if the system has been setup for Magnetic Card Payouts
+   If miPayoutTabs > 1 Then ' Pay Vouchers and Cards
+      ' Attempt to open the reader (up to 3 times).
+      llCount = 0
+      lbOpenSuccess = False
+      Do Until llCount = 3 Or lbOpenSuccess = True
+         llCount = llCount + 1
+         lbOpenSuccess = OpenReader(lsErrText)
+      Loop
+      
+      If lbOpenSuccess Then
+         ' Attempt to set the reader to read on extract.
+         If oHrGnr.SendStr("S\1D\013") <> RETOK Then
+            MsgBox "Unable to set extract mode read.", vbExclamation, "Card Reader Status"
+            lbShowForm = False
+            GoTo NoShow
+         End If
+      Else
+         MsgBox lsErrText, vbExclamation, "Card Reader Status"
+         If gSecurityLevel < 50 Then
+            lbShowForm = False
+            GoTo NoShow
+         End If
+      End If
+   End If
+      
+   'fr_CashDrawerTrans.Visible = False
+   lbSessionWrite = False
+   lbTimedOutSS = False
+   
+   ' Build session string that will be used if not restarting
+   ' a suspended session that has not timed out.
+   If Not mbRestartingSS Then
+      msSessionID = LCase(gUserId) & Format(Now(), "_yymmdd_hhmm_ss")
+   Else
+      msSessionID = gCurrentSession
+   End If
+   msPaymentType = "A"
+   mbManualMode = False
+   
+   ' Do we need to log the starting balance?
+   If mbHasCashDrawer And (Not (mbRestartingSS)) Then
+      lsStartBalance = mcStartingBalance
+      ' Yes, so build the INSERT statement...
+      lsSQL = "INSERT INTO CASHIER_TRANS (TRANS_TYPE, TRANS_AMT, SESSION_ID, CREATED_BY, CASHIER_STN, LOCATION_ID) " & _
+         "VALUES ('S', %ta, '%sid', '%cb', '%cs', %lid)"
+      lsSQL = Replace(lsSQL, "%ta", lsStartBalance, 1, 1)
+      lsSQL = Replace(lsSQL, "%sid", msSessionID, 1, 1)
+      lsSQL = Replace(lsSQL, "%cb", gUserId, 1, 1)
+      lsSQL = Replace(lsSQL, "%cs", gWKStation, 1, 1)
+      lsSQL = Replace(lsSQL, "%lid", mlLocationID, 1, 1)
+      
+      ' Execute it.
+      gConn.Execute lsSQL, , adExecuteNoRecords
+   End If
+   
+   ' Make the bank transaction button visible if using a cash drawer.
+   'mark for delete
+   'cmd_BankTrans.Visible = mbHasCashDrawer
+   
+   If mbIsCashier Then
+      ' User is a cashier...
+      Opt_Mode(0).Visible = False
+      Opt_Mode(1).Visible = False
+   End If
+   
+   MousePointer = vbDefault
+   
+   If UCase(gSessionStatus) = "A" Then
+      ' User already has an active session...
+      msSessionID = gCurrentSession
+      lbl_Session.Caption = "SESSION ID: " & msSessionID
+      mbActiveSession = True
+   ElseIf mbRestartingSS Then
+      ' User is restarting a suspended session...
+      llMinutesElapsed = DateDiff("n", gCurrentSessionDtTime, Now)
+      
+      ' Set timed out suspended session flag
+      lbTimedOutSS = (llMinutesElapsed >= gEndSuspSessionMinutes)
+      
+      If lbTimedOutSS Then
+         ' Suspended session has timed out...
+         Call HandleSSTimeout
+         
+         ' Did user cancel when entering a new starting balance?
+         If mcStartingBalance < 0 Then
+            ' Yes, so set exiting flag and don't start a new session...
+            lbShowForm = False
+            GoTo NoShow
+         Else
+            ' New session has been written to CASINO_USERS via gConnection.SessionTracker...
+            lbSessionWrite = True
+         End If
+         'get the cashiers summary
+         'Call GetCashiersSummary
+      End If
+      
+      msSessionID = gCurrentSession
+      'Call GetCashiersSummary
+   End If
+   
+   If Not (gExitingflg) Then
+      If Not lbSessionWrite Then Call gConnection.SessionTracker("Write", msSessionID, "A", gWKStation)
+      lbl_Session.Caption = "SESSION ID: " & msSessionID
+      mbActiveSession = True
+   End If
+   
+   ' If using the auto cash drawers then open the drawer.
+   If mbHasCashDrawer And Not gExitingflg Then Call OpenDrawer
+   
+   ' If cash drawer enabled, print a session started or resumed slip...
+   If mbHasCashDrawer Then
+      lcBalance = 0
+      If mbRestartingSS And Not lbTimedOutSS Then
+         lsReportName = "Session_Resumed_CD"
+         ' Get the current balance for the suspended session
+         lcBalance = GetCashDrawerBalance()
+      Else
+         lsReportName = "Session_Started_CD"
+      End If
+      If (sst_Payouts.Tab = 1) And Not (mbRestartingSS) Then
+         lcBalance = mcStartingBalance
+      End If
+      ' Initialize frm_RepViewer property and public var values...
+      With frm_RepViewer
+         .OptionValue = gUserId
+         .DirectToPrinter = True
+         .UserSession = msSessionID
+         .ReportName = lsReportName
+         .Amount = CStr(lcBalance)
+      End With
+      
+      ' Print the startup or resume report...
+      Load frm_RepViewer
+      Unload frm_RepViewer
+   End If
+   
+   mbManualMode = False
+ExitSub:
+   
+   ' Free the recordset object reference...
+   If Not lRS Is Nothing Then
+      If lRS.State Then lRS.Close
+      Set lRS = Nothing
+   End If
+   
+   ' Either show or unload this form.
+   If lbShowForm Then
+      Me.Show vbModal, mdi_Main
+   Else
+      Unload Me
+   End If
+   
+   ' Exit to avoid error handler.
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::Form_Preload" & vbCrLf & Err.Description, vbInformation, gMsgTitle
+   lbShowForm = False
+   Resume ExitSub
+   
+NoShow:
+   
+   mbActiveSession = False
+   GoTo ExitSub
+   
+End Sub
+
+Private Sub VoucherDetails(ByVal sBarcode As String, ByVal IsTransactionDetails As Boolean)
+
+    Dim lsUserMsg As String
+    
+       ' Check if Supervisor
+       If (gSecurityLevel < giSupervisorLevel) Or (InStr(1, "~ADMIN~ADMINISTRATOR~SUPERVISOR~SUPER~", gUserId, vbTextCompare) > 0) Then
+              ' Requires supervisor level (or greater) authorization.
+              lsUserMsg = " Supervisor level access required to view Voucher Details." & vbCrLf & _
+                 "Please have a supervisor login to authorize action."
+              MsgBox lsUserMsg, vbInformation, "Authorization Required"
+              
+              ' Setup and show the authorization form.
+              With frm_Login
+                 .OpenedBy = Me.Name
+                 .IsAuthorizationMode = True
+                 .AuthorizationAction = "AuthorizeLockupPayout"
+              End With
+              
+              ' Initialize the Authorized Flag and Authorization UID in case the user cancels
+              ' on the authorization entry form (frm_Login)...
+              mbPayAuthorized = False
+              
+              ' Show the form for authorization...
+              frm_Login.Show vbModal
+              
+              ' If invalid authorization or user cancelled, bail out without making the payment.
+              If (mbPayAuthorized = False) Or (Len(msAuthUID) = 0) Then
+                 Exit Sub
+                             
+              End If
+        End If
+        
+        MousePointer = vbHourglass
+         If IsTransactionDetails = True Then
+            frm_RepViewer.ReportName = "Voucher_Details_Multiple"
+         Else
+            frm_RepViewer.ReportName = "Voucher_Details"
+         End If
+                 
+         frm_RepViewer.BarCode = sBarcode
+         frm_RepViewer.DirectToPrinter = False
+         frm_RepViewer.Show vbModal
+         MousePointer = vbDefault
+                 
+
+End Sub
+
+
+Private Sub cmd_VoucherSearch_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the Search button.
+' Added for the Voucher payouts functionality
+' Added by MZ - 08/08/2005
+'--------------------------------------------------------------------------------
+   
+   ' Call routine to retrieve Voucher information.
+   Call GetVoucherInfo
+  
+End Sub
+
+'Private Sub CmdActivate_Click()
+''--------------------------------------------------------------------------------
+'' Click event handler for the Account Activation button.
+''--------------------------------------------------------------------------------
+'
+'   With frm_Account_Pin_Setup
+'      .CardAccountNumber = mtCardState.AccountNumber
+'      .FirstName = mtCardState.CustomerFirstName
+'      .LastName = mtCardState.CustomerLastName
+'      .BirthDate = mtCardState.CustomerDOB
+'      .CardExists = mtCardState.ExistsInDB
+'      .OpeningFormName = Me.Name
+'      .ResetMode = (Len(mtCardState.PinNumber) > 0)
+'      .Show vbModal, Me
+'   End With
+'
+'End Sub
+
+Private Sub cmd_AuthorizeCancel_Click()
+
+   txt_UserId.Text = ""
+   txt_PssWd.Text = ""
+   ' display login authorization
+   fr_Vouchers.Visible = True
+   fr_Authorize.Visible = False
+
+End Sub
+
+Private Sub cmdPayout_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the Payout button.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lbEnabled        As Boolean
+Dim lbUserCancelled  As Boolean
+
+Dim liCount          As Integer
+Dim llUserPin        As Long
+
+Dim lsPinNbr         As String
+Dim lsPrompt         As String
+
+   ' Get current enabled state of tmr_GetReaderStatus.
+   lbEnabled = tmr_GetReaderStatus.Enabled
+   
+   ' Disable the timer.
+   tmr_GetReaderStatus.Enabled = False
+   
+   ' Init cancelled flag.
+   lbUserCancelled = False
+      
+   'turn on error check
+   On Error GoTo LocalError
+   
+   ' Handle Pin required mode...
+   If mbPinRequired And CCur(txt_Balance.Text) > 0 Then
+      If mtCardState.HasValidPin Then
+         ' We have a Pin number, user must enter for payout.
+         lsPrompt = "Hello %s, %s,??Please enter your PIN Number:"
+         lsPrompt = Replace(lsPrompt, SR_Q, vbCrLf, 1, 2)
+         
+         If Len(msCustName) > 0 Then
+            lsPrompt = Replace(lsPrompt, SR_STD, msCustName, 1, 1)
+         Else
+            lsPrompt = Replace(lsPrompt, " " & SR_STD, "", 1, 1)
+         End If
+         
+         If Len(mtCardState.CustomerDOB) > 0 Then
+            lsPrompt = Replace(lsPrompt, SR_STD, "Birthdate " & mtCardState.CustomerDOB, 1, 1)
+         Else
+            lsPrompt = Replace(lsPrompt, " %s,", "", 1, 1)
+         End If
+         
+         ' Init Pin ok flag to false
+         mbPinOkay = False
+         For liCount = 1 To 3
+            ' Get user pin number.
+            With frm_Pin_Entry
+               .PromptMessage = lsPrompt
+               .Show vbModal, Me
+               lbUserCancelled = mbPinEntryCancelled
+               lsPinNbr = msUserEnteredPinValue
+            End With
+            
+            ' Exit loop if user cancelled.
+            If lbUserCancelled Then Exit For
+            
+            ' Does the user entry match the account pin number?
+            If msUserEnteredPinValue = mtCardState.PinNumber Then
+               mbPinOkay = True
+               Exit For
+            Else
+               If liCount = 3 Then
+                  txt_Result.Text = "Invalid Pin Number."
+               End If
+            End If
+         Next
+      Else
+         ' There is no system pin number for this account.
+         mbPinOkay = False
+      End If
+      
+      If mbPinOkay = False And lbUserCancelled = False Then
+         ' Pin number is missing or customer could not match system pin so ask if they want supervisor override...
+         lsPrompt = "%s, do you want to have a Supervisor authorize payout?"
+         If Not mtCardState.HasValidPin Then
+            ' No pin on account.
+            lsPrompt = Replace(lsPrompt, SR_STD, "Account has no Pin")
+         Else
+            ' User failed to match system Pin.
+            lsPrompt = Replace(lsPrompt, SR_STD, "Incorrect Pin entry")
+         End If
+         
+         If MsgBox(lsPrompt, vbQuestion Or vbYesNo, "Please Confirm") = vbYes Then
+            ' Cashier said Yes, so setup and show the authorization form...
+            With frm_Login
+               .OpenedBy = Me.Name
+               .IsAuthorizationMode = True
+               .AuthorizationAction = "AuthorizeNoPinPayout"
+            End With
+            
+            ' Initialize the Authorized Flag and Authorization UID in case the user cancels
+            ' on the authorization entry form (frm_Login)...
+            mbPayAuthorized = False
+            msAuthUID = ""
+            
+            ' Show the form for authorization...
+            frm_Login.Show vbModal
+            mbPinOkay = mbPayAuthorized
+         End If
+      End If
+   End If
+   
+   ' Attempt to perform the payout.
+   If mbPinOkay Then Call PerformPayout
+   
+   ' Reset timer enabled status.
+   If tmr_GetReaderStatus.Enabled <> lbEnabled Then tmr_GetReaderStatus.Enabled = lbEnabled
+   
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   If mbManualMode Then
+      If cmb_CARD_ACCT_LIST.Visible Then
+        cmb_CARD_ACCT_LIST.Enabled = True
+        cmb_CARD_ACCT_LIST.SetFocus
+      End If
+   Else
+      If Opt_Mode(0).Visible Then Opt_Mode(0).SetFocus
+   End If
+   
+ExitRoutine:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::cmdPayout" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitRoutine
+   
+End Sub
+
+Private Sub cmdPromoPoints_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the PromoPoints button.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim liSLen        As Integer
+Dim lsCardAcctNbr As String
+
+   If mbManualMode Then
+      lsCardAcctNbr = cmb_CARD_ACCT_LIST.Text
+   Else
+      lsCardAcctNbr = mtCardState.AccountNumber
+   End If
+   
+   ' Store the length of lsCardAcctNbr.
+   liSLen = Len(lsCardAcctNbr)
+   
+   ' Bail out if no Card Account number or if it does not begin with the Casino ID.
+   If (liSLen = 0) Or (liSLen = 16 And Left(lsCardAcctNbr, 6) <> gCasinoID) Then Exit Sub
+   
+   ' If we have just the number, prepend the Casino ID.
+   If liSLen = 10 Then lsCardAcctNbr = gCasinoID & lsCardAcctNbr
+   
+   ' Setup Redemption form and show it...
+   With frm_PromoRedeem
+      .AccountNumber = lsCardAcctNbr
+      .DollarsPerPoint = mcDollarsPerPoint
+      .RedeemMultiple = miRedeemMultiple
+      .Show vbModal, Me
+   End With
+   
+End Sub
+
+Private Sub cmdTransactionDetails_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the Voucher Details button.
+' Opens an authorization form and if authorized shows voucher details report.
+'--------------------------------------------------------------------------------
+   Dim lsUserMsg As String
+   Dim i As Integer
+   Dim lsBarcodes As String
+   
+   ' Check if there is already a Voucher in memory.
+   If lstVoucherCode.ListCount > 0 Then
+        For i = 0 To lstVoucherCode.ListCount - 1
+            lsBarcodes = lsBarcodes & Replace(lstVoucherCode.List(i), "-", "")
+            
+            If i < lstVoucherCode.ListCount - 1 Then
+                lsBarcodes = lsBarcodes & ","
+            End If
+        Next
+        
+        Call VoucherDetails(lsBarcodes, True)
+        
+   End If
+   
+   ' Implemented in 3.0.8
+   ' Return focus for next barcode scan
+   Call SetVoucherInputFocus
+   
+End Sub
+
+Private Sub cmd_VoucherDetails_Click()
+'--------------------------------------------------------------------------------
+' Click event handler for the Voucher Details button.
+' Opens an authorization form and if authorized shows voucher details report.
+'--------------------------------------------------------------------------------
+   Dim lsUserMsg As String
+   
+   ' Check if there is already a Voucher in memory.
+   If txt_LastVoucher.Text = "" Then
+      MsgBox "No Vouchers to view", vbInformation, "Voucher Details"
+   Else
+       Call VoucherDetails(txt_LastVoucher.Text, False)
+   End If
+
+   ' Implemented in 3.0.8
+   ' Return focus for next barcode scan
+   Call SetVoucherInputFocus
+
+End Sub
+
+Private Sub Form_Activate()
+'--------------------------------------------------------------------------------
+' Activate event for this form.
+'--------------------------------------------------------------------------------
+       
+   ' Turn on error checking.
+   On Error Resume Next
+   
+   ' Set enabled property of PromoPoints label based upon PromoPlay flag.
+   lblPromoPoints.Enabled = mbPromoPlay
+
+   ' Hide first tab...
+   sst_Payouts.TabVisible(0) = False
+   sst_Payouts.TabVisible(2) = gAutoCashDrawer
+            
+   Call ValidateTransaction
+   '------------------------------
+   ' The following code was added to implement the Voucher Payouts by MZ 08/11/2005
+   If (mcStartingBalance > 0) And Not (mbRestartingSS) Then
+      txt_CurrentBal(1).Text = mcStartingBalance
+      txt_StartBal(1).Text = mcStartingBalance
+   Else
+       Call GetCashiersSummary
+   End If
+   '------------------------------
+   ' Check if the payouts are for Vouchers or Cards
+
+   
+'   If miPayoutsLastTab = 3 Then
+'      ' 3 indicates that it has not been set yet.
+'      If miPayoutTabs = 1 Then
+         ' Voucher payout only
+         sst_Payouts.Tab = 1
+         txt_VoucherCode.Enabled = True
+         Call SetVoucherInputFocus
+         'sst_Payouts.TabEnabled(0) = False
+'      ElseIf miPayoutTabs = 2 Then
+'         ' Magnetic Card only
+'         sst_Payouts.Tab = 0
+'         cmb_CARD_ACCT_LIST.Visible = False
+'         txt_SmartCardNo.SetFocus
+'         sst_Payouts.TabEnabled(1) = False
+'      Else
+'         ' Card Player or Both
+'         sst_Payouts.Tab = 0
+'         cmb_CARD_ACCT_LIST.Visible = False
+'         txt_SmartCardNo.SetFocus
+'      End If
+      
+      If (gAutoCashDrawer = False) Or (mbHasCashDrawer = False) Then
+         ' Cash Drawer support not needed.
+         sst_Payouts.TabEnabled(2) = False
+         txt_StartBal(0).Visible = False
+         lblStartBal(0).Visible = False
+         txt_CurrentBal(0).Visible = False
+         lblCurrentBal(0).Visible = False
+      End If
+      
+      Call GetLastPrintedTransaction
+      
+'   Else
+'      ' If the last tab was 2 then set it miPayoutTabs=1
+'       sst_Payouts.Tab = miPayoutsLastTab
+'   End If
+   
+End Sub
+
+Private Sub GetLastPrintedTransaction()
+
+   Dim lsKeyName As String
+   
+   ' Assign key where receipt information is stored.
+   lsKeyName = "SOFTWARE\Diamond Game Enterprises\Millennium Accounting System\Last Receipt"
+         
+   txtLastReceiptNumber.Text = GetKeyValue(HKEY_LOCAL_MACHINE, lsKeyName, "ReceiptNumber")
+   txtLastTransAmount.Text = GetKeyValue(HKEY_LOCAL_MACHINE, lsKeyName, "PaidAmount")
+   txtLastTransVoucherCount.Text = CInt(GetKeyValue(HKEY_LOCAL_MACHINE, lsKeyName, "TransVoucherCount"))
+   
+   
+End Sub
+
+
+Private Sub Form_Load()
+'--------------------------------------------------------------------------------
+' Load event for this form.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+   
+   ' Initialize MD5 Class
+   Set mMD5Hasher = New MD5Hash
+   
+   Opt_Mode(0).Visible = gAllowManualPayout
+   Opt_Mode(1).Visible = gAllowManualPayout
+   
+   ' Initialize payout button visible and default properties to False.
+   With cmdPayout
+      .Default = False
+      .Visible = False
+   End With
+   With imgLightVchr
+      .Picture = imgSource(3).Picture
+      .Refresh
+   End With
+   
+   ' Initialize it to 3 to indicate that it has not been set yet.
+   miPayoutsLastTab = 3
+   
+   ' Set visiblity of the PromoPoints button based upon mbPromoPlay flag.
+   cmdPromoPoints.Visible = mbPromoPlay
+   
+   ' Turn off the button image timer.
+   tmrButtonImage.Enabled = False
+   
+   ' Set user interface to unread card state.
+   Call ClearTextControls
+   
+End Sub
+
+Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
+'--------------------------------------------------------------------------------
+' QueryUnload event for this form.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsReportName  As String
+Dim lsUserMsg     As String
+
+   On Error GoTo LocalError
+   If Not oHrGnr Is Nothing Then
+      oHrGnr.CloseReader
+      Set oHrGnr = Nothing
+   End If
+   
+   If mbActiveSession = True Then
+      lsUserMsg = "There is an active session, do you want to end your current session?"
+      gVerifyExit = MsgBox(lsUserMsg, vbYesNo Or vbInformation, gMsgTitle)
+      If gVerifyExit = vbYes Then
+         If mbHasCashDrawer Then
+            lsReportName = "Session_Summary_CD"
+         Else
+            lsReportName = "Session_Summary"
+         End If
+         
+         With frm_RepViewer
+            .UserSession = msSessionID
+            .ReportName = lsReportName
+            .DirectToPrinter = True
+         End With
+         Load frm_RepViewer
+         Unload frm_RepViewer
+         
+         Call gConnection.SessionTracker("Delete", "", "", "")
+         
+         If mbIsCashier Then
+            Call gConnection.LogOffUser(gUserId, gUserPswd)
+            End
+         End If
+         gExitingflg = True
+      Else
+         Cancel = 1
+         gExitingflg = False
+      End If
+   Else
+      Cancel = 0
+      gExitingflg = True
+   End If
+   
+ExitSub:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::QueryUnload" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+'--------------------------------------------------------------------------------
+' Unload event for this form.
+' Release the oHrGnr object.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lPrinter      As Printer
+
+   ' Attempt to close and free the card reader object...
+   If Not oHrGnr Is Nothing Then
+      Call oHrGnr.CloseReader
+      Set oHrGnr = Nothing
+   End If
+   
+   ' Turn on error checking.
+   On Error GoTo ErrExit
+   
+   ' If we changed the default printer, set it back again...
+   If Printers.Count > 0 And Len(msPrnDevName) > 0 Then
+      If Printer.DeviceName <> msPrnDevName Then
+         For Each lPrinter In Printers
+            If lPrinter.DeviceName = msPrnDevName Then
+               Set Printer = lPrinter
+               Exit For
+            End If
+         Next
+      End If
+   End If
+   
+ExitSub:
+   Exit Sub
+   
+ErrExit:
+   MsgBox "frm_Payout_MV:Unload" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+
+
+
+
+
+
+
+Private Sub lstVoucherAmount_Click()
+
+    lstVoucherLock.ListIndex = lstVoucherAmount.ListIndex
+    lstVoucherCode.ListIndex = lstVoucherAmount.ListIndex
+    
+End Sub
+
+Private Sub lstVoucherCode_Click()
+
+    lstVoucherLock.ListIndex = lstVoucherCode.ListIndex
+    lstVoucherAmount.ListIndex = lstVoucherCode.ListIndex
+    
+End Sub
+
+Private Sub lstVoucherLock_Click()
+
+    lstVoucherCode.ListIndex = lstVoucherLock.ListIndex
+    lstVoucherAmount.ListIndex = lstVoucherLock.ListIndex
+    
+End Sub
+
+Private Sub oHrGnr_HrDataEvent(ByRef DataBuf() As Byte, ByVal DataLen As Byte)
+'--------------------------------------------------------------------------------
+' Data Event handler for the card reader object.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lcCardBalance As Currency
+
+Dim lsData        As String
+Dim lsSQL         As String
+Dim lsValue       As String
+
+Dim lobjCmd       As ADODB.Command
+
+   ' If in manual mode and data received then tell user to switch modes...
+   If Opt_Mode(1).Value Then
+      MsgBox "Switch to 'Automatic mode' before reading a card in the card reader.", vbExclamation, "Card Status"
+      Exit Sub
+   End If
+   
+   ' Clear the card state.
+   Call ClearCardState
+   
+   ' Turn on error checking.
+   On Error Resume Next
+   
+   ' Convert the incoming data.
+   lsData = ByteArrayToString(DataBuf, DataLen)
+   
+   ' Does the card contain a valid signature?
+   If StrComp("PT109JFK", Mid(lsData, miKeyStart, miKeyLen), vbBinaryCompare) = 0 Then
+      mtCardState.AccountNumber = Mid(lsData, miDataStart, miDataLen)
+      txt_SmartCardNo.Text = Mid(mtCardState.AccountNumber, 7)
+      
+      Call cmd_Search_Click
+      
+      mlElapsedTime = 0
+      tmr_GetReaderStatus.Enabled = True
+      
+      'Code added to implement Voucher Payouts
+      'Added by MZ - 08/17/2005
+      If sst_Payouts.Tab = 0 Then  'Magnetic Card payout tab
+          If Not mbManualMode Then
+            If cmdPayout.Visible Then
+               ' Show Green dot.
+               With imgLight
+                  .Picture = imgSource(0).Picture
+                  .Refresh
+               End With
+            Else
+               ' Show a Yellow light.
+               With imgLight
+                  .Picture = imgSource(1).Picture
+                  .Refresh
+               End With
+            End If
+         End If
+      Else  'Voucher payout tab
+         If Not mbManualMode Then
+            If cmd_PayoutVoucher.Visible Then
+               ' Show Green dot.
+               With imgLight
+                  .Picture = imgSource(0).Picture
+                  .Refresh
+               End With
+            Else
+               ' Show a Yellow light.
+               With imgLight
+                  .Picture = imgSource(1).Picture
+                  .Refresh
+               End With
+            End If
+         End If
+      End If   'Voucher payout tab
+      
+      ' If required, store the card insertion in the database.
+      If mbStoreInserts Then
+         ' Turn on error checking.
+         On Error Resume Next
+         
+         ' Get the card balance...
+         lsValue = txt_Balance.Text
+         If IsNumeric(lsValue) Then
+            lcCardBalance = CCur(lsValue)
+         Else
+            lcCardBalance = 0
+         End If
+         
+         ' Instantiate a command object and initialize it...
+         Set lobjCmd = New ADODB.Command
+         With lobjCmd
+            Set .ActiveConnection = gConn
+            .CommandType = adCmdStoredProc
+            .CommandText = "InsertPOSCardRead"
+            .CommandTimeout = 120
+            
+            ' Append the parameters for the stored proc command object reference...
+            .Parameters.Append .CreateParameter(Name:="@CardAcctNbr", Type:=adVarChar, Direction:=adParamInput, Size:=16, Value:=mtCardState.AccountNumber)
+            .Parameters.Append .CreateParameter(Name:="@SessionID", Type:=adVarChar, Direction:=adParamInput, Size:=40, Value:=msSessionID)
+            .Parameters.Append .CreateParameter(Name:="@CreatedBy", Type:=adVarChar, Direction:=adParamInput, Size:=30, Value:=gUserId)
+            .Parameters.Append .CreateParameter(Name:="@WorkStation", Type:=adVarChar, Direction:=adParamInput, Size:=32, Value:=gWKStation)
+            .Parameters.Append .CreateParameter(Name:="@CardBalance", Type:=adCurrency, Direction:=adParamInput, Value:=lcCardBalance)
+            
+            ' Execute the InsertPOSCardRead stored procedure.
+            .Execute
+         End With
+         
+         ' Turn off error checking.
+         On Error GoTo LocalError
+         If Err.Number <> 0 Then
+            MsgBox Err.Description
+         End If
+      End If
+   End If
+   
+ExitSub:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::oHrGnr_HrDataEvent" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+Private Sub oHrGnr_HrErrEvent(ByRef DataBuf() As Byte, ByVal DataLen As Byte)
+'--------------------------------------------------------------------------------
+' Error Event handler for the card reader object.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsErrText     As String
+
+  lsErrText = ByteArrayToString(DataBuf, DataLen)
+  lsErrText = "Error message from reader:" & vbCrLf & lsErrText
+  MsgBox lsErrText, vbExclamation, "Card Reader Error"
+   
+End Sub
+
+Private Sub Opt_Mode_Click(Index As Integer)
+'--------------------------------------------------------------------------------
+' These Options determine if the payout process is executed automatically (via
+' the card reader) or manually (the user selects a card account from a list).
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+'On Error GoTo LocalError ' Resume Next 'sometimes the control does not refresh on time
+   
+   If Index = 0 Then
+      ' Automatic
+      mbManualMode = False
+      If sst_Payouts.Tab = 0 Then
+         msPaymentType = "A"
+         cmb_CARD_ACCT_LIST.Visible = False
+         txt_SmartCardNo.Visible = True
+         txt_SmartCardNo.SetFocus
+      
+         With cmd_Search
+            .Visible = False
+            .Default = False
+         End With
+         With imgLight
+            .Picture = imgSource(3).Picture
+            .Refresh
+         End With
+         With cmdPayout
+            .Visible = False
+            .Default = False
+         End With
+      
+      ElseIf sst_Payouts.Tab = 1 Then
+         ' Begin Code added by MZ - 08/08/2005
+         ' Code added to perform Voucher payouts
+         cboVouchers.Visible = False
+         cmd_VoucherSearch.Visible = False
+         txt_VoucherCode.Visible = True
+         Call SetVoucherInputFocus
+         ' Show a Red light.
+         With imgLightVchr
+           .Picture = imgSource(3).Picture
+           .Refresh
+         End With
+         
+         With cmd_PayoutVoucher
+           .Visible = False
+           .Default = False
+         End With
+      End If
+   Else
+      ' Manual
+      mbManualMode = True
+      msPaymentType = "M"
+      If sst_Payouts.Tab = 0 Then
+         txt_SmartCardNo.Visible = False
+         cmb_CARD_ACCT_LIST.Visible = True
+         Call GetAccounts
+         cmb_CARD_ACCT_LIST.SetFocus
+         With cmd_Search
+            .Visible = True
+            .Default = True
+         End With
+         With imgLight
+             .Picture = imgSource(2).Picture
+             .Refresh
+         End With
+         With cmdPayout
+           .Visible = False
+           .Default = False
+         End With
+      ElseIf sst_Payouts.Tab = 1 Then
+      ' Begin Code added by MZ - 08/08/2005
+      ' Code added to perform Voucher payouts
+        cboVouchers.Visible = True
+        txt_VoucherCode.Visible = False
+        cmd_PayoutVoucher.Visible = False
+        cmd_VoucherSearch.Visible = False
+        
+        ' Show a Blue light.
+        With imgLightVchr
+           .Picture = imgSource(2).Picture
+           .Refresh
+        End With
+         With cmd_PayoutVoucher
+           .Visible = False
+           .Default = False
+         End With
+        'call function to populate barcode dropdown window.
+        If mbValidVoucher = False Then Call LoadVouchers
+        Call SetVoucherInputFocus
+      End If
+   ' End Code added by MZ - 08/08/2005
+   End If
+   
+   ' Turn off the button image timer.
+   tmrButtonImage.Enabled = False
+
+   Call ClearTextControls
+
+ExitSub:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::Opt_Mode" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+      
+End Sub
+
+
+Private Sub Opt_Mode_GotFocus(Index As Integer)
+
+   'do not allowed changed when the Authorization screen or Cash Drawer enabled
+   If fr_Authorize.Visible = True Or (sst_Payouts = 2) Then
+      'this message will display twice
+      MsgBox "Changes are only allowed when Authorize or Cash Drawer Enabled.", vbInformation
+   End If
+
+End Sub
+
+Private Sub sst_Payouts_Click(PreviousTab As Integer)
+'--------------------------------------------------------------------------------
+' Tab added to process Voucher Payouts
+' Added by MZ 08/08/2005
+'--------------------------------------------------------------------------------
+   On Error Resume Next
+   If sst_Payouts.Tab = 0 Then
+      ' Player Card tab - Card play mode
+      sst_Payouts.Tab = 0
+     
+     If Opt_Mode(0) Then
+        ' Automatic
+         cmb_CARD_ACCT_LIST.Visible = False
+         txt_SmartCardNo.Visible = True
+         txt_Result.Text = "Insert, then quickly remove magnetic stripe card."
+         txt_SmartCardNo.Text = ""
+         txt_SmartCardNo.SetFocus
+      Else
+         ' Manual
+         txt_SmartCardNo.Visible = False
+         cmb_CARD_ACCT_LIST.Visible = True
+         txt_Result.Text = "Select a Card Account from the list."
+         Call GetAccounts
+         cmb_CARD_ACCT_LIST.SetFocus
+      End If
+      miPayoutsLastTab = 0
+      
+   ElseIf sst_Payouts.Tab = 1 Then
+      ' Vouchers tab - TITO play mode
+      With imgLight
+         .Picture = imgSource(2).Picture
+         .Refresh
+      End With
+      sst_Payouts.Tab = 1
+
+      ' Hide the payout button and empty the voucher number and amount (added v608)...
+      cmd_PayoutVoucher.Visible = lstVoucherCode.ListCount > 0
+      txt_VoucherCode.Text = ""
+      txt_VoucherAmt.Text = ""
+
+      If Opt_Mode(0) Then
+         ' Automatic
+         cboVouchers.Visible = False
+         txt_VoucherCode.Visible = True
+         txt_Result.Text = "Ready to Scan Voucher."
+         Call SetVoucherInputFocus
+      Else
+         ' Manual
+         txt_VoucherCode.Visible = False
+         cboVouchers.Visible = True
+         txt_Result.Text = "Select a Voucher from the list."
+         If mbValidVoucher = False Then Call LoadVouchers
+         Call SetVoucherInputFocus
+      End If
+      cmd_AuthorizeOk.Default = True
+      miPayoutsLastTab = 1
+      
+   Else
+      ' Cash Drawer Tab
+      sst_Payouts.Tab = 2
+      ' Check what the last message was and see if the voucher was valid
+      If PreviousTab = 1 Then
+         If mbValidVoucher = False Then
+            mtVoucher.BarCode = "0"
+            If Opt_Mode(0) Then
+               cboVouchers.Text = ""
+            Else
+               txt_VoucherCode.Text = ""
+            End If
+            txt_VoucherAmt.Text = "0"
+         End If
+      End If
+      txt_TransactionAmt.SetFocus
+      cmd_CashTransSubmit.Default = True
+      txt_Result.Text = "Cash Drawer.  Add/Remove Cash."
+      
+      'after cash drawer has been executed do not return to it.
+      miPayoutsLastTab = PreviousTab
+   End If
+   
+End Sub
+
+Private Sub tmr_getReaderStatus_Timer()
+'--------------------------------------------------------------------------------
+' Timer event for the timer control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   mlElapsedTime = mlElapsedTime + tmr_GetReaderStatus.Interval
+   If mlElapsedTime > mlTimeout Then
+      Call ClearCardState
+      Call ClearTextControls
+      tmr_GetReaderStatus.Enabled = False
+   End If
+   
+End Sub
+
+Private Sub tmrButtonImage_Timer()
+'--------------------------------------------------------------------------------
+' Timer event handler for the Button Image Timer control.
+'--------------------------------------------------------------------------------
+   If sst_Payouts.Tab = 0 Then
+      
+      If cmdPayout.Visible Then
+         miButtonIndex = miButtonIndex + 1
+         If miButtonIndex > 2 Then miButtonIndex = 1
+         cmdPayout.Picture = imgList.ListImages(miButtonIndex).Picture
+         Beep
+      End If
+   ElseIf sst_Payouts.Tab = 1 Then
+      
+      If cmd_PayoutVoucher.Visible Then
+         miButtonIndex = miButtonIndex + 1
+         If miButtonIndex > 2 Then miButtonIndex = 1
+         cmd_PayoutVoucher.Picture = imgList.ListImages(miButtonIndex).Picture
+         Beep
+      End If
+   
+   End If
+End Sub
+
+Private Sub txt_Balance_Change()
+'--------------------------------------------------------------------------------
+' Change event for the Balance textbox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lbShowPayoutButton  As Boolean
+
+   ' Initialize Show Payout button to false.
+   lbShowPayoutButton = False
+   
+   If IsNumeric(txt_Balance.Text) Then
+      txt_Balance.Text = Format(txt_Balance.Text, "###,##0.00")
+   Else
+      txt_Balance.Text = 0
+   End If
+   
+   If CCur(txt_Balance.Text) > 0 Then
+      ' We want to show the Payout button even if no Pin so cashier can choose
+      ' to have a supervisor override lack of Pin.
+      lbShowPayoutButton = True
+      
+      ' Turn on the button image timer.
+      tmrButtonImage.Enabled = True
+      
+      ' Show the Print Account button.
+      'cmd_Print.Visible = True
+      
+      If mbCardInUse Then
+         chk_PartialPayOut.Visible = False
+         txt_PartialPayAmt.Visible = False
+      Else
+         ' If the card has a JACKPOT, no partial payout is allowed.
+         If gCardStatus <> "2" Then
+            ' Set visibility according to paramaterized CASINO_SYSTEM_PARAMETERS value.
+            chk_PartialPayOut.Visible = mbPartialPay
+         Else
+            chk_PartialPayOut.Visible = False
+         End If
+      End If
+      
+      ' Show a Green light.
+      If Not mbManualMode Then
+         With imgLight
+            .Picture = imgSource(0).Picture
+            .Refresh
+         End With
+      End If
+   Else
+      ' We do not want to see the Payout button.
+      lbShowPayoutButton = False
+      
+      ' Turn off the button image timer.
+      tmrButtonImage.Enabled = False
+      
+      ' cmd_Print.Visible = False
+      chk_PartialPayOut.Visible = False
+      txt_PartialPayAmt.Visible = False
+   End If
+   
+   ' Show or hide and set default property for the payout button...
+   With cmdPayout
+      .Visible = lbShowPayoutButton
+      .Default = lbShowPayoutButton
+   End With
+   
+End Sub
+
+Private Sub txt_CashRemoved_Change()
+   If IsNumeric(txt_CashRemoved.Text) Then
+      txt_CashRemoved.Text = Format(txt_CashRemoved.Text, "###,##0.00")
+   Else
+      txt_CashRemoved.Text = 0
+   End If
+
+End Sub
+
+Private Sub txt_CurrentBal_Change(Index As Integer)
+   If Index = 1 Then
+      If IsNumeric(txt_CurrentBal(1).Text) Then
+         txt_CurrentBal(1).Text = Format(txt_CurrentBal(1).Text, "###,##0.00")
+      Else
+         txt_CurrentBal(1).Text = 0
+      End If
+   End If
+   
+   txt_CurrentBal(0).Text = txt_CurrentBal(1).Text
+
+End Sub
+
+Private Sub txt_PartialPayAmt_GotFocus()
+'--------------------------------------------------------------------------------
+' GotFocus event handler for the Partial Pay Amount TextBox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   txt_PartialPayAmt.Text = ""
+
+End Sub
+
+Private Sub txt_PartialPayAmt_KeyPress(KeyAscii As Integer)
+'--------------------------------------------------------------------------------
+' KeyPress event handler for the Partial Pay Amount TextBox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   If (KeyAscii <> vbKeyBack) And (KeyAscii <> vbKeyReturn) Then
+      If InStrRev("1234567890.", Chr(KeyAscii)) = 0 Then
+         MsgBox "Invalid character entered.", vbCritical, gMsgTitle
+         KeyAscii = 0
+      Else
+         If (KeyAscii = 46) And (InStrRev(txt_PartialPayAmt.Text, ".") > 1) Then
+            KeyAscii = 0
+         End If
+      End If
+   End If
+   
+   mlElapsedTime = 0
+   
+End Sub
+
+Private Sub GetAccounts()
+'--------------------------------------------------------------------------------
+' Retrieves Card Accounts and populates the CMB_CARD_ACCT_LIST Dropdown control
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim CardAccountRS As ADODB.Recordset
+Dim lsSQL         As String
+Dim lsValue       As String
+
+   ' Show an hourglass pointer.
+   Screen.MousePointer = vbHourglass
+   
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   ' Retrieve Card Account data...
+   lsSQL = "SELECT CARD_ACCT_NO FROM CARD_ACCT " & _
+           "WHERE CARD_ACCT_NO NOT IN ('INTERNAL','INVALID') " & _
+           "AND LEFT(CARD_ACCT_NO, 6) = '" & gCasinoPrefix & "' ORDER BY CARD_ACCT_NO DESC"
+           
+   Set CardAccountRS = gConn.Execute(lsSQL)
+   
+   ' Clear the current list.
+   cmb_CARD_ACCT_LIST.Clear
+   
+   ' Populate the ComboBox control.
+   Do While Not CardAccountRS.EOF
+      lsValue = Mid(CardAccountRS.Fields("CARD_ACCT_NO"), 7, 10)
+      If IsNumeric(lsValue) Then
+         cmb_CARD_ACCT_LIST.AddItem lsValue
+      End If
+      CardAccountRS.MoveNext
+   Loop
+   
+   CardAccountRS.Close
+   Set CardAccountRS = Nothing
+   
+ExitFunction:
+   Screen.MousePointer = vbDefault
+   Exit Sub
+   
+LocalError:
+   MsgBox "frm_Payout_MV::GetAccounts" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+   
+End Sub
+
+Private Sub OpenDrawer()
+'--------------------------------------------------------------------------------
+' This routine is called to open the cash drawer.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lPtDocInfo       As DOCINFO
+
+Dim lsPrintData      As String
+
+Dim llBytesWritten   As Long
+Dim llDoc            As Long
+Dim llHPrinter       As Long
+Dim llReturn         As Long
+
+   ' Using the VB Printer object causes a small blank receipt to be printed each time
+   ' the drawer is opened, so the following code block uses some Windows API calls to
+   ' send control codes to the printer to open the drawer.
+   '
+   ' The printer codes were found at http://pages.prodigy.net/daleharris/rprinter.htm.
+   ' They are also at http://www.logiccontrols.com/a_faq_cr.html.
+   '
+   ' Another set of codes to open the drawer, listed on the first site are:
+   ' 27, 112, 0, 25, 250.  I have not tried them, as the codes below are working...
+   '
+   ' Codes to cut the paper (not sure if valid or even if useful): 29, 86, 66, 0
+   
+   ' Store a handle for a print job in llHPrinter.
+   llReturn = OpenPrinter(Printer.DeviceName, llHPrinter, 0)
+   If llReturn = 0 Then
+      ' OpenPrinter failed, show an error message and bail out...
+      MsgBox "Open Printer Error", vbCritical, "Open Drawer Error"
+   Else
+      ' Initialize the docinfo structure...
+      lPtDocInfo.pDocName = "Open Drawer"
+      lPtDocInfo.pOutputFile = vbNullString
+      lPtDocInfo.pDatatype = vbNullString
+      
+      llDoc = StartDocPrinter(llHPrinter, 1, lPtDocInfo)
+      Call StartPagePrinter(llHPrinter)
+      
+      ' Build a string containing the print codes to open the cash drawer.
+      ' lsPrintData = Chr$(27) & Chr$(112) & Chr$(48) & Chr$(55) & Chr$(121)
+      lsPrintData = Chr$(27) & "p07y"
+      
+      ' Send it to the printer.
+      llReturn = WritePrinter(llHPrinter, ByVal lsPrintData, Len(lsPrintData), llBytesWritten)
+      
+      ' End the page, doc, and then close the print job...
+      llReturn = EndPagePrinter(llHPrinter)
+      llReturn = EndDocPrinter(llHPrinter)
+      llReturn = ClosePrinter(llHPrinter)
+   End If
+   
+   ' Set up the control font...
+   '   Printer.FontSize = 10
+   '   Printer.FontName = "control"
+   
+   ' Use special function character to open the cash drawer (see comments below).
+   '   Printer.Print "A"
+   '   Printer.EndDoc
+   
+   ' Special function characters:
+   '  A - Open drawer 1 (50ms drive pulse width).
+   '  B - Open drawer 1 at 100ms.
+   '  C - Open drawer 1 at 150ms.
+   '  D - Open drawer 1 at 200ms.
+   '  E - Open drawer 1 at 250ms.
+   '  a - Open drawer 2 at 50ms.
+   '  b - Open drawer 2 at 100ms.
+   '  c - Open drawer 2 at 150ms.
+   '  d - Open drawer 2 at 200ms.
+   '  e - Open drawer 2 at 250ms.
+   
+End Sub
+
+Public Property Get IsCashier() As Boolean
+
+   IsCashier = mbIsCashier
+
+End Property
+
+Public Property Let IsCashier(abIsCashier As Boolean)
+
+   mbIsCashier = abIsCashier
+
+End Property
+
+Public Property Get HasCashDrawer() As Boolean
+
+   HasCashDrawer = mbHasCashDrawer
+
+End Property
+
+Public Property Let HasCashDrawer(abHasCashDrawer As Boolean)
+
+   mbHasCashDrawer = abHasCashDrawer
+
+End Property
+
+Public Property Get StartingBalance() As Currency
+
+   StartingBalance = mcStartingBalance
+   
+End Property
+
+Public Property Let StartingBalance(acStartingBalance As Currency)
+
+   mcStartingBalance = acStartingBalance
+
+End Property
+
+Public Property Get RestartingSession() As Boolean
+
+   RestartingSession = mbRestartingSS
+
+End Property
+
+Public Property Let RestartingSession(abRestarting As Boolean)
+
+   mbRestartingSS = abRestarting
+
+End Property
+
+Private Sub txt_StartBal_Change(Index As Integer)
+   If Index = 1 Then
+      If IsNumeric(txt_StartBal(1).Text) Then
+         txt_StartBal(1).Text = Format(txt_StartBal(1).Text, "###,##0.00")
+      Else
+         txt_StartBal(1).Text = 0
+      End If
+   End If
+   txt_StartBal(0) = Format(txt_StartBal(1), "###,##0.00")
+End Sub
+
+Private Sub txt_TotalPayout_Change()
+   If IsNumeric(txt_TotalPayout.Text) Then
+      txt_TotalPayout.Text = Format(txt_TotalPayout.Text, "###,##0.00")
+   Else
+      txt_TotalPayout.Text = 0
+   End If
+
+End Sub
+
+Private Sub txt_VoucherAmt_Change()
+'--------------------------------------------------------------------------------
+' Change event for the Balance textbox control for starting balance.
+' This code was added to implement Voucher Payouts process.
+' Added by MZ-08/08/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   If IsNumeric(txt_VoucherAmt.Text) Then
+      txt_VoucherAmt.Text = Format(txt_VoucherAmt.Text, "###,##0.00")
+   Else
+      txt_VoucherAmt.Text = "0"
+   End If
+   
+   If CCur(txt_VoucherAmt.Text) > 0 Then
+      ' We want to show the Payout button even if no Pin so cashier can choose
+      ' to have a supervisor override lack of Pin.
+      ' Turn on the button image timer.
+      tmrButtonImage.Enabled = True
+      
+      ' Show the Print Account button.
+      ' cmd_Print.Visible = True
+      
+      ' Show a Green light.
+      If Not mbManualMode Then
+         With imgLight
+            .Picture = imgSource(0).Picture
+            .Refresh
+         End With
+      End If
+   Else
+      ' We do not want to see the Payout button.
+      ' Turn off the button image timer.
+      tmrButtonImage.Enabled = False
+      ' cmd_Print.Visible = False
+   End If
+   
+End Sub
+
+Private Sub txt_VoucherCode_Change()
+'--------------------------------------------------------------------------------
+' Change event handler for the Voucher Code TextBox control.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   msVoucherCasinoID = ""
+   If Len(txt_VoucherCode.Text) = 18 Then
+      ' Get voucher information.
+      Call GetVoucherInfo
+   ElseIf Len(txt_VoucherCode.Text) > 18 Then
+      MsgBox "Invalid voucher scanned. Voucher barcodes cannot have more than 18 digits.", vbExclamation, "Voucher Status"
+      txt_LastVoucher.Text = txt_VoucherCode.Text
+      txt_VoucherCode.Text = ""
+   End If
+   
+End Sub
+
+Private Sub txt_VoucherCode_GotFocus()
+   
+   txt_VoucherCode.Text = ""
+   
+End Sub
+
+'Private Sub txt_VoucherCode_KeyDown(KeyCode As Integer, Shift As Integer)
+'
+'   If KeyCode = vbKeyReturn Then
+'      Debug.Print "KeyDown is vbKeyReturn"
+'      KeyCode = vbKeyEnd
+'   End If
+'
+'End Sub
+'
+'Private Sub txt_VoucherCode_KeyPress(KeyAscii As Integer)
+'
+'   If KeyAscii = 13 Or KeyAscii = 10 Then
+'      Debug.Print "KeyPress is " & CStr(KeyAscii)
+'      KeyAscii = 0
+'   End If
+'
+'End Sub
+
+Private Sub txt_VoucherCode_Validate(Cancel As Boolean)
+   
+   If Len(txt_VoucherCode.Text) > 0 And (Len(txt_VoucherCode.Text) <> 18) Then
+      Cancel = True
+      txt_VoucherCode.Text = ""
+   End If
+   
+End Sub
+
+Private Sub txt_TransactionAmt_Change()
+'--------------------------------------------------------------------------------
+' Change event for the Transaction Amount Textbox.
+' Check for valid entry and set password controls visibility.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lbPassVisible As Boolean
+Dim lsValue       As String
+Dim lcValue       As Currency
+
+   ' Store the transaction amount.
+   lsValue = txt_TransactionAmt.Text
+
+   ' Do we have something to validate?
+   If Len(lsValue) Then
+      ' Yes, is it a valid number?
+      If Not IsNumeric(lsValue) Then
+         ' User may have made an invalid entry...
+         If Not (Len(lsValue) = 1 And InStr(".,-", lsValue) > 0) Then
+            MsgBox "Invalid entry", vbExclamation, gCasinoName
+         End If
+      End If
+   End If
+
+End Sub
+
+Private Sub txt_TransactionAmt_KeyPress(KeyAscii As Integer)
+'--------------------------------------------------------------------------------
+' KeyPress event for the Transaction Amount Textbox.
+' Check for valid characters.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsValue       As String
+
+   ' Did the user press the enter key?
+   If KeyAscii = 13 Then
+      ' Yes, so submit...
+      Call cmd_CashTransSubmit_Click
+   ' Did the user press the backspace key?
+   ElseIf KeyAscii <> 8 Then
+      ' No, so see if it is a valid character.
+      lsValue = Chr$(KeyAscii)
+      If InStr(1, "0123456789.,-", lsValue, vbTextCompare) = 0 Then
+         ' Invalid key, so ignore it.
+         KeyAscii = 0
+      End If
+   End If
+
+End Sub
+
+Private Sub HandleSSTimeout()
+'--------------------------------------------------------------------------------
+' Routine to handle the case of a user who has logged in and has
+' a timed-out suspended session.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsEndBalance  As String
+Dim lsReportID    As String
+Dim lsSQL         As String
+
+   ' Turn on error checking.
+   On Error GoTo ErrExit
+   
+   ' Show the default mouse cursor.
+   MousePointer = vbDefault
+   
+   ' If cash drawer enabled, write an 'E'nd session record into the CASHIER_TRANS
+   ' table with the current cash drawer balance.
+   
+   ' Is this user operating with a cash drawer?
+   ' the following line of code was modified by MZ-10/21/2005
+   ' If mbHasCashDrawer Then
+   If (mbHasCashDrawer) And Not (mbRestartingSS) Then
+      ' Retrieve and then log session totals for this user...
+      ' Get the current drawer balance for this session...
+      lsEndBalance = CStr(GetCashDrawerBalance())
+      
+      lsSQL = "INSERT INTO CASHIER_TRANS (TRANS_TYPE, TRANS_AMT, SESSION_ID, CREATED_BY, CASHIER_STN, LOCATION_ID) " & _
+         "VALUES ('E', %ta, '%sid', '%cb', '%cs', %lid)"
+      lsSQL = Replace(lsSQL, "%ta", lsEndBalance, 1, 1)
+      lsSQL = Replace(lsSQL, "%sid", gCurrentSession, 1, 1)
+      lsSQL = Replace(lsSQL, "%cb", gUserId, 1, 1)
+      lsSQL = Replace(lsSQL, "%cs", gWKStation, 1, 1)
+      lsSQL = Replace(lsSQL, "%lid", mlLocationID, 1, 1)
+      
+      ' Execute it.
+      gConn.Execute lsSQL, , adExecuteNoRecords
+      
+      ' Report identifier is session summary with cash drawer.
+      lsReportID = "Session_Summary_CD"
+      
+      ' Open the cash drawer.
+      Call OpenDrawer
+   Else
+      ' Report identifier is just session summary.
+      lsReportID = "Session_Summary"
+   End If
+   
+   ' Print the session summary...
+   With frm_RepViewer
+      .ReportName = lsReportID
+      .UserSession = gCurrentSession
+      .DirectToPrinter = True
+   End With
+   Load frm_RepViewer
+   Unload frm_RepViewer
+   
+   ' If using CD, prompt user for a new starting balance and open the cash drawer...
+   ' the following line of code was modified by MZ-10/21/2005
+   ' If mbHasCashDrawer Then
+   If (mbHasCashDrawer) And Not (mbRestartingSS) Then
+      frm_Cashier_Startup.Show vbModal
+      
+      ' Did user cancel?
+      If mcStartingBalance < 0 Then
+         ' Yes.
+         Exit Sub
+      Else
+         ' No, so open the cash drawer...
+         Call OpenDrawer
+      End If
+   End If
+   
+      ' Build the new session id string.
+      msSessionID = LCase(gUserId) & Format(Now(), "_yymmdd_hhmm_ss")
+      
+      ' Update CASINO_USERS record for current user with new SessionID, Status, etc...
+      Call gConnection.SessionTracker("Write", msSessionID, "A", gWKStation)
+      
+      ' If using CD, insert an 'S' (start new session) record into CASHIER_TRANS with newly entered starting balance.
+      If mbHasCashDrawer Then
+         lsSQL = "INSERT INTO CASHIER_TRANS (TRANS_TYPE, TRANS_AMT, SESSION_ID, CREATED_BY, CASHIER_STN, LOCATION_ID) " & _
+            "VALUES ('S', %ta, '%sid', '%cb', '%cs', %lid)"
+         lsSQL = Replace(lsSQL, "%ta", CStr(mcStartingBalance), 1, 1)
+         lsSQL = Replace(lsSQL, "%sid", msSessionID, 1, 1)
+         lsSQL = Replace(lsSQL, "%cb", gUserId, 1, 1)
+         lsSQL = Replace(lsSQL, "%cs", gWKStation, 1, 1)
+         lsSQL = Replace(lsSQL, "%lid", mlLocationID, 1, 1)
+         
+         ' Execute it.
+         gConn.Execute lsSQL, , adExecuteNoRecords
+      End If
+      
+      ' Update application public vars with new SessionID, etc...
+      Call gConnection.SessionTracker("UserSession", "", "", "")
+      
+ExitRoutine:
+   Exit Sub
+   
+ErrExit:
+   MsgBox "frm_Payout_MV:HandleSSTimeout" & vbCrLf & Err.Description, vbExclamation
+   GoTo ExitRoutine
+   
+End Sub
+
+Private Sub Print_CD_AddRemove_Receipt(asValue As String, asTransType As String, alRefNbr As Long)
+'--------------------------------------------------------------------------------
+' This function will print the receipt
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsTransText   As String
+Dim lcValue       As Currency
+
+   ' Turn on error checking.
+   On Error GoTo ErrExit
+   
+   ' Convert amount to currency data type.
+   lcValue = CCur(asValue)
+   
+   ' The reference number will be 'Cash Removed' or 'Cash Added'...
+   If asTransType = "R" Then
+      lsTransText = "Cash Removed"
+   ElseIf lcValue = 0 Then
+      lsTransText = "Drawer Opened"
+   Else
+      lsTransText = "Cash Added"
+   End If
+   
+   ' Set frm_RepViewer properties...
+   With frm_RepViewer
+      .ReprintReceipt = False        ' This is not a reprint.
+      .CardAccountNumber = msSessionID
+      .Amount = asValue
+      .OptionValue = lsTransText
+      .TransactionID = CStr(alRefNbr)
+      .ReportName = "CashDrawerAddRemove"
+   End With
+   
+   Load frm_RepViewer
+   Unload frm_RepViewer
+   
+ExitRoutine:
+   Exit Sub
+   
+ErrExit:
+   MsgBox "frm_Payout_MV:Print_CD_AddRemove_Receipt" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitRoutine
+   
+End Sub
+
+Private Function GetCashDrawerBalance() As Currency
+'--------------------------------------------------------------------------------
+' Returns the current cash balance for the current session.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lobjRS        As ADODB.Recordset
+Dim lcReturn      As Currency
+Dim lsSQL         As String
+
+   ' Initialize the return value to 0.
+   lcReturn = 0
+   
+   ' Build the SQL request string.
+   lsSQL = "{CALL Get_Cash_Drawer_Balance('%s')}"
+   lsSQL = Replace(lsSQL, "%s", msSessionID)
+   
+   ' Turn on error checking.
+   On Error GoTo ErrExit
+   
+   ' Execute the SQL request, results will be returned in the lobjRS recordset.
+   Set lobjRS = gConn.Execute(lsSQL)
+   If lobjRS.State = adStateOpen Then
+      lcReturn = lobjRS("ENDING_BALANCE")
+      lobjRS.Close
+   End If
+   Set lobjRS = Nothing
+   
+   ' Set the function return value.
+   GetCashDrawerBalance = lcReturn
+   
+ExitFunc:
+   Exit Function
+   
+ErrExit:
+   MsgBox "frm_Payout_MV:GetCashDrawerBalance" & vbCrLf & _
+      "Error: " & Err.Description & vbCrLf & "Source: " & Err.source, _
+      vbCritical, gMsgTitle
+   Resume ExitFunc
+   
+End Function
+
+Public Property Get AuthorizingUID() As String
+'--------------------------------------------------------------------------------
+' Returns the UID of user that authorized a lockup payout.
+'--------------------------------------------------------------------------------
+
+   AuthorizingUID = msAuthUID
+
+End Property
+
+Public Property Let AuthorizingUID(AuthUID As String)
+'--------------------------------------------------------------------------------
+' Sets the UID of user that authorized a lockup payout.
+'--------------------------------------------------------------------------------
+
+   msAuthUID = AuthUID
+
+End Property
+
+Public Property Get PayoutAuthorized() As Boolean
+'--------------------------------------------------------------------------------
+' Returns the value of the flag indicating whether a lockup payout has been authorized.
+'--------------------------------------------------------------------------------
+
+   PayoutAuthorized = mbPayAuthorized
+
+End Property
+
+Public Property Let PayoutAuthorized(PayAuthorized As Boolean)
+'--------------------------------------------------------------------------------
+' Sets the value of the flag indicating whether a lockup payout has been authorized.
+'--------------------------------------------------------------------------------
+
+   mbPayAuthorized = PayAuthorized
+
+End Property
+
+Private Sub ClearCardState()
+'--------------------------------------------------------------------------------
+' Clear all elements of the CardState.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+  With mtCardState
+      .AccountNumber = ""
+      .PinNumber = ""
+      .CardStatus = ""
+      .CustomerFirstName = ""
+      .CustomerLastName = ""
+      .CustomerFullName = ""
+      .CustomerDOB = ""
+      .MachineNumber = ""
+      .ExistsInDB = False
+      .AutoMode = False
+      .ValidPrefix = False
+      .HasValidPin = False
+      .Balance = 0
+      .PromoAmount = 0
+   End With
+   
+End Sub
+
+Private Sub ClearTextControls()
+'--------------------------------------------------------------------------------
+' Clear all textbox controls.
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lControl      As Control
+   
+   ' Loop through the controls clearing them...
+   For Each lControl In Controls
+      If TypeOf lControl Is TextBox Then
+         
+         If InStr(1, "~txt_StartBal~txt_CashAdded~txt_CashRemoved~txt_TotalPayout~txt_CurrentBal~txtLastReceiptNumber~txtLastTransVoucherCount~txtLastTransAmount", lControl.Name, vbTextCompare) = 0 Then
+            lControl.Text = ""
+         End If
+         'lControl.Text = ""
+      ElseIf TypeOf lControl Is ComboBox Then
+         lControl.ListIndex = -1
+      End If
+      
+   Next
+   
+   ' Show user operational hint...
+   If Not mbManualMode Then
+      If sst_Payouts.Tab = 0 Then
+        
+        txt_Result.Text = "Insert, then quickly remove magnetic stripe card."
+      Else
+        txt_Result.Text = "Ready to Scan Voucher."
+      End If
+   Else
+      If Not mbManualMode Then
+
+        txt_Result.Text = "Select a Card Account from the list."
+      Else
+        txt_Result.Text = "Select a Voucher from the list."
+      End If
+   End If
+   
+   ' Show a Red light.
+   If Not mbManualMode Then
+      With imgLight
+         .Picture = imgSource(3).Picture
+         .Refresh
+      End With
+   End If
+   
+   ' Reset member variables...
+   mtCardState.HasValidPin = False
+   msCustName = ""
+   mtCardState.CustomerDOB = ""
+   mbPinOkay = Not mbPinRequired
+   
+   ' Hide the Activate button
+   ' CmdActivate.Visible = False
+   
+End Sub
+
+Public Property Let PinEntryCancelled(ByVal Value As Boolean)
+'--------------------------------------------------------------------------------
+' Sets the value of the flag indicating if user cancelled Pin entry when
+' prompted for a PIN number to Cashout.
+'--------------------------------------------------------------------------------
+
+   mbPinEntryCancelled = Value
+   
+End Property
+
+Public Property Let UserEnteredPinValue(ByVal Value As String)
+'--------------------------------------------------------------------------------
+' Sets the value of the User entered Pin Number.
+' This property is set from frm_Pin_Entry when a PIN number is required in order
+' to cash out.
+'--------------------------------------------------------------------------------
+   
+   msUserEnteredPinValue = Value
+   
+End Property
+
+Private Function VoucherValidation(aValidationNbr As Integer) As Boolean
+'--------------------------------------------------------------------------------
+' Validate Vouchers
+' Added for the Voucher payouts functionality
+' Added by MZ - 08/08/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim lsError         As String
+Dim lcCDBalance     As Currency
+
+   lsError = ""
+   On Error GoTo LocalError
+   
+   ' Assume voucher is valid.
+   VoucherValidation = True
+   
+   mbValidVoucher = False
+   
+   If Me.Opt_Mode(0) Then
+      txt_Result.Text = "Voucher Number " & txt_VoucherCode.Text
+   Else
+      txt_Result.Text = "Voucher Number " & cboVouchers.Text
+   End If
+   
+   ' txt_VoucherAmt.Text = ""
+   
+   Select Case aValidationNbr
+      Case 1
+         ' 1st Validation - Has the Voucher Expired or is the amount too small?
+         If (mtVoucher.VoucherType = 4) Then
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & "is a Non-Cashable Promotional Voucher."
+            txt_VoucherCode = ""
+            VoucherValidation = False
+         ElseIf (mtVoucher.RedeemedState = False) And (mtVoucher.ExpireDate < Now()) Then
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & _
+                              "expired on " & mtVoucher.ExpireDate & "."
+            txt_VoucherCode.Text = ""
+            VoucherValidation = False
+         ElseIf mtVoucher.VoucherAmt < 0.01 Then
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & "Amount too small for cashout."
+            txt_VoucherCode.Text = ""
+            VoucherValidation = False
+         End If
+      
+      Case 2
+         ' 2nd Validation - Has the Voucher already been paid?
+         If mtVoucher.RedeemedState = True Then
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & "was already redeemed on " & _
+               Format(mtVoucher.RedeemedDate, "mm/dd/yyyy") & "." & vbCrLf & "Call the Supervisor."
+            txt_VoucherCode.Text = ""
+            VoucherValidation = False
+        
+         ' Is the Voucher in a valid state?
+         ElseIf mtVoucher.IsValid = False Then
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & "is not in a Valid state. Call the Supervisor."
+            txt_VoucherCode.Text = ""
+            VoucherValidation = False
+         End If
+      
+      Case 3
+         ' 3rd Validation - Is there enough money in the Cash Register?
+         If (gAutoCashDrawer = False) Or (mbHasCashDrawer = False) Then
+            ' No cash drawer attached
+            VoucherValidation = True
+         Else
+            mbValidVoucher = True
+            ' Get the current Cash Drawer balance...
+            If IsNumeric(txt_CurrentBal(1).Text) Then
+               lcCDBalance = CCur(txt_CurrentBal(1).Text)
+            Else
+               lcCDBalance = 0
+            End If
+            
+            If mtVoucher.VoucherAmt > lcCDBalance Then
+               ' Voucher amount exceeds the Cash Drawer balance...
+               txt_VoucherAmt.Text = mtVoucher.VoucherAmt
+               txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & _
+                                 vbCrLf & "Insufficient Cash Drawer Money for Payout."
+               VoucherValidation = False
+            End If
+         End If
+      
+      Case 4
+         ' Validate check sum...
+         If mtVoucher.IsValidCheckValue = False Then
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & _
+                              "has an invalid Checksum Value. Call the Supervisor."
+            txt_VoucherCode.Text = ""
+         End If
+         
+         VoucherValidation = mtVoucher.IsValidCheckValue
+         
+      Case 5
+         ' Is it a Jackpot voucher that is over the threshold payout value?
+         If mtVoucher.VoucherType = 1 And mtVoucher.VoucherAmt >= mcPayoutThreshold Then
+            txt_Result.Text = "Jackpot Voucher " & mtVoucher.FormattedBarcode & vbCrLf & _
+                              "exceeds the payout threshold."
+            txt_VoucherCode.Text = ""
+            VoucherValidation = False
+         End If
+         
+      Case 6
+         ' Is this a voucher that was transferred because it remained unclaimed too long?
+         If mtVoucher.UcvTransferred = True Then
+            txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & _
+                              "expired on " & mtVoucher.ExpireDate & "."
+            txt_VoucherCode.Text = ""
+            VoucherValidation = False
+         End If
+   
+   End Select
+   
+   sst_Payouts.Tab = 1
+   
+ExitFunction:
+   Screen.MousePointer = vbDefault
+   Exit Function
+   
+LocalError:
+   lsError = Err.Description
+   MsgBox "frm_Payout_MV::VoucherValidation error: " & lsError & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+ 
+End Function
+
+Private Function GetArraySize(ByRef myArray() As VoucherData, ByVal source As String) As Integer
+
+    On Error Resume Next
+    Dim liArraySize As Integer
+    Dim lsError As String
+    
+    liArraySize = UBound(myArray) + 1
+    
+    If Err.Number = 9 Then
+        liArraySize = 0
+    ElseIf Err.Number <> 0 Then
+        GoTo LocalError
+    End If
+    
+    GetArraySize = liArraySize
+    GoTo ExitFunction
+    
+LocalError:
+   lsError = Err.Description
+   MsgBox "frm_Payout_MV::GetArraySize -> " & source & " Error: " & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GetArraySize = -1
+   GoTo ExitFunction
+   
+ExitFunction:
+   
+   Exit Function
+
+End Function
+
+
+Private Function GetVoucherDataSingle(ByVal sBarcode As String) As VoucherData
+    
+    On Error GoTo LocalError
+    
+    Dim loReturnData() As VoucherData
+           
+    loReturnData = GetVoucherData(sBarcode)
+    
+    Dim liArraySize As Integer
+    
+    liArraySize = GetArraySize(loReturnData, "GetVoucherDataSingle")
+        
+    If (liArraySize > 0) Then
+        GetVoucherDataSingle = loReturnData(0)
+    End If
+   
+ExitFunction:
+   Screen.MousePointer = vbDefault
+   Exit Function
+   
+LocalError:
+   MsgBox "frm_Payout_MV::GetVoucherDataSingle error: " & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+    
+End Function
+Private Function GetVoucherData(ByVal sBarcode As String) As VoucherData()
+
+  On Error GoTo LocalError
+
+  Dim VoucherRS     As ADODB.Recordset
+  Dim loReturnData() As VoucherData
+  Dim lsSQL As String
+  Dim liRecordCount As Integer
+    
+ ' Build the SQL SELECT statement.
+   lsSQL = "SELECT VOUCHER_ID, VOUCHER_TYPE, BARCODE, " & _
+           "ISNULL(REDEEMED_DATE, 0) AS REDEEMED_DATE, REDEEMED_STATE, " & _
+           "ISNULL(REDEEMED_LOC, '') AS REDEEMED_LOC, CREATE_DATE, " & _
+           "ISNULL(CREATED_LOC, '')  AS CREATED_LOC, VOUCHER_AMOUNT, " & _
+           "dbo.IsValidVoucherCheckValue(VOUCHER_ID) AS IsValidCheckValue, " & _
+           "UCV_TRANSFERRED, ISNULL(UCV_TRANSFER_DATE, 0) AS UCV_TRANSFER_DATE, " & _
+           "IS_VALID, dbo.ufnVoucherExpirationDate(VOUCHER_ID) AS ExpireDate FROM VOUCHER WHERE BARCODE in (%s)"
+   lsSQL = Replace(lsSQL, SR_STD, sBarcode, 1, 1)
+   
+   ' Execute the SQL SELECT statement to return voucher information.
+   
+   Set VoucherRS = New Recordset
+   VoucherRS.ActiveConnection = gConn
+   VoucherRS.CursorType = adOpenStatic
+   VoucherRS.source = lsSQL
+   VoucherRS.Open
+   
+   
+   liRecordCount = VoucherRS.RecordCount
+   
+   If liRecordCount > 0 Then
+   
+   ReDim loReturnData(liRecordCount - 1) As VoucherData
+   Dim lTempVoucher As VoucherData
+   Dim liCurrentIndex As Integer
+   liCurrentIndex = 0
+   Do While Not VoucherRS.EOF
+   
+       With loReturnData(liCurrentIndex)
+         .VoucherID = VoucherRS.Fields("VOUCHER_ID").Value
+         .VoucherType = VoucherRS.Fields("VOUCHER_TYPE").Value
+         .BarCode = VoucherRS.Fields("BARCODE").Value
+         .FormattedBarcode = Format(VoucherRS.Fields("BARCODE").Value, "#-###-###-##-#####-###-#")
+         .RedeemedDate = VoucherRS.Fields("REDEEMED_DATE").Value
+         .RedeemedState = VoucherRS.Fields("REDEEMED_STATE").Value
+         .RedeemedLoc = VoucherRS.Fields("REDEEMED_LOC").Value
+         .CreateDate = VoucherRS.Fields("CREATE_DATE").Value
+         .CreatedLoc = VoucherRS.Fields("CREATED_LOC").Value
+         .VoucherAmt = VoucherRS.Fields("VOUCHER_AMOUNT").Value
+         .IsValid = VoucherRS.Fields("IS_VALID").Value
+         .IsValidCheckValue = VoucherRS.Fields("IsValidCheckValue").Value
+         .UcvTransferred = VoucherRS.Fields("UCV_TRANSFERRED").Value
+         .UcvTransferDate = VoucherRS.Fields("UCV_TRANSFER_DATE").Value
+         .ExpireDate = VoucherRS.Fields("ExpireDate").Value
+      End With
+      
+      ' Move to the next record.
+        liCurrentIndex = liCurrentIndex + 1
+        VoucherRS.MoveNext
+    Loop
+   
+   ' Close and free the recordset object instance...
+   VoucherRS.Close
+   Set VoucherRS = Nothing
+   
+   End If
+   GetVoucherData = loReturnData
+ExitFunction:
+   Exit Function
+   
+LocalError:
+   MsgBox "frm_Payout_MV::GetVoucherData error: " & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+   
+   
+End Function
+Private Sub GetVoucherInfo()
+'--------------------------------------------------------------------------------
+' Retrieves Voucher record and displays it
+' Added for the Voucher payout functionality
+' Added by MZ - 08/08/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+
+Dim llValue       As Long
+
+Dim lsBarcode     As String
+Dim lsErrorText   As String
+Dim lsSQL         As String
+Dim lsValue       As String
+
+' Edris Multi_Voucher support
+Dim liVoucherCount As Integer
+Dim lbVoucherAlreadyExists As Boolean
+Dim lsApprovalText As String
+Dim liVoucherID As Long
+Dim lcVoucherBalance As Currency
+Dim lVoucherApproval As Boolean
+
+   
+   ' Show an hourglass pointer.
+   Screen.MousePointer = vbHourglass
+   
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   ' Hide the voucher payout button.
+   cmd_PayoutVoucher.Visible = False
+   
+   ' Retrieve voucher data...
+   If Not mbManualMode Then
+      lsBarcode = txt_VoucherCode.Text
+   Else
+      lsBarcode = Replace(cboVouchers.Text, "-", "")
+   End If
+   
+   cmd_VoucherSearch.Visible = False
+   
+   If Len(lsBarcode) = 0 Then
+      GoTo ExitFunction
+   End If
+   
+   
+   mtVoucher = GetVoucherDataSingle(lsBarcode)
+   ' Populate the UDT structure...
+   If mtVoucher.BarCode = "" Then
+      
+      lsErrorText = "Voucher " & Format(lsBarcode, "#-###-###-##-#####-###-#") & vbCrLf & "was not found in the database."
+      
+      txt_Result.Text = lsErrorText
+      txt_VoucherCode.Text = ""
+      txt_VoucherAmt.Text = ""
+            
+      GoTo ExitFunction:
+   End If
+      
+   ' Edris - Check if Voucher Exists in our transaction
+   lbVoucherAlreadyExists = False
+   For liVoucherCount = 0 To lstVoucherLock.ListCount - 1
+   
+        If Abs(lstVoucherLock.ItemData(liVoucherCount)) = mtVoucher.VoucherID Then
+            lbVoucherAlreadyExists = True
+            liVoucherCount = lstVoucherLock.ListCount
+        End If
+   Next
+   
+   
+   If lbVoucherAlreadyExists = True Then
+        txt_VoucherCode.Text = ""
+        txt_Result.Text = "Voucher " & Format(lsBarcode, "#-###-###-##-#####-###-#") & vbCrLf & "has already been scanned. See Transaction."
+        GoTo ExitFunction
+   End If
+   
+   If lstVoucherLock.ListCount > 25 Then
+        txt_VoucherCode.Text = ""
+        txt_Result.Text = "Voucher " & Format(lsBarcode, "#-###-###-##-#####-###-#") & vbCrLf & "Failed. Vouchers Per Transcation Limit of 25 has been exceeded. Payout transcation and try again."
+        GoTo ExitFunction
+   End If
+   
+   
+   ' Validate Voucher
+   ' 1st  Validation - Has the Voucher Expired?
+   ' Get the "ExpirationDays" TPI_SETTING table for TPI_ID=0 (DGE)
+   If VoucherValidation(1) = False Then
+      lsErrorText = txt_Result.Text
+      GoTo ExitFunction
+   End If
+   
+   ' 2nd Validation
+   ' Has the Voucher already been paid?
+   If VoucherValidation(2) = False Then
+      lsErrorText = txt_Result.Text
+      GoTo ExitFunction
+   End If
+   
+   ' Using a Cash Drawer?
+   If gAutoCashDrawer Then
+      ' Yes, so 3rd Validation - Is there enough money in the Cash Register?
+      If VoucherValidation(3) = False Then
+         lsErrorText = txt_Result.Text
+         GoTo ExitFunction
+      End If
+   End If
+   
+   ' Has the data been altered in the database?
+   If VoucherValidation(4) = False Then
+      lsErrorText = txt_Result.Text
+      GoTo ExitFunction
+   End If
+   
+   ' Is the voucher a jackpot voucher that is over the threshold payout amount?
+   If VoucherValidation(5) = False Then
+      lsErrorText = txt_Result.Text
+      GoTo ExitFunction
+   End If
+      
+   ' Has the voucher been transferred to the central office?
+   If VoucherValidation(6) = False Then
+      lsErrorText = txt_Result.Text
+      GoTo ExitFunction
+   End If
+      
+   txt_Result.Text = "Voucher " & mtVoucher.FormattedBarcode & vbCrLf & "Successfully scanned. Payout or scan more vouchers."
+  
+   
+   ' Edris -- Check if voucher has approval required
+   If Len(mtVoucher.VoucherAmt) > 0 Then
+      lcVoucherBalance = CCur(Format(mtVoucher.VoucherAmt, "###,##0.00"))
+   End If
+   
+   If (mtVoucher.VoucherType = 1) And (lcVoucherBalance > (mcLockupAmt - 0.001)) Then
+      If (gSecurityLevel < giSupervisorLevel) Or (InStr(1, "~ADMIN~ADMINISTRATOR~SUPERVISOR~SUPER~", gUserId, vbTextCompare) > 0) Then
+        lVoucherApproval = True
+      End If
+   End If
+   
+   ' Edris -- If Approval is required, Format text
+   If lVoucherApproval = True Then
+        liVoucherID = mtVoucher.VoucherID
+        lsApprovalText = "Yes"
+   Else
+        liVoucherID = mtVoucher.VoucherID
+        lsApprovalText = ""
+   End If
+   
+   ' Add the item
+  lstVoucherLock.AddItem (lsApprovalText)
+   lstVoucherLock.ItemData(lstVoucherLock.ListCount - 1) = liVoucherID
+        
+   lstVoucherCode.AddItem (mtVoucher.FormattedBarcode)
+   lstVoucherCode.ItemData(lstVoucherCode.ListCount - 1) = liVoucherID
+        
+   lstVoucherAmount.AddItem (Format$(Format$(mtVoucher.VoucherAmt, "Standard"), "@@@@@@@@@@@@"))
+   lstVoucherAmount.ItemData(lstVoucherAmount.ListCount - 1) = liVoucherID
+   
+   Call SortVoucherListBoxes
+ExitFunction:
+   txt_VoucherCode.Text = ""
+   
+   Call ValidateTransaction
+   
+   txt_LastVoucher.Text = lsBarcode
+   
+   ' Show the default pointer.
+   Screen.MousePointer = vbDefault
+   
+   ' If there is error text, show it.
+   If Len(lsErrorText) > 0 Then
+      ' Delay so CrLf from scanner does not dismiss the MsgBox...
+      For llValue = 0 To 50000
+         DoEvents
+      Next
+      
+      ' Now show the error.
+      MsgBox lsErrorText, vbCritical, "Voucher Status"
+   End If
+   
+   ' Bail out to avoid error handler.
+   Exit Sub
+   
+LocalError:
+   MsgBox "frm_Payout_MV::GetVoucherInfo" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+   
+End Sub
+
+Private Sub SortListByItemData2(Lst As ListBox)
+    ' // Sort ListBox By ItemData //
+    Dim lData() As Long
+    Dim sData() As String
+    Dim lTmp As Long
+    Dim sTmp As String
+    Dim i As Integer, j As Integer, Count As Integer
+    ' Get list count
+    Count = Lst.ListCount - 1
+    If Count < 1 Then Exit Sub ' Nothing to sort
+    ' Dimension arrays
+    ReDim lData(Count)
+    ReDim sData(Count)
+    ' Put list and item data into arrays
+    For i = 0 To Count
+        lData(i) = Lst.ItemData(i)
+        sData(i) = Lst.List(i)
+    Next i
+    ' Sort list by itemdata values
+    For i = 0 To Count
+        For j = Count To i + 1 Step -1
+            If lData(i) > lData(j) Then ' Sort Ascending
+                lTmp = lData(j) ' swap item data
+                lData(j) = lData(i)
+                lData(i) = lTmp
+                sTmp = sData(j) ' swap list data
+                sData(j) = sData(i)
+                sData(i) = sTmp
+            End If
+        Next j
+    Next i
+    ' Copy sorted data back to listbox
+    Lst.Clear
+    For i = 0 To Count
+        Lst.AddItem sData(i)
+        Lst.ItemData(i) = lData(i)
+    Next i
+End Sub
+
+Private Sub SortVoucherListBoxes()
+ 
+  ' Call SortListByItemData2(lstVoucherLock)
+  ' Call SortListByItemData2(lstVoucherCode)
+  ' Call SortListByItemData2(lstVoucherAmount)
+   
+End Sub
+
+Private Sub LoadVouchers()
+'--------------------------------------------------------------------------------
+' Retrieves Voucher Barcode and populates the cboVouchers Dropdown control
+' Added by MZ - 08/14/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim VoucherRS        As ADODB.Recordset
+Dim lsSQL            As String
+Dim lsValidationID   As String
+Dim lsValue          As String
+
+   ' Show an hourglass pointer.
+   Screen.MousePointer = vbHourglass
+   
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   lsSQL = "SELECT BARCODE FROM VOUCHER WHERE REDEEMED_STATE = 0 AND IS_VALID = 1 AND UCV_TRANSFERRED = 0 ORDER BY CREATE_DATE"
+   Set VoucherRS = gConn.Execute(lsSQL)
+   
+   ' Clear the current list.
+   cboVouchers.Clear
+   
+   ' Populate the ComboBox control.
+   Do While Not (VoucherRS.EOF)
+      lsValue = VoucherRS.Fields("BARCODE").Value
+      If IsNumeric(lsValue) Then
+         lsValidationID = Format(lsValue, "#-###-###-##-#####-###-#")
+         cboVouchers.AddItem lsValidationID
+      End If
+      VoucherRS.MoveNext
+   Loop
+   
+   ' Close and free the recordset object instance...
+   VoucherRS.Close
+   Set VoucherRS = Nothing
+   
+ExitFunction:
+   Screen.MousePointer = vbDefault
+   Exit Sub
+   
+LocalError:
+   MsgBox "frm_Payout_MV::LoadVouchers" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitFunction
+   
+End Sub
+
+Private Sub ClearVoucherState()
+'--------------------------------------------------------------------------------
+' Clear all elements of the VoucherState.
+' Added by MZ - 08/14/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+
+   With mtVoucher
+      .BarCode = ""
+      .CreateDate = #12:00:00 AM#
+      .CreatedLoc = ""
+      .FormattedBarcode = ""
+      .IsValid = False
+      .IsValidCheckValue = False
+      .RedeemedDate = #12:00:00 AM#
+      .RedeemedLoc = ""
+      .RedeemedState = False
+      .VoucherAmt = 0
+      .VoucherID = 0
+      .VoucherType = 0
+   End With
+
+End Sub
+
+Private Sub GetCashiersSummary()
+'--------------------------------------------------------------------------------
+' This subroutine will retrieves the cashier activity for display.
+' Added by MZ - 08/14/2005
+'--------------------------------------------------------------------------------
+' Allocate local vars...
+Dim CashierRS        As ADODB.Recordset
+Dim lsSQL            As String
+Dim lcCurBal         As Currency
+   
+   ' Turn on error checking.
+   On Error GoTo LocalError
+   
+   ' Execute stored procedure to retrieve data...
+   lsSQL = "EXEC Get_Cash_Drawer_Summary '" & msSessionID & "'"
+   Set CashierRS = New ADODB.Recordset
+   CashierRS.CursorLocation = adUseClient
+   CashierRS.Open lsSQL, gConn, adOpenKeyset, adLockReadOnly
+   
+   ' Update the payout screen...
+   With CashierRS.Fields
+      If IsNull(.Item("START_BALANCE").Value) Then
+         txt_StartBal(1).Text = "0"
+      Else
+         txt_StartBal(1).Text = .Item("START_BALANCE").Value
+      End If
+      
+      If IsNull(.Item("CASH_ADDED").Value) Then
+          txt_CashAdded.Text = 0
+      Else
+         txt_CashAdded.Text = .Item("CASH_ADDED").Value
+      End If
+      
+      If IsNull(.Item("CASH_REMOVED").Value) Then
+         txt_CashRemoved.Text = 0
+      Else
+         txt_CashRemoved.Text = .Item("CASH_REMOVED").Value
+      End If
+      
+      If IsNull(.Item("PAYOUT_SUM").Value) Then
+         txt_TotalPayout.Text = 0
+      Else
+         txt_TotalPayout.Text = .Item("PAYOUT_SUM").Value
+      End If
+      
+      lcCurBal = (CCur(txt_StartBal(1).Text) + CCur(txt_CashAdded.Text)) + (CCur(txt_CashRemoved.Text) + (txt_TotalPayout.Text))
+      
+      If lcCurBal > 0 Then
+         txt_CurrentBal(1).Text = lcCurBal
+      Else
+         txt_CurrentBal(1).Text = "0"
+      End If
+   End With
+   
+   ' Release objects...
+   If Not CashierRS Is Nothing Then
+      If CashierRS.State Then CashierRS.Close
+      Set CashierRS = Nothing
+   End If
+   
+ExitSub:
+   Exit Sub
+   
+LocalError:
+   MsgBox Me.Name & "::GetCashiersSummary" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+   GoTo ExitSub
+   
+End Sub
+
+'Private Function ValidateCheckSum(ByVal aiVoucherID As Long) As Boolean
+''--------------------------------------------------------------------------------
+'' This routine will prove that I should not be a programmer...
+'' Added by MZ - 08/14/2005
+''--------------------------------------------------------------------------------
+'' Allocate local vars...
+'Dim loCheckSum       As CheckSumValidation.ValidateVoucher
+'Dim lbCheckSumOK     As Boolean
+'Dim llCheckSumResult As Long
+'
+'   ' Turn on error checking.
+'   On Error GoTo LocalError
+'
+'   ' Create checksum object.
+'   ' Set loCheckSum = New CheckSumValidation.ValidateVoucher
+'   Set loCheckSum = CreateObject("CheckSum.Val")
+'
+'   With loCheckSum
+'      .pServer = gInitServer
+'      .pDatabase = gInitDbase
+'      .pUserID = gInitUser
+'      .pPassword = gInitPswd
+'      .pLogName = "CheckSumValidation.Log"
+'   End With
+'
+'   ' ValidateChkSum
+'   llCheckSumResult = loCheckSum.ValidateChkSum(aiVoucherID)
+'
+'   If llCheckSumResult = 0 Then
+'      lbCheckSumOK = True
+'   Else
+'      lbCheckSumOK = False
+'   End If
+'
+'   txt_Result.Text = loCheckSum.ErrorMsg
+'
+'ExitFunction:
+'   Set loCheckSum = Nothing
+'   ValidateCheckSum = lbCheckSumOK
+'   Screen.MousePointer = vbDefault
+'   Exit Function
+'
+'LocalError:
+'   ValidateCheckSum = False
+'   MsgBox Me.Name & "::ValidateCheckSum" & vbCrLf & Err.Description, vbCritical, gMsgTitle
+'   GoTo ExitFunction
+'
+'End Function
+

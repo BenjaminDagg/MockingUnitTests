@@ -1,0 +1,5 @@
+AccountId	String	30	
+Session	String	40	
+TranNo	Number		
+TransAmt	Currency	
+Balance	Currency

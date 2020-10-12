@@ -1,0 +1,17 @@
+; Field definition file for table: ADORecordset
+DgeMachNo	string	5	string sample value
+MachNo	string	8	string sample value
+CardAcctNo	string	20	string sample value
+DTimestamp	datetime		Jan 5, 1994 1:23:45 PM
+DropAmt	currency		1.00
+OneDollarAmt	currency		1.00
+TwoDollarAmt	currency		1.00
+FiveDollarAmt	currency		1.00
+TenDollarAmt	currency		1.00
+TwentyDollarAmt	currency		1.00
+FiftyDollarAmt	currency		1.00
+HundredDollarAmt	currency		1.00
+BillCount	long		1
+TechName	string	51	string sample value
+VoucherInAmt	currency		1.00
+VoucherInCount	long		1

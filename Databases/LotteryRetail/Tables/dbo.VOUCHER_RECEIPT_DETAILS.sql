@@ -1,0 +1,27 @@
+CREATE TABLE [dbo].[VOUCHER_RECEIPT_DETAILS]
+(
+[VOUCHER_RECEIPT_DETAILS_ID] [int] NOT NULL IDENTITY(1, 1),
+[VOUCHER_RECEIPT_NO] [int] NOT NULL,
+[VOUCHER_ID] [int] NOT NULL,
+[LOCATION_ID] [int] NOT NULL,
+[CashierTransID] [int] NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[VOUCHER_RECEIPT_DETAILS] ADD CONSTRAINT [PK_VOUCHER_RECEIPT_DETAILS] PRIMARY KEY CLUSTERED  ([VOUCHER_RECEIPT_DETAILS_ID]) WITH (FILLFACTOR=80) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_VOUCHER_RECEIPT_DETAILS_CashierTransID] ON [dbo].[VOUCHER_RECEIPT_DETAILS] ([CashierTransID]) INCLUDE ([VOUCHER_RECEIPT_NO]) WITH (FILLFACTOR=80) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_VOUCHER_RECEIPT_DETAILS_VOUCHER_RECEIPT_NO] ON [dbo].[VOUCHER_RECEIPT_DETAILS] ([VOUCHER_RECEIPT_NO]) INCLUDE ([CashierTransID], [VOUCHER_ID]) WITH (FILLFACTOR=80) ON [PRIMARY]
+GO
+EXEC sp_addextendedproperty N'MS_DESCRIPTION', N'Stores data to join Voucher table and Voucher_Reciept Table.', 'SCHEMA', N'dbo', 'TABLE', N'VOUCHER_RECEIPT_DETAILS', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Cashier Transaction ID generated in the CASINO_TRANS table when posing payout.', 'SCHEMA', N'dbo', 'TABLE', N'VOUCHER_RECEIPT_DETAILS', 'COLUMN', N'CashierTransID'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'LocationID of the voucher. ', 'SCHEMA', N'dbo', 'TABLE', N'VOUCHER_RECEIPT_DETAILS', 'COLUMN', N'LOCATION_ID'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The voucher identifer referenced from VOUCHER table.', 'SCHEMA', N'dbo', 'TABLE', N'VOUCHER_RECEIPT_DETAILS', 'COLUMN', N'VOUCHER_ID'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Identity Key, for internal use.', 'SCHEMA', N'dbo', 'TABLE', N'VOUCHER_RECEIPT_DETAILS', 'COLUMN', N'VOUCHER_RECEIPT_DETAILS_ID'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Reciept Number the voucher belongs to.', 'SCHEMA', N'dbo', 'TABLE', N'VOUCHER_RECEIPT_DETAILS', 'COLUMN', N'VOUCHER_RECEIPT_NO'
+GO

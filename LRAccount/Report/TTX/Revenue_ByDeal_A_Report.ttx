@@ -1,0 +1,15 @@
+MachNo	Number
+WINNINGTABS	Number
+LOSINGTABS	Number
+DOLLARSIN	Number
+DOLLARSOUT	Number
+perc	String	15
+TYPEID	String	10
+Denom	Long
+TypeName	String	48
+DealNo	Number
+REINSERTTABS	Long
+TABSFORFEITED	Long
+MTABS	Number
+ITABS	Number
+ETABS	Number

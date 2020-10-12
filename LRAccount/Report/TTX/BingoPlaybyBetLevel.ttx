@@ -1,0 +1,14 @@
+; Field definition file for table: ADORecordset
+GameDesc	string	64	string sample value
+DealNumber	long		1
+Denom	currency		1.00
+CoinsBet	short		1
+LinesBet	byte		1
+TabCost	currency		1.00
+TabsSold	long		1
+TotalSales	currency		1.00
+TotalWon	currency		1.00
+ExpectedHoldPct	currency		1.00
+ActualHoldPct	currency		1.00
+AcctMonth	long		1
+AcctYear	long		1

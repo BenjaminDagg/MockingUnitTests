@@ -1,0 +1,15 @@
+; Field definition file for table: ADORecordset
+TicketNo	long
+AccountNo	string	16
+MachNo	string	8
+TransAmt	currency
+TransDat	datetime
+TransText	string	16
+Fname	string	20
+Lname	string	30
+DealNo	long
+TransNo	long
+AuthorizedBy	string	10
+PaidBy	string	30
+GameDesc	string	64
+PlayCost	currency

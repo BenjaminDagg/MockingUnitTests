@@ -1,0 +1,16 @@
+; Field definition file for table: ADORecordset
+MachineNbr	string	5
+CasinoMachineNbr	string	8
+GameCode	string	3
+GameName	string	64
+GameTypeCode	string	2
+CashDeposited	currency
+TabsPlayed	long
+DollarsPlayed	currency
+WinningTabs	long
+MoneyWon	currency
+TabsForfeited	long
+NetRevenue	currency
+VoucherInTotal	currency
+VoucherOutTotal	currency
+VoucherPaidTotal	currency

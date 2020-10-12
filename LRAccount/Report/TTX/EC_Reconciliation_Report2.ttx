@@ -1,0 +1,10 @@
+AccountId	string	30
+Session	string	40
+TranNo	long
+TimeStamp	datetime
+CardAcctNo	string	20
+WkStation	string	32
+TransAmt	currency
+IsVoucherPayout	boolean
+PymntType	string	1
+ReceiptNo	long

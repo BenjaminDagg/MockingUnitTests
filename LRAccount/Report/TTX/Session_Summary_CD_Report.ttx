@@ -1,0 +1,10 @@
+SESSION_ID	String	40
+TRANS_USER	String	30
+START_BALANCE	Currency
+ENDING_BALANCE	Currency
+PAYOUT_SUM	Currency
+PAYOUT_COUNT	Long
+CASH_ADDED	Currency	
+CASH_REMOVED	Currency
+CASHIER_TRANS_ID	Long
+TransactionCount	Long

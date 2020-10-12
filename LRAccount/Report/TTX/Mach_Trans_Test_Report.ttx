@@ -1,0 +1,7 @@
+TransNo	Number
+MachNo	String	5
+TransAmt	Currency
+Balance	Currency
+TransType	String	1
+TransDt	Date
+CardAcct	String	16

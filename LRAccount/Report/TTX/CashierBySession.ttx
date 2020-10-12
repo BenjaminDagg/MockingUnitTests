@@ -1,0 +1,9 @@
+AccountID	String	30
+SessionID	String	40
+TranNo	Long
+TimeStamp	DateTime
+CardAcctNo	String	20
+WkStation	String	32
+TransAmt	Currency
+CTBalance	Currency
+PaymentType	String	1

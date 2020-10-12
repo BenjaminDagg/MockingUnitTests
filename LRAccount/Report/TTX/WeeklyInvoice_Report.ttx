@@ -1,0 +1,18 @@
+GameCode	String	10
+MachNo	String	5
+TransType	String	3
+TYPEID	String	10
+TypeName	String	48
+TransDt	Date
+Monday	Long
+Tuesday	Long
+Wednesday	Long
+Thursday	Long
+Friday	Long
+Saturday	Long
+Sunday	Long
+DispensedTot	Number
+DailyAvg	Number
+CostPerTab	Currency
+GrossRevenue	Currency
+MachDenom	Currency

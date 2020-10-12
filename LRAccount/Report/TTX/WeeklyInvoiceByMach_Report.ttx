@@ -1,0 +1,9 @@
+InvoiceNo	String	10
+RangeDateFrom	DATE
+RangeDateTo	DATE
+CreatedDate	DATE
+PrintedDate	DATE
+PrintedBy	String	10
+RePrintedDate	DATE
+ReprintedBy	String	10
+GrossRevenue	Currency
