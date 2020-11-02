@@ -1,8 +1,0 @@
-; Field definition file for table: ADORecordset
-DealNumber	long		1
-FirstPlay	datetime		Jan 5, 1994 1:23:45 PM
-LastPlay	datetime		Jan 5, 1994 1:23:45 PM
-PlayCount	long		1
-MoneyIn	currency		1.00
-MoneyOut	currency		1.00
-Hold	currency		1.00

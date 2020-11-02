@@ -1,5 +1,0 @@
-TimeStamp	Date
-DealNo	Number
-TransAmt	Currency
-FormNumb	String	10
-CostPerTab	Currency

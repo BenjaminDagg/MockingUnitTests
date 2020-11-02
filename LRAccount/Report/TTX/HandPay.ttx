@@ -1,7 +1,0 @@
-; Field definition file for table: ADORecordset
-MACH_NO	string	5	string sample value
-CASINO_MACH_NO	string	8	string sample value
-TRANS_NO	long		1
-DTIMESTAMP	datetime		Jan 5, 1994 1:23:45 PM
-TRANS_AMT	currency		1.00
-CARD_ACCT_NO	string	20	string sample value

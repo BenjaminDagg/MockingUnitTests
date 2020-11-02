@@ -1,9 +1,0 @@
-AccountNbr	String	16
-BeginningBalance	Currency
-CashDeposited	Currency
-TabsPlayedInDollars	Currency
-MoneyWonInDollars	Currency
-NetToCasino	Currency
-CashWithdrawn	Currency
-BalanceCleared	Currency
-EndingBalance	Currency

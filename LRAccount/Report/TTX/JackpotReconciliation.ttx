@@ -1,7 +1,0 @@
-; Field definition file for table: ADORecordset
-MACH_NO	string	5	12345
-CASINO_MACH_NO	string	8	87654321
-JP_COUNT_RECON	long		1
-JP_TOTAL_RECON	currency		1199.00
-JP_COUNT_SYSTEM	long		1
-JP_TOTAL_SYSTEM	currency		1199.00

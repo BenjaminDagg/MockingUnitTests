@@ -1,7 +1,0 @@
-VOUCHER_TRANS_ID		Number
-CashierTransID 			Number
-VOUCHER_ID				Number
-VOUCHER_AMOUNT			Currency
-BARCODE					String		18
-VOUCHER_TOTAL_AMOUNT 	Currency
-VOUCHER_COUNT			Number

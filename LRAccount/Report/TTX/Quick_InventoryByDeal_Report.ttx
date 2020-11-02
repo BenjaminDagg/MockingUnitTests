@@ -1,9 +1,0 @@
-DealNo	Number	
-RollNo	Number
-MachNo	String	10
-FirstTranDate	Date
-LastTranDate	Date
-TabsPerRoll	Number
-NumOfRolls	Number		
-DealDesc	String	64	
-TabsDispense	Number

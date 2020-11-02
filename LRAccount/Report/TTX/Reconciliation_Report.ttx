@@ -1,6 +1,0 @@
-AccountId	String	30	
-Session	String	40	
-TranNo	Number		
-TicketAmt	Currency		
-TimeStamp	Date		
-MachNo	String	5

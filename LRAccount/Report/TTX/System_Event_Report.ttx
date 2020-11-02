@@ -1,7 +1,0 @@
-EventID	Long		
-EventCode	String	66	
-EventSource	String	64	
-EventDesc	String	1024	
-EventDateTime	Date		
-IDValue	Long		
-CreatedBy	String	10	

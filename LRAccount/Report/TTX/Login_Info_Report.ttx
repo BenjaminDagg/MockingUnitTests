@@ -1,4 +1,0 @@
-LoginTime	DateTime
-AccountID	String	20
-EventDesc	String	128
-WorkStation	String	16

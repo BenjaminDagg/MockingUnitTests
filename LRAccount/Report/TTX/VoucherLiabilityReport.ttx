@@ -1,8 +1,0 @@
-VoucherID	Long
-LocationID	Long
-VoucherType	String	64
-ValidationID	String	32
-VoucherAmount	Currency
-CreatedDateTime	DateTime
-CreatedLoc	String	16
-CasinoTransNo	Long
