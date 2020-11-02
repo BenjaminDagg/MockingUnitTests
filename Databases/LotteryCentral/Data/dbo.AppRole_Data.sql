@@ -1,8 +1,10 @@
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (1, 'Administration', 128, 'Administration')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (2, 'Reporting', 16, 'Reporting')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (3, 'Payout', 8, 'Payout')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9001, 'RetailAdmin', 16, 'RetailAdmin')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9002, 'RetailCashier', 16, 'RetailCashier')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9003, 'RetailDiamondTech', 16, 'RetailDiamondTech')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9005, 'RetailReporting', 16, 'RetailReporting')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9006, 'RetailSupervisor', 16, 'RetailSupervisor')
+SET IDENTITY_INSERT [dbo].[AppRole] ON
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (1, NULL, NULL, NULL)
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (2, NULL, NULL, NULL)
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (3, NULL, NULL, NULL)
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (4, NULL, NULL, NULL)
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (5, NULL, NULL, NULL)
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (6, NULL, NULL, NULL)
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (7, NULL, NULL, NULL)
+INSERT INTO [dbo].[AppRole] ([RoleId], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (8, NULL, NULL, NULL)
+SET IDENTITY_INSERT [dbo].[AppRole] OFF
