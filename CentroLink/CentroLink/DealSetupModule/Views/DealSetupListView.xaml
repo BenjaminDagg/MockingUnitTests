@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="CentroLink.DealSetupModule.Views.DealSetupListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:designTime="clr-namespace:CentroLink.DealSetupModule.ViewModels.DesignTime"
+             xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=designTime:DealSetupListDesignTime,
+                                              IsDesignTimeCreatable=True}"
+             d:DesignHeight="600"
+             d:DesignWidth="900"
+             mc:Ignorable="d">
+
+    <controls:ExtendedScreenControl Margin="3"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <Grid Name="DataGridRow" Grid.Row="0">
+
+                <DataGrid Width="{Binding ActualWidth,
+                                          ElementName=DataGridRow}"
+                          Height="{Binding ActualHeight,
+                                           ElementName=DataGridRow}"
+                          Margin="0, 0, 20, 0"
+                          AutoGenerateColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
+                          HeadersVisibility="Column"
+                          HorizontalScrollBarVisibility="Auto"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding Path=DealSetupList}"
+                          SelectedItem="{Binding Path=SelectedDealSetup}"
+                          SelectionMode="Single"
+                          VerticalScrollBarVisibility="Auto">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=DealNumber}"
+                                            Header="Deal&#x0a;Number"
+                                            IsReadOnly="True" >
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=Description}"
+                                            Header="Description"
+                                            IsReadOnly="True" />
+
+                        <DataGridTextColumn Binding="{Binding Path=NumberOfRows}"
+                                            Header="Number&#x0a; of Rolls"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn 
+                                            Binding="{Binding Path=TabsPerRoll}"
+                                            Header="Tabs&#x0a;Per Roll"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=FormNumber}"
+                                            Header="Form&#x0a;Number"
+                                            IsReadOnly="True">
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=TabAmount}"
+                                            Header="Tab&#x0a;Amount"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=TypeId}"
+                                            Header="Deal&#x0a;Type"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=GameCode}"
+                                            Header="Game&#x0a;Code"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=IsOpen, 
+                            Converter={StaticResource BoolToYesNoConverter}}"
+                                            Header="Deal&#x0a;Open"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=TabsPlayed}"
+                                            Header="Tabs&#x0a;Played"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding Path=ProductId}"
+                                            Header="Product&#x0a;Id"
+                                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn 
+                            Binding="{Binding Path=CostPerTab, StringFormat={}{0:C0}.00}"
+                            Header="Cost&#x0a;Per Roll"
+                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+
+                        <DataGridTextColumn 
+                            Binding="{Binding Path=JackpotAmount, StringFormat={}{0:C0}.00}"
+                            Header="Base&#x0a;Jackpot"
+                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+
+                    </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Padding" Value="4" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridCell">
+                                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsOpen}" Value="False" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="Red" />
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsActiveUnplayed}" Value="True" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="Green" />
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsActivePlayed}" Value="True" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="Blue" />
+                                </MultiDataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                </DataGrid>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Height="30" Orientation="Horizontal">
+
+                <TextBlock Foreground="Blue">Active Played Deals</TextBlock>
+
+                <TextBlock Foreground="Green" Margin="25,0,0,0">Active Unplayed Deals</TextBlock>
+
+                <TextBlock Foreground="Red" Margin="25,0,0,0">Closed Deals</TextBlock>
+            </StackPanel>
+
+            <!--  put other content here other than alerts/header and breadcrumb  -->
+        </Grid>
+    </controls:ExtendedScreenControl>
+</UserControl>

@@ -1,0 +1,45 @@
+﻿<#
+
+	DbContextName = "DatabaseContext";
+    ConnectionStringConfig = "Data Source=(local);Initial Catalog=LotteryRetail;Integrated Security=True;MultipleActiveResultSets=True";
+    ProviderNameConfig =  "System.Data.SqlClient";
+    ConfigurationClassName = "Map"; // Configuration, Mapping, Map, etc. This is appended to the Poco class name to configure the mappings.
+
+
+   // Elements to generate ***************************************************************************************************************
+    // Add the elements that should be generated when the template is executed.
+    // Multiple projects can now be used that separate the different concerns.
+    ElementsToGenerate =  Elements.Poco ;
+
+    // Use these namespaces to specify where the different elements of the template are being generated.
+    PocoNamespace = "";
+    ContextNamespace = "";
+    UnitOfWorkNamespace = "";	
+    PocoConfigurationNamespace = "";
+
+    // Example of separate concerns:
+    //PocoNamespace = "MyProject.Model";
+    //ContextNamespace = "MyProject.Data";
+    //UnitOfWorkNamespace = "MyProject.Data";	
+    //PocoConfigurationNamespace = "MyProject.Data";
+    //ElementsToGenerate = Elements.Poco;   // Model Project
+    //ElementsToGenerate = Elements.Context | Elements.UnitOfWork | Elements.PocoConfiguration; //  Data project
+
+    // Filtering **************************************************************************************************************************
+    // Use the following table/view name regex filters to include or exclude tables/views
+    // Exclude filters are checked first and tables matching filters are removed.
+    //  * If left null, none are excluded.
+    //  * If not null, any tables matching the regex are excluded.
+    // Include filters are checked second.
+    //  * If left null, all are included.
+    //  * If not null, only the tables matching the regex are included.
+    //  Example:    TableFilterExclude = new Regex(".*auto.*");
+    //              TableFilterInclude = new Regex("(.*_FR_.*)|(data_.*)");
+    //              TableFilterInclude = new Regex("^table_name1$|^table_name2$|etc");
+    
+	//TableFilterInclude = new Regex("(.*CASINO.*)|(.*CASINO.*)");
+   TableFilterInclude = new Regex("^AAA$|^AAA$");
+
+#>
+<#@ include file="..\..\..\..\..\AppDev_Common\DatabaseCodeTemplates\CodeTemplates\Reverse.POCO.Custom.ttinclude" #>
+

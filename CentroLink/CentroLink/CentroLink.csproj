@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <StartupObject>CentroLink.App</StartupObject>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DealStatus\**" />
+    <Compile Remove="LocationSetup\**" />
+    <Compile Remove="MachineInUse\**" />
+    <EmbeddedResource Remove="DealStatus\**" />
+    <EmbeddedResource Remove="LocationSetup\**" />
+    <EmbeddedResource Remove="MachineInUse\**" />
+    <None Remove="DealStatus\**" />
+    <None Remove="LocationSetup\**" />
+    <None Remove="MachineInUse\**" />
+    <Page Remove="DealStatus\**" />
+    <Page Remove="LocationSetup\**" />
+    <Page Remove="MachineInUse\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="app.ico" />
+    <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.json" />
+    <None Remove="appsettings.local.json" />
+    <None Remove="nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.local.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.6.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\Framework.Infrastructure.Data\Framework.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.Modules\Framework.WPF.Modules.csproj" />
+    <ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.UI.Theme\Framework.WPF.UI.Theme.csproj" />
+    <ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF\Framework.WPF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="app.ico" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="&quot;$(SolutionDir)..\..\AppDev_CommonLite\SystemValidator\Release_2_0_0_0\SystemValidator.exe&quot;  /validationsearchpath:$(TargetDir) /include:*.exe,*.dll  /manifestfilepath:checksum" />
+  </Target>
+
+</Project>
