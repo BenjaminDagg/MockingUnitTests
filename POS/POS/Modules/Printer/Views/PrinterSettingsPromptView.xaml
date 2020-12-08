@@ -1,0 +1,51 @@
+﻿<controls:CustomWindowControl x:Class="POS.Modules.Printer.Views.PrinterSettingsPromptView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+        Title="{Binding Path=DisplayName}"
+        mc:Ignorable="d"   Style="{StaticResource CustomPromptBoxWindowStyle}"
+        SizeToContent="WidthAndHeight">
+    <StackPanel>
+        <ItemsControl 
+                      Margin="0,2,0,2"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Alerts}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:AlertMessageControl Margin="0,3"
+                                                  HorizontalAlignment="Stretch"
+                                                  Alert="{Binding AlertType}"
+                                                  Message="{Binding Message}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="Report Printer" Margin="0,5,0,0" />
+        <ComboBox  ItemsSource="{Binding Printers}" SelectedItem="{Binding ReportPrinter}" />
+
+
+<TextBlock Text="Receipt Printer" Margin="0,5,0,0" />
+      
+
+        <ComboBox  ItemsSource="{Binding Printers}" SelectedItem="{Binding ReceiptPrinter}" />
+
+        <StackPanel 
+                    Margin="0, 20"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button x:Name="Ok"
+                    Content="Save"
+                    Visibility="{Binding OkVisible,
+                                         Converter={StaticResource BooleanToVisibility}}" />
+          
+          
+            <Button x:Name="Cancel"
+                    Content="Cancel"
+                    Visibility="{Binding CancelVisible,
+                                         Converter={StaticResource BooleanToVisibility}}" />
+        </StackPanel>
+    </StackPanel>
+</controls:CustomWindowControl>

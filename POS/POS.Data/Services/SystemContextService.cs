@@ -1,0 +1,51 @@
+﻿using System.Linq;
+using System.Threading.Tasks;
+using POS.Core.Interfaces;
+using POS.Core.Interfaces.Data;
+using POS.Core.Session;
+
+namespace POS.Infrastructure.Services
+{
+    public class SystemContextService : IPayoutContextService
+    {
+        private readonly ISystemParametersRepository systemDataService;
+        private readonly ILocationRepository locationDataService;
+        private readonly SystemContext context;
+
+        public SystemContextService(ISystemParametersRepository systemSvc, ILocationRepository locationSvc, SystemContext payoutCtx)
+        {
+            systemDataService = systemSvc;
+            locationDataService = locationSvc;
+            context = payoutCtx;
+        }
+
+      
+
+
+        public async Task RefreshPayoutContext()
+        {
+            var p = await systemDataService.GetSystemParameters();
+            var location = await locationDataService.GetLocationInfo();
+            context.Location = location;
+            
+            var sitePayoutActive = p.FirstOrDefault(x => x.Name == "SiteStatusPayoutsActive");
+            context.SiteStatusPayoutsActive = sitePayoutActive?.Value1 != "0";
+            
+            var autoCashDrawer = p.FirstOrDefault(x => x.Name == "AUTOCASHDRAWERUSEDFLG");
+            context.AutoCashDrawerUsed = autoCashDrawer?.Value1 != "0";
+            
+            var printCasinoReceipt = p.FirstOrDefault(x => x.Name == "PRINT_CASINO_PAYOUT_RECEIPT");
+            if (printCasinoReceipt != null && !string.IsNullOrEmpty(printCasinoReceipt.Value1))
+            {
+                context.PrintCasinoPayoutReceipt = bool.Parse(printCasinoReceipt.Value1);
+            }
+            
+            var supervisorApprovalEnabled = p.FirstOrDefault(x => x.Name == "DEFAULT_LOCKUP_AMOUNT");
+            //default to true if not there
+            context.SupervisorApprovalRequired = supervisorApprovalEnabled == null || string.IsNullOrEmpty(supervisorApprovalEnabled.Value2) || bool.Parse(supervisorApprovalEnabled.Value2);
+        }
+
+    }
+
+   
+}

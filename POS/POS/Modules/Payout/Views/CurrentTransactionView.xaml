@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="POS.Modules.Payout.Views.CurrentTransactionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+
+        <Button cal:Message.Attach="ViewReport" Visibility="{Binding TransactionViewModel.HasItems, Converter={StaticResource BooleanToVisibility}}" HorizontalAlignment="Right" Content="View Report" ToolTip="View Detailed Report of Current Transaction"  Margin="0, 0, 0, 5"></Button>
+
+        <DataGrid 
+                       MinWidth="400"
+                       MinHeight="200"
+                       AutoGenerateColumns="False"
+                       CanUserResizeColumns="False"
+                       CanUserResizeRows="False"
+                       HeadersVisibility="Column"
+                       HorizontalScrollBarVisibility="Auto"
+                       IsReadOnly="True" FontSize="16"
+                       ItemsSource="{Binding Path=TransactionViewModel.Items}"
+                       SelectionMode="Single"
+                       VerticalScrollBarVisibility="Auto">
+
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Width="80" Binding="{Binding Path=RequiresApproval, Mode=OneWay}" 
+                                            Header="Needs Approval"   CellStyle="{StaticResource Body_Content_DataGrid_Centering}"
+                                            HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"
+                                            IsReadOnly="True" />
+
+                <DataGridTextColumn Binding="{Binding Path=Barcode.Value}" Width="*"   
+                                                Header="Barcode"   CellStyle="{StaticResource Body_Content_DataGrid_Centering}"
+                                                IsReadOnly="True" />
+
+                <DataGridTextColumn Binding="{Binding Path=Amount, StringFormat={}{0:C}}"
+                                                Header="Amount" Width="80"   CellStyle="{StaticResource Body_Content_DataGrid_Centering}"
+                                            IsReadOnly="True" />
+
+
+                <DataGridTemplateColumn Header="Remove" Width="80"  >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource IconButtonStyle}" cal:Message.Attach="RemoveTransactionItem($dataContext)">
+                                <Button.Content>
+                                    <controls:FontAwesomeTextControl 
+                                                    FontWeight="Normal" FontSize="26"
+                                                    ToolTip="Remove Item from Transaction"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontIcon="Remove" Foreground="Red" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Details" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource IconButtonStyle}"
+                                                    cal:Message.Attach="ViewVoucherDetail($dataContext)">
+                                <Button.Content>
+                                    <controls:FontAwesomeTextControl ToolTip="View Details"
+
+                                                     FontWeight="Normal" FontSize="20"
+                                                  
+                                                    FontIcon="Search" Foreground="Black"/>
+                                </Button.Content>
+                            </Button>
+
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Text="{Binding TransactionViewModel.ItemCount, StringFormat='Number of Vouchers: {0}'}" />
+            <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Text="{Binding TransactionViewModel.TotalPayout, StringFormat='Total Payout: {0:C}'}" />
+
+            <Button Command="{Binding TransactionViewModel.VoidCommand}" 
+                    CommandParameter="null"
+                    Visibility="{Binding TransactionViewModel.HasItems, Converter={StaticResource BooleanToVisibility}}" 
+                    Content="Void Transaction"
+                    Grid.Row="1"
+                    Grid.Column="0" 
+                    HorizontalAlignment="Stretch" 
+                    Margin="0, 15, 5, 0" 
+                    Style="{DynamicResource RedButtonStyle}"
+                    />
+
+            <Button Command="{Binding TransactionViewModel.PayoutCommand}" 
+                    CommandParameter="null"
+                    Visibility="{Binding TransactionViewModel.HasItems, Converter={StaticResource BooleanToVisibility}}" 
+                    Content="Payout" 
+                    HorizontalAlignment="Stretch" 
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Margin="5, 15, 0, 0" 
+                    Style="{DynamicResource GreenButtonStyle}" 
+                    />
+
+        </Grid>
+
+    </StackPanel>
+</UserControl>

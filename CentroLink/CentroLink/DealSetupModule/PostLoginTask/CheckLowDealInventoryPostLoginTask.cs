@@ -57,5 +57,10 @@ namespace CentroLink.DealSetupModule.PostLoginTask
 
 
         }
+
+        public async void Execute()
+        {
+            await ExecuteAsync();
+        }
     }
 }

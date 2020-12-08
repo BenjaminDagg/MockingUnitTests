@@ -1,0 +1,33 @@
+﻿using Caliburn.Micro;
+using Framework.Core.Logging;
+using Framework.Core.Modularity.Framework.Core.Modularity;
+using Framework.Infrastructure.Identity.Services;
+using POS.Common;
+using POS.Core.Interfaces;
+using POS.Core.Interfaces.Data;
+using POS.Core.Interfaces.Printer;
+using POS.Core.Session;
+using POS.Modules.Payout.ViewModels;
+
+namespace POS.Modules.Payout.Services.ViewModels
+{
+    public interface IPayoutViewServices
+    {
+        IModalPopupService ModalService { get; }
+        IServiceLocator ServiceLocator { get; }
+        Session Session { get; }
+        IPayoutSettingsRepository PayoutDataService { get; }
+        IUserSession User { get; }
+        IPayoutContextService PayoutContextService { get; }
+        SystemContext Context { get; }
+        IVoucherRepository VoucherService { get; }
+        IEventAggregator EventAggregator { get; }
+        IPrintService PrintService { get; }
+        ILogEventDataService LogEventService { get; }
+        CashDrawerViewModel CashDrawerViewModel { get;  }
+        SearchBarcodeViewModel SearchBarcodeViewModel { get; }
+        TransactionViewModel TransactionViewModel { get; }
+
+        //  IEnumerable<IDatabaseConfigItem> AppConfigItems { get; }
+    }
+}
