@@ -3,6 +3,7 @@ using Framework.WPF.Modules.Shell.ViewModels;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Core;
 using POS.Core.Interfaces.Data;
+
 using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
 using System;

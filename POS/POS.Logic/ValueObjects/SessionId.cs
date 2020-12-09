@@ -1,5 +1,5 @@
-﻿using System;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
+using System;
 
 namespace POS.Core.ValueObjects
 {
@@ -19,7 +19,7 @@ namespace POS.Core.ValueObjects
         {
             username = (username ?? string.Empty).Trim();
             return string.IsNullOrEmpty(username) 
-                ? Result.Failure<SessionId>("Username is required") 
+                ? Result.Failure<SessionId>(POSResources.SessionUsernameRequiredMsg) 
                 : Result.Success(new SessionId(username));
         }
 

@@ -1,5 +1,6 @@
 ﻿using Framework.WPF.FontAwesome;
 using Framework.WPF.Menu;
+using POS.Core;
 
 namespace POS.Modules.Payout.Menu
 {
@@ -10,7 +11,7 @@ namespace POS.Modules.Payout.Menu
         /// </summary>
         public PayoutStationMenuItem()
         {
-            Name = "Payout Station";
+            Name = POSResources.PayoutStationMenu;
             AllowAnyAuthenticatedUser = true;
             FontAwesomeIcon = FontAwesomeIcons.Ticket;
 

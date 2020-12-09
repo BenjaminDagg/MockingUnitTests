@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using POS.Core.ValueObjects;
+﻿using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace POS.Core.Interfaces.Data
 {

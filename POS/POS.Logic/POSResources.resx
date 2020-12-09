@@ -120,14 +120,26 @@
   <data name="AddCashTitle" xml:space="preserve">
     <value>Add Cash</value>
   </data>
+  <data name="AddRemoveCashErrorMsg" xml:space="preserve">
+    <value>An error has occurred with this transaction.  Error: {0}</value>
+  </data>
   <data name="AreYouSureEndSessionMsg" xml:space="preserve">
     <value>Leaving this screen will end your current session.  Are you sure you want to end this session?</value>
   </data>
   <data name="AreYouSureRemoveTransactionItemMsg" xml:space="preserve">
     <value>Are you sure you want to remove this item from the transaction?</value>
   </data>
+  <data name="AreYouSureTitle" xml:space="preserve">
+    <value>Are You Sure?</value>
+  </data>
   <data name="AreYouSureVoidTransactionMsg" xml:space="preserve">
     <value>Are you sure you want to Void Transaction?  This transaction will be cleared.</value>
+  </data>
+  <data name="BarcodeInvalidMaxCharacterMsg" xml:space="preserve">
+    <value>Barcode must be {0} characters.</value>
+  </data>
+  <data name="BarcodeInvalidNumberMsg" xml:space="preserve">
+    <value>Barcode must be a valid number</value>
   </data>
   <data name="BarcodeRequiredMsg" xml:space="preserve">
     <value>Barcode is required.</value>
@@ -147,6 +159,9 @@
   <data name="ConfirmActionTitle" xml:space="preserve">
     <value>Confirm Action</value>
   </data>
+  <data name="CurrentTransactionMenu" xml:space="preserve">
+    <value>Current Transaction</value>
+  </data>
   <data name="DidNotGetApprovalMsg" xml:space="preserve">
     <value>Did not receive approval</value>
   </data>
@@ -156,6 +171,9 @@
   <data name="DidNotGetPayoutApprovalMsg" xml:space="preserve">
     <value>Payout failure.  Supervisor authorization is required for one or more vouchers.  Please try again.</value>
   </data>
+  <data name="HomeMenu" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="IsCashDrawerAttachedMsg" xml:space="preserve">
     <value>Do you have a Cash Drawer attached to this workstation?</value>
   </data>
@@ -164,6 +182,15 @@
   </data>
   <data name="LastReceiptErrorMsg" xml:space="preserve">
     <value>An error has occurred getting last receipt information.</value>
+  </data>
+  <data name="LoginFailAccountDisabledMsg" xml:space="preserve">
+    <value>Account is deactivated. Please contact your Administrator.</value>
+  </data>
+  <data name="LoginFailAccountLockedMsg" xml:space="preserve">
+    <value>Account is locked. Too many failed login attempts. Please try again later or contact your Administrator.</value>
+  </data>
+  <data name="LoginFailedMsg" xml:space="preserve">
+    <value>Invalid username or password.</value>
   </data>
   <data name="NoDefaultLocationFoundMsg" xml:space="preserve">
     <value>No Default Retail Location found. Correct immediately!</value>
@@ -177,11 +204,26 @@
   <data name="NoPrintersDetectedMsg" xml:space="preserve">
     <value>No printers have been detected.  Please ensure you are connected to a printer and try again.</value>
   </data>
+  <data name="NoPrinterSetupErorMsg" xml:space="preserve">
+    <value>There are no printers setup for this computer.  Please contact your computer support personnel to setup the appropriate printer(s).</value>
+  </data>
+  <data name="PayoutInitializeErrorMsg" xml:space="preserve">
+    <value>Unable to initialize for Payout.</value>
+  </data>
+  <data name="PayoutStationMenu" xml:space="preserve">
+    <value>Payout Station</value>
+  </data>
   <data name="PayoutStationTitle" xml:space="preserve">
     <value>Payout Station</value>
   </data>
   <data name="PayoutSuccessfulMsg" xml:space="preserve">
     <value>Payout Transaction Successful.</value>
+  </data>
+  <data name="PayoutTransactionFailedMsg" xml:space="preserve">
+    <value>Payout failure.  Error: {0}</value>
+  </data>
+  <data name="PrintAddCashReceiptAction" xml:space="preserve">
+    <value>Cash Added</value>
   </data>
   <data name="PrinterNotAvailableMsg" xml:space="preserve">
     <value>Receipt printer is not available or configured.</value>
@@ -189,14 +231,113 @@
   <data name="PrinterNotSetupOrAvailableTitle" xml:space="preserve">
     <value>Printer Not Setup or Available</value>
   </data>
+  <data name="PrinterSettingsMenu" xml:space="preserve">
+    <value>Printer Settings</value>
+  </data>
   <data name="PrinterSettingsSavedMsg" xml:space="preserve">
     <value>Printer Settings successfully saved.</value>
   </data>
   <data name="PrinterSettingsTitle" xml:space="preserve">
     <value>Printer Settings</value>
   </data>
+  <data name="PrintRemoveCashReceiptAction" xml:space="preserve">
+    <value>Cash Removed</value>
+  </data>
+  <data name="RawPrintAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="RawPrintAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="RawPrintBarcode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="RawPrintCashAdded" xml:space="preserve">
+    <value>Cash Added</value>
+  </data>
+  <data name="RawPrintCashier" xml:space="preserve">
+    <value>Cashier</value>
+  </data>
+  <data name="RawPrintCashRemoved" xml:space="preserve">
+    <value>Cash Removed</value>
+  </data>
+  <data name="RawPrintCustomerReceipt" xml:space="preserve">
+    <value>Customer Receipt</value>
+  </data>
+  <data name="RawPrintDataCashDrawerTransaction" xml:space="preserve">
+    <value>Cash Drawer Transaction</value>
+  </data>
+  <data name="RawPrintDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="RawPrintEndingBalance" xml:space="preserve">
+    <value>Ending Balance</value>
+  </data>
+  <data name="RawPrintNumberOfTransactions" xml:space="preserve">
+    <value>Number of Transactions</value>
+  </data>
+  <data name="RawPrintNumberOfVouchers" xml:space="preserve">
+    <value>Number of Vouchers</value>
+  </data>
+  <data name="RawPrintPayoutAmount" xml:space="preserve">
+    <value>Payout Amount</value>
+  </data>
+  <data name="RawPrintReceiptNo" xml:space="preserve">
+    <value>Receipt No</value>
+  </data>
+  <data name="RawPrintRefNbr" xml:space="preserve">
+    <value>Ref Nbr</value>
+  </data>
+  <data name="RawPrintReprintedReceipt" xml:space="preserve">
+    <value>Reprinted Receipt</value>
+  </data>
+  <data name="RawPrintSession" xml:space="preserve">
+    <value>Session</value>
+  </data>
+  <data name="RawPrintSessionDetails" xml:space="preserve">
+    <value>Session Details</value>
+  </data>
+  <data name="RawPrintStartingBalance" xml:space="preserve">
+    <value>Starting Balance</value>
+  </data>
+  <data name="RawPrintStartSession" xml:space="preserve">
+    <value>Start Session</value>
+  </data>
+  <data name="RawPrintTotalPayouts" xml:space="preserve">
+    <value>Total Payouts</value>
+  </data>
+  <data name="RawPrintUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="RawPrintVoucherCount" xml:space="preserve">
+    <value>Voucher Count</value>
+  </data>
+  <data name="RawPrintVoucherPayout" xml:space="preserve">
+    <value>Voucher Payout</value>
+  </data>
+  <data name="RawPrintVouchersRedeemed" xml:space="preserve">
+    <value>Vouchers Redeemed</value>
+  </data>
+  <data name="ReceiptPrinterNotAvailableErrorMsg" xml:space="preserve">
+    <value>The configured receipt printer {0} is not available on this workstation</value>
+  </data>
+  <data name="ReceiptPrinterNotSetErrorMsg" xml:space="preserve">
+    <value>A receipt printer has not been set.  Please set a receipt printer in Printer Settings and try again.</value>
+  </data>
+  <data name="RemoteConnectionAppTitle" xml:space="preserve">
+    <value>POS</value>
+  </data>
   <data name="RemoveCashTitle" xml:space="preserve">
     <value>Remove Cash</value>
+  </data>
+  <data name="RequiredMsg" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="SessionUsernameRequiredMsg" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="SitePayoutsDisabledMsg" xml:space="preserve">
     <value>Site Payouts have been disabled.  Please contact your supervisor.</value>
@@ -210,6 +351,9 @@
   <data name="StartingBalanceValidationMsg" xml:space="preserve">
     <value>To continue you must enter a starting balance greater than 0 and less than or equal to $250,000.</value>
   </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
   <data name="SupervisorApprovalRequiredMsg" xml:space="preserve">
     <value>Supervisor approval is required to proceed.</value>
   </data>
@@ -221,6 +365,183 @@
   </data>
   <data name="TotalPayoutExceedsCashDrawerMsg" xml:space="preserve">
     <value>The amount to pay exceeds the cash drawer balance.  Please add cash to the cash drawer and try again.</value>
+  </data>
+  <data name="TransactionVoucherAlreadyScannedMsg" xml:space="preserve">
+    <value>Voucher {0} has already been scanned.</value>
+  </data>
+  <data name="UIAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="UICachDrawerFormatCurrentBalance" xml:space="preserve">
+    <value>Current Balance: {0:C}</value>
+  </data>
+  <data name="UICachDrawerFormatTotalPayout" xml:space="preserve">
+    <value>Total Payout: {0:C}</value>
+  </data>
+  <data name="UICancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="UICashDrawerAddCash" xml:space="preserve">
+    <value>Add Cash</value>
+  </data>
+  <data name="UICashDrawerFormatCashAdded" xml:space="preserve">
+    <value>Cash Added: {0:C}</value>
+  </data>
+  <data name="UICashDrawerFormatCashRemoved" xml:space="preserve">
+    <value>Cash Removed: {0:C}</value>
+  </data>
+  <data name="UICashDrawerFormatStartingBalance" xml:space="preserve">
+    <value>Starting Balance: {0:C}</value>
+  </data>
+  <data name="UICashDrawerRemoveCash" xml:space="preserve">
+    <value>Remove Cash</value>
+  </data>
+  <data name="UICurrentTransactionButtonPayout" xml:space="preserve">
+    <value>Payout</value>
+  </data>
+  <data name="UICurrentTransactionButtonVoidTransaction" xml:space="preserve">
+    <value>Void Transaction</value>
+  </data>
+  <data name="UICurrentTransactionFormatItemCount" xml:space="preserve">
+    <value>Number of Vouchers: {0}</value>
+  </data>
+  <data name="UICurrentTransactionFormatTotalPayout" xml:space="preserve">
+    <value>Total Payout: {0:C}</value>
+  </data>
+  <data name="UICurrentTransactionHeaderAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="UICurrentTransactionHeaderBarcode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="UICurrentTransactionHeaderDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="UICurrentTransactionHeaderNeedsApproval" xml:space="preserve">
+    <value>Needs Approval</value>
+  </data>
+  <data name="UICurrentTransactionHeaderRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="UICurrentTransactionToolTipDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="UICurrentTransactionToolTipRemove" xml:space="preserve">
+    <value>Remove Item from Transaction</value>
+  </data>
+  <data name="UICurrentTransactionToolTipViewReport" xml:space="preserve">
+    <value>View Detailed Report of Current Transaction</value>
+  </data>
+  <data name="UICurrentTransactionViewReport" xml:space="preserve">
+    <value>View Report</value>
+  </data>
+  <data name="UIEnter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="UILastPrintedReceiptButtonReprint" xml:space="preserve">
+    <value>Reprint</value>
+  </data>
+  <data name="UILastPrintedReceiptNumber" xml:space="preserve">
+    <value>Receipt Number</value>
+  </data>
+  <data name="UILastPrintedReceiptNumberOfVouchers" xml:space="preserve">
+    <value>Number of vouchers</value>
+  </data>
+  <data name="UILastPrintedReceiptTotalPayout" xml:space="preserve">
+    <value>Total Payout</value>
+  </data>
+  <data name="UINavigateHome" xml:space="preserve">
+    <value>Navigate Home</value>
+  </data>
+  <data name="UINo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="UIOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="UIPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UIPasswordWaterMark" xml:space="preserve">
+    <value>Please re-enter your password</value>
+  </data>
+  <data name="UIPaymentCashDrawer" xml:space="preserve">
+    <value>Cash Drawer</value>
+  </data>
+  <data name="UIPaymentCurrentTransaction" xml:space="preserve">
+    <value>Current Transaction</value>
+  </data>
+  <data name="UIPaymentVoucherNumber" xml:space="preserve">
+    <value>Voucher Number</value>
+  </data>
+  <data name="UIPayoutFormatSessionId" xml:space="preserve">
+    <value>Session ID: {0}</value>
+  </data>
+  <data name="UIPayoutLastReceipt" xml:space="preserve">
+    <value>Last Receipt</value>
+  </data>
+  <data name="UIPayoutPrinterSettings" xml:space="preserve">
+    <value>Printer Settings</value>
+  </data>
+  <data name="UIPayoutPrinterToolTipSettings" xml:space="preserve">
+    <value>Printer Settings</value>
+  </data>
+  <data name="UIPayoutStation" xml:space="preserve">
+    <value>Payout Station</value>
+  </data>
+  <data name="UIPayoutToolTipLastReceipt" xml:space="preserve">
+    <value>Last Receipt</value>
+  </data>
+  <data name="UISearchVoucherWatermarkVoucherNumber" xml:space="preserve">
+    <value>Voucher Number</value>
+  </data>
+  <data name="UIStartingBalanceMessage" xml:space="preserve">
+    <value>Starting Balance (must be greater than 0)</value>
+  </data>
+  <data name="UIUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UIVoucherDetailAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="UIVoucherDetailBarcode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="UIVoucherDetailCreatedLocation" xml:space="preserve">
+    <value>Create Location (Machine No.)</value>
+  </data>
+  <data name="UIVoucherDetailDateCreated" xml:space="preserve">
+    <value>Date Created</value>
+  </data>
+  <data name="UIVoucherDetailVoucherId" xml:space="preserve">
+    <value>Voucher ID</value>
+  </data>
+  <data name="UIVoucherDetailVoucherStatus" xml:space="preserve">
+    <value>Voucher Status</value>
+  </data>
+  <data name="UIVoucherReportHeaderAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="UIVoucherReportHeaderBarcode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="UIVoucherReportHeaderCreatedAtMachine" xml:space="preserve">
+    <value>Created at Machine</value>
+  </data>
+  <data name="UIVoucherReportHeaderDateCreated" xml:space="preserve">
+    <value>Date Created</value>
+  </data>
+  <data name="UIVoucherReportHeaderState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="UIVoucherReportHeaderVoucherId" xml:space="preserve">
+    <value>Voucher Id</value>
+  </data>
+  <data name="UIVoucherReportTitle" xml:space="preserve">
+    <value>Voucher Details</value>
+  </data>
+  <data name="UIYes" xml:space="preserve">
+    <value>Yes</value>
   </data>
   <data name="UnableToPayoutTitle" xml:space="preserve">
     <value>Unable to Payout Transaction</value>
@@ -263,5 +584,8 @@
   </data>
   <data name="VoucherTooSmallMsg" xml:space="preserve">
     <value>Voucher amount is too small for cashout.</value>
+  </data>
+  <data name="WindowTitle" xml:space="preserve">
+    <value>POS</value>
   </data>
 </root>

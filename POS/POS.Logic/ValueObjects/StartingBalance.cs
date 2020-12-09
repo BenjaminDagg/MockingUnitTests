@@ -1,5 +1,6 @@
 ﻿using System;
 using CSharpFunctionalExtensions;
+using POS.Core;
 
 namespace POS.Core.ValueObjects
 {

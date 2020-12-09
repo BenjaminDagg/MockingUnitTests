@@ -1,14 +1,15 @@
-﻿using System;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Framework.WPF.Modules.CaliburnMicro;
+﻿using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using Framework.WPF.ScreenManagement.Alert;
 using POS.Core;
 using POS.Core.Config;
 using POS.Core.Interfaces.Printer;
+
+using System;
+using System.Drawing.Printing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace POS.Modules.Printer.ViewModels
 {

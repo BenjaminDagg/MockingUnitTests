@@ -1,7 +1,8 @@
-﻿using System;
-using POS.Core.Common.DomainValidation;
+﻿using POS.Core.Common.DomainValidation;
 using POS.Core.Common.DomainValidation.Validation;
+using POS.Core;
 using POS.Core.Vouchers;
+using System;
 
 namespace POS.Core.Transaction.Rules
 {

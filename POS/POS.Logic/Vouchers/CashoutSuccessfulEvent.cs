@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using POS.Core.Common;
+﻿using POS.Core.Common;
 using POS.Core.ValueObjects;
+using System;
+using System.Collections.Generic;
 
 namespace POS.Core.Vouchers
 {

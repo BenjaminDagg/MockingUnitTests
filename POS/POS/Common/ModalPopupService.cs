@@ -1,6 +1,6 @@
-﻿using System.Dynamic;
+﻿using Caliburn.Micro;
+using System.Dynamic;
 using System.Windows;
-using Caliburn.Micro;
 
 namespace POS.Common
 {

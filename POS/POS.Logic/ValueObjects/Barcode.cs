@@ -1,11 +1,11 @@
-﻿using System.Text.RegularExpressions;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
+using System;
+using System.Text.RegularExpressions;
 
 namespace POS.Core.ValueObjects
 {
     public class Barcode : ValueObject<Barcode>
     {
-
         public string Value { get; }
 
         public int Length => Value.Length;
@@ -17,7 +17,6 @@ namespace POS.Core.ValueObjects
 
         public string FormattedBarcode => $"{Value:#-###-###-##-#####-###-#}";
 
-
         public static Result<Barcode> Create(string barcode, int voucherMaxCharLength = 18)
         {
             barcode = (barcode ?? string.Empty).Trim();
@@ -25,9 +24,9 @@ namespace POS.Core.ValueObjects
                 return Result.Failure<Barcode>(POSResources.BarcodeRequiredMsg);
 
             if (!Regex.IsMatch(barcode, @"([0-9]+)"))
-                return Result.Failure<Barcode>("Barcode must be a valid number");
+                return Result.Failure<Barcode>(POSResources.BarcodeInvalidNumberMsg);
             return barcode.Length != voucherMaxCharLength 
-                ? Result.Failure<Barcode>($"Barcode must be {voucherMaxCharLength} characters.") 
+                ? Result.Failure<Barcode>(String.Format(POSResources.BarcodeInvalidMaxCharacterMsg, voucherMaxCharLength)) 
                 : Result.Success(new Barcode(barcode));
         }
 
@@ -56,6 +55,4 @@ namespace POS.Core.ValueObjects
             return Create(barcode).Value;
         }
     }
-
-
 }

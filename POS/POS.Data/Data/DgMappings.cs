@@ -61,10 +61,7 @@ namespace POS.Infrastructure.Data
                     x.Column(y => y.Barcode).WithName("BARCODE");
                     x.Column(y => y.VoucherAmount).WithName("VOUCHER_AMOUNT");
                     x.Column(y => y.ExpireDate);
-
-                })
-
-                ;
+                });
         }
     }
 }

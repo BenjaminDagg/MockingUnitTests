@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using Framework.Core.ApplicationEnvironment;
+﻿using Framework.Core.ApplicationEnvironment;
 using Framework.Infrastructure;
 using Framework.Infrastructure.ApplicationEnvironment;
 using Framework.Infrastructure.Data;
@@ -10,32 +8,19 @@ using Framework.WPF.Modules;
 using Framework.WPF.Modules.Startup;
 using Framework.WPF.Startup;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using POS.Core.Interfaces.Printer;
-using POS.Modules.Printer.Services;
-using POS.Modules.Payout.ViewModels;
-using POS.Infrastructure.Printer;
-using POS.Core.Interfaces.Data;
-using POS.Infrastructure.Data;
-using POS.Core.Session;
-using POS.Core.Interfaces;
-using POS.Infrastructure.Services;
-using POS.Core.Config;
-using POS.Infrastructure.Config;
 using POS.Common;
-using POS.Modules.Printer.Menu;
-using POS.Modules.Payout.Menu;
-using Framework.WPF.Menu;
-using Framework.Infrastructure.Configuration;
-using POS.Modules.Printer.ViewModels;
-using POS.Infrastructure.Startup;
-using POS.Modules.Printer;
-using POS.Modules.Payout;
+using POS.Core;
 using POS.Core.StartUp;
+using POS.Infrastructure.Startup;
+using POS.Modules.Payout;
+using POS.Modules.Printer;
+using System.Reflection;
 
 namespace POS.Startup
 {
-    
+
     public class AppStartup : CaliburnMicroAppStartup
     {
         public AppStartup(IHostEnvironment hostEnvironment) : base(hostEnvironment)
@@ -77,8 +62,8 @@ namespace POS.Startup
             var config = new WindowShellConfiguration()
             { 
                 SideMenuEnabled = true,
-                WindowTitle = "POS",
-                RemoteConnectionAppName = "POS",
+                WindowTitle = POSResources.WindowTitle,
+                RemoteConnectionAppName = POSResources.RemoteConnectionAppTitle,
                 //WindowIconUri = "pack://application:,,,/CentroLink;component/app.ico",
             };
 

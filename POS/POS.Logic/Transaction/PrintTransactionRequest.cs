@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using POS.Core.ValueObjects;
+﻿using POS.Core.ValueObjects;
+using System.Collections.Generic;
 
 namespace POS.Core.Transaction
 {

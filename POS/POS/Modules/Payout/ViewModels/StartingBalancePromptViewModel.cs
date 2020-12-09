@@ -2,6 +2,7 @@
 using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Core;
+
 using POS.Core.ValueObjects;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,7 @@ namespace POS.Modules.Payout.ViewModels
         /// </summary>
         public ObservableCollection<TaskAlert> Alerts { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Required")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredMsg", ErrorMessageResourceType = typeof(POSResources))]
         public decimal StartingBalanceValue 
         {
             get => startingBalance; 

@@ -12,7 +12,6 @@ using POS.Core.Vouchers;
 using POS.Modules.Payout.Events;
 using POS.Modules.Payout.Services.ViewModels;
 using POS.Modules.Printer.ViewModels;
-using POS.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -72,7 +71,7 @@ namespace POS.Modules.Payout.ViewModels
             canPayoutInitialize = r.IsSuccess;
             if (!canPayoutInitialize)
             {
-                await PromptUserAsync(r.Error, "Unable to initialize for Payout.");
+                await PromptUserAsync(r.Error, POSResources.PayoutInitializeErrorMsg);
                 //if payout init fails, go back to welcome screen or printer settings
                 Services.Navigation.NavigateToScreen(
                     !hasPrinter ? typeof(PrinterSettingsViewModel) : typeof(HomeScreenViewModel), this);
@@ -188,7 +187,7 @@ namespace POS.Modules.Payout.ViewModels
         public async void RemoveTransactionItem(object o)
         {
             if (!(o is VoucherItem vi)) return;
-            var result = await PromptUserAsync(POSResources.AreYouSureRemoveTransactionItemMsg, Resources.AreYouSureTitle, PromptOptions.YesNo, PromptTypes.Question);
+            var result = await PromptUserAsync(POSResources.AreYouSureRemoveTransactionItemMsg, POSResources.AreYouSureTitle, PromptOptions.YesNo, PromptTypes.Question);
 
             if (result != PromptOptions.Yes) return;
             TransactionViewModel.RemoveTransactionItem(vi);

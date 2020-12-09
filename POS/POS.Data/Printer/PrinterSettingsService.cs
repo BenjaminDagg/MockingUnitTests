@@ -1,13 +1,11 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using Framework.Core.Configuration;
 using Framework.Core.FileSystem;
-using Framework.Infrastructure.Configuration;
 using Microsoft.Extensions.Hosting;
 using POS.Core.Config;
 using POS.Core.Interfaces.Printer;
-using POS.Infrastructure.Config;
+using System;
+using System.Runtime.InteropServices;
 
 namespace POS.Infrastructure.Printer
 {

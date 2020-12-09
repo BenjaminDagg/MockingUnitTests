@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using POS.Core.Transaction.Rules;
 using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace POS.Core.Transaction
 {
@@ -51,7 +52,7 @@ namespace POS.Core.Transaction
             var alreadyExists = Items.Any(x => x.Barcode == r.Voucher.Barcode);
             if (alreadyExists)
             {
-                return Result.Failure($"Voucher {r.Voucher.Barcode} has already been scanned.");
+                return Result.Failure(String.Format(POSResources.TransactionVoucherAlreadyScannedMsg, r.Voucher.Barcode));
             }
             //validate voucher
             var validation = new IsVoucherRequestValid().Validate(r);

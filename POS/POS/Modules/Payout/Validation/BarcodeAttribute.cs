@@ -1,6 +1,6 @@
-﻿using System;
+﻿using POS.Core.ValueObjects;
+using System;
 using System.ComponentModel.DataAnnotations;
-using POS.Core.ValueObjects;
 
 namespace POS.Modules.Payout.Validation
 {
@@ -9,8 +9,7 @@ namespace POS.Modules.Payout.Validation
     {
         protected override ValidationResult IsValid(
             object value, ValidationContext validationContext)
-        {
-         
+        {         
             var barcode = value as string;
           
             var barcodeResult = Barcode.Create(barcode);  

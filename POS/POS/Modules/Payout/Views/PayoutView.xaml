@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              xmlns:views="clr-namespace:POS.Modules.Payout.Views"
              xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+             xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              xmlns:cal="http://www.caliburnproject.org"
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -38,23 +39,23 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Payout Station" FontSize="22"></TextBlock>
+                    <TextBlock Text="{x:Static resx:POSResources.UIPayoutStation}" FontSize="22"></TextBlock>
                     <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" >
-                        <Button Style="{StaticResource IconButtonStyle}" ToolTip="Navigate Home"  cal:Message.Attach="NavigateHome">
+                        <Button Style="{StaticResource IconButtonStyle}" ToolTip="{x:Static resx:POSResources.UINavigateHome}" cal:Message.Attach="NavigateHome">
                             <controls:FontAwesomeTextControl 
                                     FontWeight="Normal"
                                     Margin="0" Foreground="Black"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontIcon="Home"   FontSize="28"/>
+                                    FontIcon="Home" FontSize="28"/>
                         </Button>
                     </StackPanel>
                 </Grid>
 
             </Border>
-            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding SessionId, StringFormat='Session ID: {0}'}"  FontSize="18" Margin="0, 0, 5, 15"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding SessionId, StringFormat={x:Static resx:POSResources.UIPayoutFormatSessionId}}"  FontSize="18" Margin="0, 0, 5, 15"/>
             <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
-                <Button Style="{StaticResource IconButtonStyle}"  cal:Message.Attach="ViewLastReceipt" ToolTip="Last Receipt" Margin="0,0,15,0">
+                <Button Style="{StaticResource IconButtonStyle}" cal:Message.Attach="ViewLastReceipt" ToolTip="{x:Static resx:POSResources.UIPayoutToolTipLastReceipt}" Margin="0,0,15,0">
                     <StackPanel Orientation="Horizontal">
                         <controls:FontAwesomeTextControl 
                             FontWeight="Normal"
@@ -62,10 +63,10 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontIcon="History"   FontSize="28"/>
-                        <TextBlock Margin="5, 0, 0, 0" Text="Last Receipt" VerticalAlignment="Center" />
+                        <TextBlock Margin="5, 0, 0, 0" Text="{x:Static resx:POSResources.UIPayoutLastReceipt}" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
-                <Button  cal:Message.Attach="ViewPrinterSettings" Style="{StaticResource IconButtonStyle}" ToolTip="Printer Settings">
+                <Button  cal:Message.Attach="ViewPrinterSettings" Style="{StaticResource IconButtonStyle}" ToolTip="{x:Static resx:POSResources.UIPayoutPrinterToolTipSettings}">
                     <StackPanel Orientation="Horizontal">
                         <controls:FontAwesomeTextControl 
                             FontWeight="Normal"
@@ -73,7 +74,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontIcon="Print"   FontSize="28"/>
-                        <TextBlock Margin="5, 0, 0, 0" Text="Printer Settings" VerticalAlignment="Center" />
+                        <TextBlock Margin="5, 0, 0, 0" Text="{x:Static resx:POSResources.UIPayoutPrinterSettings}" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -92,10 +93,10 @@
             </ItemsControl>
 
 
-<GroupBox Grid.Row="3"  Grid.Column="0" Padding="5" Margin="0, 0, 10, 0">
+            <GroupBox Grid.Row="3"  Grid.Column="0" Padding="5" Margin="0, 0, 10, 0">
                 <GroupBox.HeaderTemplate>
                     <DataTemplate>
-                        <TextBlock FontSize="20">Current Transaction</TextBlock>
+                        <TextBlock FontSize="20" Text="{x:Static resx:POSResources.UIPaymentCurrentTransaction}"></TextBlock>
                     </DataTemplate>
                 </GroupBox.HeaderTemplate>
                 <views:CurrentTransactionView />
@@ -103,7 +104,7 @@
             <GroupBox Grid.Row="3" Grid.Column="1">
                 <GroupBox.HeaderTemplate>
                     <DataTemplate>
-                        <TextBlock FontSize="20">Voucher Number</TextBlock>
+                        <TextBlock FontSize="20" Text="{x:Static resx:POSResources.UIPaymentVoucherNumber}"></TextBlock>
                     </DataTemplate>
                 </GroupBox.HeaderTemplate>
                 <views:SearchVoucherView />
@@ -113,7 +114,7 @@
                 <Expander.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock FontSize="22" Margin="0" HorizontalAlignment="Right" Background="#2d6ca2" Padding="10" Foreground="White" TextAlignment="Right" 
-                                        Text="Cash Drawer">
+                                        Text="{x:Static resx:POSResources.UIPaymentCashDrawer}">
                             <TextBlock.LayoutTransform>
                                 <RotateTransform Angle="270" />
                             </TextBlock.LayoutTransform>
@@ -132,7 +133,7 @@
                 <GroupBox Margin="10, 0">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock FontSize="20">Cash Drawer</TextBlock>
+                            <TextBlock FontSize="20" Text="Cash Drawer"></TextBlock>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <views:CashDrawerView />

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using POS.Core;
 using POS.Core.Interfaces;
 using POS.Core.Transaction;
 using POS.Printer.Models;
+using System;
 
 namespace POS.Infrastructure.Services
 {
@@ -29,11 +30,11 @@ namespace POS.Infrastructure.Services
         {
             var rawPrintData = "";
 
-            rawPrintData += $"{centerText}Start Session{crlf}{crlf}";
-            rawPrintData += $"{leftAlignText}Cashier: {user}{crlf}";
-            rawPrintData += $"Date: {DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}";
-            rawPrintData += $"Session: {sessionId}{crlf}{crlf}";
-            rawPrintData += $"Starting Balance: {startBalance:C}{crlf}";
+            rawPrintData += $"{centerText}{POSResources.RawPrintStartSession}{crlf}{crlf}";
+            rawPrintData += $"{leftAlignText}{POSResources.RawPrintCashier}: {user}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintDate}: {DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintSession}: {sessionId}{crlf}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintStartingBalance}: {startBalance:C}{crlf}";
 
             return BuildReceiptHeader() + rawPrintData + BuildReceiptFooter();
         }
@@ -42,17 +43,17 @@ namespace POS.Infrastructure.Services
         {
             var rawPrintData = "";
 
-            rawPrintData = rawPrintData + centerText + "Session Details" + crlf + crlf + leftAlignText;
+            rawPrintData = rawPrintData + centerText + POSResources.RawPrintSessionDetails + crlf + crlf + leftAlignText;
             rawPrintData += $"{DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}";
-            rawPrintData += $"User: {r.Session.Username}{crlf}";
-            rawPrintData += $"Session: {r.Session.Id}{crlf}{crlf}";
-            rawPrintData += $"Number of Transactions: {r.Session.NumberTransactions}{crlf}";
-            rawPrintData += $"Number of Vouchers: {r.Session.VouchersCashed}{crlf}";
-            rawPrintData += $"Starting Balance: {r.StartBalance:C}{crlf}";
-            rawPrintData += $"Total Payouts: {r.TotalPayout:C}{crlf}";
-            rawPrintData += $"Cash Added: {r.CashAdded:C}{crlf}";
-            rawPrintData += $"Cash Removed: {r.CashRemoved:C}";
-            rawPrintData += $"Ending Balance: {r.EndBalance:C}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintUser}: {r.Session.Username}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintSession}: {r.Session.Id}{crlf}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintNumberOfTransactions}: {r.Session.NumberTransactions}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintNumberOfVouchers}: {r.Session.VouchersCashed}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintStartingBalance}: {r.StartBalance:C}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintTotalPayouts}: {r.TotalPayout:C}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintCashAdded}: {r.CashAdded:C}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintCashRemoved}: {r.CashRemoved:C}";
+            rawPrintData += $"{POSResources.RawPrintEndingBalance}: {r.EndBalance:C}{crlf}";
 
             rawPrintData += $"-------------------{crlf}";
 
@@ -61,34 +62,34 @@ namespace POS.Infrastructure.Services
 
         public string BuildTransactionReceipt(PrintTransactionRequest r)
         {
-            string rawPrintData = $"{centerText} Voucher Payout{crlf}{r.LocationName}{crlf}";
+            string rawPrintData = $"{centerText} {POSResources.RawPrintVoucherPayout}{crlf}{r.LocationName}{crlf}";
 
             if (r.IsReprint)
-                rawPrintData += $"{crlf} -- Reprinted Receipt -- {crlf}";
+                rawPrintData += $"{crlf} -- {POSResources.RawPrintReprintedReceipt} -- {crlf}";
 
             if (r.IsCustomerReceipt)
-                rawPrintData = rawPrintData + crlf + "Customer Receipt" + crlf;
+                rawPrintData = rawPrintData + crlf +  POSResources.RawPrintCustomerReceipt  + crlf;
 
             rawPrintData += $"{crlf}{leftAlignText}";
 
             rawPrintData += $"{crlf}{DateTime.Now:M/dd/yyy HH:mm:ss}";
-            rawPrintData += $"{crlf}Cashier: {r.Username}";
-            rawPrintData += $"{crlf}Receipt No: {r.ReceiptNumber}";
-            rawPrintData += $"{crlf}Voucher Count: {r.Vouchers.Count}{crlf}";
+            rawPrintData += $"{crlf}{POSResources.RawPrintCashier}: {r.Username}";
+            rawPrintData += $"{crlf}{POSResources.RawPrintReceiptNo}: {r.ReceiptNumber}";
+            rawPrintData += $"{crlf}{POSResources.RawPrintVoucherCount}: {r.Vouchers.Count}{crlf}";
 
-            rawPrintData += $"{crlf}Vouchers Redeemed:{crlf}";
+            rawPrintData += $"{crlf}{POSResources.RawPrintVouchersRedeemed}:{crlf}";
 
             foreach (var v in r.Vouchers)
             {
                 rawPrintData += $"{crlf}{dashLine}";
 
-                rawPrintData += $"{crlf}Barcode: {v.Barcode.FormattedBarcode}";
-                rawPrintData += $"{crlf}Amount: {v.Amount}";
+                rawPrintData += $"{crlf}{POSResources.RawPrintBarcode}: {v.Barcode.FormattedBarcode}";
+                rawPrintData += $"{crlf}{POSResources.RawPrintAmount}: {v.Amount}";
             }
 
             rawPrintData += $"{crlf}{dashLine}";
 
-            rawPrintData += $"{crlf}{crlf}Payout Amount: {r.PayoutAmount:C}";
+            rawPrintData += $"{crlf}{crlf}{POSResources.RawPrintPayoutAmount}: {r.PayoutAmount:C}";
 
             return BuildReceiptHeader() + rawPrintData + BuildReceiptFooter();
         }
@@ -96,15 +97,15 @@ namespace POS.Infrastructure.Services
         public string BuildAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest r)
         {
             var rawPrintData = "";
-           
+
             rawPrintData = crlf + centerText;
-            rawPrintData += $"Cash Drawer Transaction{crlf}";
+            rawPrintData += $"{POSResources.RawPrintDataCashDrawerTransaction}{crlf}";
             rawPrintData += $"{DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}{crlf}";
-            rawPrintData += $"{leftAlignText}User: {r.Username}{crlf}";
-            rawPrintData += $"Session: {r.SessionId}{crlf}";
-            rawPrintData += $"Ref Nbr: {r.ReferenceNumber}{crlf}";
-            rawPrintData += $"Amount: {r.Amount:C}{crlf}";
-            rawPrintData += $"Action: {r.Action}{crlf}";
+            rawPrintData += $"{leftAlignText}{POSResources.RawPrintUser}: {r.Username}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintSession}: {r.SessionId}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintRefNbr}: {r.ReferenceNumber}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintAmount}: {r.Amount:C}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintAction}: {r.Action}{crlf}";
             rawPrintData += $"{centerText}{dashLine}{crlf}";
             
             return BuildReceiptHeader() + rawPrintData + BuildReceiptFooter();

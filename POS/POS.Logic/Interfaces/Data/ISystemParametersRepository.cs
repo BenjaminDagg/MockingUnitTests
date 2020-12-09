@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using POS.Core.PayoutSettings;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using POS.Core.PayoutSettings;
 
 namespace POS.Core.Interfaces.Data
 {

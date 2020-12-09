@@ -1,14 +1,10 @@
-﻿using Framework.Infrastructure.Startup;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using POS.Core.Interfaces;
 using POS.Core.Interfaces.Data;
 using POS.Core.Interfaces.Printer;
 using POS.Infrastructure.Data;
 using POS.Infrastructure.Printer;
 using POS.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace POS.Infrastructure.Startup
 {

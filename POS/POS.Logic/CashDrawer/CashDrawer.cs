@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using POS.Core;
 using POS.Core.ValueObjects;
 
 namespace POS.Core.CashDrawer

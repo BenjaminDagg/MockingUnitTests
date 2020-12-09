@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Framework.WPF.ScreenManagement.Alert;
+﻿using Framework.WPF.ScreenManagement.Alert;
 
 namespace POS.Modules.Payout.Events
 {

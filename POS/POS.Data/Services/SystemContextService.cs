@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using POS.Core.Interfaces;
+﻿using POS.Core.Interfaces;
 using POS.Core.Interfaces.Data;
 using POS.Core.Session;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace POS.Infrastructure.Services
 {

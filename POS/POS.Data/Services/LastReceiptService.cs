@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using POS.Core.Interfaces;
 using POS.Core.Transaction;
+using System;
+using System.IO;
 
 namespace POS.Infrastructure.Services
 {

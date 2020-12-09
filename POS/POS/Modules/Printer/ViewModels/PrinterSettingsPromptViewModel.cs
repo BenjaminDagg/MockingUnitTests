@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Framework.WPF.Modules.Shell.ViewModels;
+﻿using Framework.WPF.Modules.Shell.ViewModels;
 using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Core;
 using POS.Core.Config;
 using POS.Core.Interfaces.Printer;
+
+using System;
+using System.Collections.ObjectModel;
+using System.Drawing.Printing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace POS.Modules.Printer.ViewModels
 {

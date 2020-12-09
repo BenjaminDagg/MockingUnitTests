@@ -1,4 +1,6 @@
 ﻿using Framework.WPF.ScreenManagement.Breadcrumb;
+using POS.Common;
+using POS.Core;
 using POS.Modules.Printer.ViewModels;
 
 namespace POS.Modules.Printer.Breadcrumbs
@@ -7,13 +9,7 @@ namespace POS.Modules.Printer.Breadcrumbs
     {
         public BreadcrumbItem GetBreadcrumb()
         {
-            var parent = new BreadcrumbItem(null, null, "Home");
-
-            var child = new BreadcrumbItem(parent, typeof(PrinterSettingsViewModel), "Printer Settings");
-
-            parent.Children.Add(child);
-
-            return parent;
+            return UIBreadcrumbCreator<PrinterSettingsViewModel>.Create(POSResources.HomeMenu, POSResources.PrinterSettingsMenu);
         }
     }
 }

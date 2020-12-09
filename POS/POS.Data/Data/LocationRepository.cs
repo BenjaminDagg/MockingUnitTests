@@ -10,7 +10,6 @@ namespace POS.Infrastructure.Data
         public LocationRepository(IDbConnectionInfo dbConnectionInfo) : base(dbConnectionInfo)
         {
         }
-
         public Task<LocationDto> GetLocationInfo()
         {
             const string sql = @"SELECT LOCATION_ID, CAS_NAME FROM CASINO WHERE SETASDEFAULT = 1";

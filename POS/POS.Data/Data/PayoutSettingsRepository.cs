@@ -11,13 +11,10 @@ namespace POS.Infrastructure.Data
         public PayoutSettingsRepository(IDbConnectionInfo dbConnectionInfo) : base(dbConnectionInfo)
         {
         }
-
         public Task<PayoutSettingsDto> GetPayoutSettings()
         {
             const string sql = @";EXEC [dbo].[GetPayoutSetup]";
             return Db.SingleOrDefaultAsync<PayoutSettingsDto>(sql);
         }
-
-       
     }
 }

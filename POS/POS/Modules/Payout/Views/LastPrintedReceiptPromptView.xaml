@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+        xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
         Title="{Binding Path=DisplayName}"
 
-        mc:Ignorable="d"   Style="{StaticResource CustomPromptBoxWindowStyle}"
+        mc:Ignorable="d" Style="{StaticResource CustomPromptBoxWindowStyle}"
         SizeToContent="WidthAndHeight">
     <StackPanel>
         <ItemsControl 
@@ -23,7 +24,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <TextBlock Text="Receipt Number" Margin="0,5,0,0" />
+        <TextBlock Text="{x:Static resx:POSResources.UILastPrintedReceiptNumber}" Margin="0,5,0,0" />
 
         <controls:CustomTextBoxControl
             HorizontalAlignment="Left" 
@@ -33,7 +34,7 @@
                         Mode=OneWay}" IsReadOnly="True"
             TextBoxIcon="File"  />
 
-        <TextBlock Text="Number of Vouchers" Margin="0,5,0,0" />
+        <TextBlock Text="{x:Static resx:POSResources.UILastPrintedReceiptNumberOfVouchers}" Margin="0,5,0,0" />
         <controls:CustomTextBoxControl
             HorizontalAlignment="Left" 
             Width="300"
@@ -43,7 +44,7 @@
             TextBoxIcon="Ticket"  />
 
 
-        <TextBlock Text="Total Payout" Margin="0,5,0,0" />
+        <TextBlock Text="{x:Static resx:POSResources.UILastPrintedReceiptTotalPayout}" Margin="0,5,0,0" />
         <controls:CustomTextBoxControl
             HorizontalAlignment="Left" 
             Width="300"
@@ -52,21 +53,19 @@
                         Mode=OneWay}"
             TextBoxIcon="Dollar"  />
 
-        <StackPanel 
-                    Margin="0, 20"
+        <StackPanel Margin="0, 20"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
          
             <Button x:Name="Ok"
-                    Content="Reprint" 
+                    Content="{x:Static resx:POSResources.UILastPrintedReceiptButtonReprint}" 
                     IsEnabled="{Binding IsReprintEnabled}"
-                    Visibility="{Binding OkVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}" />
         
             <Button x:Name="Cancel"
-                    Content="Cancel"
-                    Visibility="{Binding CancelVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UICancel}"
+                    Visibility="{Binding CancelVisible, Converter={StaticResource BooleanToVisibility}}" />
+            
         </StackPanel>
     </StackPanel>
 </controls:CustomWindowControl>

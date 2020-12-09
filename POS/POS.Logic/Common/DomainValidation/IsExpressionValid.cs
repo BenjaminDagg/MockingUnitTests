@@ -1,6 +1,6 @@
-﻿using System;
+﻿using POS.Core.Common.DomainValidation.Interfaces;
+using System;
 using System.Linq.Expressions;
-using POS.Core.Common.DomainValidation.Interfaces;
 
 namespace POS.Core.Common.DomainValidation
 {

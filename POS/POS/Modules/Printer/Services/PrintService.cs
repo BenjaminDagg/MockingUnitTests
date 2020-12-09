@@ -1,11 +1,12 @@
-﻿using System.Drawing.Printing;
-using System.Linq;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
+using POS.Core;
 using POS.Core.Config;
 using POS.Core.Interfaces;
 using POS.Core.Interfaces.Printer;
 using POS.Core.Transaction;
 using POS.Printer.Models;
+using System.Drawing.Printing;
+using System.Linq;
 
 namespace POS.Modules.Printer.Services
 {
@@ -26,17 +27,17 @@ namespace POS.Modules.Printer.Services
         {
             if (PrinterSettings.InstalledPrinters.Count < 1)
             {
-                return Result.Failure("There are no printers setup for this computer.  Please contact your computer support personnel to setup the appropriate printer(s).");
+                return Result.Failure(POSResources.NoPrinterSetupErorMsg);
             }
             if (string.IsNullOrEmpty(printerSettings.ReceiptPrinterName))
             {
-                return Result.Failure("A receipt printer has not been set.  Please set a receipt printer in Printer Settings and try again.");
+                return Result.Failure(POSResources.ReceiptPrinterNotSetErrorMsg);
             }
             // is configured printer installed?
             var printerFound = PrinterSettings.InstalledPrinters.Cast<string>().Any(s => s == printerSettings.ReceiptPrinterName);
             if (!printerFound)
             {
-                return Result.Failure($"The configured receipt printer {printerSettings.ReceiptPrinterName} is not available on this workstation.");
+                return Result.Failure(string.Format(POSResources.ReceiptPrinterNotAvailableErrorMsg, printerSettings.ReceiptPrinterName));
             }
 
             return Result.Success();

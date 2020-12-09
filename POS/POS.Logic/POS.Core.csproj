@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="POSResources.Designer.cs">
+    <Compile Update="PosResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>POSResources.resx</DependentUpon>
@@ -25,8 +25,12 @@
   <ItemGroup>
     <EmbeddedResource Update="POSResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>POSResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>PosResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

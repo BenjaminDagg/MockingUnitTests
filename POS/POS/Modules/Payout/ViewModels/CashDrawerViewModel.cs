@@ -15,6 +15,7 @@ using POS.Core.CashDrawer;
 using POS.Core.Interfaces.Data;
 using POS.Core.Interfaces.Printer;
 using POS.Core.PayoutSettings;
+
 using POS.Core.Session;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;
@@ -139,7 +140,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception ex)
             {
-                await errorService.HandleErrorAsync($"An error has occurred with this transaction.  Error: {ex.Message}", ex, true);
+                await errorService.HandleErrorAsync(String.Format(POSResources.AddRemoveCashErrorMsg, ex.Message), ex, true);
             }
         }
 
@@ -245,10 +246,6 @@ namespace POS.Modules.Payout.ViewModels
             NotifyOfPropertyChange(nameof(CashAdded));
             NotifyOfPropertyChange(nameof(CashRemoved));
             NotifyOfPropertyChange(nameof(TotalPayout));
-
         }
-
     }
-
-
 }

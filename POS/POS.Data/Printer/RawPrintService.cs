@@ -1,7 +1,7 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using POS.Core.Interfaces.Printer;
+using System;
+using System.Runtime.InteropServices;
 
 namespace POS.Infrastructure.Printer
 {
@@ -68,12 +68,6 @@ namespace POS.Infrastructure.Printer
                 Marshal.FreeCoTaskMem(dataToSend);
             }
             return r;
-        }
-
-    
-
-
-     
-        
+        }        
     }
 }

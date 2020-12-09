@@ -11,6 +11,7 @@ namespace POS.Modules.Payout.ViewModels
     public class SearchBarcodeViewModel : PropertyChangedBaseWithValidation
     {
         private string barcode;
+        private int cursorIndex;
         private int voucherMaxLength;
         private readonly IEventAggregator eventAggregator;
 
@@ -35,10 +36,21 @@ namespace POS.Modules.Payout.ViewModels
                 }
             }
         }
-
+        public int CursorIndex
+        {
+            get => cursorIndex;
+            set
+            {
+                if (cursorIndex != value)
+                {
+                    cursorIndex = value;
+                    NotifyOfPropertyChange(nameof(CursorIndex));
+                }
+            }
+        }
         public ICommand AddCharacterCommand => new RelayCommand<object>(AddCharacter);
 
-        public ICommand RemoveLastCharacterCommand => new RelayCommand<object>(RemoveLastCharacter);
+        public ICommand RemoveLastCharacterCommand => new RelayCommand<int>(RemoveLastCharacter);
 
         public ICommand ClearCommand => new RelayCommand<object>(Clear);
 
@@ -54,27 +66,34 @@ namespace POS.Modules.Payout.ViewModels
             eventAggregator = eventAgg;
         }
 
-        public void RemoveLastCharacter(object o)
+        public void RemoveLastCharacter(int cursorPosition)
         {
-            if (Barcode.Length > 0)
+            if (Barcode.Length > 0 && cursorPosition > 0)
             {
-                Barcode = Barcode.Remove(Barcode.Length - 1, 1);
+                Barcode = Barcode.Remove(--cursorPosition, 1);
+                CursorIndex = cursorPosition;
             }
         }
 
-        public void AddCharacter(object o)
+        public void AddCharacter(object character)
         {
             if (Barcode?.Length >= VoucherMaxLength) return;
-            Barcode += o.ToString();
-            Console.WriteLine($@"Append {o}");
+
+            var tempCursorPosition = CursorIndex;
+            if (Barcode != null)
+            {
+                Barcode = Barcode.Insert(CursorIndex, character.ToString());
+            }
+            else
+            {
+                Barcode = character.ToString();
+            }
+            CursorIndex = ++tempCursorPosition;
         }
 
         public void Clear(object o = null)
         {
             Barcode = string.Empty;
         }
-
     }
-
-
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using POS.Core.Transaction;
+﻿using POS.Core.Transaction;
 
 namespace POS.Core.Interfaces
 {

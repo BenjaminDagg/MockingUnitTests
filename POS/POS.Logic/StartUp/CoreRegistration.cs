@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using POS.Core;
 using POS.Core.Session;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace POS.Core.StartUp
 {

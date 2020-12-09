@@ -15,8 +15,7 @@ using System.Threading.Tasks;
 namespace POS.Modules.Payout.ViewModels
 {
     public class SupervisorApprovalPromptViewModel : PromptBoxViewModel
-    {
-        //private readonly IAuthenticateUserService authenticateUserService;
+    { 
         private readonly IUserAuthenticationService authenticateUserService;
         private readonly IUserSession userSession;
         private readonly IErrorHandlingService errorHandlingService;
@@ -60,7 +59,6 @@ namespace POS.Modules.Payout.ViewModels
                 }
                 var userResult = await authenticateUserService.LoginAsync(User, Password);
 
-                //if (userResult.UserPermissions.Any(u => u.PermissionName == PayoutPermissionType.VoucherApproval.ToString()))
                 if (userResult == LoginEventType.LoginSuccess && userSession.HasPermission(PayoutPermissionType.VoucherApproval.ToString()))
                 {
                     await base.Ok();
@@ -74,9 +72,6 @@ namespace POS.Modules.Payout.ViewModels
             {
                 await errorHandlingService.HandleErrorAsync(e.Message, e, true);
             }
-
-            
         }
-
     }
 }

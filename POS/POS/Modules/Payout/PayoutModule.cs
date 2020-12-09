@@ -1,14 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Framework.Infrastructure.Configuration;
-using POS.Core.Config;
+﻿using Framework.Infrastructure.Configuration;
 using Framework.WPF.Menu;
-using POS.Modules.Payout.Menu;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using POS.Core.Config;
 using POS.Infrastructure.Config;
-using POS.Modules.Payout.ViewModels;
+using POS.Modules.Payout.Menu;
 using POS.Modules.Payout.Services.ViewModels;
 
 namespace POS.Modules.Payout

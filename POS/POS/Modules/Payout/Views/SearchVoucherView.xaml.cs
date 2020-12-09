@@ -12,11 +12,11 @@ namespace POS.Modules.Payout.Views
             InitializeComponent();
         }
 
-        private void ValidationNumberTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            var t = (TextBox)sender;
-            t.Focus();
-            t.CaretIndex = t.Text.Length;
-        }
+        //private void ValidationNumberTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    var t = (TextBox)sender;
+        //    t.Focus();
+        //    t.CaretIndex = t.Text.Length;
+        //}
     }
 }

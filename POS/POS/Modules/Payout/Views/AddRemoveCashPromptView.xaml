@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   
+        xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
         xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
         Title="{Binding Path=DisplayName}"
 
@@ -24,7 +24,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <TextBlock Text="Amount" Margin="0,5,0,0" />
+        <TextBlock Text="{x:Static resx:POSResources.UIAmount}" Margin="0,5,0,0" />
 
         <controls:CustomTextBoxControl
             HorizontalAlignment="Left" 
@@ -34,39 +34,34 @@
                         Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
             TextBoxIcon="Dollar"  />
 
-        <TextBlock Text="Password" Margin="0,5,0,0" />
+        <TextBlock Text="{x:Static resx:POSResources.UIPassword}" Margin="0,5,0,0" />
 
         <controls:CustomPasswordControl 
                                         Width="300"
                                         HorizontalAlignment="Left"
                                         Password="{Binding Path=Password,
-                                                                   ValidatesOnDataErrors=True,
-                                                                   Mode=TwoWay,
-                                                                   UpdateSourceTrigger=PropertyChanged}"
+                                                            ValidatesOnDataErrors=True,
+                                                            Mode=TwoWay,
+                                                            UpdateSourceTrigger=PropertyChanged}"
                                         TextBoxIcon="Lock"
-                                        WatermarkText="Please re-enter your password" />
-
+                                        WatermarkText="{x:Static resx:POSResources.UIPasswordWaterMark}" />
 
         <StackPanel 
                     Margin="0, 20"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <Button x:Name="Ok"
-                    Content="Ok"
-                    Visibility="{Binding OkVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UIOk}"
+                    Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}" />
             <Button x:Name="Yes"
-                    Content="Yes"
-                    Visibility="{Binding YesVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UIYes}"
+                    Visibility="{Binding YesVisible, Converter={StaticResource BooleanToVisibility}}" />
             <Button x:Name="No"
-                    Content="No"
-                    Visibility="{Binding NoVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UINo}"
+                    Visibility="{Binding NoVisible, Converter={StaticResource BooleanToVisibility}}" />
             <Button x:Name="Cancel"
-                    Content="Cancel"
-                    Visibility="{Binding CancelVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UICancel}"
+                    Visibility="{Binding CancelVisible, Converter={StaticResource BooleanToVisibility}}" />
         </StackPanel>
     </StackPanel>
 </controls:CustomWindowControl>

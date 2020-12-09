@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using POS.Core.Common.DomainValidation.Interfaces;
+﻿using POS.Core.Common.DomainValidation.Interfaces;
+using System.Collections.Generic;
 
 namespace POS.Core.Common.DomainValidation.Validation
 {

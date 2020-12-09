@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
         xmlns:local="clr-namespace:POS.Modules.Payout.Views"
         Title="{Binding Path=DisplayName}"
         xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
@@ -24,14 +25,13 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Label Content="Starting Balance (must be greater than 0)" Margin="0,5,0,0" />
+        <Label Content="{x:Static resx:POSResources.UIStartingBalanceMessage}" Margin="0,5,0,0" />
 
         <controls:CustomTextBoxControl
             HorizontalAlignment="Left" 
             Width="400"
             HorizontalContentAlignment="Stretch"
-            Text="{Binding Path=StartingBalanceValue, 
-                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+            Text="{Binding Path=StartingBalanceValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
             TextBoxIcon="Dollar"  />
 
         <StackPanel 
@@ -39,21 +39,17 @@
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <Button x:Name="Ok"
-                    Content="Ok"
-                    Visibility="{Binding OkVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UIOk}"
+                    Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}" />
             <Button x:Name="Yes"
-                    Content="Yes"
-                    Visibility="{Binding YesVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UIYes}"
+                    Visibility="{Binding YesVisible, Converter={StaticResource BooleanToVisibility}}" />
             <Button x:Name="No"
-                    Content="No"
-                    Visibility="{Binding NoVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UINo}"
+                    Visibility="{Binding NoVisible, Converter={StaticResource BooleanToVisibility}}" />
             <Button x:Name="Cancel"
-                    Content="Cancel"
-                    Visibility="{Binding CancelVisible,
-                                         Converter={StaticResource BooleanToVisibility}}" />
+                    Content="{x:Static resx:POSResources.UICancel}"
+                    Visibility="{Binding CancelVisible, Converter={StaticResource BooleanToVisibility}}" />
         </StackPanel>
     </StackPanel>
 </controls:CustomWindowControl>

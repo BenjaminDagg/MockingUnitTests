@@ -1,4 +1,5 @@
-﻿using POS.Core.Transaction;
+﻿using POS.Core;
+using POS.Core.Transaction;
 
 namespace POS.Printer.Models
 {
@@ -24,10 +25,10 @@ namespace POS.Printer.Models
             switch (transactionType)
             {
                 case TransactionType.A:
-                    Action = "Cash Added";
+                    Action = POSResources.PrintAddCashReceiptAction;
                     break;
                 case TransactionType.R:
-                    Action = "Cash Removed";
+                    Action = POSResources.PrintRemoveCashReceiptAction;
                     break;
             }
         }

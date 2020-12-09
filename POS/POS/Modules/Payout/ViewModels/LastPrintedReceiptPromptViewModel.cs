@@ -12,6 +12,7 @@ using POS.Core.Interfaces;
 using POS.Core.Interfaces.Data;
 using POS.Core.Interfaces.Printer;
 using POS.Core.PayoutSettings;
+
 using POS.Core.Session;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;

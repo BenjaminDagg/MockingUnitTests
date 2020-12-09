@@ -19,7 +19,6 @@ using POS.Core.Transaction;
 using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
 using POS.Modules.Payout.Events;
-using POS.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -161,7 +160,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception e)
             {
-                errorHandlingService.HandleErrorAsync($"Payout failure.  Error: {e.Message}", e, true);
+                errorHandlingService.HandleErrorAsync(String.Format(POSResources.PayoutTransactionFailedMsg, e.Message), e, true);
             }
         }
 
@@ -220,7 +219,7 @@ namespace POS.Modules.Payout.ViewModels
                 //save last receipt info locally
                 lastReceiptService.SetLastReceipt(receiptNumber, ItemCount, TotalPayout);
                 // eventAggregator.PublishOnUIThread(new CashoutSuccessfulEvent(receiptNumber, Items.ToList(), TotalPayout));
-                dialogService.PromptAsync(POSResources.PayoutSuccessfulMsg, Resources.SuccessTitle);
+                dialogService.PromptAsync(POSResources.PayoutSuccessfulMsg, POSResources.SuccessTitle);
                 ResetUi();
             }
             catch (Exception e)

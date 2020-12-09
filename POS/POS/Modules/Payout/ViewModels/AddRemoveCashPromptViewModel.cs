@@ -18,7 +18,6 @@ namespace POS.Modules.Payout.ViewModels
     {
         private string password;
         private decimal amount;
-        //private readonly IAuthenticateUserService authenticateUser;
         private readonly IUserAuthenticationService authenticateUser;
         private readonly IErrorHandlingService errorHandlingService;
         private readonly IUserSession user;
@@ -32,7 +31,7 @@ namespace POS.Modules.Payout.ViewModels
 
         public TransactionType TransactionType { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Required")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredMsg", ErrorMessageResourceType = typeof(POSResources))]
         public decimal Amount { get => amount; set => Set(ref amount, value); }
 
         [Required]
@@ -98,12 +97,12 @@ namespace POS.Modules.Payout.ViewModels
             switch (result)
             {
                 case LoginEventType.LoginFail:
-                    return "Invalid username or password.";
+                    return POSResources.LoginFailedMsg;
                 case LoginEventType.LoginFailAccountDisabled:
-                    return "Account is deactivated. Please contact your Administrator.";
+                    return POSResources.LoginFailAccountDisabledMsg;
                 case LoginEventType.LoginFailAccountLocked:
                     return
-                        "Account is locked. Too many failed login attempts. Please try again later or contact your Administrator.";
+                        POSResources.LoginFailAccountLockedMsg;
 
                 default:
                     return string.Empty;
