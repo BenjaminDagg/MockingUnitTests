@@ -1,0 +1,69 @@
+﻿<controls:CustomWindowControl x:Class="POS.Modules.Payout.Views.Prompts.LastPrintedReceiptPromptView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
+        xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+        xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
+        Title="{Binding Path=DisplayName}"
+        mc:Ignorable="d"
+        Style="{StaticResource POSPromptWindowStyle}"
+        SizeToContent="WidthAndHeight">
+    
+    <StackPanel>
+        <ItemsControl Margin="0,2,0,2"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Alerts}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <dgmaterial:AlertMessageControlEx Margin="0,3"
+                                                  HorizontalAlignment="Stretch"
+                                                  Alert="{Binding AlertType}"
+                                                  Message="{Binding Message}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <Path Data="{StaticResource Receipt}" Fill="{StaticResource DgWhite}"/>
+                <TextBlock Text="{Binding Path=ReceiptNumber, Mode=OneWay}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Path Data="{StaticResource ticket}" Fill="{StaticResource DgWhite}"/>
+                <TextBlock Text="{Binding Path=NumberVouchers, Mode=OneWay}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Path Data="{StaticResource Money_Icon}" Fill="{StaticResource DgWhite}"/>
+                <TextBlock Text="{Binding Path=TotalPayout, Mode=OneWay}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel 
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <dgmaterial:CustomButtonControlEx x:Name="Ok"
+                                              FontSize="16" 
+                                              Foreground="{StaticResource DgWhite}"
+                                              Background="{StaticResource DgDefaultButtonBackground}" 
+                                              Width="137" 
+                                              Height="34"
+                                              Margin="10, 0"
+                                              Content="{x:Static resx:POSResources.UILastPrintedReceiptButtonReprint}" 
+                                              Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}"
+                                              />
+            <dgmaterial:CustomButtonControlEx x:Name="Cancel"
+                                              FontSize="16" 
+                                              Foreground="{StaticResource DgWhite}"
+                                              Background="{StaticResource DgDefaultButtonBackground}" 
+                                              Width="137" 
+                                              Height="34"
+                                              Content="{x:Static resx:POSResources.UICancel}"
+                                              Visibility="{Binding CancelVisible, Converter={StaticResource BooleanToVisibility}}" 
+                                              />
+        </StackPanel>
+    </StackPanel>
+</controls:CustomWindowControl>

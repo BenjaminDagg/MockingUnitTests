@@ -23,7 +23,7 @@ namespace POS.Core.ValueObjects
             if (string.IsNullOrEmpty(barcode))
                 return Result.Failure<Barcode>(POSResources.BarcodeRequiredMsg);
 
-            if (!Regex.IsMatch(barcode, @"([0-9]+)"))
+            if (!Regex.IsMatch(barcode, @"\A([0-9]+)\Z"))
                 return Result.Failure<Barcode>(POSResources.BarcodeInvalidNumberMsg);
             return barcode.Length != voucherMaxCharLength 
                 ? Result.Failure<Barcode>(String.Format(POSResources.BarcodeInvalidMaxCharacterMsg, voucherMaxCharLength)) 

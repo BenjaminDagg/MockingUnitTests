@@ -1,17 +1,17 @@
 ﻿<Application x:Class="POS.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converter="clr-namespace:POS.Converters"
+             >
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Framework.WPF.UI.Theme;component/Default.xaml" />
                 <ResourceDictionary Source="Resources/POSStyles.xaml" />
-                <!--<ResourceDictionary>
-                    --><!--  ReSharper disable once InconsistentNaming  --><!--
-                    <startup:ApplicationBootstrapper x:Key="bootstrapper" />
-                </ResourceDictionary>-->
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+            <converter:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>               
         </ResourceDictionary>
     </Application.Resources>
 </Application>

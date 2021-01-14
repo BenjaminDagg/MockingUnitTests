@@ -13,14 +13,20 @@ namespace POS.Core.Vouchers
 
         public Money Amount { get; }
 
+        public DateTime Created { get; }
+
+        public string Location { get; }
+
         public int VoucherType { get;  }
         
-        public VoucherItem(int voucherId, int voucherType, Barcode barcode, Money amount )
+        public VoucherItem(int voucherId, int voucherType, Barcode barcode, Money amount, DateTime created, string location )
         {
             VoucherId = voucherId;
             VoucherType = voucherType;
             Barcode = barcode ?? throw new ArgumentNullException(nameof(barcode));
             Amount = amount ?? throw new ArgumentNullException(nameof(amount));
+            Created = created;
+            Location = location;
         }
 
       

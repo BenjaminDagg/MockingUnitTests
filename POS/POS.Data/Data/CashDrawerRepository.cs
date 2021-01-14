@@ -14,20 +14,20 @@ namespace POS.Infrastructure.Data
         {
 
         }
-        public Task<CashDrawerSummaryDto> GetCashDrawerSummary(string sessionId)
+        public async Task<CashDrawerSummaryDto> GetCashDrawerSummary(string sessionId)
         {
             const string sql = @";EXEC [dbo].[Get_Cash_Drawer_Summary] @SessionID";
-            return Db.SingleOrDefaultAsync<CashDrawerSummaryDto>(sql,
+            return await Db.SingleOrDefaultAsync<CashDrawerSummaryDto>(sql,
                 new
                 {
                    SessionID = sessionId
                 });
         }
 
-        public Task<decimal> GetCashDrawerBalance(string sessionId)
+        public async Task<decimal> GetCashDrawerBalance(string sessionId)
         {
             const string sql = @";EXEC [dbo].[Get_Cash_Drawer_Balance]";
-            return Db.ExecuteScalarAsync<decimal>(sql, sessionId);
+            return await Db.ExecuteScalarAsync<decimal>(sql, sessionId);
         }
 
         public async Task InsertStartingBalance(string username, int locationId, decimal amount, SessionId sessionId)

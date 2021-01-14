@@ -7,6 +7,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Update="Modules\Payout\ViewModels\PayoutViewModel.Helper.cs">
+			<DependentUpon>Modules\Payout\ViewModels\PayoutViewModel.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Modules\Payout\ViewModels\TransactionViewModel.Helper.cs">
+			<DependentUpon>Modules\Payout\ViewModels\TransactionViewModel.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Remove="appsettings.Development.json" />
 		<None Remove="appsettings.json" />
 		<None Remove="appsettings.local.json" />
@@ -39,11 +48,24 @@
 		<ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\Framework.Infrastructure.Data\Framework.Infrastructure.Data.csproj" />
 		<ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.Modules\Framework.WPF.Modules.csproj" />
+		<ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.UI.DGMaterial.Theme\Framework.WPF.UI.DGMaterial.Theme.csproj" />
 		<ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.UI.Theme\Framework.WPF.UI.Theme.csproj" />
 		<ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.UI\Framework.WPF.UI.csproj" />
 		<ProjectReference Include="..\..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF\Framework.WPF.csproj" />
 		<ProjectReference Include="..\POS.Data\POS.Infrastructure.csproj" />
 		<ProjectReference Include="..\POS.Logic\POS.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Modules\Settings\Views\Prompts\AddRemoveCashPromptView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	  </Page>
+	  <Page Update="Modules\Payout\Views\Prompts\LastPrintedReceiptPromptView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	  </Page>
+	  <Page Update="Modules\Settings\Views\Prompts\StartingBalancePromptView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	  </Page>
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

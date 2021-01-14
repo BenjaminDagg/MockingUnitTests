@@ -8,13 +8,13 @@ using POS.Core.Interfaces.Data;
 using POS.Core.Interfaces.Printer;
 using POS.Core.Session;
 using POS.Modules.Payout.ViewModels;
+using POS.Modules.Settings.ViewModels;
 
 namespace POS.Modules.Payout.Services.ViewModels
 {
     public class PayoutViewServices : IPayoutViewServices
     {
         public IServiceLocator ServiceLocator { get; }
-        public IModalPopupService ModalService => ServiceLocator.Resolve<IModalPopupService>();
         public IPayoutSettingsRepository PayoutDataService => ServiceLocator.Resolve<IPayoutSettingsRepository>();
         public IUserSession User => ServiceLocator.Resolve<IUserSession>();
         public IPayoutContextService PayoutContextService => ServiceLocator.Resolve<IPayoutContextService>();
@@ -22,13 +22,12 @@ namespace POS.Modules.Payout.Services.ViewModels
         public SystemContext Context => ServiceLocator.Resolve<SystemContext>();
         public Session Session => ServiceLocator.Resolve<Session>();
         public ILogEventDataService LogEventService => ServiceLocator.Resolve<ILogEventDataService>();
-
         public IEventAggregator EventAggregator => ServiceLocator.Resolve<IEventAggregator>();
         public IPrintService PrintService => ServiceLocator.Resolve<IPrintService>();
         public CashDrawerViewModel CashDrawerViewModel => ServiceLocator.Resolve<CashDrawerViewModel>();
         public SearchBarcodeViewModel SearchBarcodeViewModel => ServiceLocator.Resolve<SearchBarcodeViewModel>();
         public TransactionViewModel TransactionViewModel => ServiceLocator.Resolve<TransactionViewModel>();
-       // public IEnumerable<IDatabaseConfigItem> AppConfigItems => ServiceLocator.Resolve<IEnumerable<IDatabaseConfigItem>>();
+        public PrinterSettingsViewModel PrinterSettingsViewModel => ServiceLocator.Resolve<PrinterSettingsViewModel>();
 
         public PayoutViewServices(IServiceLocator serviceLocator)
         {

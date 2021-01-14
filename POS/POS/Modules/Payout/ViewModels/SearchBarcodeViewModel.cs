@@ -1,7 +1,7 @@
 ﻿using Caliburn.Micro;
 using Framework.WPF.Mvvm;
 using POS.Core.Config;
-using POS.Modules.Payout.Events;
+using POS.Common.Events;
 using POS.Modules.Payout.Validation;
 using System;
 using System.Windows.Input;
@@ -10,40 +10,47 @@ namespace POS.Modules.Payout.ViewModels
 {
     public class SearchBarcodeViewModel : PropertyChangedBaseWithValidation
     {
-        private string barcode;
-        private int cursorIndex;
-        private int voucherMaxLength;
-        private readonly IEventAggregator eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
 
-        public int VoucherMaxLength { get => voucherMaxLength; set
+        public SearchBarcodeViewModel(IVoucherSettings settings, IEventAggregator eventAgg)
+        {
+            VoucherMaxLength = settings.VoucherCharacterLength;
+            _eventAggregator = eventAgg;
+        }
+
+        private int _voucherMaxLength;
+        public int VoucherMaxLength { get => _voucherMaxLength; set
             {
-                voucherMaxLength = value;
+                _voucherMaxLength = value;
                 NotifyOfPropertyChange(nameof(VoucherMaxLength));
-            } }
+            } 
+        }
 
+        private string _barcode;
         [Barcode]
         public string Barcode
         {
-            get => barcode;
+            get => _barcode;
             set
             {
-                barcode = value;
+                _barcode = value;
                 NotifyOfPropertyChange(nameof(Barcode));
 
                 if (Barcode?.Length == VoucherMaxLength)
                 {
-                    eventAggregator.PublishOnUIThreadAsync(new TriggerSearch());
+                     _eventAggregator.PublishOnUIThreadAsync(new TriggerSearch());
                 }
             }
         }
+        private int _cursorIndex;
         public int CursorIndex
         {
-            get => cursorIndex;
+            get => _cursorIndex;
             set
             {
-                if (cursorIndex != value)
+                if (_cursorIndex != value)
                 {
-                    cursorIndex = value;
+                    _cursorIndex = value;
                     NotifyOfPropertyChange(nameof(CursorIndex));
                 }
             }
@@ -57,43 +64,44 @@ namespace POS.Modules.Payout.ViewModels
         public ICommand EnterCommand =>
             new RelayCommand<object>((o) =>
             {
-                eventAggregator.PublishOnUIThreadAsync(new TriggerSearch());
+                _eventAggregator.PublishOnUIThreadAsync(new TriggerSearch());
             });
-
-        public SearchBarcodeViewModel(IVoucherSettings settings, IEventAggregator eventAgg)
-        {
-            VoucherMaxLength = settings.VoucherCharacterLength;
-            eventAggregator = eventAgg;
-        }
 
         public void RemoveLastCharacter(int cursorPosition)
         {
-            if (Barcode.Length > 0 && cursorPosition > 0)
+            if (_barcode.Length > 0 && cursorPosition > 0)
             {
-                Barcode = Barcode.Remove(--cursorPosition, 1);
-                CursorIndex = cursorPosition;
+                _barcode = _barcode.Remove(--cursorPosition, 1);
+                _cursorIndex = cursorPosition;
             }
+            NotifyOfPropertyChange(nameof(CursorIndex));
+            NotifyOfPropertyChange(nameof(Barcode));
         }
 
         public void AddCharacter(object character)
         {
-            if (Barcode?.Length >= VoucherMaxLength) return;
+            if (_barcode?.Length >= VoucherMaxLength) return;
 
-            var tempCursorPosition = CursorIndex;
-            if (Barcode != null)
+            var tempCursorPosition = _cursorIndex;
+            if (_barcode != null)
             {
-                Barcode = Barcode.Insert(CursorIndex, character.ToString());
+                _barcode = _barcode.Insert(_cursorIndex, character.ToString());
             }
             else
             {
-                Barcode = character.ToString();
+                _barcode = character.ToString();
             }
-            CursorIndex = ++tempCursorPosition;
+            _cursorIndex = ++tempCursorPosition;
+            NotifyOfPropertyChange(nameof(CursorIndex));
+            NotifyOfPropertyChange(nameof(Barcode));
         }
 
         public void Clear(object o = null)
         {
-            Barcode = string.Empty;
+            _barcode = string.Empty;
+            _cursorIndex = 0;
+            NotifyOfPropertyChange(nameof(CursorIndex));
+            NotifyOfPropertyChange(nameof(Barcode));
         }
     }
 }

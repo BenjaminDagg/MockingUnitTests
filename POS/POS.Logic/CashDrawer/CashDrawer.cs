@@ -41,7 +41,7 @@ namespace POS.Core.CashDrawer
         }
 
         public Result SetCashDrawerValues(CashDrawerSummaryDto s)
-        {
+        {        
             CashAdded = (Money)s.CashAdded;
             TotalPayout = (Money)s.PayoutSum;
             CashRemoved = (Money)s.CashRemoved;

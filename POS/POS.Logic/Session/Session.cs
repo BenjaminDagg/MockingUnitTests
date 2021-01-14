@@ -10,7 +10,9 @@ namespace POS.Core.Session
 
         public int UserId { get; private set; }
 
-        public SessionId Id { get; set; }
+        public SessionId Id = SessionId.None;
+
+        public bool CashDrawerStarted { get; set; }
 
         public bool HasSessionInitialized => Id != SessionId.None;
 
@@ -21,10 +23,12 @@ namespace POS.Core.Session
         public int NumberTransactions { get; set; }
 
         public bool HasCashDrawer { get; set; }
-         
-        public Result BeginSession(string username, int userId, bool hasLocation, bool isSiteStatusPayoutsActive, bool isPrinterReady)
+        public bool UseNoCashDrawer { get; set; }
+        public bool HaveReceiptPrinter { get; set; }
+
+        public Result BeginSession(string username, int userId, bool hasLocation, bool isSiteStatusPayoutsActive)
         {
-            var canBeInit = CanBeInitialized(hasLocation, isSiteStatusPayoutsActive, isPrinterReady);
+            var canBeInit = CanBeInitialized(hasLocation, isSiteStatusPayoutsActive);
             if (canBeInit.IsFailure)
                 return Result.Failure(canBeInit.Error);
             var canCreateSessionId = SessionId.Create(username);
@@ -38,7 +42,7 @@ namespace POS.Core.Session
             return Result.Success();
         }
 
-        public Result CanBeInitialized(bool hasLocation, bool isSiteStatusPayoutsActive, bool isPrinterReady)
+        public Result CanBeInitialized(bool hasLocation, bool isSiteStatusPayoutsActive)
         {
             //if no locationId is set, can't payout
             if (!hasLocation)
@@ -52,7 +56,7 @@ namespace POS.Core.Session
                 return Result.Failure(POSResources.SitePayoutsDisabledMsg);
             }
 
-            if (!isPrinterReady)
+            if (!HaveReceiptPrinter)
             {
                 return Result.Failure(POSResources.PrinterNotAvailableMsg);
             }
@@ -66,6 +70,9 @@ namespace POS.Core.Session
             NumberTransactions = 0;
             CurrentCashDrawerBalance = Money.None;
             HasCashDrawer = false;
+            HaveReceiptPrinter = false;
+            CashDrawerStarted = false;
+            UseNoCashDrawer = false;
         }
     }
 }

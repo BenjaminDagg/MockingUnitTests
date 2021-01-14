@@ -8,12 +8,12 @@ using POS.Core.Interfaces.Data;
 using POS.Core.Interfaces.Printer;
 using POS.Core.Session;
 using POS.Modules.Payout.ViewModels;
+using POS.Modules.Settings.ViewModels;
 
 namespace POS.Modules.Payout.Services.ViewModels
 {
     public interface IPayoutViewServices
     {
-        IModalPopupService ModalService { get; }
         IServiceLocator ServiceLocator { get; }
         Session Session { get; }
         IPayoutSettingsRepository PayoutDataService { get; }
@@ -27,7 +27,6 @@ namespace POS.Modules.Payout.Services.ViewModels
         CashDrawerViewModel CashDrawerViewModel { get;  }
         SearchBarcodeViewModel SearchBarcodeViewModel { get; }
         TransactionViewModel TransactionViewModel { get; }
-
-        //  IEnumerable<IDatabaseConfigItem> AppConfigItems { get; }
+        PrinterSettingsViewModel PrinterSettingsViewModel { get; }
     }
 }

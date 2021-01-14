@@ -19,9 +19,9 @@ namespace POS.Core.Vouchers
 
         //public string RedeemedLocation { get; set; }
 
-        //public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
 
-        //public string CreatedLocation { get; set; }
+        public string CreatedLocation { get; set; }
 
         public decimal VoucherAmount { get; set; }
 

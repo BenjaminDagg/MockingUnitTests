@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="POS.Modules.Settings.Views.DeviceManagementSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:POS.Modules.Settings.Views"
+             xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="1000">
+    <GroupBox  >
+        <StackPanel>
+
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" 
+                                                       Text="Device Management Settings" 
+                                                       Foreground="{StaticResource DgWhite}"
+                                                       FontSize="34" 
+                                                       HorizontalAlignment="Left" 
+                                                       VerticalAlignment="Bottom"
+                                                       />
+                </Grid>
+
+                <Separator BorderBrush="{StaticResource DgWhite}" Margin="0, 2, 0, 10" />
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel  Margin="0, 0, 10, 0">
+                    <dgmaterial:CustomTextBoxControlEx x:Name="PolingInterval"
+                                                             Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                             MaxLength="18" 
+                                                             Margin="0, 20, 0, 0" 
+                                                             Width="400"
+                                                             HorizontalAlignment="Center"
+                                                             FontSize="18" 
+                                                             Foreground="{StaticResource DgWhite}"
+                                           PathIcon="{StaticResource Query_Builder}"
+                                           WatermarkText="Polling Interval">
+                    </dgmaterial:CustomTextBoxControlEx>
+                    <dgmaterial:CustomTextBoxControlEx x:Name="ServerIPAddress"
+                                                             Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                             MaxLength="18" 
+                                                             Margin="0, 20, 0, 0" 
+                                                             Width="400"
+                                                             HorizontalAlignment="Center"
+                                                             FontSize="18" 
+                                                             Foreground="{StaticResource DgWhite}"
+                                           PathIcon="{StaticResource Dns}"
+                                                            WatermarkText="Server IP Address">
+                    </dgmaterial:CustomTextBoxControlEx>
+                </StackPanel>
+                <StackPanel Margin="20, 0, 0, 0">
+                    <dgmaterial:CustomTextBoxControlEx x:Name="LogFilePath"
+                                                             Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                             MaxLength="18" 
+                                                             Margin="0, 20, 0, 0" 
+                                                             Width="400"
+                                                             HorizontalAlignment="Center"
+                                                             FontSize="18" 
+                                                             Foreground="{StaticResource DgWhite}"
+                                           PathIcon="{StaticResource Description}"
+                                                     WatermarkText="Log File Path">
+                    </dgmaterial:CustomTextBoxControlEx>
+                    <dgmaterial:CustomTextBoxControlEx x:Name="ServerPort"
+                                                             Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                             MaxLength="18" 
+                                                             Margin="0, 20, 0, 0" 
+                                                             Width="400"
+                                                             HorizontalAlignment="Center"
+                                                             FontSize="18" 
+                                                             Foreground="{StaticResource DgWhite}"
+                                           PathIcon="{StaticResource Dns}"
+                                                     WatermarkText="Server Port">
+                    </dgmaterial:CustomTextBoxControlEx>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Margin="0, 20, 0, 0"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+
+                <dgmaterial:CustomButtonControlEx x:Name="SaveDeviceSettings" 
+                                                Margin="10, 0, 5, 0"
+                                                Content="Save"
+                                                FontSize="24" 
+                                                Foreground="{StaticResource DgWhite}"
+                                                Background="{StaticResource DgDefaultButtonBackground}" 
+                                                Width="184" 
+                                                Height="46"
+                                                        />
+            </StackPanel>
+        </StackPanel>
+    </GroupBox>
+</UserControl>

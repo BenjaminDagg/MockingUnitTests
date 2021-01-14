@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="POS.Modules.Settings.Views.PrinterSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:POS.Modules.Settings.Views"
+             xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
+             xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="1000">
+    <GroupBox  >
+        <StackPanel>
+            <ItemsControl Margin="0,2,0,2"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Alerts}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <dgmaterial:AlertMessageControlEx Margin="0,3"
+                                                  HorizontalAlignment="Stretch"
+                                                  Alert="{Binding AlertType}"
+                                                  Message="{Binding Message}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" 
+                                Text="Printer Settings" 
+                                Foreground="{StaticResource DgWhite}"
+                                FontSize="34" 
+                                HorizontalAlignment="Left" 
+                                VerticalAlignment="Bottom"
+                                />
+                </Grid>
+
+                <Separator BorderBrush="{StaticResource DgWhite}" Margin="0, 2, 0, 10" />
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel  Margin="0, 0, 10, 0">
+                    <Label Content="{x:Static resx:POSResources.UIReceiptPrinter}" Foreground="{StaticResource DgWhite}" FontSize="16"/>
+                    <dgmaterial:CustomComboBoxControlEx Style="{StaticResource DgComboBoxStyle}"
+                                                        PlaceholderText="{x:Static resx:POSResources.UIPrinterSelectionPlaceholder}" 
+                                                        FontSize="30" 
+                                                        Width="400"
+                                                        ItemsSource="{Binding Printers}" 
+                                                        SelectedItem="{Binding ReceiptPrinter, ValidatesOnDataErrors=true}" 
+                                                        />
+                </StackPanel>
+                <StackPanel Margin="20, 0, 0, 0">
+                    <Label Content="{x:Static resx:POSResources.UIReportPrinter}" Foreground="{StaticResource DgWhite}" FontSize="16"/>
+                    <dgmaterial:CustomComboBoxControlEx Style="{StaticResource DgComboBoxStyle}"
+                                                        PlaceholderText="{x:Static resx:POSResources.UIPrinterSelectionPlaceholder}" 
+                                                        FontSize="30" 
+                                                        Width="400"
+                                                        ItemsSource="{Binding Printers}" 
+                                                        SelectedItem="{Binding ReportPrinter}" 
+                                                        />
+
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Margin="0, 20, 0, 0" HorizontalAlignment="Right" Orientation="Horizontal">
+
+                <dgmaterial:CustomButtonControlEx x:Name="Save" 
+                                                  Command="{Binding SaveCommand}"
+                                                  CommandParameter="null"
+                                                Margin="10, 0, 5, 0"
+                                                Content="{x:Static resx:POSResources.UISave}"
+                                                FontSize="24" 
+                                                Foreground="{StaticResource DgWhite}"
+                                                Background="{StaticResource DgDefaultButtonBackground}" 
+                                                Width="184" 
+                                                Height="46"
+                                                        />
+            </StackPanel>
+        </StackPanel>
+    </GroupBox>
+</UserControl>

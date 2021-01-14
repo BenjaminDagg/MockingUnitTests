@@ -4,18 +4,21 @@ using Framework.Infrastructure.ApplicationEnvironment;
 using Framework.Infrastructure.Data;
 using Framework.Infrastructure.Identity.Data;
 using Framework.Infrastructure.Identity.Desktop;
+using Framework.WPF;
 using Framework.WPF.Modules;
-using Framework.WPF.Modules.Startup;
+using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.Startup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using POS.Common;
 using POS.Core;
 using POS.Core.StartUp;
 using POS.Infrastructure.Startup;
+using POS.Modules.Main;
+using POS.Modules.Main.ViewModels;
 using POS.Modules.Payout;
 using POS.Modules.Printer;
+using System;
 using System.Reflection;
 
 namespace POS.Startup
@@ -36,8 +39,11 @@ namespace POS.Startup
             
             services.AddSystemValidationWithDatabase(null);
 
+            services.AddWpfModules();
             services.AddWpf(ConfigureWindowShell());
             services.AddWpfUserAdministration();
+
+            services.AddTransient<POSMainWindowViewModel>();
 
             #region POS Services
             //POS Infrastructure Services
@@ -47,11 +53,11 @@ namespace POS.Startup
             services.AddPOSCoreServices();
 
             //Modules
-            services.AddPrinterModule(configuration);
+            services.AddSettingsModule(configuration);
             services.AddPayoutModule(configuration);
 
-            //POS Common
-            services.AddTransient<IModalPopupService, ModalPopupService>();
+            //POS Shell
+            services.AddTabModules();
             #endregion
 
             var securityDb = new SecurityDbConnection(configuration, GetConnectionStringEncryption());
@@ -68,6 +74,11 @@ namespace POS.Startup
             };
 
             return config;
+        }
+
+        protected override Type GetShellViewModelType()
+        {
+            return typeof(POSMainWindowViewModel);
         }
 
         protected override IApplicationEnvironmentService GetApplicationEnvironmentService()

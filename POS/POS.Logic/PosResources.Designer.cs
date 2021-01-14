@@ -340,6 +340,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payout initializing without cash drawer..
+        /// </summary>
+        public static string PayoutInitializingWithoutCashDrawerMsg {
+            get {
+                return ResourceManager.GetString("PayoutInitializingWithoutCashDrawerMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payout session initialized successfully..
+        /// </summary>
+        public static string PayoutSessionInitializedSuccessfullyMsg {
+            get {
+                return ResourceManager.GetString("PayoutSessionInitializedSuccessfullyMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payout Station.
         /// </summary>
         public static string PayoutStationMenu {
@@ -754,6 +772,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Starting balance must be numeric..
+        /// </summary>
+        public static string StartingBalanceValidationFormatMsg {
+            get {
+                return ResourceManager.GetString("StartingBalanceValidationFormatMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To continue you must enter a starting balance greater than 0 and less than or equal to $250,000..
         /// </summary>
         public static string StartingBalanceValidationMsg {
@@ -826,20 +853,11 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Balance: {0:C}.
+        ///   Looks up a localized string similar to An unexpected error occured loading window..
         /// </summary>
-        public static string UICachDrawerFormatCurrentBalance {
+        public static string UIApplicatioLoadingWindowErrorMsg {
             get {
-                return ResourceManager.GetString("UICachDrawerFormatCurrentBalance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Total Payout: {0:C}.
-        /// </summary>
-        public static string UICachDrawerFormatTotalPayout {
-            get {
-                return ResourceManager.GetString("UICachDrawerFormatTotalPayout", resourceCulture);
+                return ResourceManager.GetString("UIApplicatioLoadingWindowErrorMsg", resourceCulture);
             }
         }
         
@@ -862,6 +880,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash added successfully..
+        /// </summary>
+        public static string UICashDrawerCashAddedSuccessMsg {
+            get {
+                return ResourceManager.GetString("UICashDrawerCashAddedSuccessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash removed successfully..
+        /// </summary>
+        public static string UICashDrawerCashRemovedSuccessMsg {
+            get {
+                return ResourceManager.GetString("UICashDrawerCashRemovedSuccessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cash Added: {0:C}.
         /// </summary>
         public static string UICashDrawerFormatCashAdded {
@@ -880,6 +916,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Balance: {0:C}.
+        /// </summary>
+        public static string UICashDrawerFormatCurrentBalance {
+            get {
+                return ResourceManager.GetString("UICashDrawerFormatCurrentBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Starting Balance: {0:C}.
         /// </summary>
         public static string UICashDrawerFormatStartingBalance {
@@ -889,11 +934,38 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Payout: {0:C}.
+        /// </summary>
+        public static string UICashDrawerFormatTotalPayout {
+            get {
+                return ResourceManager.GetString("UICashDrawerFormatTotalPayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove Cash.
         /// </summary>
         public static string UICashDrawerRemoveCash {
             get {
                 return ResourceManager.GetString("UICashDrawerRemoveCash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash Drawer.
+        /// </summary>
+        public static string UICashDrawerTitle {
+            get {
+                return ResourceManager.GetString("UICashDrawerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string UIClear {
+            get {
+                return ResourceManager.GetString("UIClear", resourceCulture);
             }
         }
         
@@ -912,6 +984,16 @@ namespace POS.Core {
         public static string UICurrentTransactionButtonVoidTransaction {
             get {
                 return ResourceManager.GetString("UICurrentTransactionButtonVoidTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently no items in transaction. 
+        ///Enter or scan a voucher to get started..
+        /// </summary>
+        public static string UICurrentTransactionEmptyTransactionMsg {
+            get {
+                return ResourceManager.GetString("UICurrentTransactionEmptyTransactionMsg", resourceCulture);
             }
         }
         
@@ -952,11 +1034,38 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        public static string UICurrentTransactionHeaderCreated {
+            get {
+                return ResourceManager.GetString("UICurrentTransactionHeaderCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string UICurrentTransactionHeaderDetails {
             get {
                 return ResourceManager.GetString("UICurrentTransactionHeaderDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string UICurrentTransactionHeaderID {
+            get {
+                return ResourceManager.GetString("UICurrentTransactionHeaderID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Location.
+        /// </summary>
+        public static string UICurrentTransactionHeaderLocation {
+            get {
+                return ResourceManager.GetString("UICurrentTransactionHeaderLocation", resourceCulture);
             }
         }
         
@@ -1006,6 +1115,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Payout: {0}.
+        /// </summary>
+        public static string UICurrentTransactionTotalPayout {
+            get {
+                return ResourceManager.GetString("UICurrentTransactionTotalPayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Report.
         /// </summary>
         public static string UICurrentTransactionViewReport {
@@ -1015,11 +1133,56 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voucher Count: {0}.
+        /// </summary>
+        public static string UICurrentTransactionVoucherCount {
+            get {
+                return ResourceManager.GetString("UICurrentTransactionVoucherCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter.
         /// </summary>
         public static string UIEnter {
             get {
                 return ResourceManager.GetString("UIEnter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash amount must be numeric..
+        /// </summary>
+        public static string UIErrorCashPromptAmountFormatMsg {
+            get {
+                return ResourceManager.GetString("UIErrorCashPromptAmountFormatMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount is required.
+        /// </summary>
+        public static string UIErrorCashPromptAmountRequiredMsg {
+            get {
+                return ResourceManager.GetString("UIErrorCashPromptAmountRequiredMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required..
+        /// </summary>
+        public static string UIErrorCashPromptPasswordRequiredMsg {
+            get {
+                return ResourceManager.GetString("UIErrorCashPromptPasswordRequiredMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipt Printer is required..
+        /// </summary>
+        public static string UIErrorReceiptPrinterValidationMsg {
+            get {
+                return ResourceManager.GetString("UIErrorReceiptPrinterValidationMsg", resourceCulture);
             }
         }
         
@@ -1056,6 +1219,15 @@ namespace POS.Core {
         public static string UILastPrintedReceiptTotalPayout {
             get {
                 return ResourceManager.GetString("UILastPrintedReceiptTotalPayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string UILogin {
+            get {
+                return ResourceManager.GetString("UILogin", resourceCulture);
             }
         }
         
@@ -1132,6 +1304,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voucher with barcode {0} not found.
+        /// </summary>
+        public static string UIPayoutBarcodeNotFoundMsg {
+            get {
+                return ResourceManager.GetString("UIPayoutBarcodeNotFoundMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Session ID: {0}.
         /// </summary>
         public static string UIPayoutFormatSessionId {
@@ -1168,6 +1349,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receipt Printer error.
+        /// </summary>
+        public static string UIPayoutReceiptPrinterError {
+            get {
+                return ResourceManager.GetString("UIPayoutReceiptPrinterError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please set the receipt printer..
+        /// </summary>
+        public static string UIPayoutReceiptPrinterErrorMsg {
+            get {
+                return ResourceManager.GetString("UIPayoutReceiptPrinterErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payout Station.
         /// </summary>
         public static string UIPayoutStation {
@@ -1177,11 +1376,110 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payout was successful..
+        /// </summary>
+        public static string UIPayoutSuccessfulMsg {
+            get {
+                return ResourceManager.GetString("UIPayoutSuccessfulMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Receipt.
         /// </summary>
         public static string UIPayoutToolTipLastReceipt {
             get {
                 return ResourceManager.GetString("UIPayoutToolTipLastReceipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a Printer.
+        /// </summary>
+        public static string UIPrinterSelectionPlaceholder {
+            get {
+                return ResourceManager.GetString("UIPrinterSelectionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipt Printer.
+        /// </summary>
+        public static string UIReceiptPrinter {
+            get {
+                return ResourceManager.GetString("UIReceiptPrinter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string UIReportHeaderAmount {
+            get {
+                return ResourceManager.GetString("UIReportHeaderAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Barcode.
+        /// </summary>
+        public static string UIReportHeaderBarcode {
+            get {
+                return ResourceManager.GetString("UIReportHeaderBarcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Created.
+        /// </summary>
+        public static string UIReportHeaderDateCreated {
+            get {
+                return ResourceManager.GetString("UIReportHeaderDateCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created at Machine.
+        /// </summary>
+        public static string UIReportHeaderDateCreatedAtMachine {
+            get {
+                return ResourceManager.GetString("UIReportHeaderDateCreatedAtMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State.
+        /// </summary>
+        public static string UIReportHeaderState {
+            get {
+                return ResourceManager.GetString("UIReportHeaderState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voucher Id.
+        /// </summary>
+        public static string UIReportHeaderVoucherId {
+            get {
+                return ResourceManager.GetString("UIReportHeaderVoucherId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Printer.
+        /// </summary>
+        public static string UIReportPrinter {
+            get {
+                return ResourceManager.GetString("UIReportPrinter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string UISave {
+            get {
+                return ResourceManager.GetString("UISave", resourceCulture);
             }
         }
         
@@ -1200,6 +1498,51 @@ namespace POS.Core {
         public static string UIStartingBalanceMessage {
             get {
                 return ResourceManager.GetString("UIStartingBalanceMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter an amount greater than 0.
+        /// </summary>
+        public static string UIStartingBalancePlaceholder {
+            get {
+                return ResourceManager.GetString("UIStartingBalancePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device Management.
+        /// </summary>
+        public static string UITabDeviceManagement {
+            get {
+                return ResourceManager.GetString("UITabDeviceManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payout.
+        /// </summary>
+        public static string UITabPayout {
+            get {
+                return ResourceManager.GetString("UITabPayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reports.
+        /// </summary>
+        public static string UITabReports {
+            get {
+                return ResourceManager.GetString("UITabReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string UITabSettings {
+            get {
+                return ResourceManager.GetString("UITabSettings", resourceCulture);
             }
         }
         

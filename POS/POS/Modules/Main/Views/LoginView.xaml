@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="POS.Modules.Main.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+        xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
+        xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Style="{StaticResource POSLoginViewStyle}"
+             >
+    
+    <!-- Content -->
+    <StackPanel FocusManager.FocusedElement="{Binding ElementName=UserName}">
+
+        <TextBlock Text="Please Login Below" 
+                   VerticalAlignment="Bottom" 
+                   FontSize="34" 
+                   Foreground="{StaticResource DgWhite}" 
+                   Margin="40, 0, 0, 28"
+                    />
+
+        <ItemsControl Margin="0,2,0,2"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Alerts}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <dgmaterial:AlertMessageControlEx Margin="0,3"
+                                                 HorizontalAlignment="Stretch"
+                                                 Alert="{Binding AlertType}"
+                                                 Message="{Binding Message}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <dgmaterial:CustomTextBoxControlEx x:Name="UserName"
+                                         Margin="6, 20, 15, 25" 
+                                         Width="400"
+                                         HorizontalAlignment="Center"
+                                         FontSize="18" 
+                                         CaretIndex="{x:Static system:Int32.MaxValue}"
+                                         Foreground="{StaticResource DgWhite}"
+                                         PathIcon="{StaticResource User_Icon_Small}"
+                                         WatermarkText="{x:Static resx:POSResources.UIUsername}">
+            <dgmaterial:CustomTextBoxControlEx.Style>
+                <Style TargetType="{x:Type dgmaterial:CustomTextBoxControlEx}" BasedOn="{StaticResource POSCustomTextBoxControlExStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=parentGrid, Path=IsVisible}" Value="true">
+                                <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=UserName}" />                                
+                        </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </dgmaterial:CustomTextBoxControlEx.Style>
+        </dgmaterial:CustomTextBoxControlEx>
+
+        <dgmaterial:CustomPasswordControlEx x:Name="PasswordTextBox" 
+                                          Style="{StaticResource POSCustomPasswordControlExStyle}"
+                                          Margin="6, 10, 15, 20" 
+                                          Width="400" 
+                                          HorizontalAlignment="Center" 
+                                          FontSize="18" 
+                                          Foreground="{StaticResource DgWhite}" 
+                                          Password="{Binding Path=Password, 
+                                              NotifyOnSourceUpdated=True, 
+                                              NotifyOnTargetUpdated=True, 
+                                              Mode=TwoWay, 
+                                              UpdateSourceTrigger=PropertyChanged}"
+                                          PasswordIcon="{StaticResource Lock_Icon}"
+                                          WatermarkText="{x:Static resx:POSResources.UIPassword}">
+        </dgmaterial:CustomPasswordControlEx>
+
+        <Button Style="{StaticResource POSLinkButtonStyle}"
+                Content="Forget Password?" 
+                Foreground="#00B2E2" 
+                FontSize="20"  
+                Margin="0,30,50,20" 
+                HorizontalAlignment="Right" 
+                />
+
+        <StackPanel Margin="0, 20, 50, 40"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+
+            <dgmaterial:CustomButtonControlEx x:Name="Login" 
+                                            Content="{x:Static resx:POSResources.UILogin}"
+                                            FontSize="24" 
+                                            Foreground="{StaticResource DgWhite}" 
+                                            Background="{StaticResource DgDefaultButtonBackground}" 
+                                            Width="184" 
+                                            Height="46"
+                                            IsDefault="True"  
+                                                    />
+            
+        </StackPanel>
+    </StackPanel>
+</UserControl>

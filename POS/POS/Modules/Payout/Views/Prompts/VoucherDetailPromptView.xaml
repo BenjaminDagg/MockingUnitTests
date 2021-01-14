@@ -1,0 +1,130 @@
+﻿<controls:CustomWindowControl x:Class="POS.Modules.Payout.Views.Prompts.VoucherDetailPromptView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
+        xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+        xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
+        Title="{Binding Path=DisplayName}"
+        mc:Ignorable="d"
+        Style="{StaticResource POSPromptWindowStyle}"
+        SizeToContent="WidthAndHeight">
+    <StackPanel>
+        <ItemsControl 
+                      Margin="0,2,0,2"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Alerts}">
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <dgmaterial:AlertMessageControlEx Margin="0,3"
+                                                  HorizontalAlignment="Stretch"
+                                                  Alert="{Binding AlertType}"
+                                                  Message="{Binding Message}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Margin="10">
+            <Separator/>
+            <StackPanel Margin="5, 10">
+                <TextBlock Text="{x:Static resx:POSResources.UIVoucherDetailVoucherId}" Margin="10,5,0,0" Foreground="{StaticResource DgWhite}" Opacity="0.5" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Data="{StaticResource ticket}" Fill="{StaticResource DgWhite}" Height="30" Width="30" Stretch="UniformToFill" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Item.VoucherId, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DgWhite}" FontSize="18"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="5, 10">
+                <TextBlock Text="{x:Static resx:POSResources.UIVoucherDetailBarcode}" Margin="10,5,0,0" Foreground="{StaticResource DgWhite}" Opacity="0.5" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Data="{StaticResource Barcode}" Fill="{StaticResource DgWhite}" Height="24" Width="30" Stretch="UniformToFill" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Item.Barcode, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DgWhite}" FontSize="18"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="5, 10">
+                <TextBlock Text="{x:Static resx:POSResources.UIVoucherDetailAmount}" Margin="10,5,0,0" Foreground="{StaticResource DgWhite}" Opacity="0.5" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Data="{StaticResource Attach_money}" Fill="{StaticResource DgWhite}" Height="30" Width="17" Stretch="UniformToFill" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Item.VoucherAmount, Mode=OneWay, StringFormat='{}{0:c}'}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DgWhite}" FontSize="18"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Margin="5, 10">
+                <TextBlock Text="{x:Static resx:POSResources.UIVoucherDetailDateCreated}" Margin="10,5,0,0" Foreground="{StaticResource DgWhite}" Opacity="0.5" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Data="{StaticResource Calendar}" Fill="{StaticResource DgWhite}" Height="30" Width="28" Stretch="UniformToFill" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Item.DateCreated, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DgWhite}" FontSize="18"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Margin="5, 10">
+                <TextBlock Text="{x:Static resx:POSResources.UIVoucherDetailCreatedLocation}" Margin="10,5,0,0" Foreground="{StaticResource DgWhite}" Opacity="0.5" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Data="{StaticResource Location}" Fill="{StaticResource DgWhite}" Height="30" Width="21" Stretch="UniformToFill" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Item.CreateLocation, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DgWhite}" FontSize="18"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Margin="5, 10">
+                <TextBlock Text="{x:Static resx:POSResources.UIVoucherDetailVoucherStatus}" Margin="10,5,0,0" Foreground="{StaticResource DgWhite}" Opacity="0.5" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Data="{StaticResource Info}" Fill="{StaticResource DgWhite}" Height="30" Width="30" Stretch="UniformToFill" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Item.VoucherState, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DgWhite}" FontSize="18"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel 
+                    Margin="20"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+
+            <dgmaterial:CustomButtonControlEx x:Name="Ok"
+                                              FontSize="18" 
+                                              Foreground="{StaticResource DgWhite}"
+                                              Background="{StaticResource DgDefaultButtonBackground}" 
+                                              Width="137" 
+                                              Height="34"
+                                              Content="{x:Static resx:POSResources.UIOk}"
+                                              Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}" 
+                                              />
+        </StackPanel>
+    </StackPanel>
+</controls:CustomWindowControl>

@@ -3,26 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:POS.Modules.Payout.Views"
-             xmlns:control="clr-namespace:POS.Controls"
+             xmlns:extenedcontrols="clr-namespace:POS.Controls"
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
-             xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <control:CustomTextBoxControlEx x:Name="ValidationNumberTextBox" MaxLength="{Binding SearchBarcodeItem.VoucherMaxLength}" Margin="0, 10, 0, 0"
-                                                       HorizontalAlignment="Stretch" 
-                                           Text="{Binding Path=SearchBarcodeItem.Barcode,
-                                                              Mode=TwoWay,
-                                                              ValidatesOnDataErrors=True,
-                                                              UpdateSourceTrigger=PropertyChanged}"
-                                           CursorIndex="{Binding SearchBarcodeItem.CursorIndex}"
-                                           TextBoxIcon="Ticket" 
-                                           WatermarkText="{x:Static resx:POSResources.UISearchVoucherWatermarkVoucherNumber}">
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" >
 
-        </control:CustomTextBoxControlEx>
-        <Grid Margin="0, 20, 0, 0" MinHeight="400">
-            
+    <StackPanel Margin="20" FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}">
+
+        <extenedcontrols:CustomTextBoxControlExtended x:Name="VoucherNumberTextBox"
+                                            Style="{StaticResource POSCustomTextBoxControlExStyle}"
+                                            CursorIndex="{Binding Path=SearchBarcodeItem.CursorIndex, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"           
+                                            MaxLength="18" 
+                                            Margin="20, 0, 0, 0" 
+                                            Width="524"
+                                            HorizontalAlignment="Left"
+                                            FontSize="18" 
+                                            Text="{Binding Path=SearchBarcodeItem.Barcode,
+                                                    Mode=TwoWay,
+                                                    ValidatesOnDataErrors=True,
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                                            CaretIndex="{x:Static system:Int32.MaxValue}"
+                                            NumericMode="True"
+                                            Foreground="{StaticResource DgWhite}"
+                                            PathIcon="{StaticResource Barcode}"
+                                            WatermarkText="{x:Static resx:POSResources.UISearchVoucherWatermarkVoucherNumber}"
+                                                      >
+        </extenedcontrols:CustomTextBoxControlExtended>
+
+        <Grid Margin="20" MinHeight="535" MinWidth="536">
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -36,45 +45,43 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Button Content="7"  Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="7" Grid.Row="0" Grid.Column="0" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}" />
-            <Button Content="8" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="8" Grid.Row="0" Grid.Column="1" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}" />
-            <Button Content="9" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="9" Grid.Row="0" Grid.Column="2" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
-            <Button Grid.Row="0" 
-                    Command="{Binding SearchBarcodeItem.RemoveLastCharacterCommand}" 
+            <Button Content="1"  Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="1" Grid.Row="0" Grid.Column="0" Style="{DynamicResource POSKeyPadStyle}" />
+            <Button Content="2" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="2" Grid.Row="0" Grid.Column="1" Style="{DynamicResource POSKeyPadStyle}" />
+            <Button Content="3" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="3" Grid.Row="0" Grid.Column="2" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Grid.Row="0"  
+                    Command="{Binding SearchBarcodeItem.ClearCommand}" 
                     CommandParameter="{Binding SearchBarcodeItem.CursorIndex}"                     
                     Grid.Column="3" 
-                    Style="{StaticResource KeyPadStyle}" >                
-                <Button.Content>
-                    <controls:FontAwesomeTextControl 
-                            FontWeight="Normal" FontSize="32"
-                            Margin="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontIcon="ArrowLeft" Foreground="Black"/>
-                </Button.Content>
-            </Button>
+                    Style="{DynamicResource POSClearKeyPadStyle}" 
+                    Content="{x:Static resx:POSResources.UIClear}"
+                    />
 
-            <Button Content="4" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="4" Grid.Row="1" Grid.Column="0" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
-            <Button Content="5" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="5" Grid.Row="1" Grid.Column="1" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
-            <Button Content="6" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="6" Grid.Row="1" Grid.Column="2" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
-            <Button Command="{Binding SearchBarcodeItem.ClearCommand}" CommandParameter="null" Grid.Row="1" Grid.Column="3" Style="{StaticResource KeyPadStyle}" >
-                <Button.Content>
-                    <controls:FontAwesomeTextControl 
-                            FontWeight="Normal" FontSize="32"
-                            Margin="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontIcon="Undo" Foreground="Black"/>
-                </Button.Content>
-            </Button>
+            <Button Content="4" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="4" Grid.Row="1" Grid.Column="0" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Content="5" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="5" Grid.Row="1" Grid.Column="1" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Content="6" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="6" Grid.Row="1" Grid.Column="2" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Command="{Binding SearchBarcodeItem.EnterCommand}" 
+                    CommandParameter="null" 
+                    Grid.Row="1" 
+                    Grid.Column="3" 
+                    Grid.RowSpan="2" 
+                    Style="{StaticResource POSEnterKeyPadStyle}" 
+                    Content="{x:Static resx:POSResources.UIEnter}"
+                    />
 
-            <Button Content="1" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="1" Grid.Row="2" Grid.Column="0" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
-            <Button Content="2" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="2" Grid.Row="2" Grid.Column="1" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
-            <Button Content="3" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="3" Grid.Row="2" Grid.Column="2" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
+            <Button Content="7" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="7" Grid.Row="2" Grid.Column="0" Style="{DynamicResource DgKeyPadStyle}"/>
+            <Button Content="8" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="8" Grid.Row="2" Grid.Column="1" Style="{DynamicResource DgKeyPadStyle}"/>
+            <Button Content="9" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="9" Grid.Row="2" Grid.Column="2" Style="{DynamicResource DgKeyPadStyle}"/>
+            <Button Command="{Binding SearchBarcodeItem.RemoveLastCharacterCommand}" 
+                    CommandParameter="{Binding SearchBarcodeItem.CursorIndex}" 
+                    Grid.Row="3" 
+                    Grid.Column="0" 
+                    Style="{DynamicResource DgBackKeyPadStyle}"
+                    />
 
-            <Button Content="0" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="0" Grid.Row="3" Grid.Column="0" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
-            <Button Command="{Binding SearchBarcodeItem.EnterCommand}"  CommandParameter="null" Content="{x:Static resx:POSResources.UIEnter}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource KeyPadStyle}" ContentTemplate="{DynamicResource KeyPadDataTemplate}"/>
+            <Button Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="0" Content="0" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Style="{DynamicResource POSKeyPadStyle}"/>
 
         </Grid>
+
     </StackPanel>
+
 </UserControl>

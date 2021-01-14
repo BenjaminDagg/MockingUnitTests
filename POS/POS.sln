@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppCommon", "AppCommon", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{8217EFEC-4A65-4B0F-986C-DA24906D7C6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS", "POS\POS.csproj", "{8AE2822C-FF49-4BBD-9FC1-3FD6EF054799}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POS", "POS\POS.csproj", "{8AE2822C-FF49-4BBD-9FC1-3FD6EF054799}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{67009D81-961C-4FE7-9981-F02C3E8F0EB4}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.WPF.UI", "..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.UI\Framework.WPF.UI.csproj", "{A2784189-3E46-491D-AE71-5A4B40C08F0F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.WPF.UI.Theme", "..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.UI.Theme\Framework.WPF.UI.Theme.csproj", "{B81F100E-0B89-445E-A4AF-9ECE762A0551}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.WPF.UI.DGMaterial.Theme", "..\..\AppDev_CommonLite\Framework\WPF\Framework.WPF.UI.DGMaterial.Theme\Framework.WPF.UI.DGMaterial.Theme.csproj", "{91999BCA-A311-4DAE-A8CB-9A1C83417EC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{B81F100E-0B89-445E-A4AF-9ECE762A0551}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B81F100E-0B89-445E-A4AF-9ECE762A0551}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B81F100E-0B89-445E-A4AF-9ECE762A0551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91999BCA-A311-4DAE-A8CB-9A1C83417EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91999BCA-A311-4DAE-A8CB-9A1C83417EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91999BCA-A311-4DAE-A8CB-9A1C83417EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91999BCA-A311-4DAE-A8CB-9A1C83417EC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

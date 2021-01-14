@@ -10,61 +10,61 @@ namespace POS.Core.Transaction
 {
     public class Transaction
     {
-        private readonly IList<VoucherItem> items;
+        private readonly IList<VoucherItem> _voucherItems;
 
-        public IReadOnlyList<VoucherItem> Items => items.ToList();
+        public IReadOnlyList<VoucherItem> VoucherItems => _voucherItems.ToList();
 
         public Money CalculateTotalPayout()
         {
-            return Money.Create(Items.Sum(x => x.Amount)).Value;
+            return Money.Create(VoucherItems.Sum(x => x.Amount)).Value;
         }
 
         public Transaction()
         {
-            items = new List<VoucherItem>();
+            _voucherItems = new List<VoucherItem>();
         }
 
-        public Result AddTransactionItem(AddVoucherRequest req)
+        public Result AddTransactionItem(AddVoucherRequest addVoucherRequest)
         {
-            var canAdd = CanVoucherBeAdded(req);
-            if (canAdd.IsFailure)
+            var canAddResult = CanVoucherBeAdded(addVoucherRequest);
+            if (canAddResult.IsFailure)
             {
-                return canAdd;
+                return canAddResult;
             }
-            var v = new VoucherItem(req.Voucher.VoucherId, req.Voucher.VoucherType, (Barcode)req.Voucher.Barcode,
-                (Money)req.Voucher.VoucherAmount);
+            var voucherItem = new VoucherItem(addVoucherRequest.Voucher.VoucherId, addVoucherRequest.Voucher.VoucherType, (Barcode)addVoucherRequest.Voucher.Barcode,
+                (Money)addVoucherRequest.Voucher.VoucherAmount, addVoucherRequest.Voucher.CreateDate, addVoucherRequest.Voucher.CreatedLocation);
             
-            v.IsApprovalRequired(req.UserHasVoucherApprovalPermission, 
-                req.ConfiguredLockupAmount,
-                req.IsConfiguredSupervisorApprovalActive);
-            items.Add(v);
+            voucherItem.IsApprovalRequired(addVoucherRequest.UserHasVoucherApprovalPermission, 
+                addVoucherRequest.ConfiguredLockupAmount,
+                addVoucherRequest.IsConfiguredSupervisorApprovalActive);
+            _voucherItems.Add(voucherItem);
             return Result.Success();
         }
 
         public void RemoveTransactionItem(VoucherItem voucher)
         {
-            items.Remove(voucher);
+            _voucherItems.Remove(voucher);
         }
 
         private Result CanVoucherBeAdded(AddVoucherRequest r)
         {
             //was this barcode already added?
-            var alreadyExists = Items.Any(x => x.Barcode == r.Voucher.Barcode);
+            var alreadyExists = VoucherItems.Any(x => x.Barcode == r.Voucher.Barcode);
             if (alreadyExists)
             {
                 return Result.Failure(String.Format(POSResources.TransactionVoucherAlreadyScannedMsg, r.Voucher.Barcode));
             }
             //validate voucher
-            var validation = new IsVoucherRequestValid().Validate(r);
-            return !validation.IsValid
-                ? Result.Failure(validation.Message) 
+            var validationResult = new IsVoucherRequestValid().Validate(r);
+            return !validationResult.IsValid
+                ? Result.Failure(validationResult.Message) 
                 : Result.Success();
         }
 
         public Result CanCashoutTransaction(bool hasCashDrawer, Money payoutTotal, Money cashDrawerBalance)
         {
             //check cash drawer
-            if (hasCashDrawer && payoutTotal > cashDrawerBalance)
+            if (hasCashDrawer && (payoutTotal > cashDrawerBalance))
             {
                 return Result.Failure(POSResources.TotalPayoutExceedsCashDrawerMsg);
             }
@@ -74,7 +74,7 @@ namespace POS.Core.Transaction
 
         public void VoidTransaction()
         {
-            items.Clear();
+            _voucherItems.Clear();
         }
     }
 }

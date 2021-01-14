@@ -23,9 +23,9 @@ namespace POS.Core.Vouchers
         public bool IsConfiguredSupervisorApprovalActive { get; set; }
 
 
-        public AddVoucherRequest(VoucherDto v, int voucherCount, bool hasCashDrawer, Money configuredLockupAmount, Money cashDrawerBalance, Money payoutThreshold, bool autoCashDrawerUsed)
+        public AddVoucherRequest(VoucherDto voucherDto, int voucherCount, bool hasCashDrawer, Money configuredLockupAmount, Money cashDrawerBalance, Money payoutThreshold, bool autoCashDrawerUsed)
         {
-            Voucher = v;
+            Voucher = voucherDto;
             AutoCashDrawerUsed = autoCashDrawerUsed;
             CurrentVoucherCount = voucherCount;
             HasCashDrawer = hasCashDrawer;
