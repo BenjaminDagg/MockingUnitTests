@@ -309,4 +309,19 @@
     <Style x:Key="POSBackKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgBackKeyPadStyle}" />
     <Style x:Key="POSEnterKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgEnterKeyPadStyle}" />
 
+    <!--body content datagrid cell vertical centering-->
+
+    <Style x:Key="BodyContentDataGridCentering"
+           TargetType="{x:Type DataGridCell}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Grid >
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

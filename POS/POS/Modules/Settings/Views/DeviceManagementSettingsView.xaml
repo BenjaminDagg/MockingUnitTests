@@ -18,7 +18,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                                                       Text="Device Management Settings" 
+                                                       Text="Device Management" 
                                                        Foreground="{StaticResource DgWhite}"
                                                        FontSize="34" 
                                                        HorizontalAlignment="Left" 

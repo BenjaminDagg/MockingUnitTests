@@ -989,7 +989,7 @@ namespace POS.Core {
         
         /// <summary>
         ///   Looks up a localized string similar to Currently no items in transaction. 
-        ///Enter or scan a voucher to get started..
+        ///Scan Voucher..
         /// </summary>
         public static string UICurrentTransactionEmptyTransactionMsg {
             get {

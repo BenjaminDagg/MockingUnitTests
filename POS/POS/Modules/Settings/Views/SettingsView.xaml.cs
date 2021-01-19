@@ -11,5 +11,10 @@ namespace POS.Modules.Settings.Views
         {
             InitializeComponent();
         }
+
+        private void AdvancedSettingsView_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

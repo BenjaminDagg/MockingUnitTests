@@ -25,7 +25,7 @@ namespace POS.Core.Session
             SiteStatusPayoutsActive = false;
             AutoCashDrawerUsed = false;
             PrintCasinoPayoutReceipt = false;
-            SupervisorApprovalRequired = false;
+            SupervisorApprovalRequired = true;
         }
     }
 }

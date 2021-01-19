@@ -30,7 +30,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                                Text="Printer Settings" 
+                                Text="Printer" 
                                 Foreground="{StaticResource DgWhite}"
                                 FontSize="34" 
                                 HorizontalAlignment="Left" 

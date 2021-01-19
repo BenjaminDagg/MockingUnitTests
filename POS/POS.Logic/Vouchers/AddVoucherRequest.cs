@@ -1,4 +1,5 @@
-﻿using POS.Core.ValueObjects;
+﻿using POS.Core.Session;
+using POS.Core.ValueObjects;
 
 namespace POS.Core.Vouchers
 {
@@ -23,7 +24,7 @@ namespace POS.Core.Vouchers
         public bool IsConfiguredSupervisorApprovalActive { get; set; }
 
 
-        public AddVoucherRequest(VoucherDto voucherDto, int voucherCount, bool hasCashDrawer, Money configuredLockupAmount, Money cashDrawerBalance, Money payoutThreshold, bool autoCashDrawerUsed)
+        public AddVoucherRequest(VoucherDto voucherDto, int voucherCount, bool hasCashDrawer, Money configuredLockupAmount, Money cashDrawerBalance, Money payoutThreshold, bool autoCashDrawerUsed, bool supervisorApproval)
         {
             Voucher = voucherDto;
             AutoCashDrawerUsed = autoCashDrawerUsed;
@@ -32,6 +33,8 @@ namespace POS.Core.Vouchers
             CashDrawerBalance = cashDrawerBalance;
             PayoutThreshold = payoutThreshold;
             ConfiguredLockupAmount = configuredLockupAmount;
+            IsConfiguredSupervisorApprovalActive = supervisorApproval;
+
         }
     }
 }
