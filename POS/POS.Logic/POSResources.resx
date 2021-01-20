@@ -478,6 +478,9 @@ Scan Voucher.</value>
   <data name="UICurrentTransactionVoucherCount" xml:space="preserve">
     <value>Voucher Count: {0}</value>
   </data>
+  <data name="UIDeviceManagementHeader" xml:space="preserve">
+    <value>Device Management</value>
+  </data>
   <data name="UIEnter" xml:space="preserve">
     <value>Enter</value>
   </data>
@@ -564,6 +567,9 @@ Scan Voucher.</value>
   </data>
   <data name="UIPrinterSelectionPlaceholder" xml:space="preserve">
     <value>Select a Printer</value>
+  </data>
+  <data name="UIPrinterSettingsHeader" xml:space="preserve">
+    <value>Printer</value>
   </data>
   <data name="UIReceiptPrinter" xml:space="preserve">
     <value>Receipt Printer</value>

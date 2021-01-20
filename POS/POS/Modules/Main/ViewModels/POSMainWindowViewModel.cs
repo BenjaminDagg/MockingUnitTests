@@ -127,7 +127,7 @@ namespace POS.Modules.Main.ViewModels
             return true;
         }
 
-        public async void Logout()
+        public async Task Logout()
         {
             if (await ConfirmLogout() == PromptOptions.Yes)
             {

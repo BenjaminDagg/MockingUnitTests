@@ -43,7 +43,6 @@
                            Text="{x:Static resx:POSResources.UIPaymentCurrentTransaction}" 
                            FontSize="40"
                            Grid.Column="0" 
-                       
                            Foreground="{StaticResource DgWhite}"  
                            Margin="28, 20, 0, 0" />
                 <local:CurrentTransactionView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 50 0 0 "  DataContext="{Binding}"/>

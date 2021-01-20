@@ -77,7 +77,7 @@
                                     FontSize="20" Width="180" />
                 <DataGridCheckBoxColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderNeedsApproval}" Binding="{Binding Path=RequiresApproval, Mode=OneWay}"  
                                         Width="180" 
-                                        CellStyle="{StaticResource BodyContentDataGridCentering}"
+                                        CellStyle="{StaticResource DgBodyContentDataGridCStyle}"
                                         IsReadOnly="True"/>
                 <DataGridTemplateColumn  Width="90">
                     <DataGridTemplateColumn.CellTemplate>

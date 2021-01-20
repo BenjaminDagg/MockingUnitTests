@@ -30,7 +30,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                                Text="Printer" 
+                                Text="{x:Static resx:POSResources.UIPrinterSettingsHeader}" 
                                 Foreground="{StaticResource DgWhite}"
                                 FontSize="34" 
                                 HorizontalAlignment="Left" 
