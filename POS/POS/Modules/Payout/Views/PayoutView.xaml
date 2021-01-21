@@ -25,12 +25,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <TextBlock x:Name="CurrentTransactionTxt" DockPanel.Dock="Top" 
-                   Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
-                   Text="{x:Static resx:POSResources.UIPaymentCurrentTransaction}" 
-                   FontSize="40" 
-                   Foreground="{StaticResource DgWhite}"  
-                   Margin="20, 20, 20, 0" />
+        
         <Grid VerticalAlignment="Stretch" 
               HorizontalAlignment="Stretch" 
               Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}">
@@ -39,10 +34,20 @@
                 <ColumnDefinition Width="610" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" MinHeight="620"/>
+                <RowDefinition Height="*" MinHeight="20"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <local:CurrentTransactionView Grid.Column="0" Grid.RowSpan="2" DataContext="{Binding}"/>
+            
+                <TextBlock x:Name="CurrentTransactionTxt" DockPanel.Dock="Top" 
+                           Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
+                           Text="{x:Static resx:POSResources.UIPaymentCurrentTransaction}" 
+                           FontSize="40"
+                           Grid.Column="0" 
+                           Foreground="{StaticResource DgWhite}"  
+                           Margin="28, 20, 0, 0" />
+                <local:CurrentTransactionView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 50 0 0 "  DataContext="{Binding}"/>
+            
+           
             <local:SearchVoucherView DataContext="{Binding}" Grid.Column="1" Grid.Row="0" />
             <settingsviews:CashDrawerView DataContext="{Binding}" Visibility="{Binding HasCashDrawer, Converter={StaticResource BooleanToVisibility}}" 
                                           Margin="20, 0, 20, 20" 

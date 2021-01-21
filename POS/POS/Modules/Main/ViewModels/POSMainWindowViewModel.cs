@@ -127,14 +127,25 @@ namespace POS.Modules.Main.ViewModels
             return true;
         }
 
-        public void Logout()
+        public async Task Logout()
         {
-            LoggedIn = Visibility.Collapsed;
-            UserName = default;
-            SessionId = default;
-            _eventAggregator.PublishOnUIThreadAsync(new LogoutEventMessage());
+            if (await ConfirmLogout() == PromptOptions.Yes)
+            {
+                LoggedIn = Visibility.Collapsed;
+                UserName = default;
+                SessionId = default;
+                await _eventAggregator.PublishOnUIThreadAsync(new LogoutEventMessage());
+            }
         }
-
+        private async Task<PromptOptions> ConfirmLogout()
+        {
+            return await _messageBoxService.PromptAsync(
+                POSResources.AreYouSureEndSessionMsg,
+                POSResources.ConfirmActionTitle,
+                PromptOptions.YesNo,
+                PromptTypes.Question
+            );
+        }
         private async Task ShowMainContentScreen()
         {
             var serviceLocator = new ServiceLocator();
@@ -180,7 +191,7 @@ namespace POS.Modules.Main.ViewModels
 
             if (user == null)
             {
-                Logout();
+                await Logout();
                 return;
             }
 

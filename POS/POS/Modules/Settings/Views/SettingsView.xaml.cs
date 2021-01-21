@@ -11,5 +11,6 @@ namespace POS.Modules.Settings.Views
         {
             InitializeComponent();
         }
+
     }
 }

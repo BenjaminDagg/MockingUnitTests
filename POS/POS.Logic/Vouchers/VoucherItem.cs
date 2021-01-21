@@ -32,7 +32,7 @@ namespace POS.Core.Vouchers
       
         public bool IsApprovalRequired( bool userHasVoucherApprovalPermission, Money lockupAmount, bool supervisorApprovalActive)
         {
-            //lockup amount from configured payout settings and supervisor approval active from system parameters
+           //lockup amount from configured payout settings and supervisor approval active from system parameters
             if (VoucherType == 1 && (Amount > (lockupAmount - (decimal)0.001)) && supervisorApprovalActive)
             {
                 if (!userHasVoucherApprovalPermission)

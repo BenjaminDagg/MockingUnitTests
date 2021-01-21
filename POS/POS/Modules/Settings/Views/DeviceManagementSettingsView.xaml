@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:POS.Modules.Settings.Views"
              xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
+             xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="1000">
     <GroupBox  >
@@ -18,7 +19,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                                                       Text="Device Management Settings" 
+                                                       Text="{x:Static resx:POSResources.UIDeviceManagementHeader}" 
                                                        Foreground="{StaticResource DgWhite}"
                                                        FontSize="34" 
                                                        HorizontalAlignment="Left" 

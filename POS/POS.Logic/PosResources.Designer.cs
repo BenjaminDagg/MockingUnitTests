@@ -989,7 +989,7 @@ namespace POS.Core {
         
         /// <summary>
         ///   Looks up a localized string similar to Currently no items in transaction. 
-        ///Enter or scan a voucher to get started..
+        ///Scan Voucher..
         /// </summary>
         public static string UICurrentTransactionEmptyTransactionMsg {
             get {
@@ -1138,6 +1138,15 @@ namespace POS.Core {
         public static string UICurrentTransactionVoucherCount {
             get {
                 return ResourceManager.GetString("UICurrentTransactionVoucherCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device Management.
+        /// </summary>
+        public static string UIDeviceManagementHeader {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementHeader", resourceCulture);
             }
         }
         
@@ -1399,6 +1408,15 @@ namespace POS.Core {
         public static string UIPrinterSelectionPlaceholder {
             get {
                 return ResourceManager.GetString("UIPrinterSelectionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Printer.
+        /// </summary>
+        public static string UIPrinterSettingsHeader {
+            get {
+                return ResourceManager.GetString("UIPrinterSettingsHeader", resourceCulture);
             }
         }
         

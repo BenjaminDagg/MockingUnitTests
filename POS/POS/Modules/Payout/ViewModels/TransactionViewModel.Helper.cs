@@ -51,7 +51,8 @@ namespace POS.Modules.Payout.ViewModels
                         (Money)_systemContext.PayoutSettings.LockupAmount,
                         _session.CurrentCashDrawerBalance,
                         (Money)_systemContext.PayoutSettings.PayoutThreshold,
-                        _systemContext.AutoCashDrawerUsed
+                        _systemContext.AutoCashDrawerUsed,
+                        _systemContext.SupervisorApprovalRequired
                     );
 
             return this;

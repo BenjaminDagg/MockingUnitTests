@@ -428,7 +428,7 @@
   </data>
   <data name="UICurrentTransactionEmptyTransactionMsg" xml:space="preserve">
     <value>Currently no items in transaction. 
-Enter or scan a voucher to get started.</value>
+Scan Voucher.</value>
   </data>
   <data name="UICurrentTransactionFormatItemCount" xml:space="preserve">
     <value>Number of Vouchers: {0}</value>
@@ -477,6 +477,9 @@ Enter or scan a voucher to get started.</value>
   </data>
   <data name="UICurrentTransactionVoucherCount" xml:space="preserve">
     <value>Voucher Count: {0}</value>
+  </data>
+  <data name="UIDeviceManagementHeader" xml:space="preserve">
+    <value>Device Management</value>
   </data>
   <data name="UIEnter" xml:space="preserve">
     <value>Enter</value>
@@ -564,6 +567,9 @@ Enter or scan a voucher to get started.</value>
   </data>
   <data name="UIPrinterSelectionPlaceholder" xml:space="preserve">
     <value>Select a Printer</value>
+  </data>
+  <data name="UIPrinterSettingsHeader" xml:space="preserve">
+    <value>Printer</value>
   </data>
   <data name="UIReceiptPrinter" xml:space="preserve">
     <value>Receipt Printer</value>

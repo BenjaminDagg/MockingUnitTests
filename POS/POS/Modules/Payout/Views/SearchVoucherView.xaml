@@ -8,11 +8,10 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" >
 
-    <StackPanel Margin="20" FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}">
+    <StackPanel Margin="20" FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}" Name="ParentPanel">
 
         <extenedcontrols:CustomTextBoxControlExtended x:Name="VoucherNumberTextBox"
-                                            Style="{StaticResource POSCustomTextBoxControlExStyle}"
-                                            CursorIndex="{Binding Path=SearchBarcodeItem.CursorIndex, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"           
+                                            CursorIndex="{Binding Path=SearchBarcodeItem.CursorIndex, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"          
                                             MaxLength="18" 
                                             Margin="20, 0, 0, 0" 
                                             Width="524"
@@ -27,7 +26,16 @@
                                             Foreground="{StaticResource DgWhite}"
                                             PathIcon="{StaticResource Barcode}"
                                             WatermarkText="{x:Static resx:POSResources.UISearchVoucherWatermarkVoucherNumber}"
-                                                      >
+                                           >
+            <extenedcontrols:CustomTextBoxControlExtended.Style>
+                <Style TargetType="{x:Type extenedcontrols:CustomTextBoxControlExtended}" BasedOn="{StaticResource POSCustomTextBoxControlExStyle}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ParentPanel, Path=IsVisible}" Value="true">
+                            <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=VoucherNumberTextBox}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </extenedcontrols:CustomTextBoxControlExtended.Style>
         </extenedcontrols:CustomTextBoxControlExtended>
 
         <Grid Margin="20" MinHeight="535" MinWidth="536">

@@ -75,6 +75,10 @@
                                     FontSize="20" Width="260" />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderLocation}" Binding="{Binding Path=Location}" 
                                     FontSize="20" Width="180" />
+                <DataGridCheckBoxColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderNeedsApproval}" Binding="{Binding Path=RequiresApproval, Mode=OneWay}"  
+                                        Width="180" 
+                                        CellStyle="{StaticResource DgBodyContentDataGridStyle}"
+                                        IsReadOnly="True"/>
                 <DataGridTemplateColumn  Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
