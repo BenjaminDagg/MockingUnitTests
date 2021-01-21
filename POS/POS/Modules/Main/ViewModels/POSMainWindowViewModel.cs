@@ -191,7 +191,7 @@ namespace POS.Modules.Main.ViewModels
 
             if (user == null)
             {
-                Logout();
+                await Logout();
                 return;
             }
 

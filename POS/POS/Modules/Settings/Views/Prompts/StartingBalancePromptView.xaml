@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Style="{StaticResource POSPromptWindowStyle}"
         SizeToContent="WidthAndHeight">
-    <StackPanel>
+    <StackPanel FocusManager.FocusedElement="{Binding ElementName=StartingBalance}">
         <ItemsControl 
                       Margin="0,2,0,2"
                       HorizontalAlignment="Stretch"
@@ -39,6 +39,7 @@
                                             DecimalMode="True"
                                             Foreground="{StaticResource DgWhite}"
                                             PathIcon="{StaticResource Attach_money}"
+                                            FocusManager.FocusedElement="{Binding ElementName=StartingBalance}"
                                             WatermarkText="{x:Static resx:POSResources.UIStartingBalancePlaceholder}">
         </dgmaterial:CustomTextBoxControlEx>
 
