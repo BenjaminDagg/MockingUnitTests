@@ -1232,6 +1232,33 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Receipt.
+        /// </summary>
+        public static string UILastReceiptButton {
+            get {
+                return ResourceManager.GetString("UILastReceiptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reciept Number.
+        /// </summary>
+        public static string UILastReceiptNumber {
+            get {
+                return ResourceManager.GetString("UILastReceiptNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of Vouchers.
+        /// </summary>
+        public static string UILastTotalNumberOfVouchers {
+            get {
+                return ResourceManager.GetString("UILastTotalNumberOfVouchers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string UILogin {

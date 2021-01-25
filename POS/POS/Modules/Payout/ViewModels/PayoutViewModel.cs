@@ -158,5 +158,12 @@ namespace POS.Modules.Payout.ViewModels
         {
             await EndPayoutSession();
         }
+
+        public void  ReprintReceipt()
+        {
+            Alerts.Clear();
+            LastReceiptPrint();
+
+        }
     }
 }
