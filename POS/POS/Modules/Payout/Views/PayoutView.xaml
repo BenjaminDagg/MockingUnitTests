@@ -53,6 +53,8 @@
                                                       Foreground="{StaticResource DgWhite}" 
                                                       Background="{StaticResource DgDefaultButtonBackground}" 
                                                       Width="184" 
+                                                      PathIcon="{StaticResource History}"
+                                                      IconColor="{StaticResource DgWhite}"
                                                       Height="46"
                                                       VerticalAlignment="Top"
                                                       HorizontalAlignment="Right"
