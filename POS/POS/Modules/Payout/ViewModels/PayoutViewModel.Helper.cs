@@ -243,5 +243,11 @@ namespace POS.Modules.Payout.ViewModels
             voucherDetailPromptViewModel.Barcode = voucherItem.Barcode?.Value;
             _messageBoxService.ShowModal(voucherDetailPromptViewModel);
         }
+
+        private void  LastReceiptPrint()
+        {
+            var lastPrintedReceipt = _payoutViewServices.ServiceLocator.Resolve<LastPrintedReceiptPromptViewModel>();
+            _messageBoxService.ShowModal(lastPrintedReceipt);
+            }
     }
 }

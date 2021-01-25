@@ -26,19 +26,73 @@
         </ItemsControl>
 
         <StackPanel Margin="10">
-            <StackPanel Orientation="Horizontal">
-                <Path Data="{StaticResource Receipt}" Fill="{StaticResource DgWhite}"/>
-                <TextBlock Text="{Binding Path=ReceiptNumber, Mode=OneWay}"/>
+            <StackPanel >
+                <TextBlock x:Name="ReceiptNumberTxt" 
+                           Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
+                           Text="{x:Static resx:POSResources.UILastReceiptNumber}" 
+                           FontSize="20"
+                           Grid.Column="0" 
+                           Foreground="{StaticResource DgSelectedHighlighted}"  
+                           Margin="20, 0, 0, 0" />
+                <dgmaterial:CustomTextBoxControlEx x:Name="ReceiptNumber"
+                                                   Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                   Text="{Binding Path=ReceiptNumber, Mode=OneWay}"
+                                                   Margin="0, 0, 0, 30" 
+                                                   Width="440"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="18"
+                                                   IsReadOnly="True"
+                                                   DecimalMode="True"
+                                                   Foreground="{StaticResource DgWhite}"
+                                                   PathIcon="{StaticResource Receipt}"
+                >
+                </dgmaterial:CustomTextBoxControlEx>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <Path Data="{StaticResource ticket}" Fill="{StaticResource DgWhite}"/>
-                <TextBlock Text="{Binding Path=NumberVouchers, Mode=OneWay}"/>
+            <StackPanel>
+                <TextBlock x:Name="NumberVouchersTxt" 
+                           Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
+                           Text="{x:Static resx:POSResources.UILastTotalNumberOfVouchers}" 
+                           FontSize="20"
+                           Grid.Column="0" 
+                           Foreground="{StaticResource DgSelectedHighlighted}"  
+                           Margin="20, 0, 0, 0" />
+                <dgmaterial:CustomTextBoxControlEx x:Name="NumberVouchers"
+                                                   Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                   Text="{Binding Path=NumberVouchers, Mode=OneWay}"
+                                                   Margin="0, 0, 0, 30" 
+                                                   Width="440"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="18"
+                                                   IsReadOnly="True"
+                                                   DecimalMode="True"
+                                                   Foreground="{StaticResource DgWhite}"
+                                                   PathIcon="{StaticResource ticket}"
+                >
+                </dgmaterial:CustomTextBoxControlEx>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <Path Data="{StaticResource Money_Icon}" Fill="{StaticResource DgWhite}"/>
-                <TextBlock Text="{Binding Path=TotalPayout, Mode=OneWay}"/>
+            <StackPanel>
+                <TextBlock x:Name="TotalPayoutTxt" 
+                           Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
+                           Text="{x:Static resx:POSResources.UIReportHeaderAmount}" 
+                           FontSize="20"
+                           Grid.Column="0" 
+                           Foreground="{StaticResource DgSelectedHighlighted}"  
+                           Margin="20, 0, 0, 0" />
+                <dgmaterial:CustomTextBoxControlEx x:Name="TotalPayout"
+                                                   Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                   Text="{Binding Path=TotalPayout, Mode=OneWay}"
+                                                   Margin="0, 0, 0, 30" 
+                                                   Width="440"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="18"
+                                                   IsReadOnly="True"
+                                                   DecimalMode="True"
+                                                   Foreground="{StaticResource DgWhite}"
+                                                   PathIcon="{StaticResource Attach_money}"
+                >
+            </dgmaterial:CustomTextBoxControlEx>
             </StackPanel>
         </StackPanel>
         <StackPanel 

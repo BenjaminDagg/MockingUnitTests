@@ -7,6 +7,7 @@
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              xmlns:local="clr-namespace:POS.Modules.Payout.Views"
              xmlns:settingsviews="clr-namespace:POS.Modules.Settings.Views"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1400">
 
@@ -38,13 +39,28 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
-                <TextBlock x:Name="CurrentTransactionTxt" DockPanel.Dock="Top" 
+                <TextBlock x:Name="CurrentTransactionTxt" 
                            Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
                            Text="{x:Static resx:POSResources.UIPaymentCurrentTransaction}" 
                            FontSize="40"
                            Grid.Column="0" 
                            Foreground="{StaticResource DgWhite}"  
                            Margin="28, 20, 0, 0" />
+                <dgmaterial:CustomButtonControlEx x:Name="ReprintReceipt"
+                                                      Style="{StaticResource DgCustomButtonControlExStyle}"
+                                                      Content="{x:Static resx:POSResources.UILastReceiptButton}"
+                                                      FontSize="24" 
+                                                      Foreground="{StaticResource DgWhite}" 
+                                                      Background="{StaticResource DgDefaultButtonBackground}" 
+                                                      Width="184" 
+                                                      Height="46"
+                                                      VerticalAlignment="Top"
+                                                      HorizontalAlignment="Right"
+                                                      Grid.Column="0"
+                                                      Grid.Row="0" 
+                                                      Margin="0 20 28 0">
+                   
+                </dgmaterial:CustomButtonControlEx>
                 <local:CurrentTransactionView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 50 0 0 "  DataContext="{Binding}"/>
             
            
