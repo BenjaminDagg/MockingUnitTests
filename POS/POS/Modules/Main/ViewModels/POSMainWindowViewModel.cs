@@ -2,19 +2,18 @@
 using Framework.Infrastructure.Identity.Services;
 using Framework.Infrastructure.Modularity;
 using Framework.WPF.ErrorHandling;
+using Framework.WPF.Events;
 using Framework.WPF.Modules.LoginModule.Events;
-using Framework.WPF.Modules.Shell.Events;
 using Framework.WPF.ScreenManagement.Prompt;
 using Framework.WPF.Startup;
 using POS.Common;
-using POS.Core;
 using POS.Common.Events;
+using POS.Core;
 using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Framework.WPF.Events;
 
 namespace POS.Modules.Main.ViewModels
 {

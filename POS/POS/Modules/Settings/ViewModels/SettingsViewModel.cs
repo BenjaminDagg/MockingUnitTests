@@ -25,6 +25,7 @@ namespace POS.Modules.Settings.ViewModels
 
             PrinterSettingsViewModel = _payoutViewServices.PrinterSettingsViewModel;
             CashDrawerViewModel = _payoutViewServices.CashDrawerViewModel;
+            DeviceManagementSettingsViewModel = _payoutViewServices.DeviceManagementSettingsViewModel;
         }
 
         protected override async Task OnActivateAsync(CancellationToken cancellationToken)
@@ -88,6 +89,14 @@ namespace POS.Modules.Settings.ViewModels
             get => _printerSettingsViewModel;
             set => Set(ref _printerSettingsViewModel, value);
         }
+
+        private DeviceManagementSettingsViewModel _deviceManagementSettingsViewModel;
+        public DeviceManagementSettingsViewModel DeviceManagementSettingsViewModel
+        {
+            get => _deviceManagementSettingsViewModel;
+            set => Set(ref _deviceManagementSettingsViewModel, value);
+        }
+
         #endregion
     }
 }

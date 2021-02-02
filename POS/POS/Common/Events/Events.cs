@@ -20,7 +20,9 @@ namespace POS.Common.Events
     }
     public enum TabUpdateEventAction{
         PrinterSettingsNotInitialized = 0,
-        PrinterSettingsSaved = 1
+        PrinterSettingsSaved = 1,
+        DeviceManagerSettingsNotInitialized = 2,
+        DeviceManagerSettingsSaved = 3,
     }
     public class TabUpdated
     {        

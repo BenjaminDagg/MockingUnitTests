@@ -1,9 +1,11 @@
 ﻿<UserControl x:Class="POS.Modules.DeviceManagement.Views.DeviceManagementView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
+             xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
     <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -16,20 +18,24 @@
         <Border Background="#15191C" BorderThickness="0" Margin="10" Padding="6" HorizontalAlignment="Left">
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
 
-                <dgmaterial:CustomButtonControlEx                                          
-                                    Content="Set All Online" 
+                <dgmaterial:CustomButtonControlEx  
+                                    x:Name="SetAllOnLine"
+                                    Content="{x:Static resx:POSResources.UIDeviceManagementSetAllOnline}" 
                                     FontSize="18" 
                                     Foreground="{StaticResource DgWhite}"
-                                    Background="{StaticResource DgDefaultButtonBackground}" 
+                                    Background="{StaticResource DgDefaultButtonBackground}"
+                                    IsEnabled="{Binding SelectAllActionEnabled}"
                                     Width="137" 
                                     Height="34"
                                     Margin="5"/>
-                <dgmaterial:CustomButtonControlEx                                          
-                                    Content="Set All Offline" 
+                <dgmaterial:CustomButtonControlEx            
+                                    x:Name="SetAllOffline"
+                                    Content="{x:Static resx:POSResources.UIDeviceManagementSetAllOffline}" 
                                     FontSize="18" 
                                     Foreground="{StaticResource DgWhite}"
                                     Background="{StaticResource DgRed}"
                                     HoverColor="{StaticResource DgRedShade}"
+                                    IsEnabled="{Binding SelectAllActionEnabled}"
                                     Width="137" 
                                     Height="34"
                                     Margin="5"/>
@@ -39,6 +45,7 @@
 
         <DataGrid Grid.Row="1" 
                 ItemsSource="{Binding Devices}" 
+                SelectedItem="{Binding SelectedDevice}"
                 Style="{StaticResource DgDataGridStyle}"
                 Margin="10" 
                 HorizontalAlignment="Stretch"   
@@ -47,9 +54,20 @@
                 HorizontalScrollBarVisibility="Hidden"
                 IsReadOnly="True"
                 RowHeight="100"
+                IsSynchronizedWithCurrentItem="True"
                           >
             <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" BasedOn="{StaticResource POSDeviceManagementDataGridCellStyle}" />
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource POSDeviceManagementDataGridCellStyle}"  >
+                    <Setter Property="Foreground" Value="{StaticResource DgGray}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                            <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                            <Setter Property="Foreground" Value="{StaticResource DgRed}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
             </DataGrid.CellStyle>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}" />
@@ -58,72 +76,145 @@
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource DgScrollBarStyle}" />
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Casino Match ID" MinWidth="180">                    
+                <DataGridTemplateColumn Header="{x:Static resx:POSResources.UIDeviceManagementCasinoMachID}" MinWidth="180">                    
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid >
-                                <Path Data="{StaticResource Screen_Icon_Large}"
-                                          Fill="{StaticResource DgWhite}"
+                                <Path Data="{StaticResource Screen_Icon_Large}"                                          
                                             Stretch="Uniform"
-                                              Height="80"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Margin="10, 5, 0, 5"
-                                          />
-                                <TextBlock Text="{Binding CasinoMatchNumber}" 
+                                            Height="80"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="10, 5, 0, 5"
+                                            Fill="{StaticResource DgWhite}"
+                                          >
+                                    <Path.Style>
+                                        <Style TargetType="Path" >
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                                                    <Setter Property="Fill" Value="{StaticResource DgWhite}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                                    <Setter Property="Fill" Value="{StaticResource DgRed}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Text="{Binding CasinoMachNumber}" 
                                                Margin="20, 0, 0, 0"
                                                FontSize="18"
                                                HorizontalAlignment="Left"
-                                               VerticalAlignment="Center"/>
+                                               VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" >
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                                                    <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                                    <Setter Property="Foreground" Value="{StaticResource DgRed}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="DGE ID"       Binding="{Binding DegID}" FontSize="18"  Width="200"/>
-                <DataGridTextColumn Header="IP"   Binding="{Binding IP}" FontSize="18"  Width="200"/>
-                <DataGridTextColumn Header="Last Played"   Binding="{Binding LastPlayed, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" FontSize="18"  Width="100">
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementDEGID}" Binding="{Binding DegID}" FontSize="18"  Width="200">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                            <Setter Property="TextBlock.Margin" Value="-12, 0, 0, 0"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                            <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Trans Type"   Binding="{Binding TransType}" FontSize="18"  Width="160">
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementIP}"   Binding="{Binding IP}" FontSize="18"  Width="200"/>
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementLastPlayed}"  Binding="{Binding LastPlayed, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" FontSize="18"  Width="120">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                            <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementTransType}"   Binding="{Binding TransType}" FontSize="18"  Width="160">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
                             <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Description"   Binding="{Binding Description}" FontSize="18"  Width="260"/>
-                <DataGridTextColumn Header="Balance"   Binding="{Binding Balance, StringFormat=C}" FontSize="18"  Width="180"/>
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementDescription}"   Binding="{Binding Description}" FontSize="18"  Width="300">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                            <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementBalance}"   Binding="{Binding Balance, StringFormat=C}" FontSize="18"  Width="180">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn  Width="180">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <dgmaterial:CustomButtonControlEx   
-                                    VerticalAlignment="Bottom" 
-                                                    Content="Set Offline" 
+                                                    VerticalAlignment="Bottom" 
+                                                    cal:Message.Attach="SetOnOffLine"
                                                     FontSize="16" 
-                                                    Foreground="{StaticResource DgWhite}"
-                                                    Background="{StaticResource DgDefaultButtonBackground}"                
+                                                    Foreground="{StaticResource DgWhite}"             
                                                     Width="120" 
-                                                    Height="34"/>
+                                                    Height="34" 
+                                                    Visibility="{Binding Connected, Converter={StaticResource BooleanToVisibility}}"
+                                                    IsEnabled="{Binding ActionEnabled}"
+                                >
+                                <dgmaterial:CustomButtonControlEx.Style>
+                                    <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource POSOfflineCustomButtonControlExStyle}">
+                                        <Setter Property="Content" Value="Set Online"/>
+                                        <Setter Property="Background" Value="{StaticResource DgDefaultButtonBackground}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                                                <Setter Property="Content" Value="Set Offline"/>
+                                                <Setter Property="Background" Value="{StaticResource DgRed}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                                <Setter Property="Content" Value="Set Online"/>
+                                                <Setter Property="Background" Value="{StaticResource DgDefaultButtonBackground}"/>
+                                            </DataTrigger>                                         
+                                        </Style.Triggers>
+                                    </Style>
+                                </dgmaterial:CustomButtonControlEx.Style>
+                            </dgmaterial:CustomButtonControlEx>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Border Grid.Row="2" Background="#15191C" BorderThickness="0" Height="39">
-            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">
-                <TextBlock Text="Server: 10.0.1.1:4550" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40, 0" Background="{StaticResource DgTransparent}" />
-                <TextBlock Text="Refresh Interval: 10 sec" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40, 0" Background="{StaticResource DgTransparent}" />
-                <TextBlock Text="Status: Connected" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40, 0" Background="{StaticResource DgTransparent}" />
-                <TextBlock Text="Machine Count: 6" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40, 0" Background="{StaticResource DgTransparent}" />
-            </StackPanel>
+        <Border Grid.Row="2" Background="{StaticResource DgBackground}" BorderThickness="0" Height="39">
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Server}" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 0" Background="{StaticResource DgTransparent}" />
+                <TextBlock Grid.Column="1" Text="{Binding RefreshInterval}" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 0" Background="{StaticResource DgTransparent}" />
+                <TextBlock Grid.Column="2" Text="{Binding ServerStatus}" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 0" Background="{StaticResource DgTransparent}" />
+                <TextBlock Grid.Column="3" Text="{Binding MachineCount}" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 0" Background="{StaticResource DgTransparent}" />
+            </Grid>
         </Border>
 
     </Grid>

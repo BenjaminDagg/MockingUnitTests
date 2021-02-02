@@ -196,6 +196,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Device Manager Settings Saved Successfully..
+        /// </summary>
+        public static string DeviceManagerSettingsSavedMsg {
+            get {
+                return ResourceManager.GetString("DeviceManagerSettingsSavedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Did not receive approval.
         /// </summary>
         public static string DidNotGetApprovalMsg {
@@ -1142,11 +1151,245 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Balance.
+        /// </summary>
+        public static string UIDeviceManagementBalance {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Casino Mach ID.
+        /// </summary>
+        public static string UIDeviceManagementCasinoMachID {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementCasinoMachID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DGE ID.
+        /// </summary>
+        public static string UIDeviceManagementDEGID {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementDEGID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string UIDeviceManagementDescription {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Device Management.
         /// </summary>
         public static string UIDeviceManagementHeader {
             get {
                 return ResourceManager.GetString("UIDeviceManagementHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP.
+        /// </summary>
+        public static string UIDeviceManagementIP {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Played.
+        /// </summary>
+        public static string UIDeviceManagementLastPlayed {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementLastPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Machine Count: {0}.
+        /// </summary>
+        public static string UIDeviceManagementMachineCount {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementMachineCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh Interval: {0} sec..
+        /// </summary>
+        public static string UIDeviceManagementRefreshInterval {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementRefreshInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server: {0}.
+        /// </summary>
+        public static string UIDeviceManagementServer {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set All Offline.
+        /// </summary>
+        public static string UIDeviceManagementSetAllOffline {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementSetAllOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set All Online.
+        /// </summary>
+        public static string UIDeviceManagementSetAllOnline {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementSetAllOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Offline.
+        /// </summary>
+        public static string UIDeviceManagementSetOffline {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementSetOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Online.
+        /// </summary>
+        public static string UIDeviceManagementSetOnline {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementSetOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected.
+        /// </summary>
+        public static string UIDeviceManagementStateConnected {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementStateConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnected.
+        /// </summary>
+        public static string UIDeviceManagementStateDisconnected {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementStateDisconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Set.
+        /// </summary>
+        public static string UIDeviceManagementStateNotSet {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementStateNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status: {0}.
+        /// </summary>
+        public static string UIDeviceManagementStatus {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trans Type.
+        /// </summary>
+        public static string UIDeviceManagementTransType {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementTransType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device Manager Settings Error.
+        /// </summary>
+        public static string UIDeviceManagerSettingsError {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device Manager Settings not set. Please set the Device Manager Settings under the Settings tab..
+        /// </summary>
+        public static string UIDeviceManagerSettingsNotAvailableErrorMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsNotAvailableErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        public static string UIDeviceManagerSettingsSetAllOfflineConfirm {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOfflineConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you would like to set all machines offline?.
+        /// </summary>
+        public static string UIDeviceManagerSettingsSetAllOfflineConfirmMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOfflineConfirmMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        public static string UIDeviceManagerSettingsSetAllOnlineConfirm {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOnlineConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you would like to set all machines online?.
+        /// </summary>
+        public static string UIDeviceManagerSettingsSetAllOnlineConfirmMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOnlineConfirmMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        public static string UIDeviceManagerSettingsSetAllOnlineOfflineConfirm {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOnlineOfflineConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you would like to set Casino Machine ID {0} {1}?.
+        /// </summary>
+        public static string UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg", resourceCulture);
             }
         }
         
@@ -1187,11 +1430,56 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polling interval must be between 5 and 120 seconds.
+        /// </summary>
+        public static string UIErrorPollingIntervalRangeValidationMsg {
+            get {
+                return ResourceManager.GetString("UIErrorPollingIntervalRangeValidationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receipt Printer is required..
         /// </summary>
         public static string UIErrorReceiptPrinterValidationMsg {
             get {
                 return ResourceManager.GetString("UIErrorReceiptPrinterValidationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server IP is invalid.
+        /// </summary>
+        public static string UIErrorServerIPAddressFormatMsg {
+            get {
+                return ResourceManager.GetString("UIErrorServerIPAddressFormatMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server IP address required.
+        /// </summary>
+        public static string UIErrorServerIPAddressValidationMsg {
+            get {
+                return ResourceManager.GetString("UIErrorServerIPAddressValidationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server port must be between 4500 and 5000.
+        /// </summary>
+        public static string UIErrorServerPortRangeValidationMsg {
+            get {
+                return ResourceManager.GetString("UIErrorServerPortRangeValidationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server port required.
+        /// </summary>
+        public static string UIErrorServerPortValidationMsg {
+            get {
+                return ResourceManager.GetString("UIErrorServerPortValidationMsg", resourceCulture);
             }
         }
         
@@ -1430,6 +1718,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polling interval is required..
+        /// </summary>
+        public static string UIPollingIntervalValidationErrorMsg {
+            get {
+                return ResourceManager.GetString("UIPollingIntervalValidationErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a Printer.
         /// </summary>
         public static string UIPrinterSelectionPlaceholder {
@@ -1534,6 +1831,33 @@ namespace POS.Core {
         public static string UISearchVoucherWatermarkVoucherNumber {
             get {
                 return ResourceManager.GetString("UISearchVoucherWatermarkVoucherNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Polling Interval.
+        /// </summary>
+        public static string UISettingsPollingInterval {
+            get {
+                return ResourceManager.GetString("UISettingsPollingInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server IP Address.
+        /// </summary>
+        public static string UISettingsServerIpAddress {
+            get {
+                return ResourceManager.GetString("UISettingsServerIpAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Port.
+        /// </summary>
+        public static string UISettingsServerPort {
+            get {
+                return ResourceManager.GetString("UISettingsServerPort", resourceCulture);
             }
         }
         

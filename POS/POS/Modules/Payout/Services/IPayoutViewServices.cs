@@ -2,7 +2,6 @@
 using Framework.Core.Logging;
 using Framework.Core.Modularity.Framework.Core.Modularity;
 using Framework.Infrastructure.Identity.Services;
-using POS.Common;
 using POS.Core.Interfaces;
 using POS.Core.Interfaces.Data;
 using POS.Core.Interfaces.Printer;
@@ -28,5 +27,6 @@ namespace POS.Modules.Payout.Services.ViewModels
         SearchBarcodeViewModel SearchBarcodeViewModel { get; }
         TransactionViewModel TransactionViewModel { get; }
         PrinterSettingsViewModel PrinterSettingsViewModel { get; }
+        DeviceManagementSettingsViewModel DeviceManagementSettingsViewModel { get; }
     }
 }

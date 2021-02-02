@@ -33,12 +33,20 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>
+        </Setter>        
     </Style>
     
     <Style x:Key="POSDataGridRowStyle"  TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}">
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Height" Value="70"/>
+        <Setter Property="Height" Value="100"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource DgBlack}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource DgRed}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
         <Style x:Key="POSDataGridCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DgDataGridCellStyle}">
@@ -161,6 +169,73 @@
     <Style x:Key="POSCustomTextBoxControlExStyle" TargetType="{x:Type dgmaterial:CustomTextBoxControlEx}" BasedOn="{StaticResource DgCustomTextBoxControlExStyle}"/>
     <Style TargetType="{x:Type extenedcontrols:CustomTextBoxControlExtended}" BasedOn="{StaticResource DgCustomTextBoxControlExStyle}"/>
     <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource DgCustomButtonControlExStyle}" />
+
+    <Style x:Key="POSOfflineCustomButtonControlExStyle" TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource DgCustomButtonControlExStyle}" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type dgmaterial:CustomButtonControlEx}">
+                    <Grid MaxWidth="460" Width="{TemplateBinding Width}" MaxHeight="78" Height="{TemplateBinding Height}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox VerticalAlignment="Top"  HorizontalAlignment="Left" >
+                                <Path x:Name="TopCorner" Fill="{TemplateBinding Background}" 
+                                      Data="{StaticResource Small_LeftCorner_CutBack}"
+                                        />
+                            </Viewbox>
+                            <Rectangle Margin="-1, 0, 0, 0" 
+                                               Stroke="{StaticResource DgTransparent}" 
+                                               StrokeThickness="0" 
+                                               Name="RectangleFill" 
+                                               Fill="{TemplateBinding Background}" 
+                                               HorizontalAlignment="Right" 
+                                               Width="400" 
+                                               />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Viewbox VerticalAlignment="Center" 
+                                             HorizontalAlignment="Left" 
+                                             Height="{TemplateBinding Height}" 
+                                             Margin="0, 0, 10, 2" >
+                                <Path x:Name="SidePathIcon" 
+                                              Fill="{Binding IconColor, RelativeSource={RelativeSource AncestorType={x:Type dgmaterial:CustomButtonControlEx}}}" 
+                                              Data="{Binding PathIcon, RelativeSource={RelativeSource AncestorType={x:Type dgmaterial:CustomButtonControlEx}}}"
+                                              Stretch="UniformToFill"
+                                        />
+                                <Viewbox.LayoutTransform>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                </Viewbox.LayoutTransform>
+                            </Viewbox>
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                               FontSize="{TemplateBinding FontSize}" 
+                                               VerticalAlignment="Center" 
+                                               HorizontalAlignment="Right"
+                                               Margin="3" 
+                                               />
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="TopCorner" Property="Fill" Value="{Binding HoverColor, 
+                                RelativeSource={RelativeSource AncestorType={x:Type dgmaterial:CustomButtonControlEx}}, 
+                                TargetNullValue={StaticResource DgBackground3}}" />
+                            <Setter TargetName="RectangleFill" Property="Fill" Value="{Binding HoverColor, 
+                                RelativeSource={RelativeSource AncestorType={x:Type dgmaterial:CustomButtonControlEx}}, 
+                                TargetNullValue={StaticResource DgBackground3}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"  Value="True">
+                            <Setter TargetName="TopCorner" Property="Fill" Value="{StaticResource DgBackground4}"/>
+                            <Setter TargetName="RectangleFill" Property="Fill" Value="{StaticResource DgBackground4}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="TopCorner" Property="Fill" Value="{StaticResource DgBackground4}"/>
+                            <Setter TargetName="RectangleFill" Property="Fill" Value="{StaticResource DgBackground4}"/>
+                            <Setter Property="Opacity" Value="0.3"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type dgmaterial:AlertMessageControlEx}" BasedOn="{StaticResource DgAlertMessageControlStyle}"/>
     <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource DgScrollViewerStyle}" />
     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource DgScrollBarStyle}"/>

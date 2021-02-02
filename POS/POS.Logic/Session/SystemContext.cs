@@ -18,7 +18,7 @@ namespace POS.Core.Session
         public bool PrintCasinoPayoutReceipt { get; set; }
 
         public bool SupervisorApprovalRequired { get; set; }
-        
+
         public void Reset()
         {
             Location = null;

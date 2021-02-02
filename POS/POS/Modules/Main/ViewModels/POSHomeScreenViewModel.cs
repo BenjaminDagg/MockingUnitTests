@@ -1,18 +1,12 @@
 ﻿using Caliburn.Micro;
 using CSharpFunctionalExtensions;
 using Framework.Infrastructure.Identity.Services;
-using Framework.WPF.Modules.LoginModule.Events;
-using Framework.WPF.Modules.Services;
-using Framework.WPF.Modules.Shell.ViewModels;
-using Framework.WPF.ScreenManagement;
-using POS.Core;
-using POS.Core.PayoutSettings;
 using POS.Common.Events;
+using POS.Core;
 using POS.Modules.Payout.Services.ViewModels;
 using POS.Modules.Payout.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -39,7 +33,7 @@ namespace POS.Modules.Main.ViewModels
 
             UpdateTabPermissions(ref tabViewModels);
             Items.AddRange(OrderByPriority(tabViewModels.Where(tab => tab.UserHasPermission)));
-            EnableTabs(null, true);
+            EnableTabs(true);
         }
 
         private bool _actionInProgress;
@@ -61,29 +55,38 @@ namespace POS.Modules.Main.ViewModels
             }
         }
 
-        private void EnableTabs(string name, bool enable, bool disableOthers = false, IEnumerable<string> disableThese = null)
+        private void EnableTabs(bool enable)
         {
             if (Items == null || !Items.Any())
                 return;
 
             Items.ToList().ForEach(tab =>
-            {
-                if (tab.DisplayName == name)
-                {
-                    tab.Enabled = enable;
-                }
-                else
-                {
-                    if (disableOthers)
-                    {
-                        tab.Enabled = false;
-                    }
-                    else
-                    {
-                        tab.Enabled = enable;
-                    }
-                }
+            { 
+                tab.Enabled = enable;
             });
+        }
+
+        private void EnableTab(string name, bool enable)
+        {
+            if (Items == null || !Items.Any())
+                return;
+
+            var tab = Items.SingleOrDefault(t => t.DisplayName == name);
+            if(tab != null)
+            {
+                tab.Enabled = enable;
+            }
+        }
+        private void EnableTab(string name, bool enable, IEnumerable<string> disableThese = null)
+        {
+            if (Items == null || !Items.Any())
+                return;
+
+            var tab = Items.SingleOrDefault(t => t.DisplayName == name);
+            if (tab != null)
+            {
+                tab.Enabled = enable;
+            }
 
             if (disableThese != null && disableThese.Any())
             {
@@ -109,12 +112,19 @@ namespace POS.Modules.Main.ViewModels
         {
             switch (message.TabUpdateEventAction)
             {
-                case TabUpdateEventAction.PrinterSettingsNotInitialized:                    
-                    EnableTabs(POSResources.UITabSettings, true, disableThese: message.DisableTheseViews);
+                case TabUpdateEventAction.PrinterSettingsNotInitialized:
+                    EnableTab(POSResources.UITabSettings, true, disableThese: message.DisableTheseViews);
+                    await NavigateToTab(POSResources.UITabSettings);
+                    break;
+                case TabUpdateEventAction.DeviceManagerSettingsNotInitialized:
+                    EnableTab(POSResources.UITabSettings, true, disableThese: message.DisableTheseViews);
                     await NavigateToTab(POSResources.UITabSettings);
                     break;
                 case TabUpdateEventAction.PrinterSettingsSaved:
-                    EnableTabs(POSResources.UITabPayout, true);
+                    EnableTab(POSResources.UITabPayout, true);
+                    break;
+                case TabUpdateEventAction.DeviceManagerSettingsSaved:
+                    EnableTab(POSResources.UITabDeviceManagement, true);
                     break;
             }
         }

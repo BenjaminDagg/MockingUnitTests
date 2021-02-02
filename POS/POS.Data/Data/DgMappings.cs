@@ -1,5 +1,6 @@
 ﻿using NPoco.FluentMappings;
 using POS.Core.CashDrawer;
+using POS.Core.DeviceManager;
 using POS.Core.PayoutSettings;
 using POS.Core.Vouchers;
 
@@ -61,6 +62,17 @@ namespace POS.Infrastructure.Data
                     x.Column(y => y.Barcode).WithName("BARCODE");
                     x.Column(y => y.VoucherAmount).WithName("VOUCHER_AMOUNT");
                     x.Column(y => y.ExpireDate);
+                });
+            For<MachineDto>()
+                .Columns(x =>
+                {
+                    x.Column(y => y.MachineNo).WithName("MACH_NO");
+                    x.Column(y => y.CasinoMachNo).WithName("CASINO_MACH_NO");
+                    x.Column(y => y.ModelDesc).WithName("MODEL_DESC"); ;
+                    x.Column(y => y.IpAddress).WithName("IP_ADDRESS");
+                    x.Column(y => y.RemovedFlag).WithName("REMOVED_FLAG"); ;
+                    x.Column(y => y.Balance).WithName("BALANCE"); ;
+                    x.Column(y => y.LastActivity).WithName("LAST_ACTIVITY"); ;
                 });
         }
     }

@@ -162,6 +162,9 @@
   <data name="CurrentTransactionMenu" xml:space="preserve">
     <value>Current Transaction</value>
   </data>
+  <data name="DeviceManagerSettingsSavedMsg" xml:space="preserve">
+    <value>Device Manager Settings Saved Successfully.</value>
+  </data>
   <data name="DidNotGetApprovalMsg" xml:space="preserve">
     <value>Did not receive approval</value>
   </data>
@@ -478,8 +481,86 @@ Scan Voucher.</value>
   <data name="UICurrentTransactionVoucherCount" xml:space="preserve">
     <value>Voucher Count: {0}</value>
   </data>
+  <data name="UIDeviceManagementBalance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="UIDeviceManagementCasinoMachID" xml:space="preserve">
+    <value>Casino Mach ID</value>
+  </data>
+  <data name="UIDeviceManagementDEGID" xml:space="preserve">
+    <value>DGE ID</value>
+  </data>
+  <data name="UIDeviceManagementDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="UIDeviceManagementHeader" xml:space="preserve">
     <value>Device Management</value>
+  </data>
+  <data name="UIDeviceManagementIP" xml:space="preserve">
+    <value>IP</value>
+  </data>
+  <data name="UIDeviceManagementLastPlayed" xml:space="preserve">
+    <value>Last Played</value>
+  </data>
+  <data name="UIDeviceManagementMachineCount" xml:space="preserve">
+    <value>Machine Count: {0}</value>
+  </data>
+  <data name="UIDeviceManagementRefreshInterval" xml:space="preserve">
+    <value>Refresh Interval: {0} sec.</value>
+  </data>
+  <data name="UIDeviceManagementServer" xml:space="preserve">
+    <value>Server: {0}</value>
+  </data>
+  <data name="UIDeviceManagementSetAllOffline" xml:space="preserve">
+    <value>Set All Offline</value>
+  </data>
+  <data name="UIDeviceManagementSetAllOnline" xml:space="preserve">
+    <value>Set All Online</value>
+  </data>
+  <data name="UIDeviceManagementSetOffline" xml:space="preserve">
+    <value>Set Offline</value>
+  </data>
+  <data name="UIDeviceManagementSetOnline" xml:space="preserve">
+    <value>Set Online</value>
+  </data>
+  <data name="UIDeviceManagementStateConnected" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="UIDeviceManagementStateDisconnected" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
+  <data name="UIDeviceManagementStateNotSet" xml:space="preserve">
+    <value>Not Set</value>
+  </data>
+  <data name="UIDeviceManagementStatus" xml:space="preserve">
+    <value>Status: {0}</value>
+  </data>
+  <data name="UIDeviceManagementTransType" xml:space="preserve">
+    <value>Trans Type</value>
+  </data>
+  <data name="UIDeviceManagerSettingsError" xml:space="preserve">
+    <value>Device Manager Settings Error</value>
+  </data>
+  <data name="UIDeviceManagerSettingsNotAvailableErrorMsg" xml:space="preserve">
+    <value>Device Manager Settings not set. Please set the Device Manager Settings under the Settings tab.</value>
+  </data>
+  <data name="UIDeviceManagerSettingsSetAllOfflineConfirm" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="UIDeviceManagerSettingsSetAllOfflineConfirmMsg" xml:space="preserve">
+    <value>Are you sure you would like to set all machines offline?</value>
+  </data>
+  <data name="UIDeviceManagerSettingsSetAllOnlineConfirm" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="UIDeviceManagerSettingsSetAllOnlineConfirmMsg" xml:space="preserve">
+    <value>Are you sure you would like to set all machines online?</value>
+  </data>
+  <data name="UIDeviceManagerSettingsSetAllOnlineOfflineConfirm" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg" xml:space="preserve">
+    <value>Are you sure you would like to set Casino Machine ID {0} {1}?</value>
   </data>
   <data name="UIEnter" xml:space="preserve">
     <value>Enter</value>
@@ -493,8 +574,23 @@ Scan Voucher.</value>
   <data name="UIErrorCashPromptPasswordRequiredMsg" xml:space="preserve">
     <value>Password is required.</value>
   </data>
+  <data name="UIErrorPollingIntervalRangeValidationMsg" xml:space="preserve">
+    <value>Polling interval must be between 5 and 120 seconds</value>
+  </data>
   <data name="UIErrorReceiptPrinterValidationMsg" xml:space="preserve">
     <value>Receipt Printer is required.</value>
+  </data>
+  <data name="UIErrorServerIPAddressFormatMsg" xml:space="preserve">
+    <value>Server IP is invalid</value>
+  </data>
+  <data name="UIErrorServerIPAddressValidationMsg" xml:space="preserve">
+    <value>Server IP address required</value>
+  </data>
+  <data name="UIErrorServerPortRangeValidationMsg" xml:space="preserve">
+    <value>Server port must be between 4500 and 5000</value>
+  </data>
+  <data name="UIErrorServerPortValidationMsg" xml:space="preserve">
+    <value>Server port required</value>
   </data>
   <data name="UILastPrintedReceiptButtonReprint" xml:space="preserve">
     <value>Reprint</value>
@@ -574,6 +670,9 @@ Scan Voucher.</value>
   <data name="UIPayoutToolTipLastReceipt" xml:space="preserve">
     <value>Last Receipt</value>
   </data>
+  <data name="UIPollingIntervalValidationErrorMsg" xml:space="preserve">
+    <value>Polling interval is required.</value>
+  </data>
   <data name="UIPrinterSelectionPlaceholder" xml:space="preserve">
     <value>Select a Printer</value>
   </data>
@@ -609,6 +708,15 @@ Scan Voucher.</value>
   </data>
   <data name="UISearchVoucherWatermarkVoucherNumber" xml:space="preserve">
     <value>Voucher Number</value>
+  </data>
+  <data name="UISettingsPollingInterval" xml:space="preserve">
+    <value>Polling Interval</value>
+  </data>
+  <data name="UISettingsServerIpAddress" xml:space="preserve">
+    <value>Server IP Address</value>
+  </data>
+  <data name="UISettingsServerPort" xml:space="preserve">
+    <value>Server Port</value>
   </data>
   <data name="UIStartingBalanceMessage" xml:space="preserve">
     <value>Starting Balance (must be greater than 0)</value>

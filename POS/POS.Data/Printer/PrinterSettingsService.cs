@@ -36,7 +36,6 @@ namespace POS.Infrastructure.Printer
         {
             try
             {
-                //todo: Need to clarify which is supposed to be set default... LRAS may have a bug 
                 SetDefaultPrinter(receiptPrinter);
 
                 var appSettingsFileName = _hostEnvironment.IsDevelopment() ? "appsettings.local.json" : "appsettings.json";

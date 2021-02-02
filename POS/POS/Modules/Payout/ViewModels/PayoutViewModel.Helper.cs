@@ -96,7 +96,7 @@ namespace POS.Modules.Payout.ViewModels
         {
             if (!_payoutViewServices.Session.HaveReceiptPrinter)
             {
-                await _messageBoxService.PromptAsync(POSResources.UIPayoutReceiptPrinterError, POSResources.UIPayoutReceiptPrinterErrorMsg, promptType: PromptTypes.Error);
+                await _messageBoxService.PromptAsync(POSResources.UIPayoutReceiptPrinterErrorMsg, POSResources.UIPayoutReceiptPrinterError, promptType: PromptTypes.Error);
 
                 await _payoutViewServices.EventAggregator.PublishOnUIThreadAsync(
                     new TabUpdated(TabUpdateEventAction.PrinterSettingsNotInitialized,

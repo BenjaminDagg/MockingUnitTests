@@ -10,7 +10,18 @@
              d:DesignHeight="400" d:DesignWidth="1000">
     <GroupBox  >
         <StackPanel>
-
+            <ItemsControl Margin="0,2,0,2"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Alerts}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <dgmaterial:AlertMessageControlEx Margin="0,3"
+                                                  HorizontalAlignment="Stretch"
+                                                  Alert="{Binding AlertType}"
+                                                  Message="{Binding Message}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             <StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -32,61 +43,59 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <StackPanel  Margin="0, 0, 10, 0">
-                    <dgmaterial:CustomTextBoxControlEx x:Name="PolingInterval"
-                                                             Style="{StaticResource DgCustomTextBoxControlExStyle}"
-                                                             MaxLength="18" 
-                                                             Margin="0, 20, 0, 0" 
-                                                             Width="400"
-                                                             HorizontalAlignment="Center"
-                                                             FontSize="18" 
-                                                             Foreground="{StaticResource DgWhite}"
-                                           PathIcon="{StaticResource Query_Builder}"
-                                           WatermarkText="Polling Interval">
-                    </dgmaterial:CustomTextBoxControlEx>
                     <dgmaterial:CustomTextBoxControlEx x:Name="ServerIPAddress"
                                                              Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                             Text="{Binding ServerIPAddress, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                                              MaxLength="18" 
                                                              Margin="0, 20, 0, 0" 
                                                              Width="400"
                                                              HorizontalAlignment="Center"
                                                              FontSize="18" 
                                                              Foreground="{StaticResource DgWhite}"
-                                           PathIcon="{StaticResource Dns}"
-                                                            WatermarkText="Server IP Address">
+                                                             PathIcon="{StaticResource Dns}"
+                                                             WatermarkText="{x:Static resx:POSResources.UISettingsServerIpAddress}">
                     </dgmaterial:CustomTextBoxControlEx>
-                </StackPanel>
-                <StackPanel Margin="20, 0, 0, 0">
-                    <dgmaterial:CustomTextBoxControlEx x:Name="LogFilePath"
+
+                <dgmaterial:CustomTextBoxControlEx x:Name="ServerPort"
                                                              Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                             Text="{Binding ServerPort, 
+                                                               UpdateSourceTrigger=PropertyChanged, 
+                                                               ValidatesOnDataErrors=True, TargetNullValue=''}"
                                                              MaxLength="18" 
                                                              Margin="0, 20, 0, 0" 
-                                                             Width="400"
+                                                             Width="240"
                                                              HorizontalAlignment="Center"
                                                              FontSize="18" 
+                                                             NumericMode="True"
                                                              Foreground="{StaticResource DgWhite}"
-                                           PathIcon="{StaticResource Description}"
-                                                     WatermarkText="Log File Path">
+                                                             PathIcon="{StaticResource Dns}"
+                                                             WatermarkText="{x:Static resx:POSResources.UISettingsServerPort}">
                     </dgmaterial:CustomTextBoxControlEx>
-                    <dgmaterial:CustomTextBoxControlEx x:Name="ServerPort"
+                    <dgmaterial:CustomTextBoxControlEx x:Name="PollingInterval"
                                                              Style="{StaticResource DgCustomTextBoxControlExStyle}"
+                                                             Text="{Binding PollingInterval,
+                                                               UpdateSourceTrigger=PropertyChanged, 
+                                                               ValidatesOnDataErrors=True, TargetNullValue=''}"
                                                              MaxLength="18" 
                                                              Margin="0, 20, 0, 0" 
-                                                             Width="400"
+                                                             Width="240"
                                                              HorizontalAlignment="Center"
                                                              FontSize="18" 
+                                                             NumericMode="True"
                                                              Foreground="{StaticResource DgWhite}"
-                                           PathIcon="{StaticResource Dns}"
-                                                     WatermarkText="Server Port">
+                                                             PathIcon="{StaticResource Query_Builder}"
+                                                             WatermarkText="{x:Static resx:POSResources.UISettingsPollingInterval}">
                     </dgmaterial:CustomTextBoxControlEx>
-                </StackPanel>
+
             </StackPanel>
 
             <StackPanel Margin="0, 20, 0, 0"
                                             HorizontalAlignment="Right"
                                             Orientation="Horizontal">
 
-                <dgmaterial:CustomButtonControlEx x:Name="SaveDeviceSettings" 
+                <dgmaterial:CustomButtonControlEx x:Name="Save" 
+                                                  Command="{Binding SaveCommand}"
+                                                  CommandParameter="null"
                                                 Margin="10, 0, 5, 0"
                                                 Content="Save"
                                                 FontSize="24" 

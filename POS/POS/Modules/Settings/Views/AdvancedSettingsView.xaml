@@ -11,7 +11,7 @@
 
             <local:PrinterSettingsView DataContext="{Binding PrinterSettingsViewModel}"/>
 
-            <local:DeviceManagementSettingsView DataContext="{Binding}"/>
+            <local:DeviceManagementSettingsView DataContext="{Binding DeviceManagementSettingsViewModel}"/>
 
         </StackPanel>
     

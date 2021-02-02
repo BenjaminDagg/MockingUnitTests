@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using POS.Core;
 using POS.Core.StartUp;
 using POS.Infrastructure.Startup;
+using POS.Modules.DeviceManagement;
 using POS.Modules.Main;
 using POS.Modules.Main.ViewModels;
 using POS.Modules.Payout;
@@ -55,6 +56,7 @@ namespace POS.Startup
             //Modules
             services.AddSettingsModule(configuration);
             services.AddPayoutModule(configuration);
+            services.AddDeviceManagementModule(configuration);
 
             //POS Shell
             services.AddTabModules();

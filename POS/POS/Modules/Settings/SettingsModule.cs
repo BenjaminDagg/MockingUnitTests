@@ -2,9 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using POS.Core.Config;
-using POS.Core.Interfaces.Printer;
 using POS.Infrastructure.Config;
-using POS.Common;
 
 namespace POS.Modules.Printer
 {
@@ -14,6 +12,9 @@ namespace POS.Modules.Printer
         {
             var printerSettings = configuration.GetConfigurationSection<PrinterSettingsFileConfig>("UserPrinterSettings");
             services.AddSingleton<IPrinterSettings>(printerSettings);
+
+            var deviceManagerSettings = configuration.GetConfigurationSection<DeviceManagerSettingsFileConfig>("DeviceManagerSettings");
+            services.AddSingleton<IDeviceManagerSettings>(deviceManagerSettings);
         }
     }
 }
