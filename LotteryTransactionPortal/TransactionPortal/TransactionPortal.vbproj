@@ -98,7 +98,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DgeHashLib">
-      <HintPath>..\..\..\CompiledLibs\DgeHashLib.dll</HintPath>
+      <HintPath>..\..\CompiledLibs\DgeHashLib.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -229,6 +229,6 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>C:\DgeTools\CompileHasher.exe /targetfolder:$(TargetDir) /digestfullpath:$(TargetDir)\tpMsgDigest.dat /filelist:TransactionPortal.exe,DataAccess.dll,DgeHashLib.dll,Tpi.dll,Messages.xml,Transactions.xml /copydigestpath:$(SolutionDir)\TransactionPortalSetup\tpMsgDigest.dat</PostBuildEvent>
+    <PostBuildEvent>C:\Users\hmccarthy\source\repos\AppDev_MOLite\DgeTools\CompileHasher.exe /targetfolder:$(TargetDir) /digestfullpath:$(TargetDir)\tpMsgDigest.dat /filelist:TransactionPortal.exe,DataAccess.dll,DgeHashLib.dll,Tpi.dll,Messages.xml,Transactions.xml /copydigestpath:$(SolutionDir)\TransactionPortalSetup\tpMsgDigest.dat</PostBuildEvent>
   </PropertyGroup>
 </Project>

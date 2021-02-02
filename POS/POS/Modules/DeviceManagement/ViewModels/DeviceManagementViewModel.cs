@@ -262,7 +262,9 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 }
 
                 var promptOpion = await _messageBoxService.PromptAsync(
-                    String.Format(POSResources.UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg, SelectedDevice.CasinoMachNumber, command == COMMAND_SETONLINE ? "Online" : "Offline"),
+                    String.Format(POSResources.UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg, 
+                    SelectedDevice.CasinoMachNumber, 
+                    command == COMMAND_SETONLINE ? POSResources.UIDeviceOnlineStatus : POSResources.UIDeviceOfflineStatus),
                     POSResources.UIDeviceManagerSettingsSetAllOnlineOfflineConfirm,
                     PromptOptions.YesNo,
                     promptType: promtType);

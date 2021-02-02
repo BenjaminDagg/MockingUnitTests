@@ -1,14 +1,8 @@
 ﻿using Caliburn.Micro;
 using Framework.Infrastructure.Identity.Services.Authentication;
-using Framework.WPF.Modules.LoginModule.ViewModels;
 using Framework.WPF.ScreenManagement;
 using Framework.WPF.ScreenManagement.Alert;
-using Framework.WPF.ScreenManagement.Prompt;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS.Modules.Main.ViewModels
 {

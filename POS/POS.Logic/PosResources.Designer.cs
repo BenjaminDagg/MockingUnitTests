@@ -1151,6 +1151,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Halted for Ticket Printing.
+        /// </summary>
+        public static string UIDeviceHaltedStatus {
+            get {
+                return ResourceManager.GetString("UIDeviceHaltedStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Balance.
         /// </summary>
         public static string UIDeviceManagementBalance {
@@ -1390,6 +1399,33 @@ namespace POS.Core {
         public static string UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg {
             get {
                 return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offline.
+        /// </summary>
+        public static string UIDeviceOfflineStatus {
+            get {
+                return ResourceManager.GetString("UIDeviceOfflineStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string UIDeviceOnlineStatus {
+            get {
+                return ResourceManager.GetString("UIDeviceOnlineStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string UIDeviceUnknownStatus {
+            get {
+                return ResourceManager.GetString("UIDeviceUnknownStatus", resourceCulture);
             }
         }
         

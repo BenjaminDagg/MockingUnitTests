@@ -481,6 +481,9 @@ Scan Voucher.</value>
   <data name="UICurrentTransactionVoucherCount" xml:space="preserve">
     <value>Voucher Count: {0}</value>
   </data>
+  <data name="UIDeviceHaltedStatus" xml:space="preserve">
+    <value>Halted for Ticket Printing</value>
+  </data>
   <data name="UIDeviceManagementBalance" xml:space="preserve">
     <value>Balance</value>
   </data>
@@ -561,6 +564,15 @@ Scan Voucher.</value>
   </data>
   <data name="UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg" xml:space="preserve">
     <value>Are you sure you would like to set Casino Machine ID {0} {1}?</value>
+  </data>
+  <data name="UIDeviceOfflineStatus" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="UIDeviceOnlineStatus" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="UIDeviceUnknownStatus" xml:space="preserve">
+    <value>Unknown</value>
   </data>
   <data name="UIEnter" xml:space="preserve">
     <value>Enter</value>

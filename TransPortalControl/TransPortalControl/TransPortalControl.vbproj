@@ -99,10 +99,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DgeHashLib">
-      <HintPath>..\..\..\CompiledLibs\DgeHashLib.dll</HintPath>
+      <HintPath>..\..\CompiledLibs\DgeHashLib.dll</HintPath>
     </Reference>
     <Reference Include="DgeSqlDataAccess">
-      <HintPath>..\..\..\CompiledLibs\DgeSqlDataAccess.dll</HintPath>
+      <HintPath>..\..\CompiledLibs\DgeSqlDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
