@@ -79,6 +79,16 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leaving this screen will end your current session.
+        ///Are you sure you want to end this session?.
+        /// </summary>
+        public static string AreYouSureEndLogSessionMsg {
+            get {
+                return ResourceManager.GetString("AreYouSureEndLogSessionMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Leaving this screen will end your current session.  Are you sure you want to end this session?.
         /// </summary>
         public static string AreYouSureEndSessionMsg {
@@ -714,6 +724,15 @@ namespace POS.Core {
         public static string RemoveCashTitle {
             get {
                 return ResourceManager.GetString("RemoveCashTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reciept reprinted succesfully.
+        /// </summary>
+        public static string ReprintSucessful {
+            get {
+                return ResourceManager.GetString("ReprintSucessful", resourceCulture);
             }
         }
         

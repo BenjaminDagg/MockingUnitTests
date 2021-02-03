@@ -20,7 +20,8 @@
                     <dgmaterial:AlertMessageControlEx Margin="0,3"
                                                   HorizontalAlignment="Stretch"
                                                   Alert="{Binding AlertType}"
-                                                  Message="{Binding Message}" />
+                                                  Message="{Binding Message}"
+                                                  FontSize="15"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

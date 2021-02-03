@@ -2,17 +2,20 @@
 {
     public class LastTransaction
     {
-        public int LastReceiptNumber { get; }
+        public int LastReceiptNumbers { get; }
 
-        public int LastVoucherCount { get; }
+        public int LastVoucherCounts { get; }
 
-        public decimal LastReceiptTotal { get; }
+        public decimal LastReceiptTotals { get; }
 
-        public LastTransaction(int receiptNumber, int voucherCount, decimal totalPayout)
+        public LastTransaction(int LastReceiptNumbers, int LastVoucherCounts, decimal LastReceiptTotals)
         {
-            LastReceiptNumber = receiptNumber;
-            LastVoucherCount = voucherCount;
-            LastReceiptTotal = totalPayout;
+            this.LastReceiptNumbers = LastReceiptNumbers;
+            this.LastVoucherCounts = LastVoucherCounts;
+            this.LastReceiptTotals = LastReceiptTotals;
         }
+
+        
+
     }
 }

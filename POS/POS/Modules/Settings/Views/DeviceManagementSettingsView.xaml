@@ -8,7 +8,8 @@
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="1000">
-    <GroupBox  >
+    
+    <GroupBox >
         <StackPanel>
 
             <StackPanel>

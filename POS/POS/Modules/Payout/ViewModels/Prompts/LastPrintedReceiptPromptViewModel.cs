@@ -19,6 +19,7 @@ using POS.Modules.Main.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         public decimal TotalPayout { get; set; }
 
         public int NumberVouchers { get; set; }
-
+        
         public int ReceiptNumber { get; set; }
 
         public bool IsReprintEnabled { get; set; }
@@ -93,16 +94,16 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             try
             {
                 var lastReceipt = _lastReceiptService.GetLastReceipt();
-                if (lastReceipt == null || lastReceipt.LastReceiptNumber == 0)
+                if (lastReceipt == null || lastReceipt.LastReceiptNumbers == 0)
                 {
                     IsReprintEnabled = false;
                     Alerts.Clear();
-                    Alerts.Add(new TaskAlert(AlertType.Info, POSResources.NoLastReceiptFoundMsg));
+                    Alerts.Add(new TaskAlert(AlertType.Error, POSResources.NoLastReceiptFoundMsg));
                     return;
                 }
-                TotalPayout = lastReceipt.LastReceiptTotal;
-                NumberVouchers = lastReceipt.LastVoucherCount;
-                ReceiptNumber = lastReceipt.LastReceiptNumber;
+                TotalPayout = lastReceipt.LastReceiptTotals;
+                NumberVouchers = lastReceipt.LastVoucherCounts;
+                ReceiptNumber = lastReceipt.LastReceiptNumbers;
 
             }
             catch (Exception)
@@ -117,6 +118,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             {
                 await ReprintReceipt(ReceiptNumber);
                 //not closing in case want to still see dialog
+                await _messageBoxService.PromptAsync(POSResources.ReprintSucessful, POSResources.SuccessTitle, PromptOptions.Ok, PromptTypes.Success);
             }
             catch (Exception exception)
             {

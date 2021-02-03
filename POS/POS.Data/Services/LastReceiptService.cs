@@ -29,7 +29,7 @@ namespace POS.Infrastructure.Services
             var path = Path.Combine(Environment.CurrentDirectory, FileName);
             if (!File.Exists(path)) return null;
             // deserialize JSON directly from a file
-            using (var file = File.OpenText(path))
+            using (StreamReader file = File.OpenText(path))
             {
                 var serializer = new JsonSerializer();
                 return (LastTransaction)serializer.Deserialize(file, typeof(LastTransaction));

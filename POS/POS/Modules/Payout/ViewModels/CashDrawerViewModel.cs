@@ -17,7 +17,7 @@ using POS.Core.PayoutSettings;
 using POS.Core.Session;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;
-using POS.Modules.Settings.ViewModels.Prompts;
+using POS.Modules.Payout.ViewModels.Prompts;
 using POS.Printer.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -26,7 +26,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace POS.Modules.Settings.ViewModels
+namespace POS.Modules.Payout.ViewModels
 {
     public class CashDrawerViewModel : PropertyChangedBaseWithValidation
     {

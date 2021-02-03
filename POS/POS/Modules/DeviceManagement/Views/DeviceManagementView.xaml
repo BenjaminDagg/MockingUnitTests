@@ -6,7 +6,13 @@
              xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
-    <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Viewbox
+        HorizontalAlignment="Stretch" 
+        VerticalAlignment="Stretch"
+        Width="{Binding SystemParameters.PrimaryScreenWidth}"
+        Height="{Binding SystemParameters.PrimaryScreenHeight}" 
+        >
+        <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Margin="20, 0, 20, 0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -125,6 +131,7 @@
                 <TextBlock Text="Machine Count: 6" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40, 0" Background="{StaticResource DgTransparent}" />
             </StackPanel>
         </Border>
-
+    
     </Grid>
+    </Viewbox>
 </UserControl>

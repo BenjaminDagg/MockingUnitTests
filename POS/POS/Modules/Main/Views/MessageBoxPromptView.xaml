@@ -51,7 +51,7 @@
                        VerticalAlignment="Center"
                        DockPanel.Dock="Right"
                        Foreground="{StaticResource DgWhite}"
-                       FontSize="12"
+                       FontSize="15"
                        Text="{Binding Message}"
                        TextWrapping="Wrap" />
             </DockPanel>

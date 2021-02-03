@@ -9,9 +9,16 @@
              xmlns:settingsviews="clr-namespace:POS.Modules.Settings.Views"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1400">
-
-    <DockPanel>
+             d:DesignHeight="800" d:DesignWidth="1400"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+    <Viewbox x:Name="PVbox" 
+       HorizontalAlignment="Stretch" 
+       VerticalAlignment="Stretch"
+       Width="{Binding SystemParameters.PrimaryScreenWidth}"
+       Height="{Binding SystemParameters.PrimaryScreenHeight}" 
+       >
+        <DockPanel>
         <ItemsControl DockPanel.Dock="Top"
                       Margin="0,2,0,2"
                       HorizontalAlignment="Stretch"
@@ -31,11 +38,11 @@
               HorizontalAlignment="Stretch" 
               Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="610" />
+                    <ColumnDefinition Width="1024"/>
+                <ColumnDefinition Width="650" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" MinHeight="20"/>
+                    <RowDefinition Height="*"  MinHeight="20"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
@@ -64,14 +71,13 @@
                    
                 </dgmaterial:CustomButtonControlEx>
                 <local:CurrentTransactionView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 50 0 0 "  DataContext="{Binding}"/>
-            
-           
-            <local:SearchVoucherView DataContext="{Binding}" Grid.Column="1" Grid.Row="0" />
-            <settingsviews:CashDrawerView DataContext="{Binding}" Visibility="{Binding HasCashDrawer, Converter={StaticResource BooleanToVisibility}}" 
-                                          Margin="20, 0, 20, 20" 
-                                          Grid.Column="1" 
-                                          Grid.Row="1"  />
+                <local:SearchVoucherView DataContext="{Binding}" Grid.Column="1" Grid.Row="0" />
+                <local:CashDrawerView DataContext="{Binding}" Visibility="{Binding HasCashDrawer, Converter={StaticResource BooleanToVisibility}}" 
+                                      Margin="20, 0, 20, 20" 
+                                      Grid.Column="1" 
+                                      Grid.Row="1"  />
 
         </Grid>
     </DockPanel>
+   </Viewbox>
 </UserControl>
