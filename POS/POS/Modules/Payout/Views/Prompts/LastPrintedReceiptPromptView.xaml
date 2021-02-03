@@ -29,7 +29,6 @@
         <StackPanel Margin="10">
             <StackPanel >
                 <TextBlock x:Name="ReceiptNumberTxt" 
-                           Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
                            Text="{x:Static resx:POSResources.UILastReceiptNumber}" 
                            FontSize="20"
                            Grid.Column="0" 
@@ -52,7 +51,6 @@
 
             <StackPanel>
                 <TextBlock x:Name="NumberVouchersTxt" 
-                           Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
                            Text="{x:Static resx:POSResources.UILastTotalNumberOfVouchers}" 
                            FontSize="20"
                            Grid.Column="0" 
@@ -75,7 +73,6 @@
 
             <StackPanel>
                 <TextBlock x:Name="TotalPayoutTxt" 
-                           Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
                            Text="{x:Static resx:POSResources.UIReportHeaderAmount}" 
                            FontSize="20"
                            Grid.Column="0" 
