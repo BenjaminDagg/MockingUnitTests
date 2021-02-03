@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace POS.Modules.Reports.Views
 {
@@ -10,6 +11,13 @@ namespace POS.Modules.Reports.Views
         public ReportsView()
         {
             InitializeComponent();
+            this.Loaded += ReportsView_Loaded;
+        }
+
+        private void ReportsView_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+           this.reportViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Resources\Cashier_Balance.rdl");
+           this.reportViewer.RefreshReport();
         }
     }
 }

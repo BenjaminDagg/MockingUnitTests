@@ -6,10 +6,12 @@
         xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
         Style="{StaticResource DgMainWindowStyle}"
         xmlns:local="clr-namespace:POS.Modules.Main.Views"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
         Width="1700"
-        MinWidth="1600"
+        MinWidth="800"
         Height="1200"
-        MinHeight="1200"
+        MinHeight="600"
         mc:Ignorable="d">    
 
         <!-- Current Active Item-->

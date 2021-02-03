@@ -20,6 +20,7 @@
 		<None Remove="appsettings.json" />
 		<None Remove="appsettings.local.json" />
 		<None Remove="nlog.config" />
+		<None Remove="Resources\Cashier_Balance.rdl" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -35,9 +36,13 @@
 		<Content Include="nlog.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Cashier_Balance.rdl">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BoldReports.WPF" Version="2.4.19" />
 		<PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="1.6.5" />
 	</ItemGroup>
