@@ -21,6 +21,7 @@ using POS.Modules.Payout;
 using POS.Modules.Printer;
 using System;
 using System.Reflection;
+using Bold.Licensing;
 
 namespace POS.Startup
 {
@@ -29,6 +30,7 @@ namespace POS.Startup
     {
         public AppStartup(IHostEnvironment hostEnvironment) : base(hostEnvironment)
         {
+
         }
 
         protected override void RegisterDependencies(IServiceCollection services, IConfiguration configuration)

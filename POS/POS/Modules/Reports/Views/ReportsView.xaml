@@ -13,6 +13,9 @@
              d:DesignHeight="450" d:DesignWidth="800" >
     <UserControl.Resources>
         <ResourceDictionary>
+            
+
+
             <Style x:Key="DgSmallComboBoxStyle" TargetType="{x:Type controls1:CustomComboBoxControlEx}">
                 <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
                 <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -137,6 +140,8 @@
                                             <ContentPresenter.Resources>
                                                 <Style TargetType="{x:Type TextBlock}">
                                                     <Setter Property="Margin" Value="10"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+
                                                 </Style>
                                             </ContentPresenter.Resources>
                                         </ContentPresenter>
@@ -339,7 +344,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                             <Border x:Name="Border" BorderThickness="0" BorderBrush="Transparent" Padding="0" SnapsToDevicePixels="true" Visibility="{Binding Visibility}">
-                                <Grid x:Name="Panel" Background="Transparent">
+                                <Grid x:Name="Panel" Background="Transparent" VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
@@ -1090,7 +1095,8 @@
                                         </StackPanel>
                                     </Grid>
                                     <Grid x:Name="PART_gridLoadingIndicator" Background="Black" FlowDirection="LeftToRight" Grid.Row="5" Visibility="Collapsed">
-                                        <controls:LoadingIndicator Background="Black"/>
+                                        <!--<controls:LoadingIndicator Background="Black"/>-->
+                                            <ProgressBar Width="100" Height="100" IsIndeterminate="True" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource DgCircularProgressBar}"></ProgressBar>
                                     </Grid>
                                 </Grid>
                             </Border>
