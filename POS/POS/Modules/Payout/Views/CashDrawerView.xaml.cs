@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace POS.Modules.Settings.Views
+namespace POS.Modules.Payout.Views
 {
     /// <summary>
     /// Interaction logic for CashDrawer.xaml

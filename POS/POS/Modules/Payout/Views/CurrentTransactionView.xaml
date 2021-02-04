@@ -45,7 +45,7 @@
             Style="{StaticResource DgDataGridStyle}" 
             Visibility="{Binding TransactionViewModel.HasItems, Converter={StaticResource BooleanToVisibility}}" 
             ItemsSource="{Binding Path=TransactionViewModel.VoucherItems}"
-            Margin="10" 
+            Margin="10 10 10 10" 
             HorizontalAlignment="Stretch"  
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
@@ -53,22 +53,22 @@
             ColumnWidth="*"
             AutoGenerateColumns="False" 
             IsReadOnly="True"
-            RowHeight="44"
+            RowHeight="44" 
             >
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource POSDataGridCellStyle}"/>
             </DataGrid.CellStyle>
             <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow" BasedOn="{StaticResource POSDataGridRowStyle}" />
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}" />
             </DataGrid.RowStyle>
             <DataGrid.Resources>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource DgScrollBarStyle}"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderBarcode}" Binding="{Binding Path=Barcode.Value}" 
-                                    FontSize="20" MinWidth="300" />
+                                    FontSize="20" MinWidth="260"/>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderAmount}" Binding="{Binding Path=Amount, StringFormat={}{0:C}}" 
-                                    FontSize="20" Width="200" />
+                                    FontSize="20" Width="180" />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderID}" Binding="{Binding Path=VoucherId}" 
                                     FontSize="20" Width="120" />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderCreated}" Binding="{Binding Path=Created, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" 

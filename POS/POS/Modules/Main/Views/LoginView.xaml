@@ -70,13 +70,13 @@
                                           WatermarkText="{x:Static resx:POSResources.UIPassword}">
         </dgmaterial:CustomPasswordControlEx>
 
-        <Button Style="{StaticResource POSLinkButtonStyle}"
+        <!--<Button Style="{StaticResource POSLinkButtonStyle}"
                 Content="Forget Password?" 
                 Foreground="#00B2E2" 
                 FontSize="20"  
                 Margin="0,30,50,20" 
                 HorizontalAlignment="Right" 
-                />
+                />-->
 
         <StackPanel Margin="0, 20, 50, 40"
                                 HorizontalAlignment="Right"

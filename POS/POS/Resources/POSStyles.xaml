@@ -154,8 +154,8 @@
     <Style TargetType="TabControl" BasedOn="{StaticResource DgTabControlStyle}"/>
     <Style x:Key="POSTabItemStyle" TargetType="{x:Type TabItem}" BasedOn="{StaticResource DgTabItemStyle}">
         <Setter Property="IsEnabled" Value="{Binding Enabled}"/>
-        <Setter Property="FontSize" Value="24"/>
-        <Setter Property="Height" Value="60"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Height" Value="40"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false">
                 <Setter Property="Foreground" Value="{StaticResource DgBackground2}"/>
@@ -395,6 +395,173 @@
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Main Window -->
+    <Style x:Key="POSMainWindowStyle" TargetType="{x:Type controls:CustomWindowControl}">
+        <Setter Property="FontFamily" Value="{StaticResource DgDefaultFont}" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CaptionHeight="72"  />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+
+                    <Border x:Name="MainWindowBorder" BorderBrush="{StaticResource DgTransparent}" BorderThickness="0" >
+
+                        <Grid x:Name="parentContainer" Background="{StaticResource DgTransparent}">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height ="Auto"/>
+                                <RowDefinition Height ="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Window chrome-->
+                            <Grid Grid.Row="0" Height="72" Background="{StaticResource DgHoverBackground}">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0, 0, 10, 0">
+
+                                        <Button x:Name="ShowUserMenu" Style="{DynamicResource DgUserIconChromeButtonStyle}"  Visibility="{Binding LoggedIn}"/>
+
+
+
+                                        <StackPanel Margin="10 10, 8, 10" 
+                                                        HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"
+                                                        Visibility="{Binding LoggedIn}">
+                                            <Viewbox>
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Grid.Row="0" FontSize="15" Foreground="{StaticResource DgWhite}" Text="{Binding UserName}" Margin=" 0 10 0 0"  />
+                                                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="12" Foreground="{StaticResource DgWhite}" Text="{Binding SessionId}" Visibility="{Binding SessionId, Converter={StaticResource NullOrEmptyVisibilityConverter}}" />
+                                                    <dgmaterial:CustomButtonControlEx   
+                                                        Style="{DynamicResource DgLogoutButtonControlExStyle}"
+                                                        Background="{StaticResource DgWhite}"
+                                                        HoverColor="{StaticResource DgHoverRed}"
+                                                        Width="80" 
+                                                        Height="40"
+                                                        WindowChrome.IsHitTestVisibleInChrome="True"
+                                                        cal:Message.Attach="Logout"  
+                                                        Content="Logout"
+                                                        Grid.Row="0"
+                                                        Grid.RowSpan="2"
+                                                        Grid.Column="1"
+                                                        FontSize="18" 
+                                                        Margin=" 10 5 0 0"/>
+
+                                                </Grid>
+                                            </Viewbox>
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center">
+
+                                        <!-- logo  -->
+                                        <Path Fill="{StaticResource DgWhite}" 
+                                              Width="62" 
+                                              Height="62" 
+                                              HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center" 
+                                              Data="{StaticResource Dg_Logo}"
+                                              />
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!--Caption buttons-->
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Right" 
+                                            VerticalAlignment="Top"
+                                            >
+
+                                    <Button x:Name="PART_MinButton" 
+                                            Style="{DynamicResource DgMinimizeButtonStyle}" 
+                                            WindowChrome.IsHitTestVisibleInChrome="True" 
+                                            ToolTip="Minimize"
+                                            Visibility="{Binding Path=MinButtonVisibility, 
+                                                                 RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
+                                            />
+
+                                    <Grid Visibility="{Binding Path=MaxButtonVisibility, RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}">
+                                        <Button x:Name="PART_MaxButton"
+                                                Style="{DynamicResource DgMaximizeButtonStyle}"                                             
+                                                WindowChrome.IsHitTestVisibleInChrome="True" 
+                                                ToolTip="Maximize" 
+                                                />
+
+                                        <Button x:Name="PART_RestoreButton" 
+                                                Style="{DynamicResource DgRestoreButtonStyle}" 
+                                                WindowChrome.IsHitTestVisibleInChrome="True" 
+                                                ToolTip="Restore"
+                                                />
+                                    </Grid>
+
+                                    <Button x:Name="PART_CloseButton" 
+                                            Style="{DynamicResource DgCloseButtonStyle}" 
+                                            WindowChrome.IsHitTestVisibleInChrome="True" 
+                                            ToolTip="Close"
+                                            Visibility="{Binding Path=CloseButtonVisibility,
+                                                           RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
+                                            />
+
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Content -->
+                            <Grid x:Name="AppMainContent" Grid.Row="1" Background="{StaticResource DgBackground2}">
+
+                                <Path Data="{StaticResource Dg_Logo_Background}" 
+                                      Fill="{StaticResource DgBackground3}" 
+                                      Width="{Binding ActualWidth ,ElementName=parentContainer}"
+                                      Height="{Binding ActualHeight ,ElementName=parentContainer}"
+                                      Opacity="0.1" 
+                                      Stretch="UniformToFill"
+                                      Margin="-100, 0, 0, 0"
+                                      HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"
+                                      />
+
+                                <ContentPresenter  Margin="0" />
+                            </Grid>
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter TargetName="PART_MinButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
             </Setter.Value>
         </Setter>
     </Style>
