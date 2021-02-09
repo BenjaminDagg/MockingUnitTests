@@ -10,6 +10,7 @@ using POS.Modules.DeviceManagement.Models;
 using POS.Modules.DeviceManagement.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -337,8 +338,11 @@ namespace POS.Modules.DeviceManagement.ViewModels
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         NotifyOfChangeToActionButtons();
-                        MachineCount = Convert.ToString(DeviceList.Count);
                         NotifyOfPropertyChange(nameof(Devices));
+                        MachineCount = Convert.ToString(DeviceList.Count);                        
+                        Devices.SortDescriptions.Clear();
+                        Devices.SortDescriptions.Add(new SortDescription(nameof(Device.Connected), ListSortDirection.Descending));
+                        Devices.Refresh();
                     });
                 }
                 finally

@@ -8,7 +8,6 @@
              d:DesignHeight="450" d:DesignWidth="1000">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <!--<local:CashDrawerView DataContext="{Binding}"  Visibility="{Binding HasCashDrawer, Converter={StaticResource BooleanToVisibility}}"/>-->
             <local:AdvancedSettingsView DataContext="{Binding}"/>
         </StackPanel>
     </ScrollViewer>

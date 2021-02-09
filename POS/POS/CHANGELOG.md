@@ -22,5 +22,9 @@ Implement new POS Theme
 - 48989 - Processed Received Socket Data
 - 48992 - Set Machines Offline/Online
 
-### fixed log session id issue (was storing object type name instead of session id)
-### Updated project structure
+### fixed
+- Log session id issue (was storing object type name instead of session id)
+- Minor issues to styles and Device Management after merge
+### Updated 
+- Project structure
+

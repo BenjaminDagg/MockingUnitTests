@@ -202,7 +202,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
             }
         }
 
-        public async Task SetAllOffLine()
+        public async Task SetAllOffline()
         {
             var promptOpion = await _messageBoxService.PromptAsync(
                     POSResources.UIDeviceManagerSettingsSetAllOfflineConfirmMsg,
