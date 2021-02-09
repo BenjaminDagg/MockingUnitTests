@@ -1,6 +1,6 @@
 ﻿using Framework.WPF.UI.Controls;
 
-namespace POS.Modules.Settings.Views.Prompts
+namespace POS.Modules.Payout.Views.Prompts
 {
     /// <summary>
     /// Interaction logic for AddCashPromptView.xaml

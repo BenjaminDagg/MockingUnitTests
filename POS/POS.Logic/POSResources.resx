@@ -123,6 +123,10 @@
   <data name="AddRemoveCashErrorMsg" xml:space="preserve">
     <value>An error has occurred with this transaction.  Error: {0}</value>
   </data>
+  <data name="AreYouSureEndLogSessionMsg" xml:space="preserve">
+    <value>Leaving this screen will end your current session.
+Are you sure you want to end this session?</value>
+  </data>
   <data name="AreYouSureEndSessionMsg" xml:space="preserve">
     <value>Leaving this screen will end your current session.  Are you sure you want to end this session?</value>
   </data>
@@ -338,6 +342,9 @@
   </data>
   <data name="RemoveCashTitle" xml:space="preserve">
     <value>Remove Cash</value>
+  </data>
+  <data name="ReprintSucessful" xml:space="preserve">
+    <value>Reciept reprinted succesfully</value>
   </data>
   <data name="RequiredMsg" xml:space="preserve">
     <value>Required</value>

@@ -6,6 +6,7 @@ using POS.Modules.Main;
 using POS.Modules.Payout.Services.ViewModels;
 using System.Threading;
 using System.Threading.Tasks;
+using POS.Modules.Payout.ViewModels;
 
 namespace POS.Modules.Settings.ViewModels
 {

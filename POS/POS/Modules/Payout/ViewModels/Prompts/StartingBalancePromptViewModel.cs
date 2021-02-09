@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
-namespace POS.Modules.Settings.ViewModels.Prompts
+namespace POS.Modules.Payout.ViewModels.Prompts
 {
     public class StartingBalancePromptViewModel : MessageBoxPromptViewModel
     {

@@ -2,38 +2,93 @@
 using POS.Core.Interfaces;
 using POS.Core.Transaction;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using Framework.Core.Configuration;
+using Framework.Core.FileSystem;
+using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Linq;
 
 namespace POS.Infrastructure.Services
 {
     public class LastReceiptService : ILastReceiptService
     {
         private const string FileName = @"lastreceipt.json";
+        private readonly IFileSystemService _fileSystem;
+        private readonly IAppSettingsFileService _appSettingsFileService;
+        
 
-    
+        public LastReceiptService(IAppSettingsFileService appSettingsFileService,
+            IHostEnvironment hostEnvironment, IFileSystemService fileSystem)
+        {
+            _fileSystem = fileSystem;
+            _appSettingsFileService = appSettingsFileService;
+        }
+
         public void SetLastReceipt(int receiptNumber, int voucherCount, decimal totalPayout)
         {
-            var last = new LastTransaction(receiptNumber, voucherCount, totalPayout);
-
-            var path = Path.Combine(Environment.CurrentDirectory, FileName);
-            // serialize JSON directly to a file
-            using (var file = File.CreateText(path))
+            
+          
+            var path = _fileSystem.Path.Combine(AppContext.BaseDirectory, FileName);
+           
+            var receiptObject = _appSettingsFileService.LoadFile(path);
+            if (receiptObject != null )
             {
-                var serializer = new JsonSerializer();
-                serializer.Serialize(file, last);
+                if (((JProperty) ((JContainer) receiptObject).First).Name == "LastTransaction")
+                {
+                    AddJsonData(receiptObject, path, receiptNumber, voucherCount, totalPayout);
+                }
+                else
+                {
+                    var receiptUpdated= CreateJsonStructure();
+                    AddJsonData(receiptUpdated, path, receiptNumber, voucherCount, totalPayout);
+                }
+                
             }
+            else
+            {
+
+                var newReceiptCreated = CreateJsonStructure();
+                AddJsonData(newReceiptCreated, path, receiptNumber, voucherCount, totalPayout);
+            }
+
+        }
+
+        public void AddJsonData(JObject receipt, string filepath, int receiptNumber, int voucherCount, decimal totalPayout)
+        {
+            _appSettingsFileService.AddOrUpdateJsonObj<int>(receipt, $"LastTransaction:LastReceiptNumbers", receiptNumber);
+            _appSettingsFileService.AddOrUpdateJsonObj<int>(receipt, $"LastTransaction:LastVoucherCounts", voucherCount);
+            _appSettingsFileService.AddOrUpdateJsonObj<decimal>(receipt, $"LastTransaction:LastReceiptTotals", totalPayout);
+            _appSettingsFileService.SaveJsonObjectToFile(receipt, filepath);
+        }
+
+        public JObject CreateJsonStructure()
+        {
+            JObject newReceipt =
+                new JObject(
+                    new JProperty("LastTransaction",
+                        new JObject(
+                            new JProperty("LastReceiptNumbers", 0),
+                            new JProperty("LastVoucherCounts", 0),
+                            new JProperty("LastReceiptTotals", 0)
+                        )));
+            return newReceipt;
         }
 
         public LastTransaction GetLastReceipt()
         {
-            var path = Path.Combine(Environment.CurrentDirectory, FileName);
-            if (!File.Exists(path)) return null;
-            // deserialize JSON directly from a file
-            using (var file = File.OpenText(path))
-            {
-                var serializer = new JsonSerializer();
-                return (LastTransaction)serializer.Deserialize(file, typeof(LastTransaction));
-            }
+            var path = _fileSystem.Path.Combine(Environment.CurrentDirectory, FileName);
+            var serializer = new JsonSerializer();
+            LastTransaction lastTrnsaction = new LastTransaction();
+            if (!_fileSystem.File.Exists(path)) return null;
+           
+            var receiptObject = _appSettingsFileService.LoadFile(path);
+
+            lastTrnsaction.LastReceiptNumbers = Convert.ToInt32(((JValue)receiptObject["LastTransaction"]["LastReceiptNumbers"]).Value);
+            lastTrnsaction.LastReceiptTotals= Convert.ToDecimal(((JValue)receiptObject["LastTransaction"]["LastReceiptTotals"]).Value);
+            lastTrnsaction.LastVoucherCounts= Convert.ToInt32(((JValue)receiptObject["LastTransaction"]["LastVoucherCounts"]).Value);
+            
+            return lastTrnsaction;
         }
 
       

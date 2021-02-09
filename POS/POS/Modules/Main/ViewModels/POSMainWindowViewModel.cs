@@ -140,7 +140,7 @@ namespace POS.Modules.Main.ViewModels
         private async Task<PromptOptions> ConfirmLogout()
         {
             return await _messageBoxService.PromptAsync(
-                POSResources.AreYouSureEndSessionMsg,
+                POSResources.AreYouSureEndLogSessionMsg,
                 POSResources.ConfirmActionTitle,
                 PromptOptions.YesNo,
                 PromptTypes.Question

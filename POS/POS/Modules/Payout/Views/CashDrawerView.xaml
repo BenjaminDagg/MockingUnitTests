@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="POS.Modules.Settings.Views.CashDrawerView"
+﻿<UserControl x:Class="POS.Modules.Payout.Views.CashDrawerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:POS.Modules.Settings.Views"
+             xmlns:local="clr-namespace:POS.Modules.Payout.Views"
              xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -40,7 +40,7 @@
                                 Text="{Binding CashDrawerViewModel.CurrentBalance, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCurrentBalance}}" 
                                 Foreground="{StaticResource DgWhite}"
                                 FontWeight="Bold" 
-                                FontSize="24" 
+                                FontSize="30" 
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Bottom"
                                 />
@@ -50,19 +50,19 @@
 
             <TextBlock Text="{Binding CashDrawerViewModel.StartingBalance, StringFormat={x:Static resx:POSResources.UICashDrawerFormatStartingBalance}}"
                    Foreground="{StaticResource DgWhite}" 
-                   FontSize="18"
+                   FontSize="25"
                    Margin="0, 3"/>
             <TextBlock Text="{Binding CashDrawerViewModel.CashAdded, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCashAdded}}" 
                    Foreground="{StaticResource DgWhite}" 
-                   FontSize="18"
+                   FontSize="25"
                    Margin="0, 3"/>
             <TextBlock Text="{Binding CashDrawerViewModel.CashRemoved, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCashRemoved}}" 
                    Foreground="{StaticResource DgWhite}" 
-                   FontSize="18"
+                   FontSize="25"
                    Margin="0, 3"/>
             <TextBlock Text="{Binding CashDrawerViewModel.TotalPayout, StringFormat={x:Static resx:POSResources.UICashDrawerFormatTotalPayout}}" 
                    Foreground="{StaticResource DgWhite}" 
-                   FontSize="18"
+                   FontSize="25"
                    Margin="0, 3"/>
 
             <StackPanel Margin="0, 20, 0, 0"

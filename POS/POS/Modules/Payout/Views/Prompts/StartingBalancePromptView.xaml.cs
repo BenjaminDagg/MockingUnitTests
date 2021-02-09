@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Framework.WPF.UI.Controls;
 
-namespace POS.Modules.Settings.Views.Prompts
+namespace POS.Modules.Payout.Views.Prompts
 {
     /// <summary>
     /// Interaction logic for StartingBalanceDialog.xaml

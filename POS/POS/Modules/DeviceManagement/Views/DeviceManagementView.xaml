@@ -8,7 +8,13 @@
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
-    <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Viewbox
+        HorizontalAlignment="Stretch" 
+        VerticalAlignment="Stretch"
+        Width="{Binding SystemParameters.PrimaryScreenWidth}"
+        Height="{Binding SystemParameters.PrimaryScreenHeight}" 
+        >
+        <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Margin="20, 0, 20, 0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -216,6 +222,7 @@
                 <TextBlock Grid.Column="3" Text="{Binding MachineCount}" Foreground="{StaticResource DgWhite}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 0" Background="{StaticResource DgTransparent}" />
             </Grid>
         </Border>
-
+    
     </Grid>
+    </Viewbox>
 </UserControl>

@@ -57,15 +57,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Modules\Settings\Views\Prompts\AddRemoveCashPromptView.xaml">
+	  <Page Update="Modules\Payout\Views\Prompts\AddRemoveCashPromptView.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	  <Page Update="Modules\Payout\Views\Prompts\LastPrintedReceiptPromptView.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
-	  <Page Update="Modules\Settings\Views\Prompts\StartingBalancePromptView.xaml">
+	  <Page Update="Modules\Payout\Views\Prompts\StartingBalancePromptView.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Modules\Settings\ViewModels\Prompts\" />
+	  <Folder Include="Modules\Settings\Views\Prompts\" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
