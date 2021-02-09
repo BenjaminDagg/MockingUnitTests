@@ -36,7 +36,7 @@ namespace POS.Startup
         protected override void RegisterDependencies(IServiceCollection services, IConfiguration configuration)
         {        
             services.AddCommandLineArgumentModule();
-            services.AddDatabaseModule(GetConnectionStringEncryption(), false);
+            services.AddDatabaseModule(GetConnectionStringEncryption(), configuration, false);
             services.AddLoggingModule();
             services.AddFileSystemModule();
             

@@ -7,8 +7,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Framework.WPF.UI.Theme;component/Default.xaml" />
+                <!--<ResourceDictionary Source="/Framework.WPF.UI.Theme;component/Default.xaml" />-->
                 <ResourceDictionary Source="Resources/POSStyles.xaml" />
+                <ResourceDictionary Source="Resources/ReportViewerStyles.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
             <converter:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>               

@@ -17,7 +17,7 @@ namespace POS.Modules.Main
             services.AddTransient<ITabItem, PayoutViewModel>();
             services.AddTransient<ITabItem, SettingsViewModel>();
             services.AddTransient<ITabItem, DeviceManagementViewModel>();
-            services.AddTransient<ITabItem, ReportsViewModel>();
+            services.AddTransient<ITabItem, ReportListViewModel>();
         }
     }
 }
