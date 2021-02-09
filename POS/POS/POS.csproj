@@ -13,6 +13,9 @@
 		<Compile Update="Modules\Payout\ViewModels\TransactionViewModel.Helper.cs">
 			<DependentUpon>Modules\Payout\ViewModels\TransactionViewModel.cs</DependentUpon>
 		</Compile>
+		<Compile Update="Modules\DeviceManagement\ViewModels\DeviceManagementViewModel.Helper.cs">
+			<DependentUpon>Modules\DeviceManagement\ViewModels\DeviceManagementViewModel.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>

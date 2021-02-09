@@ -23,3 +23,4 @@ Implement new POS Theme
 - 48992 - Set Machines Offline/Online
 
 ### fixed log session id issue (was storing object type name instead of session id)
+### Updated project structure
