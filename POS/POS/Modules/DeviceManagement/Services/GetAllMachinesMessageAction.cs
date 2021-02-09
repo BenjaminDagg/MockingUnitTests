@@ -75,34 +75,43 @@ namespace POS.Modules.DeviceManagement.Services
                 fields = dataRecieved.Split(',');
                 if (fields != null)
                 {
-                    if (((fields.Length - 8) % 9) != 0)
-                    {
-                        throw new FormatException("Invalid data recieved from TP Service");
-                    }
+                    var messageCommand = fields[6];
 
-                    if (fields.GetUpperBound(0) > 4)
+                    if (messageCommand == "GetAllMachines")
                     {
-                        var messageSequenceInProperFormat = Regex.IsMatch(fields[0], @"\A^\d+$\Z");
-                        var transTypeInProperFormat = Regex.IsMatch(fields[1], @"^\w+$");
-                        var timeStampInProperFormat = Regex.IsMatch(fields[2], @"^\d{4}[-]\d\d-\d\d \d\d:\d\d:\d\d$");
-                        var errorCodeInProperFormat = Regex.IsMatch(fields[3], @"^\d+$");
-
-                        if (messageSequenceInProperFormat &&
-                            transTypeInProperFormat)
+                        if (((fields.Length - 8) % 9) != 0)
                         {
-                            var transType = fields[1];
+                            throw new FormatException("Invalid data recieved from TP Service");
+                        }
 
-                            if (timeStampInProperFormat &&
-                                errorCodeInProperFormat)
-                            {
-                                errorCode = Convert.ToInt32(fields[3]);
-                            }
+                        if (fields.GetUpperBound(0) > 4)
+                        {
+                            var messageSequenceInProperFormat = Regex.IsMatch(fields[0], @"\A^\d+$\Z");
+                            var transTypeInProperFormat = Regex.IsMatch(fields[1], @"^\w+$");
+                            var timeStampInProperFormat = Regex.IsMatch(fields[2], @"^\d{4}[-]\d\d-\d\d \d\d:\d\d:\d\d$");
+                            var errorCodeInProperFormat = Regex.IsMatch(fields[3], @"^\d+$");
 
-                            if (errorCode == 0 && transType == "Z")
+                            if (messageSequenceInProperFormat &&
+                                transTypeInProperFormat)
                             {
-                                return fields;
+                                var transType = fields[1];
+
+                                if (timeStampInProperFormat &&
+                                    errorCodeInProperFormat)
+                                {
+                                    errorCode = Convert.ToInt32(fields[3]);
+                                }
+
+                                if (errorCode == 0 && transType == "Z")
+                                {
+                                    return fields;
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
             }
@@ -111,7 +120,7 @@ namespace POS.Modules.DeviceManagement.Services
                 throw;
             }
 
-            return fields;
+            return null;
         }
     }
 }

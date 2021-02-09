@@ -1,5 +1,4 @@
-﻿using Framework.Core.Logging;
-using POS.Core.TransactionPortal;
+﻿using POS.Core.TransactionPortal;
 using System;
 using System.Net.Sockets;
 using System.Text;
@@ -16,16 +15,14 @@ namespace POS.Infrastructure.TransactionPortal
 
         public IServiceConnection _serviceConnection;
         public IPollingMachineTimer _pollingMachineTimer;
-        private readonly ILogService _logService;
 
         public Action<string> MessageReceived { get; set; }
         public Action PollingAction { get; set; }
 
-        public ServiceInteraction(IServiceConnection serviceConnection, IPollingMachineTimer pollingMachineTimer, ILogService logService)
+        public ServiceInteraction(IServiceConnection serviceConnection, IPollingMachineTimer pollingMachineTimer)
         {
             _serviceConnection = serviceConnection;
             _pollingMachineTimer = pollingMachineTimer;
-            _logService = logService;
         }
         public async Task<IServiceConnection> StartRecieving()
         {
@@ -33,37 +30,45 @@ namespace POS.Infrastructure.TransactionPortal
             _pollingMachineTimer.Start();
 
             await _serviceConnection.ConnectAsync();
-            _serviceConnection.Socket.BeginReceive(
-                        _buffer, 0,
-                        _buffer.Length,
-                        SocketFlags.None,
-                        new AsyncCallback(OnDataReceived),
-                        this);
+            if (await _serviceConnection.IsConnected())
+            {
+                _serviceConnection.Socket.BeginReceive(
+                            _buffer, 0,
+                            _buffer.Length,
+                            SocketFlags.None,
+                            new AsyncCallback(OnDataReceived),
+                            this);
 
-            return _serviceConnection;
+                return _serviceConnection;
+            }
+            else
+            {
+                _pollingMachineTimer.ActionToExecute = null;
+                throw new Exception("Cannot connect to Transaction Portal Server.");
+            }            
         }
         public async Task Send(byte[] message)
         {
             await _semaphoreSlimSend.WaitAsync();
             try
             {
-                if (_serviceConnection.IsConnected())
+                if (await _serviceConnection.IsConnected())
                 {
                     _serviceConnection.Socket.Send(message);
                 }
                 else
                 {
                     await StartRecieving();
-                    if (_serviceConnection.IsConnected())
+                    if (await _serviceConnection.IsConnected())
                     {
                         _serviceConnection.Socket.Send(message);
                     }
                 }
             }
-            catch(Exception exception)
+            catch
             {
                 _serviceConnection.DisConnect();
-                _logService.Error(exception.Message, exception);
+                throw;
             }
             finally
             {
@@ -75,6 +80,7 @@ namespace POS.Infrastructure.TransactionPortal
             MessageReceived = default;
             PollingAction = default;
 
+            _pollingMachineTimer.ActionToExecute = null;
             _pollingMachineTimer.Stop();
             _serviceConnection.DisConnect();
 
@@ -95,7 +101,6 @@ namespace POS.Infrastructure.TransactionPortal
                         return;
                     }
 
-
                     var dataStringReceived = Encoding.UTF8.GetString(_buffer, 0, nBytesRec);
                     stringBuilder.Append(dataStringReceived);
 
@@ -113,21 +118,22 @@ namespace POS.Infrastructure.TransactionPortal
                         }
                     }
 
+
                     _serviceConnection.Socket.BeginReceive(
                         _buffer, 0,
                         _buffer.Length,
                         SocketFlags.None,
                         new AsyncCallback(OnDataReceived),
                         this);
+
                 }
             }
-            catch(Exception exception)
+            catch
             {
                 if(_serviceConnection != null)
                     {
                     _serviceConnection.DisConnect();
                 }
-                _logService.Error(exception.Message, exception);
             }
         }
     }

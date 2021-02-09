@@ -2,11 +2,11 @@
 {
     public enum PayoutEventType
     {
-        SessionStarted = 200,
-        SessionEnded = 201,
-        CashAdded = 202,
-        CashRemoved = 203,
-        VoucherSuccessfullyPaid = 204,
-        ReprintPayoutReceipt = 205
+        SessionStarted = 2000,
+        SessionEnded = 2001,
+        CashAdded = 2002,
+        CashRemoved = 2003,
+        VoucherSuccessfullyPaid = 2004,
+        ReprintPayoutReceipt = 2005
     }
 }

@@ -38,7 +38,7 @@ namespace POS.Infrastructure.TransactionPortal
 
             if (await Task.WhenAny(connectTask, timeoutTask) == timeoutTask)
             {
-                throw new TimeoutException();
+                throw new TimeoutException("Connection to Transaction Portal timed out.");
             }
 
             return Socket;
@@ -46,28 +46,48 @@ namespace POS.Infrastructure.TransactionPortal
 
         public void DisConnect()
         {
-            if (Socket != null)
+            try
             {
-                Socket.Shutdown(SocketShutdown.Both);
-                Socket.Close();
-                Socket = null;
+                if (Socket != null && Socket.Connected)
+                {
+                    Socket.Shutdown(SocketShutdown.Both);
+                    Socket.Close();
+                }
+            }
+            finally
+            {
+                if(Socket != null)
+                {                    
+                    Socket = null;
+                }
             }
         }
-        public bool IsConnected()
+        public async Task<bool> IsConnected()
         {
             if (Socket != null)
             {
                 try
                 {
-                    return Socket.Connected;
+                    if(Socket.Connected)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Socket = await ConnectAsync();
+                        return Socket != null && Socket.Connected;
+                    }
                 }
                 catch (Exception)
                 {
                     return false;
                 }
             }
-
-            return false;
+            else
+            {
+                Socket = await ConnectAsync();
+                return Socket != null && Socket.Connected;
+            }
         }
     }
 }

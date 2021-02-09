@@ -1250,6 +1250,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server disconnected.
+        /// </summary>
+        public static string UIDeviceManagementServerDisabledCaptionMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementServerDisabledCaptionMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Transaction Portal Server is not connected.
+        /// </summary>
+        public static string UIDeviceManagementServerDisabledMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementServerDisabledMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set All Offline.
         /// </summary>
         public static string UIDeviceManagementSetAllOffline {

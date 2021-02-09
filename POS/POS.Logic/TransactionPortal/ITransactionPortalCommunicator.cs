@@ -5,7 +5,6 @@ namespace POS.Core.TransactionPortal
 {
     public interface ITransactionPortalCommunicator
     {
-        Action<bool?> IsConnectedChanged { get; set; }
         bool? ConnectionState { get; }
         Task StartUp(Action pollingAction);
         Task SendMessage(byte[] message, Action<string> messageRecievedAction);

@@ -113,7 +113,7 @@ namespace POS.Modules.Payout.ViewModels
                 new PayoutSessionStarted(_payoutViewServices.Session.Id)
                 );
 
-            var msg = $"New Payout Session Started {_payoutViewServices.Session.Id}";
+            var msg = $"New Payout Session Started {_payoutViewServices.Session.Id.Value}";
             _payoutViewServices.LogEventService.LogEventToDatabase(PayoutEventType.SessionStarted, PayoutEventType.SessionStarted.ToString(),
                 msg, _payoutViewServices.User.UserId);
         }

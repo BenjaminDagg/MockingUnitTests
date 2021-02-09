@@ -8,6 +8,6 @@ namespace POS.Core.TransactionPortal
         Socket Socket { get; }
         Task<Socket> ConnectAsync();
         void DisConnect();
-        bool IsConnected();
+        Task<bool> IsConnected();
     }
 }

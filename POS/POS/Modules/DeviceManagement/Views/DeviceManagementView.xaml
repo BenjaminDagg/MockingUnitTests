@@ -24,7 +24,7 @@
                                     FontSize="18" 
                                     Foreground="{StaticResource DgWhite}"
                                     Background="{StaticResource DgDefaultButtonBackground}"
-                                    IsEnabled="{Binding SelectAllActionEnabled}"
+                                    IsEnabled="{Binding SelectAllOnLineActionEnabled}"
                                     Width="137" 
                                     Height="34"
                                     Margin="5"/>
@@ -35,7 +35,7 @@
                                     Foreground="{StaticResource DgWhite}"
                                     Background="{StaticResource DgRed}"
                                     HoverColor="{StaticResource DgRedShade}"
-                                    IsEnabled="{Binding SelectAllActionEnabled}"
+                                    IsEnabled="{Binding SelectAllOffLineActionEnabled}"
                                     Width="137" 
                                     Height="34"
                                     Margin="5"/>
@@ -76,7 +76,7 @@
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource DgScrollBarStyle}" />
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="{x:Static resx:POSResources.UIDeviceManagementCasinoMachID}" MinWidth="180">                    
+                <DataGridTemplateColumn Header="{x:Static resx:POSResources.UIDeviceManagementCasinoMachID}" MinWidth="180">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid >
@@ -90,14 +90,14 @@
                                           >
                                     <Path.Style>
                                         <Style TargetType="Path" >
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
                                                     <Setter Property="Fill" Value="{StaticResource DgWhite}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
                                                     <Setter Property="Fill" Value="{StaticResource DgRed}"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
+                                                </DataTrigger>
+                                            </Style.Triggers>
                                         </Style>
                                     </Path.Style>
                                 </Path>
@@ -108,14 +108,14 @@
                                                VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock" >
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
                                                     <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
                                                     <Setter Property="Foreground" Value="{StaticResource DgRed}"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
+                                                </DataTrigger>
+                                            </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
@@ -191,7 +191,7 @@
                                             <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
                                                 <Setter Property="Content" Value="Set Online"/>
                                                 <Setter Property="Background" Value="{StaticResource DgDefaultButtonBackground}"/>
-                                            </DataTrigger>                                         
+                                            </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </dgmaterial:CustomButtonControlEx.Style>

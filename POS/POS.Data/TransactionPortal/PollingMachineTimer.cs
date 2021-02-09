@@ -39,6 +39,7 @@ namespace POS.Infrastructure.TransactionPortal
         {
             if (_pollingTimer != null)
             {
+                _pollingTimer.Elapsed -= _pollingTimer_Elapsed;
                 _pollingTimer.Stop();
                 _pollingTimer = null;
             }

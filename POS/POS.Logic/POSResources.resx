@@ -514,6 +514,12 @@ Scan Voucher.</value>
   <data name="UIDeviceManagementServer" xml:space="preserve">
     <value>Server: {0}</value>
   </data>
+  <data name="UIDeviceManagementServerDisabledCaptionMsg" xml:space="preserve">
+    <value>Server disconnected</value>
+  </data>
+  <data name="UIDeviceManagementServerDisabledMsg" xml:space="preserve">
+    <value>The Transaction Portal Server is not connected</value>
+  </data>
   <data name="UIDeviceManagementSetAllOffline" xml:space="preserve">
     <value>Set All Offline</value>
   </data>
