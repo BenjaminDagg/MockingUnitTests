@@ -23,6 +23,9 @@
 		<None Remove="appsettings.json" />
 		<None Remove="appsettings.local.json" />
 		<None Remove="nlog.config" />
+		<None Remove="Resources\Cashier_Balance.rdl" />
+		<None Remove="Resources\Reports\Cash Bank Activity.rdl" />
+		<None Remove="Resources\Reports\Cashier Balance.rdl" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -38,9 +41,16 @@
 		<Content Include="nlog.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Reports\Cashier Balance.rdl">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Reports\Cash Bank Activity.rdl">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BoldReports.WPF" Version="2.4.19" />
 		<PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="1.6.5" />
 	</ItemGroup>
