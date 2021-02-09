@@ -209,7 +209,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Border Grid.Row="2" Background="{StaticResource DgBackground}" BorderThickness="0" Height="39">
+            <Border Grid.Row="2" Background="{StaticResource DgBackground}" BorderThickness="0" Height="39" Padding="10, 0">
                 <Grid HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="300"/>
