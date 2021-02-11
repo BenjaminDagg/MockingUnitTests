@@ -1,22 +1,22 @@
-﻿using Framework.WPF.Modules.CaliburnMicro;
+﻿using Framework.Core.FileSystem;
+using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using POS.Core;
+using POS.Core.Reports;
 using POS.Modules.Main;
+using Syncfusion.Linq;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Framework.Core.FileSystem;
-using POS.Core.Reports;
-using Syncfusion.Linq;
 
 namespace POS.Modules.Reports.ViewModels
 {
     public class ReportListViewModel : ExtendedScreenBase, ITabItem
     {
-        private readonly IFileDirectoryService _fileService;
-        private readonly ReportContext _context;
+        private readonly IFileSystemService _fileSystemService;
+        private readonly ReportContext _reportContext;
         private ObservableCollection<string> _reports;
 
         private string _selectedReport;
@@ -28,10 +28,9 @@ namespace POS.Modules.Reports.ViewModels
             {
                 Set(ref _selectedReport, value);
                 if (_selectedReport == null) return;
-                _context.SelectedReportName = _selectedReport;
+                _reportContext.SelectedReportName = _selectedReport;
                 NavigateToScreen(typeof(ReportViewModel), this, null);
             }
-
         }
 
         public ObservableCollection<string> Reports 
@@ -40,10 +39,10 @@ namespace POS.Modules.Reports.ViewModels
             set => Set(ref _reports, value);
         }
 
-        public ReportListViewModel(IScreenServices screenManagementServices, ReportContext ctx, IFileDirectoryService fileService) : base(screenManagementServices)
+        public ReportListViewModel(IScreenServices screenManagementServices, ReportContext reportContext, IFileSystemService fileSystemService) : base(screenManagementServices)
         {
-            _fileService = fileService;
-            _context = ctx;
+            _fileSystemService = fileSystemService;
+            _reportContext = reportContext;
             Init();
         }
 
@@ -58,16 +57,17 @@ namespace POS.Modules.Reports.ViewModels
             try
             {
                 Reports.Clear();
-                var reports =  _fileService.GetFiles("Resources\\Reports", "*.rdl", SearchOption.TopDirectoryOnly);
-                reports.ForEach(x =>
+                var reports = _fileSystemService.Directory.GetFiles("Resources\\Reports", "*.rdl", SearchOption.TopDirectoryOnly);
+                reports.ForEach(report =>
                 {
-                    Reports.Add(Path.GetFileNameWithoutExtension(x));
+                    Reports.Add(_fileSystemService.Path.GetFileNameWithoutExtension(report));
                 });
             }
             catch (Exception exception)
             {
                 await HandleErrorAsync(exception.Message, exception);
             }
+
             await base.OnActivateAsync(cancellationToken);
         }
 
@@ -97,8 +97,5 @@ namespace POS.Modules.Reports.ViewModels
             set => Set(ref _allowAuthenticatedUser, value);
         }
         #endregion
-
-     
-    
     }
 }

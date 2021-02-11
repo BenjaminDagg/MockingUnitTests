@@ -24,23 +24,23 @@ namespace POS.Infrastructure.Services
 
         public async Task RefreshPayoutContext()
         {
-            var p = await systemDataService.GetSystemParameters();
+            var systemParameters = await systemDataService.GetSystemParameters();
             var location = await locationDataService.GetLocationInfo();
             context.Location = location;
             
-            var sitePayoutActive = p.FirstOrDefault(x => x.Name == "SiteStatusPayoutsActive");
+            var sitePayoutActive = systemParameters.FirstOrDefault(x => x.Name == "SiteStatusPayoutsActive");
             context.SiteStatusPayoutsActive = sitePayoutActive?.Value1 != "0";
             
-            var autoCashDrawer = p.FirstOrDefault(x => x.Name == "AUTOCASHDRAWERUSEDFLG");
+            var autoCashDrawer = systemParameters.FirstOrDefault(x => x.Name == "AUTOCASHDRAWERUSEDFLG");
             context.AutoCashDrawerUsed = autoCashDrawer?.Value1 != "0";
             
-            var printCasinoReceipt = p.FirstOrDefault(x => x.Name == "PRINT_CASINO_PAYOUT_RECEIPT");
+            var printCasinoReceipt = systemParameters.FirstOrDefault(x => x.Name == "PRINT_CASINO_PAYOUT_RECEIPT");
             if (printCasinoReceipt != null && !string.IsNullOrEmpty(printCasinoReceipt.Value1))
             {
                 context.PrintCasinoPayoutReceipt = bool.Parse(printCasinoReceipt.Value1);
             }
             
-            var supervisorApprovalEnabled = p.FirstOrDefault(x => x.Name == "DEFAULT_LOCKUP_AMOUNT");
+            var supervisorApprovalEnabled = systemParameters.FirstOrDefault(x => x.Name == "DEFAULT_LOCKUP_AMOUNT");
             //default to true if not there
             context.SupervisorApprovalRequired = supervisorApprovalEnabled == null || string.IsNullOrEmpty(supervisorApprovalEnabled.Value2) || bool.Parse(supervisorApprovalEnabled.Value2);
         }

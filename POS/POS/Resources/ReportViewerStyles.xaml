@@ -6,9 +6,6 @@
                     xmlns:xaml="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf">
 
 
-
-
-   
     <Style x:Key="Office2013ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>

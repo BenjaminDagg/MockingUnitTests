@@ -27,4 +27,5 @@ Implement new POS Theme
 - Minor issues to styles and Device Management after merge
 ### Updated 
 - Project structure
+- Refactored Report ViewModel classes
 

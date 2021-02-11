@@ -9,7 +9,7 @@
     <Grid>
         <DataGrid Grid.Row="0" x:Name="ReportsGrid"  
             Style="{StaticResource DgDataGridStyle}" 
-              ItemsSource="{Binding Path=Reports}"
+            ItemsSource="{Binding Path=Reports}"
             Margin="20" 
             HorizontalAlignment="Stretch"  
             CanUserResizeColumns="False"
@@ -34,8 +34,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Report Name" Binding="{Binding}" 
                                     FontSize="20"   />
-          
-                  </DataGrid.Columns>
+            </DataGrid.Columns>
 
         </DataGrid>
     </Grid>
