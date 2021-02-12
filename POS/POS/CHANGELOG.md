@@ -21,10 +21,12 @@ Implement new POS Theme
 - 48988 - Device Management Settings
 - 48989 - Processed Received Socket Data
 - 48992 - Set Machines Offline/Online
+- 46667 - POS End to End testing
 
 ### fixed
 - Log session id issue (was storing object type name instead of session id)
 - Minor issues to styles and Device Management after merge
+- Issue with Device Manager when connected to same endpoint as the clients
 ### Updated 
 - Project structure
 - Refactored Report ViewModel classes

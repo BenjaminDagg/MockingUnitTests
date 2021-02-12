@@ -1881,6 +1881,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string UIReportNavigateBackText {
+            get {
+                return ResourceManager.GetString("UIReportNavigateBackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Report Printer.
         /// </summary>
         public static string UIReportPrinter {

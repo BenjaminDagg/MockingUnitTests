@@ -725,6 +725,9 @@ Scan Voucher.</value>
   <data name="UIReportHeaderVoucherId" xml:space="preserve">
     <value>Voucher Id</value>
   </data>
+  <data name="UIReportNavigateBackText" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="UIReportPrinter" xml:space="preserve">
     <value>Report Printer</value>
   </data>
