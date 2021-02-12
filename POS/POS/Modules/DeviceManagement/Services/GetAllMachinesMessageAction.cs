@@ -1,4 +1,5 @@
 ﻿using POS.Core.TransactionPortal;
+using POS.Modules.DeviceManagement.Constants;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -9,24 +10,27 @@ namespace POS.Modules.DeviceManagement.Services
     {
         public GetAllMachinesMessageAction()
         {
-            ActionStore = new Dictionary<string, Action<object>>();
+            _actionStore = new Dictionary<string, Action<object>>();
         }
         IDictionary<string, Action<object>> _actionStore;
-        public IDictionary<string, Action<object>> ActionStore
+
+        public void ConfigureCommandAction(string command, Action<object> action)
         {
-            get { return _actionStore; }
-            set { _actionStore = value; }
+            if (!_actionStore.ContainsKey(command))
+            {
+                _actionStore.Add(command, action);
+            }
         }
 
         public string Name => nameof(GetAllMachinesMessageAction);
 
-        public Action<object> this[string name] 
-        { 
-            get  
+        public Action<object> this[string name]
+        {
+            get
             {
-                if (ActionStore.ContainsKey(name))
+                if (_actionStore.ContainsKey(name))
                 {
-                    return ActionStore[name];
+                    return _actionStore[name];
                 }
                 else
                 {
@@ -37,29 +41,35 @@ namespace POS.Modules.DeviceManagement.Services
 
         public void Execute(string message)
         {
-            if (ActionStore != null && ActionStore.Count > 0)
+            if (_actionStore != null && _actionStore.Count > 0)
             {
                 var fields = ValidateAndParseReceivedData(message);
-                foreach (var action in ActionStore.Keys)
+                if (fields != null)
                 {
-                    ActionStore[action].Invoke(fields);
+                    foreach (var action in _actionStore.Keys)
+                    {
+                        _actionStore[action]?.Invoke(fields);
+                    }
                 }
             }
         }
 
         public void Execute(string message, string[] actions)
         {
-            if (ActionStore != null && ActionStore.Count > 0)
+            if (_actionStore != null && _actionStore.Count > 0)
             {
                 var fields = ValidateAndParseReceivedData(message);
 
-                if(actions != null && actions.Length > 0)
+                if (fields != null)
                 {
-                    foreach(var action in actions)
+                    if (actions != null && actions.Length > 0)
                     {
-                        if(ActionStore.ContainsKey(action))
+                        foreach (var action in actions)
                         {
-                            ActionStore[action].Invoke(fields);
+                            if (_actionStore.ContainsKey(action))
+                            {
+                                _actionStore[action]?.Invoke(fields);
+                            }
                         }
                     }
                 }
@@ -68,59 +78,82 @@ namespace POS.Modules.DeviceManagement.Services
 
         private string[] ValidateAndParseReceivedData(string dataRecieved)
         {
-            int errorCode = default;
-            string[] fields;
-            try
+            var IsNotNullOrEmpty = !String.IsNullOrEmpty(dataRecieved);
+            var isConfiguredToHandleMessage = IsConfiguredToHandleMessage(dataRecieved);
+
+            if (IsNotNullOrEmpty && isConfiguredToHandleMessage)
             {
-                fields = dataRecieved.Split(',');
-                if (fields != null)
+                int errorCode = default;
+                string[] fields;
+                try
                 {
-                    var messageCommand = fields[6];
-
-                    if (messageCommand == "GetAllMachines")
+                    fields = dataRecieved.Split(',');
+                    if (fields != null)
                     {
-                        if (((fields.Length - 8) % 9) != 0)
-                        {
-                            throw new FormatException("Invalid data recieved from TP Service");
-                        }
+                        var messageCommand = fields[6];
 
-                        if (fields.GetUpperBound(0) > 4)
+                        if (messageCommand == TransactionPortalActions.COMMAND_GETALLMACHINES)
                         {
-                            var messageSequenceInProperFormat = Regex.IsMatch(fields[0], @"\A^\d+$\Z");
-                            var transTypeInProperFormat = Regex.IsMatch(fields[1], @"^\w+$");
-                            var timeStampInProperFormat = Regex.IsMatch(fields[2], @"^\d{4}[-]\d\d-\d\d \d\d:\d\d:\d\d$");
-                            var errorCodeInProperFormat = Regex.IsMatch(fields[3], @"^\d+$");
-
-                            if (messageSequenceInProperFormat &&
-                                transTypeInProperFormat)
+                            if (((fields.Length - 8) % 9) != 0)
                             {
-                                var transType = fields[1];
+                                throw new FormatException("Invalid data recieved from TP Service");
+                            }
 
-                                if (timeStampInProperFormat &&
-                                    errorCodeInProperFormat)
-                                {
-                                    errorCode = Convert.ToInt32(fields[3]);
-                                }
+                            if (fields.GetUpperBound(0) > 4)
+                            {
+                                var messageSequenceInProperFormat = Regex.IsMatch(fields[0], @"\A^\d+$\Z");
+                                var transTypeInProperFormat = Regex.IsMatch(fields[1], @"^\w+$");
+                                var timeStampInProperFormat = Regex.IsMatch(fields[2], @"^\d{4}[-]\d\d-\d\d \d\d:\d\d:\d\d$");
+                                var errorCodeInProperFormat = Regex.IsMatch(fields[3], @"^\d+$");
 
-                                if (errorCode == 0 && transType == "Z")
+                                if (messageSequenceInProperFormat &&
+                                    transTypeInProperFormat)
                                 {
-                                    return fields;
+                                    var transType = fields[1];
+
+                                    if (timeStampInProperFormat &&
+                                        errorCodeInProperFormat)
+                                    {
+                                        errorCode = Convert.ToInt32(fields[3]);
+                                    }
+
+                                    if (errorCode == 0 && transType == "Z")
+                                    {
+                                        return fields;
+                                    }
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-                        return null;
+                        else
+                        {
+                            return null;
+                        }
                     }
                 }
-            }
-            catch
-            {
-                throw;
+                catch
+                {
+                    throw;
+                }
             }
 
             return null;
+        }
+
+        private IEnumerable<String> GetConfiguredActionNames()
+        {
+            return _actionStore.Keys;
+        }
+
+        private bool IsConfiguredToHandleMessage(string messageRecieved)
+        {
+            foreach (var configuredActionName in GetConfiguredActionNames())
+            {
+                if (messageRecieved.Contains(configuredActionName))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

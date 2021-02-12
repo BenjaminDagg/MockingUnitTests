@@ -6,13 +6,12 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+            <converter:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/POSStyles.xaml" />
                 <ResourceDictionary Source="Resources/ReportViewerStyles.xaml" />
-
             </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-            <converter:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>               
-        </ResourceDictionary>
+        </ResourceDictionary>        
     </Application.Resources>
 </Application>

@@ -6,6 +6,7 @@ using POS.Common;
 using POS.Core;
 using POS.Core.Config;
 using POS.Core.TransactionPortal;
+using POS.Modules.DeviceManagement.Constants;
 using POS.Modules.DeviceManagement.Models;
 using POS.Modules.DeviceManagement.Services;
 using POS.Modules.Main;
@@ -197,7 +198,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
 
                 if (promptOpion == PromptOptions.Yes)
                 {
-                    await SetSelectedDeviceStatus(SelectedDevice.Online ? COMMAND_SETOFFLINE : COMMAND_SETONLINE);
+                    await SetSelectedDeviceStatus(SelectedDevice.Online ? TransactionPortalActions.COMMAND_SETOFFLINE : TransactionPortalActions.COMMAND_SETONLINE);
                 }
             }
         }
@@ -212,7 +213,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
 
             if (promptOpion == PromptOptions.Yes)
             {
-                await SetAllDeviceStatuses(COMMAND_SETOFFLINE);
+                await SetAllDeviceStatuses(TransactionPortalActions.COMMAND_SETOFFLINE);
             }
         }
         public async Task SetAllOnLine()
@@ -226,7 +227,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
 
             if (promptOpion == PromptOptions.Yes)
             {
-                await SetAllDeviceStatuses(COMMAND_SETONLINE);
+                await SetAllDeviceStatuses(TransactionPortalActions.COMMAND_SETONLINE);
             }
         }
     }
