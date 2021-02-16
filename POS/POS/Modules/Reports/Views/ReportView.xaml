@@ -7,26 +7,21 @@
              xmlns:prop="clr-namespace:BoldReports.WPF.Properties;assembly=BoldReports.Wpf"
              xmlns:controls1="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
              xmlns:xaml="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
-             xmlns:cm="http://caliburnmicro.com"
+             xmlns:cal="http://caliburnmicro.com"
+             xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <DockPanel>
-     
         <controls1:CustomButtonControlEx x:Name="Back" DockPanel.Dock="Bottom" 
-                                        Content="Back"
+                                        Content="{x:Static resx:POSResources.UIReportNavigateBackText}"
                                         FontSize="16"  Width="150" Margin="20, 10, 20, 20"
                                         Foreground="{StaticResource DgWhite}"
                                         Background="{StaticResource DgDefaultButtonBackground}"
                                         HorizontalAlignment="Right"
                                         Height="36"/>
-       
-        <xaml:ReportViewer  cm:Message.Attach="[Event Loaded] = [Action HandleLoaded($eventArgs)]"
-                            x:Name="reportViewer" Style="{StaticResource ReportViewerStyle1}">
 
-        </xaml:ReportViewer>
-   
+        <xaml:ReportViewer x:Name="reportViewer" cal:Message.Attach="[Event Loaded] = [Action HandleLoaded($eventArgs)]"/>
 
     </DockPanel>
-
 </UserControl>

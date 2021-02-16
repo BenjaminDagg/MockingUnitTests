@@ -12,13 +12,7 @@
              d:DesignHeight="800" d:DesignWidth="1400"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
-    <Viewbox x:Name="PVbox" 
-       HorizontalAlignment="Stretch" 
-       VerticalAlignment="Stretch"
-       Width="{Binding SystemParameters.PrimaryScreenWidth}"
-       Height="{Binding SystemParameters.PrimaryScreenHeight}" 
-       >
-        <DockPanel>
+    <StackPanel>
         <ItemsControl DockPanel.Dock="Top"
                       Margin="0,2,0,2"
                       HorizontalAlignment="Left"
@@ -35,6 +29,15 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+    
+    <Viewbox x:Name="PVbox" 
+       HorizontalAlignment="Stretch" 
+       VerticalAlignment="Stretch"
+       Width="{Binding SystemParameters.PrimaryScreenWidth}"
+       Height="{Binding SystemParameters.PrimaryScreenHeight}" 
+       >
+        
+        <DockPanel>
         
         <Grid VerticalAlignment="Stretch" 
               HorizontalAlignment="Stretch" 
@@ -82,4 +85,5 @@
         </Grid>
     </DockPanel>
    </Viewbox>
+    </StackPanel>
 </UserControl>

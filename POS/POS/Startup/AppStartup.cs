@@ -21,7 +21,6 @@ using POS.Modules.Payout;
 using POS.Modules.Printer;
 using System;
 using System.Reflection;
-using Bold.Licensing;
 
 namespace POS.Startup
 {

@@ -8,7 +8,7 @@ namespace POS.Core.TransactionPortal
     {
         string Name { get; }
         Action<object> this[string name] { get; }
-        IDictionary<string, Action<object>> ActionStore { get; }
+        void ConfigureCommandAction(string command, Action<object> action);
         void Execute(string message);
         void Execute(string message, string[] actions);
     }

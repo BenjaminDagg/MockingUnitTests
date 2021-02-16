@@ -6,6 +6,7 @@ using POS.Core;
 using POS.Core.Config;
 using POS.Core.TransactionPortal;
 using POS.Infrastructure.TransactionPortal;
+using POS.Modules.DeviceManagement.Constants;
 using POS.Modules.DeviceManagement.Models;
 using POS.Modules.DeviceManagement.Services;
 using System;
@@ -26,10 +27,6 @@ namespace POS.Modules.DeviceManagement.ViewModels
         private static readonly SemaphoreSlim _semaphoreSlimSendMessage = new SemaphoreSlim(1, 1);
         private static readonly SemaphoreSlim _semaphoreSlimUpdateMachines = new SemaphoreSlim(1, 1);
         private static readonly SemaphoreSlim _semaphoreSlimInitialize = new SemaphoreSlim(1, 1);
-
-        private const string COMMAND_GETALLMACHINES = "GetAllMachines";
-        private const string COMMAND_SETOFFLINE = "ShutdownMachine";
-        private const string COMMAND_SETONLINE = "StartupMachine";
 
         private readonly IDeviceManagerSettings _deviceManagerSettings;
         private readonly IEventAggregator _eventAggregator;
@@ -67,10 +64,9 @@ namespace POS.Modules.DeviceManagement.ViewModels
                         _getAllMachinesAction = _messageActions.SingleOrDefault(a => a.Name == nameof(GetAllMachinesMessageAction));
                         if (_getAllMachinesAction != null)
                         {
-                            if (!_getAllMachinesAction.ActionStore.ContainsKey(nameof(UpdateMachines)))
-                            {
-                                _getAllMachinesAction.ActionStore.Add(nameof(UpdateMachines), UpdateMachines);
-                            }
+                            _getAllMachinesAction.ConfigureCommandAction(TransactionPortalActions.COMMAND_GETALLMACHINES, UpdateMachines);
+                            _getAllMachinesAction.ConfigureCommandAction(TransactionPortalActions.COMMAND_SETOFFLINE, default);
+                            _getAllMachinesAction.ConfigureCommandAction(TransactionPortalActions.COMMAND_SETONLINE, default);                    
                         }
 
                         await _transactionPortalCommunicator.StartUp(PollingAction);
@@ -81,7 +77,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
                             String.Empty
                             );
 
-                        await SendMessageToTransactionPortal(ProcessGetMachinesDataRecieved, COMMAND_GETALLMACHINES);
+                        await SendMessageToTransactionPortal(ProcessGetMachinesDataRecieved, TransactionPortalActions.COMMAND_GETALLMACHINES);
 
                         DeviceManagementInitializedSuccessfully = true;
 
@@ -237,14 +233,14 @@ namespace POS.Modules.DeviceManagement.ViewModels
         {
             if (_serverStatus == POSResources.UIDeviceManagementStateConnected)
             {
-                await SendMessageToTransactionPortal(ProcessGetMachinesDataRecieved, COMMAND_GETALLMACHINES);
+                await SendMessageToTransactionPortal(ProcessGetMachinesDataRecieved, TransactionPortalActions.COMMAND_GETALLMACHINES);
             }
         }
         private async void ProcessGetMachinesDataRecieved(string dataRecieved)
         {
             try
             {
-                _getAllMachinesAction.Execute(dataRecieved, new string[] { nameof(UpdateMachines) });
+                _getAllMachinesAction.Execute(dataRecieved, new string[] { TransactionPortalActions.COMMAND_GETALLMACHINES });
             }
             catch (Exception exception)
             {

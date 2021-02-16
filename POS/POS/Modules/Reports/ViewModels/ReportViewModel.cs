@@ -1,33 +1,36 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
-using BoldReports.UI.Xaml;
+﻿using BoldReports.UI.Xaml;
+using Framework.Core.FileSystem;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using POS.Core.Reports;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace POS.Modules.Reports.ViewModels
 {
     public class ReportViewModel : ExtendedScreenBase
     {
-        private readonly ReportContext _context;
+        private readonly IFilePathService _filePathService;
+        private readonly ReportContext _reportContext;
 
-        public ReportViewModel(IScreenServices screenManagementServices, ReportContext ctx) : base(screenManagementServices)
+        public ReportViewModel(IScreenServices screenManagementServices, IFilePathService filePathService , ReportContext reportContext) : base(screenManagementServices)
         {
-            _context = ctx;
+            _filePathService = filePathService;
+            _reportContext = reportContext;
         }
 
         public async Task HandleLoaded(RoutedEventArgs eventArgs)
         {
-            if (!(eventArgs.OriginalSource is ReportViewer rv)) return;
+            if (!(eventArgs.OriginalSource is ReportViewer reportViewer)) return;
             try
             {
-                rv.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, $@"Resources\Reports\{_context.SelectedReportName}.rdl");
-                rv.RefreshReport();
+                reportViewer.ReportPath = _filePathService.Combine(Environment.CurrentDirectory, $@"Resources\Reports\{_reportContext.SelectedReportName}.rdl");
+                reportViewer.RefreshReport();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                await HandleErrorAsync(e.Message, e);
+                await HandleErrorAsync(exception.Message, exception);
             }
         }
 
@@ -35,7 +38,5 @@ namespace POS.Modules.Reports.ViewModels
         {
             NavigateToScreen(typeof(ReportListViewModel), this, null);
         }
-
-
     }
 }
