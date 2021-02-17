@@ -8,10 +8,12 @@
         xmlns:local="clr-namespace:POS.Modules.Main.Views"
         Height="{Binding SystemParameters.PrimaryScreenHeight}" 
         Width="{Binding SystemParameters.PrimaryScreenWidth}"
+        WindowStyle="None"
         WindowState="Maximized"
-        mc:Ignorable="d">    
+        ResizeMode="{Binding DisplayMode}"
+        mc:Ignorable="d">
 
-        <!-- Current Active Item-->
+    <!-- Current Active Item-->
         <ContentControl Grid.Row="1" x:Name="ActiveItem" />
 
 </controls:CustomWindowControl>
