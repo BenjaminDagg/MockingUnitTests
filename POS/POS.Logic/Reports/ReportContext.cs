@@ -2,6 +2,6 @@
 {
     public class ReportContext
     {
-        public string SelectedReportName { get; set; }
+        public Report SelectedReportName { get; set; }
     }
 }

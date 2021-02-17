@@ -32,4 +32,6 @@ Implement new POS Theme
 ### Updated 
 - Project structure
 - Refactored Report ViewModel classes
+- Added Report model to include LastRun property and display in Datagrid (still needs to get correct LastRun value)
+
 

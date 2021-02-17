@@ -17,11 +17,11 @@ namespace POS.Modules.Reports.ViewModels
     {
         private readonly IFileSystemService _fileSystemService;
         private readonly ReportContext _reportContext;
-        private ObservableCollection<string> _reports;
+        private ObservableCollection<Report> _reports;
 
-        private string _selectedReport;
+        private Report _selectedReport;
 
-        public string SelectedReport
+        public Report SelectedReport
         {
             get => _selectedReport;
             set
@@ -33,7 +33,7 @@ namespace POS.Modules.Reports.ViewModels
             }
         }
 
-        public ObservableCollection<string> Reports 
+        public ObservableCollection<Report> Reports 
         {
             get => _reports; 
             set => Set(ref _reports, value);
@@ -48,7 +48,7 @@ namespace POS.Modules.Reports.ViewModels
 
         private void Init()
         {
-            Reports = new ObservableCollection<string>();
+            Reports = new ObservableCollection<Report>();
             DisplayName = POSResources.UITabReports;
         }
 
@@ -60,7 +60,11 @@ namespace POS.Modules.Reports.ViewModels
                 var reports = _fileSystemService.Directory.GetFiles("Resources\\Reports", "*.rdl", SearchOption.TopDirectoryOnly);
                 reports.ForEach(report =>
                 {
-                    Reports.Add(_fileSystemService.Path.GetFileNameWithoutExtension(report));
+                    Reports.Add(new Report
+                    {
+                        Name =_fileSystemService.Path.GetFileNameWithoutExtension(report)
+                        
+                    });
                 });
             }
             catch (Exception exception)

@@ -50,7 +50,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BoldReports.WPF" Version="2.4.19" />
+		<PackageReference Include="Bold.Licensing" Version="2.4.23" />
+		<PackageReference Include="BoldReports.WPF" Version="2.4.23" />
 		<PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="1.6.5" />
 	</ItemGroup>
