@@ -37,6 +37,10 @@ namespace POS.Modules.Main.ViewModels
         {
             return typeof(POSHomeScreenViewModel);
         }
+        protected override Type GetChangePasswordViewModel()
+        {
+            return typeof(ChangePasswordViewModel);
+        }
 
         protected override void ShowLoginScreen()
         {

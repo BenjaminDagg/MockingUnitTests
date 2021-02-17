@@ -148,6 +148,10 @@ namespace POS.Modules.Payout.ViewModels
                             }
                             else if(removeCashResult.IsSuccess)
                             {
+                                if (_session.HasCashDrawer)
+                                {
+                                    _printService.OpenCashDrawer();
+                                }
                                 await AlertUiOfSuccess(POSResources.UICashDrawerCashRemovedSuccessMsg);
                             }
                         }
@@ -162,6 +166,10 @@ namespace POS.Modules.Payout.ViewModels
                             }
                             else if (addCashResult.IsSuccess)
                             {
+                                if (_session.HasCashDrawer)
+                                {
+                                    _printService.OpenCashDrawer();
+                                }
                                 await AlertUiOfSuccess(POSResources.UICashDrawerCashAddedSuccessMsg);
                             }
                         }

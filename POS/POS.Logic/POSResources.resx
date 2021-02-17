@@ -427,8 +427,20 @@ Are you sure you want to end this session?</value>
   <data name="UICashDrawerTitle" xml:space="preserve">
     <value>Cash Drawer</value>
   </data>
+  <data name="UIChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="UIChangePasswordHeader" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
   <data name="UIClear" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="UIConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="UICurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
   </data>
   <data name="UICurrentTransactionButtonPayout" xml:space="preserve">
     <value>Payout</value>
@@ -641,8 +653,14 @@ Scan Voucher.</value>
   <data name="UILogin" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="UILoginHeader" xml:space="preserve">
+    <value>Please Login Below</value>
+  </data>
   <data name="UINavigateHome" xml:space="preserve">
     <value>Navigate Home</value>
+  </data>
+  <data name="UINewPassword" xml:space="preserve">
+    <value>New Password</value>
   </data>
   <data name="UINo" xml:space="preserve">
     <value>No</value>

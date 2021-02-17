@@ -46,13 +46,13 @@ namespace POS.Infrastructure.Services
             rawPrintData = rawPrintData + centerText + POSResources.RawPrintSessionDetails + crlf + crlf + leftAlignText;
             rawPrintData += $"{DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}";
             rawPrintData += $"{POSResources.RawPrintUser}: {r.Session.Username}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintSession}: {r.Session.Id}{crlf}{crlf}";
+            rawPrintData += $"{POSResources.RawPrintSession}: {r.Session.Id.Value}{crlf}{crlf}";
             rawPrintData += $"{POSResources.RawPrintNumberOfTransactions}: {r.Session.NumberTransactions}{crlf}";
             rawPrintData += $"{POSResources.RawPrintNumberOfVouchers}: {r.Session.VouchersCashed}{crlf}";
             rawPrintData += $"{POSResources.RawPrintStartingBalance}: {r.StartBalance:C}{crlf}";
             rawPrintData += $"{POSResources.RawPrintTotalPayouts}: {r.TotalPayout:C}{crlf}";
             rawPrintData += $"{POSResources.RawPrintCashAdded}: {r.CashAdded:C}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintCashRemoved}: {r.CashRemoved:C}";
+            rawPrintData += $"{POSResources.RawPrintCashRemoved}: {r.CashRemoved:C}{crlf}";
             rawPrintData += $"{POSResources.RawPrintEndingBalance}: {r.EndBalance:C}{crlf}";
 
             rawPrintData += $"-------------------{crlf}";

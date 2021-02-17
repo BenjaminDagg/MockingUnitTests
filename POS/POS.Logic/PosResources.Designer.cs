@@ -989,11 +989,47 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string UIChangePassword {
+            get {
+                return ResourceManager.GetString("UIChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string UIChangePasswordHeader {
+            get {
+                return ResourceManager.GetString("UIChangePasswordHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string UIClear {
             get {
                 return ResourceManager.GetString("UIClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm New Password.
+        /// </summary>
+        public static string UIConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("UIConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Password.
+        /// </summary>
+        public static string UICurrentPassword {
+            get {
+                return ResourceManager.GetString("UICurrentPassword", resourceCulture);
             }
         }
         
@@ -1629,11 +1665,29 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Login Below.
+        /// </summary>
+        public static string UILoginHeader {
+            get {
+                return ResourceManager.GetString("UILoginHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Navigate Home.
         /// </summary>
         public static string UINavigateHome {
             get {
                 return ResourceManager.GetString("UINavigateHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        public static string UINewPassword {
+            get {
+                return ResourceManager.GetString("UINewPassword", resourceCulture);
             }
         }
         

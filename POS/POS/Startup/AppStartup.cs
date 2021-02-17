@@ -7,10 +7,12 @@ using Framework.Infrastructure.Identity.Desktop;
 using Framework.WPF;
 using Framework.WPF.Modules;
 using Framework.WPF.Modules.CaliburnMicro;
+using Framework.WPF.ScreenManagement.Dialog;
 using Framework.WPF.Startup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using POS.Common;
 using POS.Core;
 using POS.Core.StartUp;
 using POS.Infrastructure.Startup;
@@ -46,6 +48,7 @@ namespace POS.Startup
             services.AddWpfUserAdministration();
 
             services.AddTransient<POSMainWindowViewModel>();
+            services.AddTransient<IDialogService, MessageBoxService>();
 
             #region POS Services
             //POS Infrastructure Services

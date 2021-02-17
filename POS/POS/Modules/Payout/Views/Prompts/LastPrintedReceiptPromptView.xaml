@@ -106,6 +106,7 @@
                                               Margin="10, 0"
                                               Content="{x:Static resx:POSResources.UILastPrintedReceiptButtonReprint}" 
                                               Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}"
+                                              IsEnabled="{Binding IsReprintEnabled}"
                                               />
             <dgmaterial:CustomButtonControlEx x:Name="Cancel"
                                               FontSize="16" 

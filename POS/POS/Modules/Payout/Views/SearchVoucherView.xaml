@@ -11,7 +11,8 @@
     <StackPanel Margin="20" FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}" Name="ParentPanel">
 
         <extenedcontrols:CustomTextBoxControlExtended x:Name="VoucherNumberTextBox"
-                                            CursorIndex="{Binding Path=SearchBarcodeItem.CursorIndex, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"          
+                                            CursorIndex="{Binding Path=SearchBarcodeItem.CursorIndex, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
+                                            TextChanged="ValidationNumberTextBox_OnTextChanged"
                                             MaxLength="18" 
                                             Margin="20, 0, 0, 0" 
                                             Width="524"
