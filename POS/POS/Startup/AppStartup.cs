@@ -63,7 +63,7 @@ namespace POS.Startup
             services.AddDeviceManagementModule(configuration);
 
             //POS Shell
-            services.AddTabModules();
+            services.AddTabModules(configuration);
             #endregion
 
             var securityDb = new SecurityDbConnection(configuration, GetConnectionStringEncryption());

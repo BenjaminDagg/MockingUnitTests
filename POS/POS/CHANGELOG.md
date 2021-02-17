@@ -34,3 +34,16 @@ Implement new POS Theme
 - Refactored Report ViewModel classes
 - Navigate user to Login screen after changing thier password
 
+## 02/16/2021
+- 50091 - Cash drawer code for add and remove cash case
+- 50092 - Barcode is flipped  when scanned 
+- 50094 - Session end Print session Id for receipt
+- 50590 - Disable reprint when no reciept found
+- 50591 - Resize Device Management UI for multiple resolution
+
+## 02/17/2021
+- 50592 - Implementation changed from lastreciept.json to database
+- 50593 - SetLastReceipt function remoded as fetching data from database
+- 50753 - Dialogbox Closes after reprint
+- 50755 - Kiosk mode configured using app settings
+
