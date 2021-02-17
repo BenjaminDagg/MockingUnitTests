@@ -139,8 +139,7 @@ namespace POS.Modules.Payout.ViewModels
                     var logMsg = $"Voucher successfully paid out.  Receipt No: {receiptNumber}.  Voucher ID: {item.VoucherId}  Amount: {item.Amount:C}  Barcode: ****{item.Barcode.Substring(item.Barcode.Length - 4)}";
                     _logEventDataService.LogEventToDatabase(PayoutEventType.VoucherSuccessfullyPaid, PayoutEventType.VoucherSuccessfullyPaid.ToString(), logMsg, _userSession.UserId);
                 });
-                //save last receipt info locally
-                _lastReceiptService.SetLastReceipt(receiptNumber, ItemCount, TotalPayout);
+               
                 await _messageBoxService.PromptAsync(POSResources.PayoutSuccessfulMsg, POSResources.SuccessTitle, PromptOptions.Ok, PromptTypes.Success);
 
                 ResetUi();

@@ -2,6 +2,7 @@
 using POS.Core.CashDrawer;
 using POS.Core.DeviceManager;
 using POS.Core.PayoutSettings;
+using POS.Core.Transaction;
 using POS.Core.Vouchers;
 
 namespace POS.Infrastructure.Data
@@ -74,6 +75,14 @@ namespace POS.Infrastructure.Data
                     x.Column(y => y.Balance).WithName("BALANCE"); ;
                     x.Column(y => y.LastActivity).WithName("LAST_ACTIVITY"); ;
                 });
+
+            For<LastReceiptDto>()
+              .Columns(x =>
+              {
+                  x.Column(y => y.LastReceiptNumbers).WithName("VOUCHER_RECEIPT_NO");
+                  x.Column(y => y.LastVoucherCounts).WithName("VOUCHER_COUNT");
+                  x.Column(y => y.LastReceiptTotals).WithName("RECEIPT_TOTAL_AMOUNT");
+              });
         }
     }
 }

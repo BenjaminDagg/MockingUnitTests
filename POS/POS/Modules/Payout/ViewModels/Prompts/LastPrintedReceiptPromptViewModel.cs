@@ -114,11 +114,13 @@ namespace POS.Modules.Payout.ViewModels.Prompts
 
         public new async Task Ok()
         {
+            Alerts.Clear();
             try
             {
                 await ReprintReceipt(ReceiptNumber);
                 //not closing in case want to still see dialog
                 await _messageBoxService.PromptAsync(POSResources.ReprintSucessful, POSResources.SuccessTitle, PromptOptions.Ok, PromptTypes.Success);
+                await base.Yes();
             }
             catch (Exception exception)
             {

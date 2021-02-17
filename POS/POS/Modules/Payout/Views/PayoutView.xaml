@@ -12,45 +12,42 @@
              d:DesignHeight="800" d:DesignWidth="1400"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
-    <StackPanel>
-        <ItemsControl DockPanel.Dock="Top"
-                      Margin="0,2,0,2"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top"
-                      Width="1024"
-                      ItemsSource="{Binding Path=Alerts}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <dgmaterial:AlertMessageControlEx 
-                                Margin="0,3"
-                                HorizontalAlignment="Stretch"
-                                Alert="{Binding AlertType}"
-                                Message="{Binding Message}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    
     <Viewbox x:Name="PVbox" 
        HorizontalAlignment="Stretch" 
        VerticalAlignment="Stretch"
        Width="{Binding SystemParameters.PrimaryScreenWidth}"
        Height="{Binding SystemParameters.PrimaryScreenHeight}" 
        >
-        
+        <StackPanel>
+            <ItemsControl DockPanel.Dock="Top"
+                      Margin="0,2,0,2"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Width="1024"
+                      ItemsSource="{Binding Path=Alerts}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <dgmaterial:AlertMessageControlEx 
+                                Margin="0,3"
+                                HorizontalAlignment="Stretch"
+                                Alert="{Binding AlertType}"
+                                Message="{Binding Message}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         <DockPanel>
-        
-        <Grid VerticalAlignment="Stretch" 
+            <Grid VerticalAlignment="Stretch" 
               HorizontalAlignment="Stretch" 
               Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}">
-            <Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1024"/>
-                <ColumnDefinition Width="650" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
+                    <ColumnDefinition Width="650" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
                     <RowDefinition Height="*"  MinHeight="20"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
                 <TextBlock x:Name="CurrentTransactionTxt" 
                            Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
                            Text="{x:Static resx:POSResources.UIPaymentCurrentTransaction}" 
@@ -73,7 +70,7 @@
                                                       Grid.Column="0"
                                                       Grid.Row="0" 
                                                       Margin="0 20 28 0">
-                   
+
                 </dgmaterial:CustomButtonControlEx>
                 <local:CurrentTransactionView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 50 0 0 "  DataContext="{Binding}"/>
                 <local:SearchVoucherView DataContext="{Binding}" Grid.Column="1" Grid.Row="0" />
@@ -82,8 +79,8 @@
                                       Grid.Column="1" 
                                       Grid.Row="1"  />
 
-        </Grid>
-    </DockPanel>
-   </Viewbox>
-    </StackPanel>
+            </Grid>
+        </DockPanel>
+        </StackPanel>
+    </Viewbox>
 </UserControl>
