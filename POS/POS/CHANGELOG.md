@@ -32,4 +32,5 @@ Implement new POS Theme
 ### Updated 
 - Project structure
 - Refactored Report ViewModel classes
+- Navigate user to Login screen after changing thier password
 

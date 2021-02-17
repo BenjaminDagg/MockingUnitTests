@@ -1,6 +1,7 @@
 ﻿using Framework.Infrastructure.Identity.Services;
 using Framework.Infrastructure.Identity.Services.Password;
 using Framework.WPF.ScreenManagement;
+using System.Threading.Tasks;
 
 namespace POS.Modules.Main.ViewModels
 {
@@ -11,6 +12,13 @@ namespace POS.Modules.Main.ViewModels
             IChangePasswordService changePasswordService, 
             IUserSession userSession) : base(screenServices, changePasswordService, userSession)
         {
+        }
+
+        public async Task ChangePassword()
+        {
+            await ChangePasswordAsync();
+
+            NavigateToScreen(typeof(LoginViewModel), this, null);
         }
     }
 }
