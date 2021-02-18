@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Framework.WPF.Events;
+using POS.Core.Config;
 
 namespace POS.Modules.Main.ViewModels
 {
@@ -36,15 +37,25 @@ namespace POS.Modules.Main.ViewModels
             IMessageBoxService messageBoxService,
             IEventAggregator eventAggregator,
             IErrorHandlingService errorHandlingService,
-            IUserSession userSession)
+            IUserSession userSession,
+            IDeviceMode settings)
         {
             _config = config;
             _messageBoxService = messageBoxService;
             _eventAggregator = eventAggregator;
             _errorHandlingService = errorHandlingService;
             _userSession = userSession;
+            DisplayMode = settings.DisplayMode;
         }
 
+        private string _displayMode;
+        public string DisplayMode
+        {
+            get => _displayMode; set
+            {
+                _displayMode = value;
+            }
+        }
         private String _userName;
 
         public String UserName
