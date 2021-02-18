@@ -23,6 +23,7 @@ Implement new POS Theme
 - 48992 - Set Machines Offline/Online
 - 46667 - POS End to End testing
 - 50750 - Implement Change Password in new POS Theme
+- 50451 - Report Viewer - Clean up styles in Report Viewer Styles .xaml resource dictionary
 
 ### fixed
 - Log session id issue (was storing object type name instead of session id)

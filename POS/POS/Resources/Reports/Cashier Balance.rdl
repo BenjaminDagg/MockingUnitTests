@@ -5,7 +5,7 @@
     <DataSource Name="LotteryRetail">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=LAP343;Initial Catalog=LotteryRetailMO</ConnectString>
+        <ConnectString>Data Source=.;Initial Catalog=LotteryRetail_Lite_CentroLink</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
