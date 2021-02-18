@@ -681,7 +681,7 @@
                                             </Image.Style>
                                         </Image>
                                     </ToggleButton>
-                                    <!--<Button x:Name="PART_buttonPageSetup" Height="30" IsEnabled="False" Margin="0,0,5,0" Style="{StaticResource POSOffice2013ButtonStyle}" ToolTip="{x:Static prop:Resources.PageUnitInchesValue}" Visibility="Visible" Width="30">
+                                    <Button x:Name="PART_buttonPageSetup" Height="30" IsEnabled="False" Margin="0,0,5,0" Style="{StaticResource POSOffice2013ButtonStyle}" ToolTip="{x:Static prop:Resources.PageUnitInchesValue}" Visibility="Collapsed" Width="30">
                                         <Image Height="16" Stretch="None" Width="16">
                                             <Image.Style>
                                                 <Style>
@@ -696,7 +696,7 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                    </Button>-->
+                                    </Button>
                                     <Rectangle Fill="{StaticResource DgAccent}" HorizontalAlignment="Center" Height="30" Margin="0,0,5,0" VerticalAlignment="Center" Width="1">
 
                                     </Rectangle>
