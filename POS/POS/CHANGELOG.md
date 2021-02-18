@@ -50,4 +50,7 @@ Implement new POS Theme
 - 50755 - Kiosk mode configured using app settings
 - Added Report model to include LastRun property and display in Datagrid (still needs to get correct LastRun value)
 
+## 02/18/2021
+- 50452 - Report Viewer - fix data source in RDL’s to be shared data source
+
 
