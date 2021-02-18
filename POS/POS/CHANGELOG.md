@@ -48,7 +48,8 @@ Implement new POS Theme
 - 50593 - SetLastReceipt function remoded as fetching data from database
 - 50753 - Dialogbox Closes after reprint
 - 50755 - Kiosk mode configured using app settings
-- Added Report model to include LastRun property and display in Datagrid (still needs to get correct LastRun value)
+- 50072 - Added Report model to include LastRun property and display in Datagrid (still needs to get correct LastRun value)
+- 50072 - Update ReportViewer toolbar to not show Page Setup, PageLayout, and default to the "Print View"
 
 ## 02/18/2021
 - 50452 - Report Viewer - fix data source in RDL’s to be shared data source

@@ -38,6 +38,7 @@ namespace POS.Modules.Reports.ViewModels
             try
             {
                 reportViewer.ReportPath = _filePathService.Combine(Environment.CurrentDirectory, String.Format(REPORT_PATH, _reportContext.SelectedReportName.Name));
+                reportViewer.ShowPageLayoutControl = false;
                 reportViewer.RefreshReport();
 
                 reportViewer.SetDataSourceCredentials(new List<DataSourceCredentials> {

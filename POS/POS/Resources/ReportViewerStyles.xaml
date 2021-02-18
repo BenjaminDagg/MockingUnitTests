@@ -681,7 +681,7 @@
                                             </Image.Style>
                                         </Image>
                                     </ToggleButton>
-                                    <Button x:Name="PART_buttonPageSetup" Height="30" IsEnabled="False" Margin="0,0,5,0" Style="{StaticResource POSOffice2013ButtonStyle}" ToolTip="{x:Static prop:Resources.PageUnitInchesValue}" Visibility="Visible" Width="30">
+                                    <Button x:Name="PART_buttonPageSetup" Height="30" IsEnabled="False" Margin="0,0,5,0" Style="{StaticResource POSOffice2013ButtonStyle}" ToolTip="{x:Static prop:Resources.PageUnitInchesValue}" Visibility="Collapsed" Width="30">
                                         <Image Height="16" Stretch="None" Width="16">
                                             <Image.Style>
                                                 <Style>
@@ -697,9 +697,7 @@
                                             </Image.Style>
                                         </Image>
                                     </Button>
-                                    <Rectangle Fill="{StaticResource DgAccent}" HorizontalAlignment="Center" Height="30" Margin="0,0,5,0" VerticalAlignment="Center" Width="1">
-
-                                    </Rectangle>
+                                    <Rectangle Fill="{StaticResource DgAccent}" HorizontalAlignment="Center" Height="30" Margin="0,0,5,0" VerticalAlignment="Center" Width="1"/>
                                     <Button x:Name="PART_buttonRefresh" Height="30" IsEnabled="False" Margin="0,0,5,0" Style="{StaticResource POSOffice2013ButtonStyle}" ToolTip="{x:Static prop:Resources.RefreshButtonToolTip}" Width="30">
                                         <Image HorizontalAlignment="Center" Height="16" Stretch="None" VerticalAlignment="Center" Width="16">
                                             <Image.Style>
@@ -742,7 +740,7 @@
                                     </Button>
                                 </StackPanel>
                             </Border>
-                            <Grid FlowDirection="LeftToRight" Grid.Row="1">
+                            <Grid FlowDirection="LeftToRight" Grid.Row="1">                                
                                 <Grid.RowDefinitions>
                                     <RowDefinition x:Name="PART_rowDefinitionFordsCredentialBlock" Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -777,6 +775,11 @@
                                         </Grid.ColumnDefinitions>
                                         <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" MaxHeight="200" VerticalScrollBarVisibility="Auto">
                                             <Grid x:Name="PART_grid_ReportParameterBlock" Background="{StaticResource TransparentBrush}" Grid.Column="0" Margin="5">
+                                                <Grid.Resources>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                    </Style>
+                                                </Grid.Resources>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="Auto"/>
@@ -785,7 +788,7 @@
                                                 </Grid.ColumnDefinitions>
                                             </Grid>
                                         </ScrollViewer>
-                                        <StackPanel x:Name="POSOffice2013ViewReportPanel">
+                                        <StackPanel x:Name="POSOffice2013ViewReportPanel" Margin="0, 10">
                                             <Grid HorizontalAlignment="Right" Height="{Binding ActualHeight, ElementName=Office2013ViewReportPanel}" Width="120">
                                                 <Border BorderThickness="1,0,0,0" BorderBrush="{StaticResource DgAccent}" Height="{Binding ActualHeight, ElementName=Office2013ViewReportPanel}" Margin="0,8,0,8"/>
                                                 <controls:CustomButtonControlEx Style="{StaticResource DgCustomButtonControlExStyle}" Background="{StaticResource DgDefaultButtonBackground}" x:Name="PART_btnViewReport" Content="{x:Static prop:Resources.ViewReportButtonText}" Foreground="{StaticResource DgWhite}" HorizontalAlignment="Center" Height="27" VerticalContentAlignment="Center" Width="90"/>
