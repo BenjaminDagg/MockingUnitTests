@@ -24,6 +24,7 @@ Implement new POS Theme
 - 46667 - POS End to End testing
 - 50750 - Implement Change Password in new POS Theme
 - 50451 - Report Viewer - Clean up styles in Report Viewer Styles .xaml resource dictionary
+- 50453 - Report Viewer - Test replacing RDL after a build to prove you don’t need to recompile code for RDL changes
 
 ### fixed
 - Log session id issue (was storing object type name instead of session id)

@@ -25,7 +25,7 @@ namespace POS.Modules.Reports.ViewModels
             if (!(eventArgs.OriginalSource is ReportViewer reportViewer)) return;
             try
             {
-                reportViewer.ReportPath = _filePathService.Combine(Environment.CurrentDirectory, $@"Resources\Reports\{_reportContext.SelectedReportName}.rdl");
+                reportViewer.ReportPath = _filePathService.Combine(Environment.CurrentDirectory, $@"Resources\Reports\{_reportContext.SelectedReportName.Name}.rdl");
                 reportViewer.RefreshReport();
             }
             catch (Exception exception)
