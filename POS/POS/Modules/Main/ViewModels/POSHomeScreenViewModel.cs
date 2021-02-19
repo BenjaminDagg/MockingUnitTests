@@ -1,8 +1,10 @@
 ﻿using Caliburn.Micro;
 using CSharpFunctionalExtensions;
 using Framework.Infrastructure.Identity.Services;
+using Framework.WPF.Modules.UserAdministration.Services;
 using POS.Common.Events;
 using POS.Core;
+using POS.Modules.DeviceManagement.Constants;
 using POS.Modules.Payout.Services.ViewModels;
 using POS.Modules.Payout.ViewModels;
 using System;
@@ -18,22 +20,57 @@ namespace POS.Modules.Main.ViewModels
         IHandle<TabUpdated>,
         IHandle<ActionProgress>
     {
+        private readonly IUserAdministrationService _userAdministrationService;
         private readonly IPayoutViewServices _payoutViewServices;
         private readonly IUserSession _userSession;
         private PayoutViewModel _payoutViewModel;
 
         public PayoutViewModel PayoutViewModel { get => _payoutViewModel; set => Set(ref _payoutViewModel, value); }
         public POSHomeScreenViewModel(
+            IUserAdministrationService userAdministrationService,
             IPayoutViewServices payoutViewServices,
             IUserSession userSession,
             IEnumerable<ITabItem> tabViewModels)
         {
+            _userAdministrationService = userAdministrationService;
             _payoutViewServices = payoutViewServices;
             _userSession = userSession;            
 
             UpdateTabPermissions(ref tabViewModels);
             Items.AddRange(OrderByPriority(tabViewModels.Where(tab => tab.UserHasPermission)));
             EnableTabs(true);
+
+            NavigateToStartupTabBasedOnUserRole();
+        }
+
+        private async void NavigateToStartupTabBasedOnUserRole()
+        {
+            var roles = await _userAdministrationService.GetUserRoleListAsync(_userSession.UserId);
+            if (roles != null && roles.Any())
+            {
+                var IsCashier = roles.Exists(role => role.RoleName == ApplicationRoles.ROLE_CASHIER && role.HasRole);
+                if (IsCashier)
+                {
+                    NavigateToTab(POSResources.UITabPayout);
+                    return;
+                }
+
+                var IsSupervisor = roles.Exists(role => role.RoleName == ApplicationRoles.ROLE_SUPERVISOR && role.HasRole);
+                if (IsSupervisor)
+                {
+                    NavigateToTab(POSResources.UITabReports);
+                    return;
+                }
+
+                var IsAdministrator = roles.Exists(role => role.RoleName == ApplicationRoles.ROLE_ADMINISTRATOR && role.HasRole);
+                if (IsAdministrator)
+                {
+                    NavigateToTab(POSResources.UITabDeviceManagement);
+                    return;
+                }
+            }
+
+            NavigateToTab(POSResources.UITabSettings);
         }
 
         private bool _actionInProgress;
@@ -114,11 +151,11 @@ namespace POS.Modules.Main.ViewModels
             {
                 case TabUpdateEventAction.PrinterSettingsNotInitialized:
                     EnableTab(POSResources.UITabSettings, true, disableThese: message.DisableTheseViews);
-                    await NavigateToTab(POSResources.UITabSettings);
+                    NavigateToTab(POSResources.UITabSettings);
                     break;
                 case TabUpdateEventAction.DeviceManagerSettingsNotInitialized:
                     EnableTab(POSResources.UITabSettings, true, disableThese: message.DisableTheseViews);
-                    await NavigateToTab(POSResources.UITabSettings);
+                    NavigateToTab(POSResources.UITabSettings);
                     break;
                 case TabUpdateEventAction.PrinterSettingsSaved:
                     EnableTab(POSResources.UITabPayout, true);
@@ -127,9 +164,11 @@ namespace POS.Modules.Main.ViewModels
                     EnableTab(POSResources.UITabDeviceManagement, true);
                     break;
             }
+
+            await Task.CompletedTask;
         }
 
-        private async Task NavigateToTab(string name = default)
+        private void NavigateToTab(string name = default)
         {
             if (name != null)
             {
@@ -139,8 +178,6 @@ namespace POS.Modules.Main.ViewModels
             {
                 ActiveItem = Items.FirstOrDefault(tab => tab.DisplayName == name && tab.Enabled && tab.UserHasPermission);
             }
-
-            await Task.CompletedTask;
         }
 
         public async Task HandleAsync(ActionProgress message, CancellationToken cancellationToken)
