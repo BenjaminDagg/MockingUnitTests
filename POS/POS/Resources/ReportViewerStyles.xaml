@@ -775,11 +775,6 @@
                                         </Grid.ColumnDefinitions>
                                         <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" MaxHeight="200" VerticalScrollBarVisibility="Auto">
                                             <Grid x:Name="PART_grid_ReportParameterBlock" Background="{StaticResource TransparentBrush}" Grid.Column="0" Margin="5">
-                                                <Grid.Resources>
-                                                    <Style TargetType="TextBlock">
-                                                        <Setter Property="Foreground" Value="White"/>
-                                                    </Style>
-                                                </Grid.Resources>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="Auto"/>

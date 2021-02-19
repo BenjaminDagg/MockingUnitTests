@@ -2,6 +2,7 @@
 using POS.Core.CashDrawer;
 using POS.Core.DeviceManager;
 using POS.Core.PayoutSettings;
+using POS.Core.Reports;
 using POS.Core.Transaction;
 using POS.Core.Vouchers;
 
@@ -75,7 +76,6 @@ namespace POS.Infrastructure.Data
                     x.Column(y => y.Balance).WithName("BALANCE"); ;
                     x.Column(y => y.LastActivity).WithName("LAST_ACTIVITY"); ;
                 });
-
             For<LastReceiptDto>()
               .Columns(x =>
               {

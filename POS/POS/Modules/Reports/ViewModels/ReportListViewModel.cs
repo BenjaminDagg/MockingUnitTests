@@ -4,6 +4,8 @@ using Framework.WPF.ScreenManagement;
 using POS.Core;
 using POS.Core.Reports;
 using POS.Modules.Main;
+using POS.Modules.Reports.Models;
+using POS.Modules.Reports.Services;
 using Syncfusion.Linq;
 using System;
 using System.Collections.ObjectModel;
@@ -16,8 +18,9 @@ namespace POS.Modules.Reports.ViewModels
     public class ReportListViewModel : ExtendedScreenBase, ITabItem
     {
         private readonly IFileSystemService _fileSystemService;
+        private readonly IReportEventService _reportEventService;
         private readonly ReportContext _reportContext;
-        private ObservableCollection<Report> _reports;
+
 
         private Report _selectedReport;
 
@@ -28,20 +31,25 @@ namespace POS.Modules.Reports.ViewModels
             {
                 Set(ref _selectedReport, value);
                 if (_selectedReport == null) return;
-                _reportContext.SelectedReportName = _selectedReport;
+                _reportContext.SelectedReportName = ReportTranslator.Translate(_selectedReport);
                 NavigateToScreen(typeof(ReportViewModel), this, null);
             }
         }
-
+        private ObservableCollection<Report> _reports;
         public ObservableCollection<Report> Reports 
         {
             get => _reports; 
             set => Set(ref _reports, value);
         }
 
-        public ReportListViewModel(IScreenServices screenManagementServices, ReportContext reportContext, IFileSystemService fileSystemService) : base(screenManagementServices)
+        public ReportListViewModel(
+            IScreenServices screenManagementServices, 
+            ReportContext reportContext, 
+            IFileSystemService fileSystemService,
+            IReportEventService reportEventService) : base(screenManagementServices)
         {
             _fileSystemService = fileSystemService;
+            _reportEventService = reportEventService;
             _reportContext = reportContext;
             Init();
         }
@@ -60,10 +68,12 @@ namespace POS.Modules.Reports.ViewModels
                 var reports = _fileSystemService.Directory.GetFiles("Resources\\Reports", "*.rdl", SearchOption.TopDirectoryOnly);
                 reports.ForEach(report =>
                 {
+                    var reportName = _fileSystemService.Path.GetFileNameWithoutExtension(report);
+                    var lastRun = _reportEventService.GetReportEventLastRunDate(reportName);
                     Reports.Add(new Report
                     {
-                        Name =_fileSystemService.Path.GetFileNameWithoutExtension(report)
-                        
+                        Name = reportName,
+                        LastRun = lastRun
                     });
                 });
             }

@@ -21,6 +21,7 @@ using POS.Modules.Main;
 using POS.Modules.Main.ViewModels;
 using POS.Modules.Payout;
 using POS.Modules.Printer;
+using POS.Modules.Reports;
 using System;
 using System.Reflection;
 
@@ -61,6 +62,7 @@ namespace POS.Startup
             services.AddSettingsModule(configuration);
             services.AddPayoutModule(configuration);
             services.AddDeviceManagementModule(configuration);
+            services.AddReportsModule(configuration);
 
             //POS Shell
             services.AddTabModules(configuration);

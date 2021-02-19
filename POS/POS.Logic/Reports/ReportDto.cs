@@ -2,10 +2,10 @@
 
 namespace POS.Core.Reports
 {
-    public class Report
+    public class ReportDto
     {
         public string Name { get; set; }
 
-        public DateTime LastRun { get; set; }
+        public DateTime? LastRun { get; set; }
     }
 }

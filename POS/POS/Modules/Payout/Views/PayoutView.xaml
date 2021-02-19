@@ -6,8 +6,6 @@
              xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              xmlns:local="clr-namespace:POS.Modules.Payout.Views"
-             xmlns:settingsviews="clr-namespace:POS.Modules.Settings.Views"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1400"
              HorizontalAlignment="Stretch"

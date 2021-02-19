@@ -1,7 +1,9 @@
 ﻿using BoldReports.UI.Xaml;
 using BoldReports.Windows;
 using Framework.Core.FileSystem;
+using Framework.Core.Logging;
 using Framework.Infrastructure.Identity.Data;
+using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using POS.Core.Reports;
@@ -20,16 +22,22 @@ namespace POS.Modules.Reports.ViewModels
         private readonly IFilePathService _filePathService;
         private readonly ReportContext _reportContext;
         private readonly ISecurityDbConnectionInfo _securityDbConnectionInfo;
+        private readonly ILogEventDataService _logEventDataService;
+        private readonly IUserSession _userSession;
 
         public ReportViewModel(
             ReportContext reportContext,
             IScreenServices screenManagementServices, 
             IFilePathService filePathService,             
-            ISecurityDbConnectionInfo securityDbConnectionInfo) : base(screenManagementServices)
+            ISecurityDbConnectionInfo securityDbConnectionInfo,
+            ILogEventDataService logEventDataService,
+            IUserSession userSession) : base(screenManagementServices)
         {
             _reportContext = reportContext;
             _filePathService = filePathService;            
             _securityDbConnectionInfo = securityDbConnectionInfo;
+            _logEventDataService = logEventDataService;
+            _userSession = userSession;
         }
 
         public async Task HandleLoaded(RoutedEventArgs eventArgs)
@@ -48,11 +56,15 @@ namespace POS.Modules.Reports.ViewModels
                             Name = REPORT_DATASOURCE_NAME,
                             IntegratedSecurity = true
                         }
-                });               
+                });
 
+                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedSuccess, String.Format("Report: '{0}' executed successfully", _reportContext.SelectedReportName.Name),
+                null, _userSession.UserId);
             }
             catch (Exception exception)
             {
+                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedFailed, String.Format("Report: '{0}' execution failed", _reportContext.SelectedReportName.Name),
+                exception.ToString(),  _userSession.UserId);
                 await HandleErrorAsync(exception.Message, exception);
             }
         }

@@ -53,5 +53,6 @@ Implement new POS Theme
 
 ## 02/18/2021
 - 50452 - Report Viewer - fix data source in RDL’s to be shared data source
-
+## 02/19/2021
+- 50889 - Report View - Implement and add Last run date on the reports
 

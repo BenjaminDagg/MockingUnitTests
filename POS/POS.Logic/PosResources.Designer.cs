@@ -1917,6 +1917,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Run.
+        /// </summary>
+        public static string UIReportHeaderLastRun {
+            get {
+                return ResourceManager.GetString("UIReportHeaderLastRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Name.
+        /// </summary>
+        public static string UIReportHeaderReportName {
+            get {
+                return ResourceManager.GetString("UIReportHeaderReportName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State.
         /// </summary>
         public static string UIReportHeaderState {

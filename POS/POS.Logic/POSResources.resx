@@ -737,6 +737,12 @@ Scan Voucher.</value>
   <data name="UIReportHeaderDateCreatedAtMachine" xml:space="preserve">
     <value>Created at Machine</value>
   </data>
+  <data name="UIReportHeaderLastRun" xml:space="preserve">
+    <value>Last Run</value>
+  </data>
+  <data name="UIReportHeaderReportName" xml:space="preserve">
+    <value>Report Name</value>
+  </data>
   <data name="UIReportHeaderState" xml:space="preserve">
     <value>State</value>
   </data>

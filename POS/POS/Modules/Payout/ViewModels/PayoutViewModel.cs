@@ -163,7 +163,6 @@ namespace POS.Modules.Payout.ViewModels
         {
             Alerts.Clear();
             LastReceiptPrint();
-
         }
     }
 }
