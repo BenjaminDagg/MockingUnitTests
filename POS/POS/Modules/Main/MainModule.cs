@@ -17,11 +17,12 @@ namespace POS.Modules.Main
         public static void AddTabModules(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IPrintService, PrintService>();
+
             services.AddTransient<ITabItem, PayoutViewModel>();
             services.AddTransient<ITabItem, SettingsViewModel>();
             services.AddTransient<ITabItem, DeviceManagementViewModel>();
-            services.AddTransient<ITabItem, ReportListViewModel>();
-            
+            services.AddTransient<ITabItem, ReportsViewModel>();
+
             var displaymode = configuration.GetConfigurationSection<DisplayModeFileConfig>("StartUpMode");
             services.AddSingleton<IDeviceMode>(displaymode);
         }

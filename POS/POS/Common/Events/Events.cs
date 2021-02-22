@@ -1,4 +1,5 @@
-﻿using Framework.WPF.ScreenManagement.Alert;
+﻿using Caliburn.Micro;
+using Framework.WPF.ScreenManagement.Alert;
 using System.Collections.Generic;
 
 namespace POS.Common.Events
@@ -22,7 +23,7 @@ namespace POS.Common.Events
         PrinterSettingsNotInitialized = 0,
         PrinterSettingsSaved = 1,
         DeviceManagerSettingsNotInitialized = 2,
-        DeviceManagerSettingsSaved = 3,
+        DeviceManagerSettingsSaved = 3
     }
     public class TabUpdated
     {        
@@ -62,6 +63,15 @@ namespace POS.Common.Events
             ActionInProgress = actionInProgress;
         }
         public bool ActionInProgress { get; }
+    }
+
+    public class ReportNavigationEvent
+    {
+        public ReportNavigationEvent(IScreen screen)
+        {
+            Screen = screen;
+        }
+        public IScreen Screen { get; }
     }
 
 }

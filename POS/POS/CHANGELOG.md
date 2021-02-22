@@ -57,3 +57,5 @@ Implement new POS Theme
 - 50889 - Report View - Implement and add Last run date on the reports
 - 50927 - Direct user to different tabs based on their role when start up of POS
 
+## 02/22/2021
+- 50888 - Fix tab issue with Reports

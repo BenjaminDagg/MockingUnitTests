@@ -785,6 +785,9 @@ Scan Voucher.</value>
   <data name="UITabReports" xml:space="preserve">
     <value>Reports</value>
   </data>
+  <data name="UITabReportView" xml:space="preserve">
+    <value>ReportView</value>
+  </data>
   <data name="UITabSettings" xml:space="preserve">
     <value>Settings</value>
   </data>

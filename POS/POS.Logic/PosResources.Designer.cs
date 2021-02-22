@@ -2061,6 +2061,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ReportView.
+        /// </summary>
+        public static string UITabReportView {
+            get {
+                return ResourceManager.GetString("UITabReportView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string UITabSettings {

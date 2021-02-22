@@ -1,9 +1,11 @@
-﻿using Framework.Core.FileSystem;
+﻿using Caliburn.Micro;
+using Framework.Core.FileSystem;
+using Framework.Core.Modularity.Framework.Core.Modularity;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
+using POS.Common.Events;
 using POS.Core;
 using POS.Core.Reports;
-using POS.Modules.Main;
 using POS.Modules.Reports.Models;
 using POS.Modules.Reports.Services;
 using Syncfusion.Linq;
@@ -15,25 +17,20 @@ using System.Threading.Tasks;
 
 namespace POS.Modules.Reports.ViewModels
 {
-    public class ReportListViewModel : ExtendedScreenBase, ITabItem
+    public class ReportListViewModel : ExtendedScreenBase
     {
         private readonly IFileSystemService _fileSystemService;
         private readonly IReportEventService _reportEventService;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IServiceLocator _serviceLocator;
         private readonly ReportContext _reportContext;
 
-
+        #region IPropertyChanged
         private Report _selectedReport;
-
         public Report SelectedReport
         {
             get => _selectedReport;
-            set
-            {
-                Set(ref _selectedReport, value);
-                if (_selectedReport == null) return;
-                _reportContext.SelectedReportName = ReportTranslator.Translate(_selectedReport);
-                NavigateToScreen(typeof(ReportViewModel), this, null);
-            }
+            set => Set(ref _selectedReport, value); 
         }
         private ObservableCollection<Report> _reports;
         public ObservableCollection<Report> Reports 
@@ -41,16 +38,49 @@ namespace POS.Modules.Reports.ViewModels
             get => _reports; 
             set => Set(ref _reports, value);
         }
+        #endregion
+
+        #region ITabItem
+        private int _indexPriority = 1004;
+        public int IndexPriority
+        {
+            get => _indexPriority;
+            set => Set(ref _indexPriority, value);
+        }
+        private bool _userHasPermission;
+        public bool UserHasPermission
+        {
+            get => _userHasPermission;
+            set => Set(ref _userHasPermission, value);
+        }
+        private bool _enabled;
+        public bool Enabled
+        {
+            get => _enabled;
+            set => Set(ref _enabled, value);
+        }
+        private bool _allowAuthenticatedUser;
+        public bool AllowAuthenticatedUser
+        {
+            get => _allowAuthenticatedUser;
+            set => Set(ref _allowAuthenticatedUser, value);
+        }
+        #endregion
 
         public ReportListViewModel(
             IScreenServices screenManagementServices, 
             ReportContext reportContext, 
             IFileSystemService fileSystemService,
-            IReportEventService reportEventService) : base(screenManagementServices)
+            IReportEventService reportEventService,
+            IEventAggregator eventAggregator,
+            IServiceLocator serviceLocator) : base(screenManagementServices)
         {
             _fileSystemService = fileSystemService;
             _reportEventService = reportEventService;
+            _eventAggregator = eventAggregator;
+            _serviceLocator = serviceLocator;
             _reportContext = reportContext;
+            
             Init();
         }
 
@@ -85,31 +115,15 @@ namespace POS.Modules.Reports.ViewModels
             await base.OnActivateAsync(cancellationToken);
         }
 
-        #region ITabItem
-        private int _indexPriority = 1004;
-        public int IndexPriority
+        public void OnReportSelectionChangedAction()
         {
-            get => _indexPriority;
-            set => Set(ref _indexPriority, value);
-        }
-        private bool _userHasPermission;
-        public bool UserHasPermission
-        {
-            get => _userHasPermission;
-            set => Set(ref _userHasPermission, value);
-        }
-        private bool _enabled;
-        public bool Enabled
-        {
-            get => _enabled;
-            set => Set(ref _enabled, value);
-        }
-        private bool _allowAuthenticatedUser;
-        public bool AllowAuthenticatedUser
-        {
-            get => _allowAuthenticatedUser;
-            set => Set(ref _allowAuthenticatedUser, value);
-        }
-        #endregion
+            if (_selectedReport == null)
+            {
+                return;
+            }
+
+            _reportContext.SelectedReport = ReportTranslator.Translate(_selectedReport);
+            _eventAggregator.PublishOnUIThreadAsync(new ReportNavigationEvent(_serviceLocator.Resolve<ReportViewModel>()));
+        }        
     }
 }

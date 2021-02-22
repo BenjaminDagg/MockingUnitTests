@@ -1,11 +1,15 @@
 ﻿using BoldReports.UI.Xaml;
 using BoldReports.Windows;
+using Caliburn.Micro;
 using Framework.Core.FileSystem;
 using Framework.Core.Logging;
+using Framework.Core.Modularity.Framework.Core.Modularity;
 using Framework.Infrastructure.Identity.Data;
 using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
+using POS.Common.Events;
+using POS.Core;
 using POS.Core.Reports;
 using System;
 using System.Collections.Generic;
@@ -24,6 +28,8 @@ namespace POS.Modules.Reports.ViewModels
         private readonly ISecurityDbConnectionInfo _securityDbConnectionInfo;
         private readonly ILogEventDataService _logEventDataService;
         private readonly IUserSession _userSession;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IServiceLocator _serviceLocator;
 
         public ReportViewModel(
             ReportContext reportContext,
@@ -31,22 +37,29 @@ namespace POS.Modules.Reports.ViewModels
             IFilePathService filePathService,             
             ISecurityDbConnectionInfo securityDbConnectionInfo,
             ILogEventDataService logEventDataService,
-            IUserSession userSession) : base(screenManagementServices)
+            IUserSession userSession,
+            IEventAggregator eventAggregator,
+            IServiceLocator serviceLocator) : base(screenManagementServices)
         {
             _reportContext = reportContext;
             _filePathService = filePathService;            
             _securityDbConnectionInfo = securityDbConnectionInfo;
             _logEventDataService = logEventDataService;
             _userSession = userSession;
+            _eventAggregator = eventAggregator;
+            _serviceLocator = serviceLocator;
+
+            DisplayName = "ReportView";
         }
 
         public async Task HandleLoaded(RoutedEventArgs eventArgs)
-        {
+        {            
             if (!(eventArgs.OriginalSource is ReportViewer reportViewer)) return;
             try
             {
-                reportViewer.ReportPath = _filePathService.Combine(Environment.CurrentDirectory, String.Format(REPORT_PATH, _reportContext.SelectedReportName.Name));
+                reportViewer.ViewMode = ViewMode.Print;
                 reportViewer.ShowPageLayoutControl = false;
+                reportViewer.ReportPath = _filePathService.Combine(Environment.CurrentDirectory, String.Format(REPORT_PATH, _reportContext.SelectedReport.Name));
                 reportViewer.RefreshReport();
 
                 reportViewer.SetDataSourceCredentials(new List<DataSourceCredentials> {
@@ -58,12 +71,12 @@ namespace POS.Modules.Reports.ViewModels
                         }
                 });
 
-                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedSuccess, String.Format("Report: '{0}' executed successfully", _reportContext.SelectedReportName.Name),
+                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedSuccess, String.Format("Report: '{0}' executed successfully", _reportContext.SelectedReport.Name),
                 null, _userSession.UserId);
             }
             catch (Exception exception)
             {
-                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedFailed, String.Format("Report: '{0}' execution failed", _reportContext.SelectedReportName.Name),
+                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedFailed, String.Format("Report: '{0}' execution failed", _reportContext.SelectedReport.Name),
                 exception.ToString(),  _userSession.UserId);
                 await HandleErrorAsync(exception.Message, exception);
             }
@@ -71,7 +84,7 @@ namespace POS.Modules.Reports.ViewModels
 
         public override void Back()
         {
-            NavigateToScreen(typeof(ReportListViewModel), this, null);
+            _eventAggregator.PublishOnUIThreadAsync(new ReportNavigationEvent(_serviceLocator.Resolve<ReportListViewModel>()));
         }
     }
 }
