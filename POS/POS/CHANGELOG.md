@@ -57,3 +57,7 @@ Implement new POS Theme
 - 50889 - Report View - Implement and add Last run date on the reports
 - 50927 - Direct user to different tabs based on their role when start up of POS
 
+## 02/22/2021
+- 50752 - Automated focus in the voucher number text box
+- 50755 - Hidden close button in kiosk mode
+- Focus on amount in add or remove cash prompt
