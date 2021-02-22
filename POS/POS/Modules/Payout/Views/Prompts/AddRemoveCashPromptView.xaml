@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Style="{StaticResource POSPromptWindowStyle}"
         SizeToContent="WidthAndHeight">
-    <StackPanel>
+    <StackPanel  FocusManager.FocusedElement="{Binding ElementName=Amount}" Name="PromptPanel">
         <ItemsControl Margin="0,2,0,2"
                       HorizontalAlignment="Stretch"
                       ItemsSource="{Binding Path=Alerts}">
