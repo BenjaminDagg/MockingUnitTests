@@ -59,3 +59,6 @@ Implement new POS Theme
 
 ## 02/22/2021
 - 50888 - Fix tab issue with Reports
+- 50752 - Automated focus in the voucher number text box
+- 50755 - Hidden close button in kiosk mode
+- Focus on amount in add or remove cash prompt

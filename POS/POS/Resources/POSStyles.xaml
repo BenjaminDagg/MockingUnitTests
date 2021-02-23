@@ -550,6 +550,7 @@
                             <Setter TargetName="PART_MinButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
