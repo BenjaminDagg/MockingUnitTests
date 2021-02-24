@@ -193,7 +193,7 @@ namespace POS.Modules.Payout.ViewModels
             _payoutViewServices.Context.Reset();
             _payoutViewServices.EventAggregator.Unsubscribe(this);
 
-            var msg = $"Payout Session Ended {_payoutViewServices.Session.Id}";
+            var msg = $"Payout Session Ended {_payoutViewServices.Session.Id.Value}";
             _payoutViewServices.LogEventService.LogEventToDatabase(PayoutEventType.SessionEnded, PayoutEventType.SessionEnded.ToString(), msg, _payoutViewServices.Session.UserId);
         }
 

@@ -62,3 +62,6 @@ Implement new POS Theme
 - 50752 - Automated focus in the voucher number text box
 - 50755 - Hidden close button in kiosk mode
 - Focus on amount in add or remove cash prompt
+
+## 02/23/2021
+- 50928 - Create Event Logs for all user POS actions in database

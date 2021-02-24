@@ -9,7 +9,6 @@ using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using POS.Common.Events;
-using POS.Core;
 using POS.Core.Reports;
 using System;
 using System.Collections.Generic;
@@ -71,12 +70,12 @@ namespace POS.Modules.Reports.ViewModels
                         }
                 });
 
-                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedSuccess, String.Format("Report: '{0}' executed successfully", _reportContext.SelectedReport.Name),
+                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedSuccess, String.Format("'{0}' Report Accessed", _reportContext.SelectedReport.Name),
                 null, _userSession.UserId);
             }
             catch (Exception exception)
             {
-                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedFailed, String.Format("Report: '{0}' execution failed", _reportContext.SelectedReport.Name),
+                _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedFailed, String.Format("'{0}' Report access failed", _reportContext.SelectedReport.Name),
                 exception.ToString(),  _userSession.UserId);
                 await HandleErrorAsync(exception.Message, exception);
             }

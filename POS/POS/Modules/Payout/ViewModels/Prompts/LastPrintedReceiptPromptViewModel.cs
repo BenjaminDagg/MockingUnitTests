@@ -147,7 +147,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                 true, false, receiptNumber, (Money)voucherData.First().ReceiptTotalAmount, voucherList));
 
             _logEventDataService.LogEventToDatabase(PayoutEventType.ReprintPayoutReceipt, PayoutEventType.ReprintPayoutReceipt.ToString(),
-                $"Reprinted Receipt No: {receiptNumber}", _userSession.UserId);
+                $"Reprinted Receipt No: {receiptNumber} SessionId: {_session.Id.Value}", _userSession.UserId);
         }
 
         private async Task<Result<List<VoucherReprintDataDto>>> CanReprint(int receiptNumber)

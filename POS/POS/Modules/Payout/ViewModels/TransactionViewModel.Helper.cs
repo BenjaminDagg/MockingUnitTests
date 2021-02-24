@@ -136,7 +136,7 @@ namespace POS.Modules.Payout.ViewModels
                 //log payout to database
                 VoucherItems.ToList().ForEach(item =>
                 {
-                    var logMsg = $"Voucher successfully paid out.  Receipt No: {receiptNumber}.  Voucher ID: {item.VoucherId}  Amount: {item.Amount:C}  Barcode: ****{item.Barcode.Substring(item.Barcode.Length - 4)}";
+                    var logMsg = $"Voucher successfully paid out.  Receipt No: {receiptNumber}. SessionId: {_session.Id.Value}  Voucher ID: {item.VoucherId}  Amount: {item.Amount:C}  Barcode: ****{item.Barcode.Substring(item.Barcode.Length - 4)}";
                     _logEventDataService.LogEventToDatabase(PayoutEventType.VoucherSuccessfullyPaid, PayoutEventType.VoucherSuccessfullyPaid.ToString(), logMsg, _userSession.UserId);
                 });
                
@@ -173,6 +173,9 @@ namespace POS.Modules.Payout.ViewModels
                 printTransaction.IsCustomerReceipt = false;
                 _printService.PrintTransaction(printTransaction);
             }
+
+            _logEventDataService.LogEventToDatabase(PayoutEventType.PrintPayoutReceipt, PayoutEventType.PrintPayoutReceipt.ToString(),
+                $"Printed Receipt No: {receiptNumber} SessionId: {_session.Id.Value}", _userSession.UserId);
         }
 
         private Result PerformCashoutTransaction()

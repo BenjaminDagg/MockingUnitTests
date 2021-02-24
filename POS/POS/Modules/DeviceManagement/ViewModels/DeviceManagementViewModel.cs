@@ -6,6 +6,7 @@ using POS.Common;
 using POS.Core;
 using POS.Core.Config;
 using POS.Core.TransactionPortal;
+using POS.Infrastructure.TransactionPortal;
 using POS.Modules.DeviceManagement.Constants;
 using POS.Modules.DeviceManagement.Models;
 using POS.Modules.DeviceManagement.Services;
@@ -199,6 +200,12 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 if (promptOpion == PromptOptions.Yes)
                 {
                     await SetSelectedDeviceStatus(SelectedDevice.Online ? TransactionPortalActions.COMMAND_SETOFFLINE : TransactionPortalActions.COMMAND_SETONLINE);
+
+                    await Services.LogEvent.LogEventToDatabaseAsync(
+                            SelectedDevice.Online ? TransactionPortalEventType.DisableMachine : TransactionPortalEventType.EnableMachine,
+                            $"Machine ID {SelectedDevice.DegID} has been {(SelectedDevice.Online ? "disabled" : "enabled")}.",
+                            String.Empty
+                            );
                 }
             }
         }
@@ -214,6 +221,12 @@ namespace POS.Modules.DeviceManagement.ViewModels
             if (promptOpion == PromptOptions.Yes)
             {
                 await SetAllDeviceStatuses(TransactionPortalActions.COMMAND_SETOFFLINE);
+
+                await Services.LogEvent.LogEventToDatabaseAsync(
+                    TransactionPortalEventType.DisableAllMachines,
+                    "All machines have been disabled.",
+                    String.Empty
+                    );
             }
         }
         public async Task SetAllOnLine()
@@ -228,6 +241,12 @@ namespace POS.Modules.DeviceManagement.ViewModels
             if (promptOpion == PromptOptions.Yes)
             {
                 await SetAllDeviceStatuses(TransactionPortalActions.COMMAND_SETONLINE);
+
+                await Services.LogEvent.LogEventToDatabaseAsync(
+                    TransactionPortalEventType.EnableAllMachines,
+                    "All machines have been enabled.",
+                    String.Empty
+                    );
             }
         }
     }

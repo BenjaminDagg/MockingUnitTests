@@ -14,5 +14,10 @@ namespace POS.Infrastructure.TransactionPortal
         SentMessageFailed = 3006,
         RecievedMessageSuccess = 3007,
         RecievedMessageFailed = 3008,
+
+        EnableMachine = 3009,
+        DisableMachine = 3010,
+        EnableAllMachines = 3011,
+        DisableAllMachines = 3012
     }
 }

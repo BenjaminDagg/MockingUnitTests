@@ -274,7 +274,7 @@ namespace POS.Modules.Payout.ViewModels
             var id = await _cashDrawerRepository.InsertTransaction(_session.Username, _session.Id, TransactionType.A, amount, Environment.MachineName, _systemContext.Location.LocationId);
             _printService.PrintAddRemoveCashReceipt(new PrintAddRemoveCashReceiptRequest(_session.Username, _session.Id, amount, id, TransactionType.A));
             _logEventService.LogEventToDatabase(PayoutEventType.CashAdded, PayoutEventType.CashAdded.ToString(),
-                $"Cash Added to Drawer: {amount:C}", _session.UserId);
+                $"Cash Added to Drawer: {amount:C} SessionId: {_session.Id.Value}", _session.UserId);
             return Result.Success();
         }
 
@@ -288,7 +288,7 @@ namespace POS.Modules.Payout.ViewModels
             var id = await _cashDrawerRepository.InsertTransaction(_session.Username, _session.Id, TransactionType.R, amount, Environment.MachineName, _systemContext.Location.LocationId);
             _printService.PrintAddRemoveCashReceipt(new PrintAddRemoveCashReceiptRequest(_session.Username, _session.Id, amount, id, TransactionType.R));
             _logEventService.LogEventToDatabase(PayoutEventType.CashRemoved, PayoutEventType.CashRemoved.ToString(),
-                $"Cash Removed from Drawer: {amount:C}", _session.UserId);
+                $"Cash Removed from Drawer: {amount:C} SessionId: {_session.Id.Value}", _session.UserId);
             return Result.Success();
         }
 

@@ -47,7 +47,14 @@
 		<Content Include="Resources\Reports\Cash Bank Activity.rdl">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
+		<Content Update="Resources\Reports\Drop by Date Range Report.rdl">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Resources\Reports\Revenue By Machine.rdl">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	
+</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Bold.Licensing" Version="2.4.23" />
