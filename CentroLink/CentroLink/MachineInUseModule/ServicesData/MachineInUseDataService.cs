@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using CentroLink.MachineInUseModule.Models;
+using Framework.Core.Logging;
+using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Data.Database;
 using Framework.Infrastructure.Data.DataSources;
 
@@ -8,7 +10,7 @@ namespace CentroLink.MachineInUseModule.ServicesData
     public class MachineInUseDataService : ApplicationDbService, IMachineInUseDataService
     {
 
-        public MachineInUseDataService(IDbConnectionInfo dbConnectionInfo) : base(dbConnectionInfo)
+        public MachineInUseDataService(IDbConnectionInfo dbConnectionInfo, TestDbRetryConfiguration testDbRetryConfiguration, ILogService logService) : base(dbConnectionInfo, testDbRetryConfiguration, logService)
         {
         }
 

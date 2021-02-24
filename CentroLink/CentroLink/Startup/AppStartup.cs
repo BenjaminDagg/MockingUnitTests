@@ -13,10 +13,11 @@ using Framework.Infrastructure.Data;
 using Framework.Infrastructure.Identity.Data;
 using Framework.Infrastructure.Identity.Desktop;
 using Framework.WPF.Modules;
-using Framework.WPF.Modules.Startup;
 using Framework.WPF.Startup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Framework.WPF.Modules.CaliburnMicro;
+using Framework.WPF;
 
 namespace CentroLink.Startup
 {
@@ -31,7 +32,7 @@ namespace CentroLink.Startup
         {
         
             services.AddCommandLineArgumentModule();
-            services.AddDatabaseModule(GetConnectionStringEncryption(), false);
+            services.AddDatabaseModule(GetConnectionStringEncryption(), configuration, false);
             services.AddLoggingModule();
             services.AddFileSystemModule();
 
@@ -40,7 +41,7 @@ namespace CentroLink.Startup
 
             services.AddWpf(ConfigureWindowShell());
             services.AddWpfUserAdministration();
-
+            services.AddWpfModules();
             services.RegisterMachineSetupModule();
             services.RegisterBankSetupModule();
             services.RegisterDealSetupModule();
