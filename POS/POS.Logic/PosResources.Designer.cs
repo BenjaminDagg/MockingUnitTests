@@ -1243,7 +1243,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Casino Mach ID.
+        ///   Looks up a localized string similar to Mach ID.
         /// </summary>
         public static string UIDeviceManagementCasinoMachID {
             get {

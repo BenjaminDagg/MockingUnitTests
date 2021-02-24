@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Framework.WPF.Events;
 using POS.Core.Config;
+using System.Windows.Media.Imaging;
 
 namespace POS.Modules.Main.ViewModels
 {
@@ -79,22 +80,33 @@ namespace POS.Modules.Main.ViewModels
             set { Set(ref _loggedIn, value); }
         }
 
+        private BitmapFrame _icon;
+        public BitmapFrame Icon
+        {
+            get => _icon;
+            set
+            {
+                _icon = value;
+                NotifyOfPropertyChange(() => Icon);
+            }
+        }
+
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            return base.OnActivateAsync(cancellationToken); 
+            return base.OnActivateAsync(cancellationToken);
         }
 
         public override Task TryCloseAsync(bool? dialogResult = null)
         {
-            return base.TryCloseAsync(dialogResult);    
+            return base.TryCloseAsync(dialogResult);
         }
 
         public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken = default)
         {
             var result = await _messageBoxService.PromptAsync(
-                POSResources.AreYouSureEndSessionMsg, 
-                POSResources.ConfirmActionTitle, 
-                PromptOptions.YesNo, 
+                POSResources.AreYouSureEndSessionMsg,
+                POSResources.ConfirmActionTitle,
+                PromptOptions.YesNo,
                 PromptTypes.Question
                 );
             return result == PromptOptions.Yes;
@@ -104,7 +116,7 @@ namespace POS.Modules.Main.ViewModels
         {
             try
             {
-                SetWindowTitle();
+                SetWindowTitleAndIcon();
 
                 base.OnViewLoaded(view);
 
@@ -166,7 +178,7 @@ namespace POS.Modules.Main.ViewModels
             await ActivateItemAsync(pOSMainContentViewModel);
         }
 
-        protected virtual async Task<bool> HandleStartupError()
+        private async Task<bool> HandleStartupError()
         {
             var startupExeption = _config?.StartupError?.Error;
 
@@ -177,9 +189,11 @@ namespace POS.Modules.Main.ViewModels
             return false;
         }
 
-        protected virtual void SetWindowTitle()
+        private void SetWindowTitleAndIcon()
         {
             DisplayName = _config?.WindowTitle ?? String.Empty;
+            if (_config?.WindowIconUri == null) return;
+            Icon = BitmapFrame.Create(new Uri(_config?.WindowIconUri));
         }
 
         public async Task HandleAsync(TerminateApplicationEventRequest message, CancellationToken cancellationToken)
@@ -188,9 +202,9 @@ namespace POS.Modules.Main.ViewModels
         }
 
         public async Task HandleAsync(PayoutSessionStarted message, CancellationToken cancellationToken)
-        {      
-            SessionId = String.IsNullOrEmpty(message.SessionId) ? 
-            String.Empty : 
+        {
+            SessionId = String.IsNullOrEmpty(message.SessionId) ?
+            String.Empty :
             String.Format(POSResources.UIPayoutFormatSessionId, message.SessionId);
 
             await Task.CompletedTask;
@@ -207,7 +221,7 @@ namespace POS.Modules.Main.ViewModels
             }
 
             LoggedIn = Visibility.Visible;
-            UserName = String.Format("{0} {1}", user.FirstName, user.LastName);         
+            UserName = String.Format("{0} {1}", user.FirstName, user.LastName);
 
             await Task.CompletedTask;
         }

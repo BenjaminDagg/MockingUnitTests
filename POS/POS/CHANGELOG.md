@@ -73,3 +73,5 @@ Implement new POS Theme
 -51140 - Alert size Updated
 -51141 - Cash Removed Displayed in red
 -51142 - Buttons color theme updated for cash drawer
+-51144 - Added icon for the application
+-51149 - Removed text casino
