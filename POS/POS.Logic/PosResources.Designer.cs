@@ -395,7 +395,8 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Payout Transaction Successful..
+        ///   Looks up a localized string similar to Payout Transaction Successful.
+        ///Total Amount:  {0:C}.
         /// </summary>
         public static string PayoutSuccessfulMsg {
             get {
@@ -989,6 +990,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash Removed.
+        /// </summary>
+        public static string UICashRemovedText {
+            get {
+                return ResourceManager.GetString("UICashRemovedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Password.
         /// </summary>
         public static string UIChangePassword {
@@ -1030,6 +1040,15 @@ namespace POS.Core {
         public static string UICurrentPassword {
             get {
                 return ResourceManager.GetString("UICurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel Transaction.
+        /// </summary>
+        public static string UICurrentTransactionButtonCancelTransaction {
+            get {
+                return ResourceManager.GetString("UICurrentTransactionButtonCancelTransaction", resourceCulture);
             }
         }
         

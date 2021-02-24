@@ -66,19 +66,20 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderBarcode}" Binding="{Binding Path=Barcode.Value}" 
-                                    FontSize="20" MinWidth="260"/>
+                                    FontSize="24" MinWidth="260"/>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderAmount}" Binding="{Binding Path=Amount, StringFormat={}{0:C}}" 
-                                    FontSize="20" Width="180" />
+                                    FontSize="24" Width="180" />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderID}" Binding="{Binding Path=VoucherId}" 
-                                    FontSize="20" Width="120" />
+                                    FontSize="24" Width="120" />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderCreated}" Binding="{Binding Path=Created, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" 
-                                    FontSize="20" Width="260" />
+                                    FontSize="24" Width="280" />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderLocation}" Binding="{Binding Path=Location}" 
-                                    FontSize="20" Width="180" />
+                                    FontSize="24" Width="180"/>
                 <DataGridCheckBoxColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderNeedsApproval}" Binding="{Binding Path=RequiresApproval, Mode=OneWay}"  
-                                        Width="180" 
+                                        Width="160"
                                         CellStyle="{StaticResource DgBodyContentDataGridStyle}"
-                                        IsReadOnly="True"/>
+                                        IsReadOnly="True">
+</DataGridCheckBoxColumn>
                 <DataGridTemplateColumn  Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -139,7 +140,7 @@
                 <dgmaterial:CustomButtonControlEx cal:Message.Attach="VoidTransaction"
                                               Grid.Column="1"
                                             Visibility="{Binding TransactionViewModel.HasItems, Converter={StaticResource BooleanToVisibility}}" 
-                                            Content="{x:Static resx:POSResources.UICurrentTransactionButtonVoidTransaction}"
+                                            Content="{x:Static resx:POSResources.UICurrentTransactionButtonCancelTransaction}"
                                             FontSize="34" 
                                             Foreground="{StaticResource DgWhite}"
                                             Background="{StaticResource DgRed}"

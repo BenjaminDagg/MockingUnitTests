@@ -140,7 +140,7 @@ namespace POS.Modules.Payout.ViewModels
                     _logEventDataService.LogEventToDatabase(PayoutEventType.VoucherSuccessfullyPaid, PayoutEventType.VoucherSuccessfullyPaid.ToString(), logMsg, _userSession.UserId);
                 });
                
-                await _messageBoxService.PromptAsync(POSResources.PayoutSuccessfulMsg, POSResources.SuccessTitle, PromptOptions.Ok, PromptTypes.Success);
+                await _messageBoxService.PromptAsync(String.Format(POSResources.PayoutSuccessfulMsg,TotalPayout), POSResources.SuccessTitle, PromptOptions.Ok, PromptTypes.Success);
 
                 ResetUi();
             }

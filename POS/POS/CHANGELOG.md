@@ -65,3 +65,11 @@ Implement new POS Theme
 
 ## 02/23/2021
 - 50928 - Create Event Logs for all user POS actions in database
+
+## 02/24/2021
+-51117 - Changed Verbage to Cancel
+-51119 - Payout prompt updated with Total Amount
+-51138 - Font Size updated for Payout Grid
+-51140 - Alert size Updated
+-51141 - Cash Removed Displayed in red
+-51142 - Buttons color theme updated for cash drawer

@@ -27,13 +27,18 @@
             <StackPanel>
                 
                 <StackPanel>
+                    <DockPanel>
                     <TextBlock Grid.Column="0" 
                                 Text="{x:Static resx:POSResources.UICashDrawerTitle}" 
                                 Foreground="{StaticResource DgWhite}"
                                 FontSize="34" 
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Bottom"
+                               
                                 />
+                        <Button DockPanel.Dock="Right"  Style="{DynamicResource POSCashIconButtonStyle}">                          
+                        </Button>
+                    </DockPanel>
                     <Separator BorderBrush="{StaticResource DgWhite}" Margin="0, 2, 0, 10" />
                     <TextBlock Grid.Column="1" 
                                 Margin="0, 0, 0, 2"
@@ -56,10 +61,14 @@
                    Foreground="{StaticResource DgWhite}" 
                    FontSize="25"
                    Margin="0, 3"/>
-            <TextBlock Text="{Binding CashDrawerViewModel.CashRemoved, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCashRemoved}}" 
-                   Foreground="{StaticResource DgWhite}" 
+            <TextBlock 
+                   Foreground="{StaticResource DgWhite}"    
                    FontSize="25"
-                   Margin="0, 3"/>
+                   Margin="0, 3">
+                <Run Text="{x:Static resx:POSResources.UICashRemovedText}"/>
+                <Run Text=":"/>
+                <Run Text="{Binding CashDrawerViewModel.CashRemoved,Mode=OneWay}" Foreground="{StaticResource DgRed}"/>
+            </TextBlock>
             <TextBlock Text="{Binding CashDrawerViewModel.TotalPayout, StringFormat={x:Static resx:POSResources.UICashDrawerFormatTotalPayout}}" 
                    Foreground="{StaticResource DgWhite}" 
                    FontSize="25"
@@ -74,7 +83,8 @@
                                                     Content="{x:Static resx:POSResources.UICashDrawerAddCash}" 
                                                     FontSize="24" 
                                                     Foreground="{StaticResource DgWhite}"
-                                                    Background="{StaticResource DgDefaultButtonBackground}" 
+                                                    Background="{StaticResource DgGreen}" 
+                                                    HoverColor="{StaticResource DgGreenShade}"
                                                     Width="184" 
                                                     Height="46"
                                                           >
@@ -90,7 +100,8 @@
                                                     Content="{x:Static resx:POSResources.UICashDrawerRemoveCash}" 
                                                     FontSize="24" 
                                                     Foreground="{StaticResource DgWhite}"
-                                                    Background="{StaticResource DgDefaultButtonBackground}" 
+                                                    Background="{StaticResource DgRed}" 
+                                                    HoverColor="{StaticResource DgRedShade}"
                                                     Width="184" 
                                                     Height="46"
                                                           >

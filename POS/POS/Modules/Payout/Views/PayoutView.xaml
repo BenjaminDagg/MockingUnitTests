@@ -21,12 +21,13 @@
                       Margin="0,2,0,2"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
-                      Width="1024"
+                      Width="1124"
                       ItemsSource="{Binding Path=Alerts}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <dgmaterial:AlertMessageControlEx 
                                 Margin="0,3"
+                                FontSize="25"
                                 HorizontalAlignment="Stretch"
                                 Alert="{Binding AlertType}"
                                 Message="{Binding Message}" />
@@ -38,7 +39,7 @@
               HorizontalAlignment="Stretch" 
               Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1024"/>
+                    <ColumnDefinition Width="1124"/>
                     <ColumnDefinition Width="650" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>

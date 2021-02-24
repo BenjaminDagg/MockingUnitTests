@@ -230,7 +230,8 @@ Are you sure you want to end this session?</value>
     <value>Payout Station</value>
   </data>
   <data name="PayoutSuccessfulMsg" xml:space="preserve">
-    <value>Payout Transaction Successful.</value>
+    <value>Payout Transaction Successful.
+Total Amount:  {0:C}</value>
   </data>
   <data name="PayoutTransactionFailedMsg" xml:space="preserve">
     <value>Payout failure.  Error: {0}</value>
@@ -427,6 +428,9 @@ Are you sure you want to end this session?</value>
   <data name="UICashDrawerTitle" xml:space="preserve">
     <value>Cash Drawer</value>
   </data>
+  <data name="UICashRemovedText" xml:space="preserve">
+    <value>Cash Removed</value>
+  </data>
   <data name="UIChangePassword" xml:space="preserve">
     <value>Change Password</value>
   </data>
@@ -441,6 +445,9 @@ Are you sure you want to end this session?</value>
   </data>
   <data name="UICurrentPassword" xml:space="preserve">
     <value>Current Password</value>
+  </data>
+  <data name="UICurrentTransactionButtonCancelTransaction" xml:space="preserve">
+    <value>Cancel Transaction</value>
   </data>
   <data name="UICurrentTransactionButtonPayout" xml:space="preserve">
     <value>Payout</value>
