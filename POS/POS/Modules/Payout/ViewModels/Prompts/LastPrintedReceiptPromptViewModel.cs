@@ -104,7 +104,6 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                 TotalPayout = lastReceipt.LastReceiptTotals;
                 NumberVouchers = lastReceipt.LastVoucherCounts;
                 ReceiptNumber = lastReceipt.LastReceiptNumbers;
-
             }
             catch (Exception)
             {

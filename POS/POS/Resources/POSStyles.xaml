@@ -40,8 +40,67 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Height" Value="100"/>
     </Style>
+
+    <Style x:Key="POSCashDrawerHistoryDataGridCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DgDataGridCellStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ContentPresenter Margin="10,3,6,3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
-        <Style x:Key="POSDataGridCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DgDataGridCellStyle}">
+    <Style x:Key="POSCashDrawerHistoryDataGridRowStyle"  TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Height" Value="34"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <StackPanel Orientation="Horizontal">
+                        <Border x:Name="DgR_Border"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0, 0, 0, 1"
+                                            Background="{StaticResource DgTransparent}"                                                                                    
+                                            SnapsToDevicePixels="True">
+                            <SelectiveScrollingGrid>
+                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                <SelectiveScrollingGrid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </SelectiveScrollingGrid.RowDefinitions>
+                                <DataGridCellsPresenter Grid.Column="1" 
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <DataGridDetailsPresenter Grid.Column="1" Margin="0, -46, 0, 0" 
+                                                      Grid.Row="1"
+                                                      SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, 
+                                            ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, 
+                                            Converter={x:Static DataGrid.RowDetailsScrollingConverter}, 
+                                            RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                      Visibility="{TemplateBinding DetailsVisibility}" />
+                                <DataGridRowHeader Grid.RowSpan="2"
+                                               SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                               Visibility="{Binding HeadersVisibility, 
+                                            ConverterParameter={x:Static DataGridHeadersVisibility.Row}, 
+                                            Converter={x:Static DataGrid.HeadersVisibilityConverter}, 
+                                            RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                            </SelectiveScrollingGrid>
+                        </Border>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="POSDataGridCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DgDataGridCellStyle}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
@@ -232,137 +291,7 @@
     <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource DgScrollViewerStyle}" />
     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource DgScrollBarStyle}"/>
     <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource DgProgressBarStyle}"/>
-
-    <!--<Style x:Key="POSMainWindowStyle" TargetType="{x:Type controls:CustomWindowControl}" BasedOn="{StaticResource DgMainWindowStyle}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:CustomWindowControl}">
-                    <Border x:Name="MainWindowBorder" BorderBrush="{StaticResource DgTransparent}" BorderThickness="0" >
-                        <Grid x:Name="parentContainer" Background="{StaticResource DgTransparent}">
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height ="Auto"/>
-                                <RowDefinition Height ="*"/>
-                            </Grid.RowDefinitions>
-
-                            --><!--Window chrome--><!--
-                            <Grid Grid.Row="0" Height="72" Background="{StaticResource DgHoverBackground}">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center">
-                                        --><!-- logo  --><!--
-                                        <Path Fill="{StaticResource DgWhite}" 
-                                              Width="62" 
-                                              Height="62" 
-                                              HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center" 
-                                              Data="{StaticResource Dg_Logo}"
-                                              />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Width="285">
-
-                                        <ToggleButton x:Name="ShowUserMenu" Style="{DynamicResource DgUserMenuToggleChromeButtonStyle}"  Visibility="{Binding LoggedIn}"/>
-
-                                        <Popup x:Name="LogoutPopup" IsOpen="{Binding IsChecked, ElementName=ShowUserMenu}" 
-                                               Visibility="{Binding LoggedIn}"
-                                               StaysOpen="False"
-                                               PlacementTarget="{Binding ElementName=ShowUserMenu}"
-                                               AllowsTransparency="True" 
-                                               PopupAnimation="Fade">
-                                            <ContentControl Style="{StaticResource DgUserPopupContentStyle}">
-                                                <Button Style="{DynamicResource DgLinkButtonStyle}" 
-                                                        cal:Message.Attach="Logout"  
-                                                        Content="Logout" 
-                                                        FontSize="16" 
-                                                        Margin="20"/>
-                                            </ContentControl>
-                                        </Popup>
-                                        <StackPanel Margin="10 10, 8, 10" 
-                                                    HorizontalAlignment="Center" 
-                                                    VerticalAlignment="Center"
-                                                    Visibility="{Binding LoggedIn}">
-                                            <TextBlock FontSize="14" Foreground="{StaticResource DgWhite}" Text="{Binding UserName}"></TextBlock>
-                                            <TextBlock FontSize="14" Foreground="{StaticResource DgWhite}" Text="{Binding SessionId}"></TextBlock>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-
-                                --><!--Caption buttons--><!--
-                                <StackPanel Orientation="Horizontal" 
-                                            HorizontalAlignment="Right" 
-                                            VerticalAlignment="Top"
-                                            >
-
-                                    <Button x:Name="PART_MinButton" 
-                                            Style="{DynamicResource DgMinimizeButtonStyle}" 
-                                            WindowChrome.IsHitTestVisibleInChrome="True" 
-                                            ToolTip="Minimize"
-                                            Visibility="{Binding Path=MinButtonVisibility, 
-                                                                 RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
-                                            />
-
-                                    <Grid Visibility="{Binding Path=MaxButtonVisibility, RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}">
-                                        <Button x:Name="PART_MaxButton"
-                                                Style="{DynamicResource DgMaximizeButtonStyle}"                                             
-                                                WindowChrome.IsHitTestVisibleInChrome="True" 
-                                                ToolTip="Maximize" 
-                                                />
-
-                                        <Button x:Name="PART_RestoreButton" 
-                                                Style="{DynamicResource DgRestoreButtonStyle}" 
-                                                WindowChrome.IsHitTestVisibleInChrome="True" 
-                                                ToolTip="Restore"
-                                                />
-                                    </Grid>
-
-                                    <Button x:Name="PART_CloseButton" 
-                                            Style="{DynamicResource DgCloseButtonStyle}" 
-                                            WindowChrome.IsHitTestVisibleInChrome="True" 
-                                            ToolTip="Close"
-                                            Visibility="{Binding Path=CloseButtonVisibility,
-                                                           RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
-                                            />
-
-                                </StackPanel>
-
-                            </Grid>
-
-                            --><!-- Content --><!--
-                            <Grid x:Name="AppMainContent" Grid.Row="1" Background="{StaticResource DgBackground2}">
-
-                                <Path Data="{StaticResource Dg_Logo_Background}" 
-                                      Fill="{StaticResource DgBackground3}" 
-                                      Width="2526"
-                                      Height="2557"
-                                      Opacity="0.1" 
-                                      Stretch="Uniform"
-                                      Margin="-140, -100, 0, 0"
-                                      HorizontalAlignment="Left" 
-                                      VerticalAlignment="Center"/>
-
-                                <ContentPresenter  Margin="0" />
-                            </Grid>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="WindowState" Value="Normal">
-                            <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                        <Trigger Property="ResizeMode" Value="NoResize">
-                            <Setter TargetName="PART_MinButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
-    
+   
     <Style x:Key="POSPromptViewStyle" TargetType="{x:Type UserControl}" BasedOn="{StaticResource DgPromptViewStyle}"/>
     <Style x:Key="POSPromptWindowStyle" TargetType="{x:Type controls:CustomWindowControl}" BasedOn="{StaticResource DgPromptWindowStyle}"/>
 
@@ -558,29 +487,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--Cash Drawer Icon-->
-    <Style x:Key="POSCashIconButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{StaticResource DgTransparent}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                   
-                       <Path Grid.Column="0" 
-                             Width="30"
-                             Height="30"
-                             Stretch="Fill"
-                             x:Name="ContentPathIcon" 
-                             VerticalAlignment="Center"
-                             HorizontalAlignment="Center"
-                             Fill="{StaticResource DgSelectedHighlighted}" 
-                             Data="{StaticResource CashDrawer}"
-                             Margin="250 0 0 0"
-                       />
-                 
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
 </ResourceDictionary>

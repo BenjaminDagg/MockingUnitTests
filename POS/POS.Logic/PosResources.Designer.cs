@@ -161,6 +161,42 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string CashdrawerHistoryHeaderAmount {
+            get {
+                return ResourceManager.GetString("CashdrawerHistoryHeaderAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and Time.
+        /// </summary>
+        public static string CashdrawerHistoryHeaderDate {
+            get {
+                return ResourceManager.GetString("CashdrawerHistoryHeaderDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction Type.
+        /// </summary>
+        public static string CashdrawerHistoryHeaderTransactionType {
+            get {
+                return ResourceManager.GetString("CashdrawerHistoryHeaderTransactionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash Drawer History.
+        /// </summary>
+        public static string CashdrawerHistoryTitle {
+            get {
+                return ResourceManager.GetString("CashdrawerHistoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter an amount and password..
         /// </summary>
         public static string CashDrawerPromptAmountPasswordMsg {
@@ -2256,6 +2292,15 @@ namespace POS.Core {
         public static string UserNotPermittedVouchersMsg {
             get {
                 return ResourceManager.GetString("UserNotPermittedVouchersMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Cashdrawer History.
+        /// </summary>
+        public static string ViewCashdrawerHistoryToolTip {
+            get {
+                return ResourceManager.GetString("ViewCashdrawerHistoryToolTip", resourceCulture);
             }
         }
         

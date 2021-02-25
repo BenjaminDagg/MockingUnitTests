@@ -151,6 +151,18 @@ Are you sure you want to end this session?</value>
   <data name="CashDrawerCannotRemoveGreaterThanBalanceMsg" xml:space="preserve">
     <value>The amount to remove is greater than the current balance.</value>
   </data>
+  <data name="CashdrawerHistoryHeaderAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="CashdrawerHistoryHeaderDate" xml:space="preserve">
+    <value>Date and Time</value>
+  </data>
+  <data name="CashdrawerHistoryHeaderTransactionType" xml:space="preserve">
+    <value>Transaction Type</value>
+  </data>
+  <data name="CashdrawerHistoryTitle" xml:space="preserve">
+    <value>Cash Drawer History</value>
+  </data>
   <data name="CashDrawerPromptAmountPasswordMsg" xml:space="preserve">
     <value>Please enter an amount and password.</value>
   </data>
@@ -851,6 +863,9 @@ Scan Voucher.</value>
   </data>
   <data name="UserNotPermittedVouchersMsg" xml:space="preserve">
     <value>This user does not have permission to approve vouchers.</value>
+  </data>
+  <data name="ViewCashdrawerHistoryToolTip" xml:space="preserve">
+    <value>View Cashdrawer History</value>
   </data>
   <data name="VoucherAlreadyRedeemedMsg" xml:space="preserve">
     <value>Voucher has already been redeemed.</value>

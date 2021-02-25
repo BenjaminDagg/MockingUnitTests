@@ -15,18 +15,23 @@ namespace POS.Common
 {
     public class PrintService : IPrintService
     {
+        private readonly Session _session;
         private readonly IRawPrintService _rawPrintService;
         private readonly IReceiptLayoutService _layoutService;
-        private readonly IPrinterSettings _printerSettings;
-        private readonly Session _session;
+        private readonly IPrinterSettings _printerSettings;        
         private readonly ILogEventDataService _logEventDataService;
 
-        public PrintService(IRawPrintService rawPrintSvc, IReceiptLayoutService layoutSvc, IPrinterSettings printer, Session session, ILogEventDataService logEventDataService)
+        public PrintService(
+            Session session,
+            IRawPrintService rawPrintService, 
+            IReceiptLayoutService layoutService, 
+            IPrinterSettings printerSettings,              
+            ILogEventDataService logEventDataService)
         {
-            _rawPrintService = rawPrintSvc;
-            _layoutService = layoutSvc;
-            _printerSettings = printer;
             _session = session;
+            _rawPrintService = rawPrintService;
+            _layoutService = layoutService;
+            _printerSettings = printerSettings;            
             _logEventDataService = logEventDataService;
         }
 
@@ -42,7 +47,7 @@ namespace POS.Common
                 return Result.Failure(POSResources.ReceiptPrinterNotSetErrorMsg);
             }
             // is configured printer installed?
-            var printerFound = PrinterSettings.InstalledPrinters.Cast<string>().Any(s => s == _printerSettings.ReceiptPrinterName);
+            var printerFound = PrinterSettings.InstalledPrinters.Cast<string>().Any(printer => printer == _printerSettings.ReceiptPrinterName);
             if (!printerFound)
             {
                 return Result.Failure(string.Format(POSResources.ReceiptPrinterNotAvailableErrorMsg, _printerSettings.ReceiptPrinterName));
@@ -63,26 +68,26 @@ namespace POS.Common
 
         public void PrintStartSession(string username, string sessionId, decimal startBalance)
         {
-            var data = _layoutService.BuildSessionStartReceipt(username, sessionId, startBalance);
-            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, data);
+            var sessionStartReceipt = _layoutService.BuildSessionStartReceipt(username, sessionId, startBalance);
+            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, sessionStartReceipt);
         }
 
-        public void PrintSessionSummary(PrintSessionSummaryRequest r)
+        public void PrintSessionSummary(PrintSessionSummaryRequest printSessionSummaryRequest)
         {
-            var data = _layoutService.BuildSessionSummary(r);
-            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, data);
+            var sessionSummary = _layoutService.BuildSessionSummary(printSessionSummaryRequest);
+            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, sessionSummary);
         }
 
-        public void PrintTransaction(PrintTransactionRequest r)
+        public void PrintTransaction(PrintTransactionRequest printTransactionRequest)
         {
-            var data = _layoutService.BuildTransactionReceipt(r);
-            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, data);
+            var transactionReceipt = _layoutService.BuildTransactionReceipt(printTransactionRequest);
+            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, transactionReceipt);
         }
 
-        public void PrintAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest r)
+        public void PrintAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest printAddRemoveCashReceiptRequest)
         {
-            var data = _layoutService.BuildAddRemoveCashReceipt(r);
-            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, data);
+            var addRemoveCashReceipt = _layoutService.BuildAddRemoveCashReceipt(printAddRemoveCashReceiptRequest);
+            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, addRemoveCashReceipt);
         }
     }
 }

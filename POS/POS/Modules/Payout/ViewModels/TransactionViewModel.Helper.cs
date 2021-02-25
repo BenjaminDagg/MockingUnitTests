@@ -178,7 +178,7 @@ namespace POS.Modules.Payout.ViewModels
                 $"Printed Receipt No: {receiptNumber} SessionId: {_session.Id.Value}", _userSession.UserId);
         }
 
-        private Result PerformCashoutTransaction()
+        private Result CanPerformCashoutTransaction()
         {
             return _transaction.CanCashoutTransaction
                 (

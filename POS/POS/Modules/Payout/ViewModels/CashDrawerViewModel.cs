@@ -49,6 +49,11 @@ namespace POS.Modules.Payout.ViewModels
                 await AddRemoveCash(isRemoveCash)
             );
 
+        public ICommand ViewCashDrawerHistoryCommand => new RelayCommand<object>(
+            async _ =>
+                await ViewCashDrawerHistory(_)
+            );
+
         public Money CashAdded => _cashDrawer?.CashAdded ?? Money.None;
         public Money CashRemoved => _cashDrawer?.CashRemoved ?? Money.None;
         public Money CurrentBalance => _cashDrawer?.CurrentBalance ?? Money.None;
@@ -290,6 +295,15 @@ namespace POS.Modules.Payout.ViewModels
             _logEventService.LogEventToDatabase(PayoutEventType.CashRemoved, PayoutEventType.CashRemoved.ToString(),
                 $"Cash Removed from Drawer: {amount:C} SessionId: {_session.Id.Value}", _session.UserId);
             return Result.Success();
+        }
+
+        public async Task ViewCashDrawerHistory(object _ = null)
+        {
+            var cashDrawerHistoryPromptViewModel = _serviceLocator.Resolve<CashDrawerHistoryPromptViewModel>();
+            cashDrawerHistoryPromptViewModel.CurrentBalance = Convert.ToDouble(CurrentBalance.Value);
+
+            _messageBoxService.ShowModal(cashDrawerHistoryPromptViewModel);
+            await Task.CompletedTask;
         }
 
         private void NotifyCashDrawerChanged()

@@ -83,6 +83,13 @@ namespace POS.Infrastructure.Data
                   x.Column(y => y.LastVoucherCounts).WithName("VOUCHER_COUNT");
                   x.Column(y => y.LastReceiptTotals).WithName("RECEIPT_TOTAL_AMOUNT");
               });
+            For<CashDrawerHistoryDto>()
+              .Columns(x =>
+              {
+                  x.Column(y => y.TransactionType).WithName("TRANS_TYPE");
+                  x.Column(y => y.Amount).WithName("TRANS_AMT");
+                  x.Column(y => y.CreatedDate).WithName("CREATE_DATE");
+              });
         }
     }
 }

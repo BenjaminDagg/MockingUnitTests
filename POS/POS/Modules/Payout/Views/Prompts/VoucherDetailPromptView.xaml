@@ -9,6 +9,7 @@
         Title="{Binding Path=DisplayName}"
         mc:Ignorable="d"
         Style="{StaticResource POSPromptWindowStyle}"
+        Background="{StaticResource DgTransparent}" 
         SizeToContent="WidthAndHeight">
     <StackPanel>
         <ItemsControl 

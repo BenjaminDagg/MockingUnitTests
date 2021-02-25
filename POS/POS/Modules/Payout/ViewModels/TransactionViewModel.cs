@@ -100,7 +100,7 @@ namespace POS.Modules.Payout.ViewModels
         {
             try
             {
-                var canCashoutResult = PerformCashoutTransaction();
+                var canCashoutResult = CanPerformCashoutTransaction();
                 if (canCashoutResult.IsFailure)
                 {
                     await AlertUiOfError(canCashoutResult.Error);

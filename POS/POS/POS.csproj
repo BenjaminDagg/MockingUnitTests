@@ -26,6 +26,8 @@
 		<None Remove="Resources\Cashier_Balance.rdl" />
 		<None Remove="Resources\Reports\Cash Bank Activity.rdl" />
 		<None Remove="Resources\Reports\Cashier Balance.rdl" />
+		<None Remove="Resources\Reports\Drop by Date Range Report.rdl" />
+		<None Remove="Resources\Reports\Revenue By Machine.rdl" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,6 +49,8 @@
 		<Content Include="Resources\Reports\Cash Bank Activity.rdl">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Reports\Drop by Date Range Report.rdl" />
+		<Content Include="Resources\Reports\Revenue By Machine.rdl" />
 		<Content Update="Resources\Reports\Drop by Date Range Report.rdl">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -85,6 +89,9 @@
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	  <Page Update="Modules\Payout\Views\Prompts\StartingBalancePromptView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	  </Page>
+	  <Page Update="Modules\Payout\Views\Prompts\CashDrawerHistoryPromptView.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	</ItemGroup>
