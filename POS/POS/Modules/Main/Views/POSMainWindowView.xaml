@@ -11,7 +11,8 @@
         WindowStyle="None"
         WindowState="Maximized"
         ResizeMode="{Binding DisplayMode}"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        Icon="{Binding Path=Icon}">
 
     <!-- Current Active Item-->
         <ContentControl Grid.Row="1" x:Name="ActiveItem" />

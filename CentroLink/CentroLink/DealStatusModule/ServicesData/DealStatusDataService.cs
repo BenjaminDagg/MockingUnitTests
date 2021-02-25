@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using CentroLink.DealStatusModule.Models;
+using Framework.Core.Logging;
+using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Data.Database;
 using Framework.Infrastructure.Data.DataSources;
 
@@ -9,7 +11,7 @@ namespace CentroLink.DealStatusModule.ServicesData
     public class DealStatusDataService : ApplicationDbService, IDealStatusDataService
     {
 
-        public DealStatusDataService(IDbConnectionInfo dbConnectionInfo) : base(dbConnectionInfo)
+        public DealStatusDataService(IDbConnectionInfo dbConnectionInfo, TestDbRetryConfiguration testDbRetryConfiguration, ILogService logService) : base(dbConnectionInfo, testDbRetryConfiguration, logService)
         {
         }
 

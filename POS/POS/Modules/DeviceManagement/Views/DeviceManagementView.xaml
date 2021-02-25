@@ -140,7 +140,7 @@
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -150,7 +150,7 @@
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -168,14 +168,14 @@
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementBalance}"   Binding="{Binding Balance, StringFormat=C}" FontSize="25"  Width="180">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
-                                <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>

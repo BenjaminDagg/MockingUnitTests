@@ -526,7 +526,7 @@ Scan Voucher.</value>
     <value>Balance</value>
   </data>
   <data name="UIDeviceManagementCasinoMachID" xml:space="preserve">
-    <value>Casino Mach ID</value>
+    <value>Mach ID</value>
   </data>
   <data name="UIDeviceManagementDEGID" xml:space="preserve">
     <value>DGE ID</value>

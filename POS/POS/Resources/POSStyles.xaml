@@ -133,7 +133,7 @@
                             <Border x:Name="BackgroundBorder" Grid.ColumnSpan="2" Background="{StaticResource DgTransparent}"/>
                             <TextBlock x:Name="HeaderText" Grid.Column="0" Foreground="{StaticResource DgWhite}" 
                                        FontSize="30"  TextWrapping="Wrap" VerticalAlignment="Center"
-                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="20 0 0 0">
                                          <ContentPresenter Margin="0" VerticalAlignment="Center">
                                 <ContentPresenter.Resources>
                                     <Style TargetType="{x:Type TextBlock}">
@@ -487,4 +487,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

@@ -4,6 +4,7 @@ using System.Linq;
 using CentroLink.MachineSetupModule.DatabaseEntities;
 using CentroLink.MachineSetupModule.Models;
 using Framework.Core.Logging;
+using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Data.Database;
 using Framework.Infrastructure.Data.DataSources;
 
@@ -16,7 +17,7 @@ namespace CentroLink.MachineSetupModule.ServicesData
 
 
         public MachineSetupDataService(IDbConnectionInfo dbConnectionInfo,
-            ILogEventDataService logEventDataService) : base(dbConnectionInfo)
+            ILogEventDataService logEventDataService, TestDbRetryConfiguration testDbRetryConfiguration, ILogService logService) : base(dbConnectionInfo, testDbRetryConfiguration, logService)
         {
             _logEventDataService = logEventDataService;
         }

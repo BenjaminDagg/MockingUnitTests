@@ -5,6 +5,7 @@ using CentroLink.DealSetupModule.Settings;
 using Framework.WPF.Modules.Services;
 using Framework.WPF.ScreenManagement.Dialog;
 using Framework.WPF.ScreenManagement.Prompt;
+using Framework.WPF.Services;
 
 namespace CentroLink.DealSetupModule.PostLoginTask
 {

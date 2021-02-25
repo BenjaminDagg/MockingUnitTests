@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using CentroLink.BankSetupModule.Models;
+using Framework.Core.Logging;
+using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Data.Database;
 using Framework.Infrastructure.Data.DataSources;
 
@@ -7,7 +9,7 @@ namespace CentroLink.BankSetupModule.ServicesData
 {
     public class BankSetupDataService : ApplicationDbService, IBankSetupDataService
     {
-        public BankSetupDataService(IDbConnectionInfo connectionInfo) : base(connectionInfo)
+        public BankSetupDataService(IDbConnectionInfo connectionInfo, TestDbRetryConfiguration testDbRetryConfiguration, ILogService logService) : base(connectionInfo, testDbRetryConfiguration, logService)
         {
         }
 

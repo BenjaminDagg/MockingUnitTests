@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using CentroLink.LocationSetupModule.DatabaseEntities;
+using Framework.Core.Logging;
+using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Data.Database;
 using Framework.Infrastructure.Data.DataSources;
 
@@ -8,9 +10,9 @@ namespace CentroLink.LocationSetupModule.ServicesData
     public class LocationSetupDataService : ApplicationDbService, ILocationSetupDataService
     {
        
-        public LocationSetupDataService(IDbConnectionInfo dbConnectionInfo) : base(dbConnectionInfo)
+        public LocationSetupDataService(IDbConnectionInfo dbConnectionInfo, TestDbRetryConfiguration testDbRetryConfiguration, ILogService logService) : base(dbConnectionInfo, testDbRetryConfiguration, logService)
         {
-           
+                       
         }
 
         public List<Tpi> GetTpiList()

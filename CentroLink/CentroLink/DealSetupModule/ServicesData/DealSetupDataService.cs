@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using CentroLink.DealSetupModule.Models;
+using Framework.Core.Logging;
+using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Data.Database;
 using Framework.Infrastructure.Data.DataSources;
 
@@ -8,7 +10,7 @@ namespace CentroLink.DealSetupModule.ServicesData
     public class DealSetupDataService : ApplicationDbService, IDealSetupDataService
     {
 
-        public DealSetupDataService(IDbConnectionInfo dbConnectionInfo) : base(dbConnectionInfo)
+        public DealSetupDataService(IDbConnectionInfo dbConnectionInfo, TestDbRetryConfiguration testDbRetryConfiguration,ILogService logService) : base(dbConnectionInfo, testDbRetryConfiguration, logService)
         {
         }
 
