@@ -23,6 +23,7 @@
 		<None Remove="appsettings.json" />
 		<None Remove="appsettings.local.json" />
 		<None Remove="nlog.config" />
+		<None Remove="pos.ico" />
 		<None Remove="Resources\Cashier_Balance.rdl" />
 		<None Remove="Resources\Reports\Cash Bank Activity.rdl" />
 		<None Remove="Resources\Reports\Cashier Balance.rdl" />
@@ -99,6 +100,10 @@
 	<ItemGroup>
 	  <Folder Include="Modules\Settings\ViewModels\Prompts\" />
 	  <Folder Include="Modules\Settings\Views\Prompts\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="pos.ico" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

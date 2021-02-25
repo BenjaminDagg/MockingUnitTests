@@ -35,6 +35,7 @@
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
                         <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Margin" Value="-22, 0"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.CellStyle>
@@ -83,7 +84,7 @@
 
         </StackPanel>
 
-        <DockPanel Margin="20" HorizontalAlignment="Stretch">
+        <DockPanel Margin="22" HorizontalAlignment="Stretch">
             
             <TextBlock DockPanel.Dock="Left"
                                 Text="{Binding CurrentBalance, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCurrentBalance}}" 
@@ -100,7 +101,7 @@
                                               Foreground="{StaticResource DgWhite}"
                                               Background="{StaticResource DgDefaultButtonBackground}" 
                                               Width="137" 
-                                              Height="34"
+                                              Height="40"
                                               HorizontalAlignment="Right"
                                               Content="{x:Static resx:POSResources.UIOk}"
                                               Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}" 

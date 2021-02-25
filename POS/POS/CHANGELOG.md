@@ -76,3 +76,7 @@ Implement new POS Theme
 
 ## 02/25/2021
 - 51143 - Payout - Research / Update - Add new feature to cash Drawer section
+
+###fixed
+- adjusted the CashdrawerHistoryPropmtView to fix grid header and button margin
+- added pos.ico as resource
