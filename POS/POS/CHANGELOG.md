@@ -76,6 +76,8 @@ Implement new POS Theme
 
 ## 02/25/2021
 - 51143 - Payout - Research / Update - Add new feature to cash Drawer section
+- 51115 - Added Limit for Max Cash Added
+- 51120 - Added hide functionalilty of needs Approval
 
 ###fixed
 - adjusted the CashdrawerHistoryPropmtView to fix grid header and button margin

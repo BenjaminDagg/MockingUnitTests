@@ -152,6 +152,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter amount less than {0:C}.
+        /// </summary>
+        public static string CashDrawerAmountLimitmessage {
+            get {
+                return ResourceManager.GetString("CashDrawerAmountLimitmessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The amount to remove is greater than the current balance..
         /// </summary>
         public static string CashDrawerCannotRemoveGreaterThanBalanceMsg {
