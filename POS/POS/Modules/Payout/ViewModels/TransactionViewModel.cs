@@ -16,6 +16,8 @@ using POS.Core.Vouchers;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using POS.Core.Config;
+using System.Windows;
 
 namespace POS.Modules.Payout.ViewModels
 {
@@ -41,7 +43,8 @@ namespace POS.Modules.Payout.ViewModels
             IUserSession userSession,
             ILogEventDataService logEventDataService,
             IPrintService printService,
-            ILastReceiptService lastReceiptService)
+            ILastReceiptService lastReceiptService,
+            INeedApproval settings)
         {
             _messageBoxService = messageBoxService;
             _session = session;
@@ -54,10 +57,19 @@ namespace POS.Modules.Payout.ViewModels
             _serviceLocator = serviceLocator;
             _systemContext = systemContext;
             _eventAggregator = eventAggregator;
-
+            NeedsApproval = settings.IsApprovalRequired;
             _transaction = new Transaction();
         }
 
+        private bool _needApproval;
+        public bool NeedsApproval
+        {
+            get => _needApproval; set
+            {
+                _needApproval = value;
+                NotifyOfPropertyChange(nameof(NeedsApproval));
+            }
+        }
         public void AddTransactionItem(VoucherDto voucherDto)
         {
             try

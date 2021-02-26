@@ -5,6 +5,7 @@ using Framework.WPF.ErrorHandling;
 using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Core;
+using POS.Core.Config;
 using POS.Core.Transaction;
 using POS.Modules.Main.ViewModels;
 using System;
@@ -20,11 +21,12 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         private readonly IErrorHandlingService _errorHandlingService;
         private readonly IUserSession _user;
 
-        public AddRemoveCashPromptViewModel(IUserAuthenticationService authenticateUser, IErrorHandlingService errorHandlingService, IUserSession user)
+        public AddRemoveCashPromptViewModel(IUserAuthenticationService authenticateUser, IErrorHandlingService errorHandlingService, IUserSession user, ICashLimit settings)
         {
             _authenticateUser = authenticateUser;
             _errorHandlingService = errorHandlingService;
-            _user = user;           
+            _user = user;
+            CashLimit = settings.AddCashLimit;
         }
         public void Initialize(TransactionType transType)
         {
@@ -34,6 +36,14 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             Options = PromptOptions.OkCancel;
         }
 
+        private decimal _cashLimit;
+        public decimal CashLimit
+        {
+            get => _cashLimit; set
+            {
+                _cashLimit = value;
+            }
+        }
         private decimal? _amount;
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "UIErrorCashPromptAmountRequiredMsg", ErrorMessageResourceType = typeof(POSResources))]
         [RegularExpression(@"^(\d+(\.\d{0,2})?|\.?\d{1,2})$", ErrorMessageResourceName = "UIErrorCashPromptAmountFormatMsg", ErrorMessageResourceType = typeof(POSResources))]
@@ -65,6 +75,11 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                     if (Amount.GetValueOrDefault() == 0 || string.IsNullOrEmpty(Password))
                     {
                         Alerts.Add(new TaskAlert(AlertType.Error, POSResources.CashDrawerPromptAmountPasswordMsg));
+                        return;
+                    }
+                    if(Amount.GetValueOrDefault()>CashLimit)
+                    {
+                        Alerts.Add(new TaskAlert(AlertType.Error, String.Format(POSResources.CashDrawerAmountLimitmessage,CashLimit)));
                         return;
                     }
 
