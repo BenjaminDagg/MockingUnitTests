@@ -3,8 +3,6 @@ using Framework.Core.Logging;
 using Framework.Core.Modularity.Framework.Core.Modularity;
 using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.ErrorHandling;
-using Framework.WPF.Mvvm;
-using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Common;
 using POS.Core;
@@ -15,11 +13,9 @@ using POS.Core.Session;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
-using POS.Common.Events;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace POS.Modules.Payout.ViewModels
 {

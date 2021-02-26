@@ -10,6 +10,10 @@
              d:DesignHeight="450" d:DesignWidth="1000">
 
     <Grid Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.Resources>
+            <FrameworkElement x:Key="ProxyElement"
+                         DataContext="{Binding}"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -78,7 +82,7 @@
                                         Width="160"
                                         CellStyle="{StaticResource DgBodyContentDataGridStyle}"
                                         IsReadOnly="True">
-</DataGridCheckBoxColumn>
+            </DataGridCheckBoxColumn>
                 <DataGridTemplateColumn  Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

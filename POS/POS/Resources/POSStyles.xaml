@@ -35,7 +35,73 @@
             </Setter.Value>
         </Setter>        
     </Style>
-    
+
+    <Style x:Key="POSDeviceManagementDataGridRowStyle" TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource DgDataGridRowStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <StackPanel Orientation="Horizontal">
+                        <Path x:Name="TopCorner" 
+                                              Fill="{TemplateBinding Background}" 
+                                              Stretch="UniformToFill"
+                                              Margin="0, 0, 0, 0"
+                                              Data="{StaticResource Leftcorner_Background_Small}"/>
+                        <Border x:Name="DgR_Border"
+                                            Margin="-15, 0, 0, 0"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Background="{TemplateBinding Background}"                                                                                    
+                                            SnapsToDevicePixels="True">
+                            <SelectiveScrollingGrid>
+                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                <SelectiveScrollingGrid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </SelectiveScrollingGrid.RowDefinitions>
+                                <DataGridCellsPresenter Grid.Column="1" 
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <DataGridDetailsPresenter Grid.Column="1" Margin="0, -46, 0, 0" 
+                                                      Grid.Row="1"
+                                                      SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, 
+                                            ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, 
+                                            Converter={x:Static DataGrid.RowDetailsScrollingConverter}, 
+                                            RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                      Visibility="{TemplateBinding DetailsVisibility}" />
+                                <DataGridRowHeader Grid.RowSpan="2"
+                                               SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                               Visibility="{Binding HeadersVisibility, 
+                                            ConverterParameter={x:Static DataGridHeadersVisibility.Row}, 
+                                            Converter={x:Static DataGrid.HeadersVisibilityConverter}, 
+                                            RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                            </SelectiveScrollingGrid>
+                        </Border>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true" />
+                                <Condition Property="SortDirection" Value="{x:Null}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="HeaderText" Property="Foreground" Value="{StaticResource DgHoverBackground}"/>
+                        </MultiTrigger>-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="DgR_Border" Property="Background" Value="{StaticResource DgHoverBackground}" />
+                            <Setter TargetName="TopCorner" Property="Fill" Value="{StaticResource DgHoverBackground}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="DgR_Border" Property="Background" Value="{StaticResource DgSelected}" />
+                            <Setter TargetName="TopCorner" Property="Fill" Value="{StaticResource DgSelected}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="POSDataGridRowStyle"  TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Height" Value="100"/>
@@ -53,7 +119,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+       
     <Style x:Key="POSCashDrawerHistoryDataGridRowStyle"  TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0" />

@@ -47,8 +47,8 @@ namespace POS.Modules.DeviceManagement.Models
             get => _description;
             set => Set(ref _description, value);
         }
-        private DateTime _lastPlayed;
-        public DateTime LastPlayed
+        private DateTime? _lastPlayed;
+        public DateTime? LastPlayed
         {
             get => _lastPlayed;
             set => Set(ref _lastPlayed, value);

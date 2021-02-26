@@ -80,3 +80,6 @@ Implement new POS Theme
 ###fixed
 - adjusted the CashdrawerHistoryPropmtView to fix grid header and button margin
 - added pos.ico as resource
+
+## 02/26/2021
+- 51147 - POS Device Management Tab - Offline / Online format changes & refresh settings

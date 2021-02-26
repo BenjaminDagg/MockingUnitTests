@@ -12,6 +12,6 @@ namespace POS.Core.DeviceManager
         public string IpAddress { get; set; }
         public bool RemovedFlag { get; set; }
         public double Balance { get; set; }
-        public DateTime LastActivity { get; set; }
+        public DateTime? LastActivity { get; set; }
     }
 }

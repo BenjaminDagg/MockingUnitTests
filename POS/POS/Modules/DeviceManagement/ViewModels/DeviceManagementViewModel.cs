@@ -207,11 +207,15 @@ namespace POS.Modules.DeviceManagement.ViewModels
                             String.Empty
                             );
                 }
+
+                SelectedDevice = null;
             }
         }
 
         public async Task SetAllOffline()
         {
+            SelectedDevice = null;
+
             var promptOpion = await _messageBoxService.PromptAsync(
                     POSResources.UIDeviceManagerSettingsSetAllOfflineConfirmMsg,
                     POSResources.UIDeviceManagerSettingsSetAllOfflineConfirm,
@@ -231,6 +235,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
         }
         public async Task SetAllOnLine()
         {
+            SelectedDevice = null;
+
             var promptOpion = await _messageBoxService.PromptAsync(
                     POSResources.UIDeviceManagerSettingsSetAllOnlineConfirmMsg,
                     POSResources.UIDeviceManagerSettingsSetAllOnlineConfirm,

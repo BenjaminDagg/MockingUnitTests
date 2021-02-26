@@ -77,19 +77,26 @@
                                 <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
-                                <Setter Property="Foreground" Value="{StaticResource DgRed}"/>
+                                <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </DataGrid.CellStyle>
                 <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}" />
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource POSDeviceManagementDataGridRowStyle}" >
+                        <Setter Property="Background" Value="{StaticResource DgBackground3}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                <Setter Property="Background" Value="{StaticResource DgRed}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Resources>
                     <Style TargetType="ScrollBar" BasedOn="{StaticResource DgScrollBarStyle}" />
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="{x:Static resx:POSResources.UIDeviceManagementCasinoMachID}" MinWidth="180">
+                    <DataGridTemplateColumn Header="{x:Static resx:POSResources.UIDeviceManagementCasinoMachID}" Width="180">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid >
@@ -126,7 +133,7 @@
                                                         <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
-                                                        <Setter Property="Foreground" Value="{StaticResource DgRed}"/>
+                                                        <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -163,7 +170,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementDescription}"   Binding="{Binding Description}" FontSize="25"  Width="300">
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementDescription}"   Binding="{Binding Description}" FontSize="25"  Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
