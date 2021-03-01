@@ -128,8 +128,6 @@
                          </Style>
                     </DataGridCheckBoxColumn.ElementStyle>
                 </DataGridCheckBoxColumn>
-                                        IsReadOnly="True">
-            </DataGridCheckBoxColumn>
                 <DataGridTemplateColumn  Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

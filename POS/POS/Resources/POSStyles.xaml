@@ -81,13 +81,6 @@
                         </Border>
                     </StackPanel>
                     <ControlTemplate.Triggers>
-                        <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="true" />
-                                <Condition Property="SortDirection" Value="{x:Null}" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="HeaderText" Property="Foreground" Value="{StaticResource DgHoverBackground}"/>
-                        </MultiTrigger>-->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="DgR_Border" Property="Background" Value="{StaticResource DgHoverBackground}" />
                             <Setter TargetName="TopCorner" Property="Fill" Value="{StaticResource DgHoverBackground}" />

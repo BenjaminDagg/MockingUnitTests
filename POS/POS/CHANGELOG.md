@@ -85,3 +85,6 @@ Implement new POS Theme
 
 ## 02/26/2021
 - 51147 - POS Device Management Tab - Offline / Online format changes & refresh settings
+
+## 03/01/2021
+### fixed merge issue in CurrentTransationView.xaml
