@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF;
+using CentroLink.PromoTicketSetupModule;
 
 namespace CentroLink.Startup
 {
@@ -48,6 +49,7 @@ namespace CentroLink.Startup
             services.RegisterDealStatusModule();
             services.RegisterMachineInUseModule();
             services.RegisterLocationSetupModule();
+            services.RegisterPromoTicketSetupModule();
 
 
             var securityDb = new SecurityDbConnection(configuration, GetConnectionStringEncryption());
