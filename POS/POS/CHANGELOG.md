@@ -88,3 +88,6 @@ Implement new POS Theme
 
 ## 03/01/2021
 ### fixed merge issue in CurrentTransationView.xaml
+
+## 03/02/2021
+- 51150 update diamond icon based on meeting feedback
