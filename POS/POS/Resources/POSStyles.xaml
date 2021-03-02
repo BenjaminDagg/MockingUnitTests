@@ -427,7 +427,7 @@
 
                                                     <TextBlock Grid.Row="0" FontSize="15" Foreground="{StaticResource DgWhite}" Text="{Binding UserName}" Margin=" 0 10 0 0"  />
                                                     <TextBlock Grid.Row="1" Grid.Column="0" FontSize="12" Foreground="{StaticResource DgWhite}" Text="{Binding SessionId}" Visibility="{Binding SessionId, Converter={StaticResource NullOrEmptyVisibilityConverter}}" />
-                                                    <dgmaterial:CustomButtonControlEx   
+                                                    <!--<dgmaterial:CustomButtonControlEx   
                                                         Style="{DynamicResource DgLogoutButtonControlExStyle}"
                                                         Background="{StaticResource DgWhite}"
                                                         HoverColor="{StaticResource DgHoverRed}"
@@ -440,7 +440,7 @@
                                                         Grid.RowSpan="2"
                                                         Grid.Column="1"
                                                         FontSize="18" 
-                                                        Margin=" 10 5 0 0"/>
+                                                        Margin=" 10 5 0 0"/>-->
 
                                                 </Grid>
                                             </Viewbox>
@@ -465,41 +465,55 @@
                                 </Grid>
 
                                 <!--Caption buttons-->
-                                <StackPanel Orientation="Horizontal" 
+                                <StackPanel
                                             HorizontalAlignment="Right" 
                                             VerticalAlignment="Top"
                                             >
 
-                                    <Button x:Name="PART_MinButton" 
-                                            Style="{DynamicResource DgMinimizeButtonStyle}" 
-                                            WindowChrome.IsHitTestVisibleInChrome="True" 
-                                            ToolTip="Minimize"
-                                            Visibility="{Binding Path=MinButtonVisibility, 
-                                                                 RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
-                                            />
-
-                                    <Grid Visibility="{Binding Path=MaxButtonVisibility, RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}">
-                                        <Button x:Name="PART_MaxButton"
-                                                Style="{DynamicResource DgMaximizeButtonStyle}"                                             
+                                    <StackPanel Orientation="Horizontal" Margin=" 0 0 0 -20">
+                                        <Button x:Name="PART_MinButton" 
+                                                Style="{DynamicResource DgMinimizeButtonStyle}" 
                                                 WindowChrome.IsHitTestVisibleInChrome="True" 
-                                                ToolTip="Maximize" 
+                                                ToolTip="Minimize"
+                                                Visibility="{Binding Path=MinButtonVisibility, 
+                                                                        RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
                                                 />
 
-                                        <Button x:Name="PART_RestoreButton" 
-                                                Style="{DynamicResource DgRestoreButtonStyle}" 
+                                        <Grid Visibility="{Binding Path=MaxButtonVisibility, RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}">
+                                            <Button x:Name="PART_MaxButton"
+                                                    Style="{DynamicResource DgMaximizeButtonStyle}"                                             
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" 
+                                                    ToolTip="Maximize" 
+                                                    />
+
+                                            <Button x:Name="PART_RestoreButton" 
+                                                    Style="{DynamicResource DgRestoreButtonStyle}" 
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" 
+                                                    ToolTip="Restore"
+                                                    />
+                                        </Grid>
+
+                                        <Button x:Name="PART_CloseButton" 
+                                                Style="{DynamicResource DgCloseButtonStyle}" 
                                                 WindowChrome.IsHitTestVisibleInChrome="True" 
-                                                ToolTip="Restore"
+                                                ToolTip="Close"
+                                                Visibility="{Binding Path=CloseButtonVisibility,
+                                                                RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
                                                 />
-                                    </Grid>
-
-                                    <Button x:Name="PART_CloseButton" 
-                                            Style="{DynamicResource DgCloseButtonStyle}" 
-                                            WindowChrome.IsHitTestVisibleInChrome="True" 
-                                            ToolTip="Close"
-                                            Visibility="{Binding Path=CloseButtonVisibility,
-                                                           RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
-                                            />
-
+                                    </StackPanel>
+                                    <dgmaterial:CustomButtonControlEx   
+                                                        Style="{DynamicResource DgLogoutButtonControlExStyle}"
+                                                        Background="{StaticResource DgWhite}"
+                                                        HoverColor="{StaticResource DgHoverRed}"
+                                                        Visibility="{Binding LoggedIn}"
+                                                        Width="80" 
+                                                        Height="40"
+                                                        WindowChrome.IsHitTestVisibleInChrome="True"
+                                                        cal:Message.Attach="Logout"  
+                                                        Content="Logout"
+                                                        FontSize="18" 
+                                                        Margin=" 10 20 10 0"/>
+                                    
                                 </StackPanel>
 
                             </Grid>

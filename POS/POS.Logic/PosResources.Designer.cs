@@ -116,7 +116,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to Void Transaction?  This transaction will be cleared..
+        ///   Looks up a localized string similar to Are you sure you want to cancel the transaction?  This will remove all vouchers from the transaction..
         /// </summary>
         public static string AreYouSureVoidTransactionMsg {
             get {
@@ -440,8 +440,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Payout Transaction Successful.
-        ///Total Amount:  {0:C}.
+        ///   Looks up a localized string similar to Payout of amount {0:C} was Successful  .
         /// </summary>
         public static string PayoutSuccessfulMsg {
             get {

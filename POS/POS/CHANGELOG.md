@@ -91,3 +91,9 @@ Implement new POS Theme
 
 ## 03/02/2021
 - 51150 update diamond icon based on meeting feedback
+- 51115 Added Max cash limit to be checke from Appconfig Table from database
+- 51146 buttons resizable last run seen properly only pdf and excel export visible
+- 51723 Text And colour for buttons changed according to the Operation Add or remove cash
+- 51724 Logout button moved to right
+- 51725 Daily cash activity and Promo Enrty Reports added
+- 51726 Prompt message changed

@@ -19,10 +19,7 @@ namespace POS.Modules.Payout
 
             var voucherSettings = configuration.GetConfigurationSection<VoucherSettingsFileConfig>("UserVoucherSettings");
             services.AddSingleton<IVoucherSettings>(voucherSettings);
-            var cashLimit = configuration.GetConfigurationSection<CashLimitConfig>("CashLimit");
-            services.AddSingleton<ICashLimit>(cashLimit);
-            var approvalRequired = configuration.GetConfigurationSection<NeedApprovalConfig>("NeedsApproval");
-            services.AddSingleton<INeedApproval>(approvalRequired);
+           
         }
     }
 }

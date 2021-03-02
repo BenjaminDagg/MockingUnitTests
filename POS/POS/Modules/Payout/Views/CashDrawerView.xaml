@@ -42,8 +42,8 @@
                                                         PathIcon="{StaticResource CashDrawer}"
                                                         IconColor="{StaticResource DgSelectedHighlighted}"
                                                         HorizontalAlignment="Right"
-                                                        Height="30" 
-                                                        Margin="0, 0, 10, 0"
+                                                        Height="50" 
+                                                        Margin="0, 0, 0, 10"
                                                           />
                     </DockPanel>
                     <Separator BorderBrush="{StaticResource DgWhite}" Margin="0, 2, 0, 10" />

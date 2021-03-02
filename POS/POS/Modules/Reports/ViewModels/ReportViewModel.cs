@@ -58,6 +58,8 @@ namespace POS.Modules.Reports.ViewModels
             {
                 reportViewer.ViewMode = ViewMode.Print;
                 reportViewer.ShowPageLayoutControl = false;
+                reportViewer.ExportOptions = ExportOptions.Pdf | ExportOptions.Excel;
+                
                 reportViewer.ReportPath = _filePathService.Combine(Environment.CurrentDirectory, String.Format(REPORT_PATH, _reportContext.SelectedReport.Name));
                 reportViewer.RefreshReport();
 

@@ -37,7 +37,13 @@
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UIReportHeaderReportName}" Binding="{Binding Name}"  Width="*"
                                     FontSize="20"   />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UIReportHeaderLastRun}" Binding="{Binding LastRun}" Width="200"
-                                    FontSize="20"   />
+                                    FontSize="20">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.Margin" Value="0, 0, 20, 0"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

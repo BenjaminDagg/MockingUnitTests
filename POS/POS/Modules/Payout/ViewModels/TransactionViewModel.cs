@@ -15,9 +15,12 @@ using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using POS.Core.Config;
 using System.Windows;
+using Framework.Infrastructure.Data.Configuration;
+using Framework.WPF.Modules.RemoteConnection.DataServices;
 
 namespace POS.Modules.Payout.ViewModels
 {
@@ -44,7 +47,7 @@ namespace POS.Modules.Payout.ViewModels
             ILogEventDataService logEventDataService,
             IPrintService printService,
             ILastReceiptService lastReceiptService,
-            INeedApproval settings)
+            IConfigurationDataService appSettings)
         {
             _messageBoxService = messageBoxService;
             _session = session;
@@ -57,7 +60,7 @@ namespace POS.Modules.Payout.ViewModels
             _serviceLocator = serviceLocator;
             _systemContext = systemContext;
             _eventAggregator = eventAggregator;
-            NeedsApproval = settings.IsApprovalRequired;
+            NeedsApproval = Convert.ToBoolean(appSettings.GetAppConfig().Single(x => x.ConfigKey == "IsSupervisorApprovalActive").ConfigValue);
             _transaction = new Transaction();
         }
 
