@@ -22,8 +22,8 @@
 		<None Remove="appsettings.Development.json" />
 		<None Remove="appsettings.json" />
 		<None Remove="appsettings.local.json" />
+		<None Remove="dg.ico" />
 		<None Remove="nlog.config" />
-		<None Remove="pos.ico" />
 		<None Remove="Resources\Cashier_Balance.rdl" />
 		<None Remove="Resources\Reports\Cash Bank Activity.rdl" />
 		<None Remove="Resources\Reports\Cashier Balance.rdl" />
@@ -103,7 +103,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="pos.ico" />
+	  <Resource Include="dg.ico" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
