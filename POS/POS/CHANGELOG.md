@@ -97,3 +97,7 @@ Implement new POS Theme
 - 51724 Logout button moved to right
 - 51725 Daily cash activity and Promo Enrty Reports added
 - 51726 Prompt message changed
+
+##03/03/2021
+- 51840 Layout of cash drawer history changed
+- 51841 Icon Added to Device Management for readability 

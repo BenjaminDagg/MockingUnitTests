@@ -6,7 +6,7 @@
                               xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
                               xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
                               xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
-                              Title="{Binding Path=DisplayName}"                             
+                              Title="{Binding Path=DisplayName}"  
                               Width="700"
                               mc:Ignorable="d"
                               WindowStartupLocation="CenterOwner"
@@ -15,7 +15,7 @@
                               SizeToContent="WidthAndHeight">
     <StackPanel>
 
-        <Separator/>
+        <Separator Margin="0 -20 0 0"/>
         <StackPanel Margin="10">
 
             <DataGrid Grid.Row="0" x:Name="VouchersGrid" MaxHeight="600"
@@ -43,15 +43,6 @@
                 </DataGrid.CellStyle>
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow" BasedOn="{StaticResource POSCashDrawerHistoryDataGridRowStyle}" >
-                        <Setter Property="BorderBrush" Value="{StaticResource DgSelected}"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding TypeName}" Value="Add">
-                                <Setter Property="BorderBrush" Value="{StaticResource DgGreen}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding TypeName}" Value="Remove">
-                                <Setter Property="BorderBrush" Value="{StaticResource DgRed}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Resources>
@@ -83,10 +74,10 @@
             </DataGrid>
 
         </StackPanel>
-
-        <DockPanel Margin="22" HorizontalAlignment="Stretch">
+        <Separator Margin="0 0 0 0"/>
+        <StackPanel Margin="22" HorizontalAlignment="Stretch">
             
-            <TextBlock DockPanel.Dock="Left"
+            <TextBlock 
                                 Text="{Binding CurrentBalance, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCurrentBalance}}" 
                                 Foreground="{StaticResource DgWhite}"
                                 FontWeight="Bold" 
@@ -96,7 +87,6 @@
                                 />
 
             <dgmaterial:CustomButtonControlEx x:Name="Ok"
-                                              DockPanel.Dock="Right"
                                               FontSize="18" 
                                               Foreground="{StaticResource DgWhite}"
                                               Background="{StaticResource DgDefaultButtonBackground}" 
@@ -104,8 +94,9 @@
                                               Height="40"
                                               HorizontalAlignment="Right"
                                               Content="{x:Static resx:POSResources.UIOk}"
-                                              Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}" 
+                                              Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}"
+                                              Margin="0 0 0 0"
                                               />
-        </DockPanel>
+        </StackPanel>
     </StackPanel>
 </controls:CustomWindowControl>
