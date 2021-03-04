@@ -16,7 +16,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
         {
             Breadcrumb = new BreadcrumbCollection(new AddPromoTicketBreadcrumbDef().GetBreadcrumb());
 
-            PromoTicket = new AddPromoTicketValidationModel()
+            PromoTicket = new PromoTicketModel()
             {
                 PromoTicketId = 1,
                 Comments = "Ticket 1",
@@ -37,24 +37,24 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
             throw new NotImplementedException();
         }
 
-        public void CreatePromoTicket(AddPromoTicketValidationModel promoTicket)
+        public void CreatePromoTicket(PromoTicketModel promoTicket)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public EditPromoTicketValidationModel GetPromoTicketEditModel(int promoScheduleId)
+        public PromoTicketModel GetPromoTicketEditModel(int promoScheduleId)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public List<PromoTicketListModel> GetPromoTicketSetupList()
+        public IEnumerable<PromoTicketModel> GetPromoTicketSetupList(int dayLimit)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public void UpdatePromoTicket(AddPromoTicketValidationModel promoTicket)
+        public void UpdatePromoTicket(PromoTicketModel promoTicket)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

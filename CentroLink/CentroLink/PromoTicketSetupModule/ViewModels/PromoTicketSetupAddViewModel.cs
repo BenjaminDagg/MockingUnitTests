@@ -15,9 +15,9 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
     public class PromoTicketSetupAddViewModel : ExtendedScreenBase
     {
         private readonly IPromoTicketSetupService _promoTicketSetupService;
-        private AddPromoTicketValidationModel _promoTicket;
+        private PromoTicketModel _promoTicket;
 
-        public AddPromoTicketValidationModel PromoTicket
+        public PromoTicketModel PromoTicket
         {
             get => _promoTicket;
             set
@@ -54,7 +54,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
 
         protected virtual void Refresh()
         {
-            PromoTicket = new AddPromoTicketValidationModel();
+            PromoTicket = new PromoTicketModel();
         }
 
 

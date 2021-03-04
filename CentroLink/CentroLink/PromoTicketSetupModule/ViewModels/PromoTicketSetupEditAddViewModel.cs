@@ -15,9 +15,9 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
     public class PromoTicketSetupEditViewModel : ExtendedScreenBase
     {
         private readonly IPromoTicketSetupService _promoTicketService;
-        private AddPromoTicketValidationModel _promoTicket;
+        private PromoTicketModel _promoTicket;
 
-        public AddPromoTicketValidationModel PromoTicket
+        public PromoTicketModel PromoTicket
         {
             get => _promoTicket;
             set

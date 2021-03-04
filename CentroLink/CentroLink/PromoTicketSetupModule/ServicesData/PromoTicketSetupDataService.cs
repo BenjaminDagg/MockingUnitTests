@@ -3,7 +3,6 @@ using Framework.Core.Logging;
 using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Data.Database;
 using Framework.Infrastructure.Data.DataSources;
-using System;
 using System.Collections.Generic;
 
 namespace CentroLink.PromoTicketSetupModule.ServicesData
@@ -19,24 +18,51 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
         {                       
         }
 
-        public PromoTicketSchedule GetPromoTicketScheduleById(string promoScheduleId)
+        public PromoTicketSchedule GetPromoTicketScheduleById(int promoScheduleId)
         {
-            throw new NotImplementedException();
+            var promoTicketSchedule = Db.SingleOrDefault<PromoTicketSchedule>("WHERE PromoScheduleID = @0", promoScheduleId);
+            return promoTicketSchedule;
         }
 
-        public List<PromoTicketSchedule> GetPromoTicketSchedules()
+        public List<PromoTicketSchedule> GetPromoTicketSchedules(int dayLimit)
         {
-            throw new NotImplementedException();
+            const string sql = @"SELECT PromoScheduleID, Comments, PromoStart, PromoEnd, PromoStarted, PromoEnded 
+                                    FROM PROMO_SCHEDULE
+                                    WHERE DATEDIFF(DAY, PromoEnd, GETDATE()) BETWEEN -1096 AND @PromoDayLimit
+                                    ORDER BY PromoStart, PromoScheduleID";
+
+            var promoTicketSchedules = Db.Fetch<PromoTicketSchedule>(sql, new { PromoDayLimit = dayLimit });
+
+            return promoTicketSchedules;
         }
 
-        public PromoTicketSchedule InsertPromoTicketSchedule(int promoScheduleId, string comments, DateTime promoStart, DateTime promoEnd, bool promoStarted, bool promoEnded, int totalPromoAmountTickets, int totalPromoFactorTickets)
+        public void InsertPromoTicketSchedule(PromoTicketSchedule promoTicketSchedule)
         {
-            throw new NotImplementedException();
+            const string sql = @";EXEC [PromoScheduleAdd] @ScheduleComments, @PromoStartTime, @PromoEndTime";
+
+            Db.Execute(sql, new
+            {
+                ScheduleComments = promoTicketSchedule.Comments,
+                PromoStartTime = promoTicketSchedule.PromoStart,
+                PromoEndTime = promoTicketSchedule.PromoEnd
+            });
         }
 
         public void UpdatePromoTicketSchedule(PromoTicketSchedule promoTicketSchedule)
         {
-            throw new NotImplementedException();
+            const string sql = @"UPDATE PROMO_SCHEDULE SET Comments = @Comments, PromoStart = @PromoSTart, PromoEnd = @PromoEnd WHERE PromoScheduleID = @PromoScheduleID";
+
+            Db.Execute(sql, new
+            {
+                PromoScheduleID = promoTicketSchedule.PromoScheduleID,
+                ScheduleComments = promoTicketSchedule.Comments,
+                PromoStartTime = promoTicketSchedule.PromoStart,
+                PromoEndTime = promoTicketSchedule.PromoEnd
+            });
+        }
+        public void DeletePromoTicketSchedule(int promoScheduleId)
+        {
+            Db.Delete<PromoTicketSchedule>("WHERE PromoScheduleID = @0", promoScheduleId);
         }
     }
 }

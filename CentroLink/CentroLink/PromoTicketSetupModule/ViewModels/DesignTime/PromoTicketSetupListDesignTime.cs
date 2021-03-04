@@ -11,15 +11,15 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
     public class PromoTicketSetupListDesignTime : PromoTicketSetupListViewModel
     {
         public PromoTicketSetupListDesignTime()
-            : base(null, null)
+            : base(null, null, null)
         {
-            PromoTicketList = new ObservableCollection<PromoTicketListModel>();
+            PromoTicketList = new ObservableCollection<PromoTicketModel>();
             for (int i = 1; i <= 30; i++)
             {
                 var start = DateTime.Now.AddDays(new Random().Next(-30, 300));
-                var promoTicket = new PromoTicketListModel()
+                var promoTicket = new PromoTicketModel()
                 {
-                    PromoScheduleID = 1,
+                    PromoTicketId = 1,
                     Comments = "Ticket " + new Random().Next(1, 300),
                     PromoStart = start,
                     PromoEnd = start.AddDays(new Random().Next(1, 300)),

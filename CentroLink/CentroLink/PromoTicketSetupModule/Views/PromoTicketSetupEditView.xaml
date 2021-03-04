@@ -30,21 +30,10 @@
                 <RowDefinition Height="70" />
             </Grid.RowDefinitions>
 
+
             <Grid Grid.Row="0">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
 
@@ -64,114 +53,51 @@
                 <TextBlock Grid.Row="0"
                        Grid.Column="0"
                        Text="Description" />
-           
+
 
                 <controls:CustomTextBoxControl Grid.Row="1"
                                                TabIndex="0"
                                            Grid.Column="0"
-                                           Width="285"
+                                               Grid.ColumnSpan="3"
+                                           Width="600"
                                            Text="{Binding PromoTicket.Comments,
                                                           ValidatesOnDataErrors=True,
                                                           Mode=TwoWay,
                                                           UpdateSourceTrigger=PropertyChanged}"
                                            TextBoxIcon="Pencil"
-                                           WatermarkText="" />
-
-
-
-                <TextBlock Grid.Row="0"
-                           Grid.Column="2" 
-                           Text="Promo Start" />
-
-                <controls:CustomTextBoxControl Grid.Row="1"
-                                               TabIndex="9"
-                                               Grid.Column="2"
-                                               Width="285"
-                                               HorizontalAlignment="Left"
-                                               IsEnabled="False"
-                                               Text="{Binding PromoTicket.PromoStart,
-                                                          Mode=TwoWay,
-                                                          ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
-                                               TextBoxIcon="TimesCircle" />
-
+                                           WatermarkText="Enter Promotional Ticket Description" />
 
                 <TextBlock Grid.Row="2"
                        Grid.Column="0"
-                       Text="Promo End" />
+                       Text="Promo Start" />
 
-                <controls:CustomTextBoxControl Grid.Row="3"
+
+                <DatePicker Grid.Row="3"
                                                TabIndex="1"
                                            Grid.Column="0"
                                            Width="285"
-                                           Text="{Binding PromoTicket.PromoEnd,
+                                           Text="{Binding PromoTicket.PromoStart,
+                                                          StringFormat='dd/MM/yyyy HH:mm',
                                                           Mode=TwoWay,
                                                           ValidatesOnDataErrors=True,
                                                           UpdateSourceTrigger=PropertyChanged}"
-                                           TextBoxIcon="Pencil" />
-
-
-                <TextBlock Grid.Row="2"
-                           Grid.Column="2"
-                           Text="Started" />
-
-                <controls:CustomTextBoxControl Grid.Row="3"
-                                               Grid.Column="2"
-                                               TabIndex="10"
-                                               IsEnabled="False"
-                                               Width="285"
-                                               Text="{Binding Path=PromoTicket.PromoStarted,
-                                                          ValidatesOnDataErrors=True,
-                                                          Mode=TwoWay,
-                                                          UpdateSourceTrigger=PropertyChanged}"
-                                               TextBoxIcon="TimesCircle" />
-
+                                            />
 
                 <TextBlock Grid.Row="4"
-                           Grid.Column="0"
-                           Text="Ended" />
+                           Grid.Column="0" 
+                           Text="Promo End" />
 
-                <controls:CustomTextBoxControl Grid.Row="5"
-                                           Grid.Column="0"
-                                           TabIndex="2"
-                                           Width="285"
-                                           IsEnabled="True"
-                                           Text="{Binding Path=PromoTicket.PromoEnded,
-                                                          ValidatesOnDataErrors=True,
-                                                          Mode=TwoWay,
-                                                          UpdateSourceTrigger=PropertyChanged}"
-                                           TextBoxIcon="Pencil" />
-
-                <TextBlock Grid.Row="4"
-                           Grid.Column="2"
-                           Text="Total Promo Amount Tickets" />
-
-
-
-                <controls:CustomTextBoxControl Grid.Row="5"
-                                               TabIndex="11"
-                                               Grid.Column="2"
-                                               Width="285"
-                                               IsEnabled="False"
-                                               HorizontalAlignment="Left"
-                                               Text="{Binding PromoTicket.TotalPromoAmountTickets,
-                                                          Mode=TwoWay,
-                                                          ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
-                                               TextBoxIcon="Pencil" />
-
-                <TextBlock Text="Total Promo Factor Tickets" 
-                           Grid.Row="6" 
-                           Grid.Column="0"/>
-                <controls:CustomTextBoxControl Grid.Row="7"
+                <DatePicker Grid.Row="5"
                                                Grid.Column="0"
-                                               TabIndex="3"
+                                               TabIndex="2"
                                                Width="285"
-                                               Text="{Binding PromoTicket.TotalPromoFactorTickets,
+                                               HorizontalAlignment="Left"
+                                               Text="{Binding PromoTicket.PromoEnd,
+                                                          StringFormat='dd/MM/yyyy HH:mm',
                                                           Mode=TwoWay,
                                                           ValidatesOnDataErrors=True,
                                                           UpdateSourceTrigger=PropertyChanged}"
-                                               TextBoxIcon="Pencil" />
+                                               />
 
             </Grid>
 

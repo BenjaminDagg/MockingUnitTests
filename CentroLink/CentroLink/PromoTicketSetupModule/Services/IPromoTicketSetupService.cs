@@ -6,9 +6,9 @@ namespace CentroLink.PromoTicketSetupModule.Services
     public interface IPromoTicketSetupService
     {
         bool CheckPermission(string permissionName);
-        List<PromoTicketListModel> GetPromoTicketSetupList();
-        EditPromoTicketValidationModel GetPromoTicketEditModel(int promoScheduleId);
-        void CreatePromoTicket(AddPromoTicketValidationModel promoTicket);
-        void UpdatePromoTicket(AddPromoTicketValidationModel promoTicket);
+        IEnumerable<PromoTicketModel> GetPromoTicketSetupList(int dayLimit);
+        PromoTicketModel GetPromoTicketEditModel(int promoScheduleId);
+        void CreatePromoTicket(PromoTicketModel promoTicket);
+        void UpdatePromoTicket(PromoTicketModel promoTicket);
     }
 }

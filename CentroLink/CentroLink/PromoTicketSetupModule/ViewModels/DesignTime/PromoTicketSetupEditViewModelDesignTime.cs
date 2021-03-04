@@ -14,7 +14,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
         {
             Breadcrumb = new BreadcrumbCollection(new AddPromoTicketBreadcrumbDef().GetBreadcrumb());
 
-            PromoTicket = new AddPromoTicketValidationModel()
+            PromoTicket = new PromoTicketModel()
             {
                 PromoTicketId = 1,
                 Comments = "Ticket 1",

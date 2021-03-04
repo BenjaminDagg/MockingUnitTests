@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CentroLink.PromoTicketSetupModule.Models
 {
-    public class AddPromoTicketValidationModel: PropertyChangedBaseWithValidation
+    public class PromoTicketModel: PropertyChangedBaseWithValidation
     {
         private int _promoTicketId;
         private string _comments;
@@ -108,7 +108,7 @@ namespace CentroLink.PromoTicketSetupModule.Models
             }
         }
 
-        public AddPromoTicketValidationModel()
+        public PromoTicketModel()
         {
             Comments = String.Empty;
             PromoStart = DateTime.Now;

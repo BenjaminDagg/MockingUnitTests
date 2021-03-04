@@ -1,19 +1,19 @@
 ﻿using CentroLink.PromoTicketSetupModule.Models;
 using CentroLink.PromoTicketSetupModule.ServicesData;
+using CentroLink.PromoTicketSetupModule.Translator;
 using Framework.Infrastructure.Identity.Services;
-using System;
 using System.Collections.Generic;
 
 namespace CentroLink.PromoTicketSetupModule.Services
 {
     public class PromoTicketSetupService : IPromoTicketSetupService
     {
-        private readonly IPromoTicketSetupDataService _dataService;
+        private readonly IPromoTicketSetupDataService _promoTicketSetupDataService;
         private readonly IUserSession _userSession;
 
-        public PromoTicketSetupService(IPromoTicketSetupDataService dataService, IUserSession userSession)
+        public PromoTicketSetupService(IPromoTicketSetupDataService promoTicketSetupDataService, IUserSession userSession)
         {
-            _dataService = dataService;
+            _promoTicketSetupDataService = promoTicketSetupDataService;
             _userSession = userSession;
         }
 
@@ -21,25 +21,26 @@ namespace CentroLink.PromoTicketSetupModule.Services
         {
             return _userSession.HasPermission(permissionName);
         }
-        public void CreatePromoTicket(AddPromoTicketValidationModel promoTicket)
+        public void CreatePromoTicket(PromoTicketModel promoTicket)
         {
-            throw new NotImplementedException();
+            _promoTicketSetupDataService.InsertPromoTicketSchedule(PromoTicketSetupTranslator.Translate(promoTicket));
         }
 
-        public EditPromoTicketValidationModel GetPromoTicketEditModel(int promoScheduleId)
+        public PromoTicketModel GetPromoTicketEditModel(int promoScheduleId)
         {
-            throw new NotImplementedException();
+            var promoTicketSchedule = _promoTicketSetupDataService.GetPromoTicketScheduleById(promoScheduleId);
+            return PromoTicketSetupTranslator.Translate(promoTicketSchedule);
         }
 
-        public List<PromoTicketListModel> GetPromoTicketSetupList()
+        public IEnumerable<PromoTicketModel> GetPromoTicketSetupList(int dayLimit)
         {
-            //throw new NotImplementedException();
-            return null;
+            var promoTicketSchedules = _promoTicketSetupDataService.GetPromoTicketSchedules(dayLimit);
+            return PromoTicketSetupTranslator.Translate(promoTicketSchedules);
         }
 
-        public void UpdatePromoTicket(AddPromoTicketValidationModel promoTicket)
+        public void UpdatePromoTicket(PromoTicketModel promoTicket)
         {
-            throw new NotImplementedException();
+            _promoTicketSetupDataService.UpdatePromoTicketSchedule(PromoTicketSetupTranslator.Translate(promoTicket));
         }
     }
 }

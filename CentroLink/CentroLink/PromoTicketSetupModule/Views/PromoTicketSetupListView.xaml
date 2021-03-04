@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:designTime="clr-namespace:CentroLink.PromoTicketSetupModule.ViewModels.DesignTime"
-             xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
+             xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI" 
+             xmlns:viewmodels="clr-namespace:CentroLink.PromoTicketSetupModule.ViewModels"
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=designTime:PromoTicketSetupListDesignTime,
                                               IsDesignTimeCreatable=True}"
@@ -90,6 +91,25 @@
 
             <StackPanel Grid.Row="1" Height="80">
 
+                <StackPanel Margin="0,6,0,6"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <TextBlock Text="Show promotions that have ended in the past "/>
+                    <!--<TextBox Width="50" Text="{Binding DayNumberLimit}"/>-->
+                    <controls:CustomTextBoxControl Grid.Row="1"
+                                               TabIndex="9"
+                                               Grid.Column="2"
+                                               Width="20"
+                                               HorizontalAlignment="Left"
+                                               NumericMode="True"
+                                               Text="{Binding DayNumberLimit,
+                                                          Mode=TwoWay,
+                                                          ValidatesOnDataErrors=True,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text=" calendar days."/>
+                </StackPanel>
+
                 <StackPanel Margin="0,8,0,0"
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
@@ -110,8 +130,6 @@
                             Margin="8,0"
                             Content="Refresh" />
                 </StackPanel>
-
-                <TextBlock Visibility="{Binding Path=HasAccessToAddPromoTicket, Converter={StaticResource BooleanToVisibility}}" Text="Note: You cannot have more than one site with Is Default set to true. Add New PromoTicket may be disabled for this reason." />
 
             </StackPanel>
 

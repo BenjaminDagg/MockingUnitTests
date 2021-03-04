@@ -2,6 +2,7 @@
 using CentroLink.PromoTicketSetupModule.Menu;
 using CentroLink.PromoTicketSetupModule.Models;
 using CentroLink.PromoTicketSetupModule.Services;
+using CentroLink.PromoTicketSetupModule.Settings;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using System.Collections.ObjectModel;
@@ -14,11 +15,21 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
     public class PromoTicketSetupListViewModel : ExtendedScreenBase
     {
         private readonly IPromoTicketSetupService _promoTicketSetupService;
-        private ObservableCollection<PromoTicketListModel> _promoTicketList;
-        private PromoTicketListModel _selectedPromoTicket;
+        private readonly PromoTicketSetupSettings _promoTicketSetupSettings;
+        private ObservableCollection<PromoTicketModel> _promoTicketList;
+        private PromoTicketModel _selectedPromoTicket;
+        private int _dayNumberLimit;
 
-
-        public PromoTicketListModel SelectedPromoTicket
+        public int DayNumberLimit
+        {
+            get => _dayNumberLimit;
+            set
+            {
+                _dayNumberLimit = value;
+                NotifyOfPropertyChange(nameof(DayNumberLimit));
+            }
+        }
+        public PromoTicketModel SelectedPromoTicket
         {
             get => _selectedPromoTicket;
             set
@@ -40,7 +51,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         /// <summary>
         /// Gets or sets the list.
         /// </summary>
-        public ObservableCollection<PromoTicketListModel> PromoTicketList
+        public ObservableCollection<PromoTicketModel> PromoTicketList
         {
             get => _promoTicketList;
             set
@@ -51,11 +62,11 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         }
 
         public PromoTicketSetupListViewModel(IScreenServices screenServices, 
-            IPromoTicketSetupService promoTicketSetupService)
+            IPromoTicketSetupService promoTicketSetupService, PromoTicketSetupSettings promoTicketSetupSettings)
             : base(screenServices)
         {
             _promoTicketSetupService = promoTicketSetupService;
-
+            _promoTicketSetupSettings = promoTicketSetupSettings;
             SetDefaults();
         }
 
@@ -65,6 +76,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         private void SetDefaults()
         {
             DisplayName = "Promo Ticket Setup";
+            DayNumberLimit = _promoTicketSetupSettings.DefaultPromoEntryScheduleDayLimit;
         }
 
         /// <summary>
@@ -84,19 +96,11 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         /// Refreshes the promoTicket setup list. Also called by Refresh button
         /// </summary>
         public virtual void RefreshList()
-        {
-            PromoTicketList = new ObservableCollection<PromoTicketListModel>();
-            SelectedPromoTicket = null;
-            var list = _promoTicketSetupService.GetPromoTicketSetupList();
-
-            PromoTicketList.Clear();
-            if (list != null && list.Count > 0)
-            {
-                foreach (var item in list)
-                {
-                    PromoTicketList.Add(item);
-                }
-            }
+        {            
+            PromoTicketList = new ObservableCollection<PromoTicketModel>(
+                _promoTicketSetupService.GetPromoTicketSetupList(DayNumberLimit)
+                );
+            SelectedPromoTicket = default;
 
             NotifyOfPropertyChange(nameof(HasAccessToAddPromoTicket));
             NotifyOfPropertyChange(nameof(HasAccessToEditPromoTicket));
@@ -120,7 +124,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         {
             if (CanEditSelectedPromoTicket == false) return;
             var breadcrumb = new EditSelectedPromoTicketBreadcrumbDef().GetBreadcrumb();
-            var arg = SelectedPromoTicket.PromoScheduleID;
+            var arg = SelectedPromoTicket.PromoTicketId;
             var source = new PromoTicketSetupMenuItem(Services.Navigation);
             NavigateToScreen(typeof(PromoTicketSetupEditViewModel), source, breadcrumb, navigationArgument:arg);
         }

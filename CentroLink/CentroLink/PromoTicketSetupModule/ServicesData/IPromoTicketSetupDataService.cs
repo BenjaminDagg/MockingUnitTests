@@ -1,18 +1,18 @@
 using CentroLink.PromoTicketSetupModule.DatabaseEntities;
-using System;
 using System.Collections.Generic;
 
 namespace CentroLink.PromoTicketSetupModule.ServicesData
 {
     public interface IPromoTicketSetupDataService
     {
-        List<PromoTicketSchedule> GetPromoTicketSchedules();
+        List<PromoTicketSchedule> GetPromoTicketSchedules(int dayLimit);
 
-        PromoTicketSchedule GetPromoTicketScheduleById(string promoScheduleId);
+        PromoTicketSchedule GetPromoTicketScheduleById(int promoScheduleId);
 
-        PromoTicketSchedule InsertPromoTicketSchedule(int promoScheduleId, string comments, DateTime promoStart, DateTime promoEnd,
-            bool promoStarted, bool promoEnded, int totalPromoAmountTickets, int totalPromoFactorTickets);
+        void InsertPromoTicketSchedule(PromoTicketSchedule promoTicketSchedule);
 
         void UpdatePromoTicketSchedule(PromoTicketSchedule promoTicketSchedule);
+
+        void DeletePromoTicketSchedule(int promoScheduleId);
     }
 }
