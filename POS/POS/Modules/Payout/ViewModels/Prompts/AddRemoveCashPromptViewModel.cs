@@ -11,7 +11,9 @@ using POS.Modules.Main.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
+using Framework.Infrastructure.Data.Configuration;
 
 namespace POS.Modules.Payout.ViewModels.Prompts
 {
@@ -21,21 +23,24 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         private readonly IErrorHandlingService _errorHandlingService;
         private readonly IUserSession _user;
 
-        public AddRemoveCashPromptViewModel(IUserAuthenticationService authenticateUser, IErrorHandlingService errorHandlingService, IUserSession user, ICashLimit settings)
+        public AddRemoveCashPromptViewModel(IUserAuthenticationService authenticateUser, IErrorHandlingService errorHandlingService, IUserSession user, IConfigurationDataService appSettings)
         {
             _authenticateUser = authenticateUser;
             _errorHandlingService = errorHandlingService;
             _user = user;
-            CashLimit = settings.AddCashLimit;
+            CashLimit = Convert.ToDecimal(appSettings.GetAppConfig().Single(x => x.ConfigKey == "AddCashLimit").ConfigValue);
         }
         public void Initialize(TransactionType transType)
         {
             IsAuthenticated = default(bool);
             Alerts = new ObservableCollection<TaskAlert>();
             DisplayName = (transType == TransactionType.R) ? POSResources.RemoveCashTitle : POSResources.AddCashTitle;
+            ButtonBackground= (transType == TransactionType.R) ? "Red" : "Green";
+            ButtonHover = (transType == TransactionType.R) ? "Red" : "Green";
             Options = PromptOptions.OkCancel;
         }
-
+        public string ButtonHover { get; set; }
+        public string ButtonBackground { get; set; }
         private decimal _cashLimit;
         public decimal CashLimit
         {

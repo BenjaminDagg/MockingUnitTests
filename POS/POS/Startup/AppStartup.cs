@@ -78,7 +78,7 @@ namespace POS.Startup
                 SideMenuEnabled = true,
                 WindowTitle = POSResources.WindowTitle,
                 RemoteConnectionAppName = POSResources.RemoteConnectionAppTitle,
-                WindowIconUri = "pack://application:,,,/POS;component/pos.ico",
+                WindowIconUri = "pack://application:,,,/POS;component/dg.ico",
             };
 
             return config;

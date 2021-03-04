@@ -34,7 +34,8 @@
                                     Content="{x:Static resx:POSResources.UIDeviceManagementSetAllOnline}" 
                                     FontSize="18" 
                                     Foreground="{StaticResource DgWhite}"
-                                    Background="{StaticResource DgDefaultButtonBackground}"
+                                    Background="{StaticResource DgGreen}"
+                                    HoverColor="{StaticResource DgHoverGreen}"
                                     IsEnabled="{Binding SelectAllOnLineActionEnabled}"
                                     Width="137" 
                                     Height="54"
@@ -85,11 +86,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow" BasedOn="{StaticResource POSDeviceManagementDataGridRowStyle}" >
                         <Setter Property="Background" Value="{StaticResource DgBackground3}"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
-                                <Setter Property="Background" Value="{StaticResource DgRed}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
+                       
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Resources>
@@ -105,17 +102,39 @@
                                             Height="80"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Center"
-                                            Margin="20, 5, 0, 5"
-                                            Fill="{StaticResource DgWhite}"
-                                          >
+                                            Margin="20, 5, 0, 5">
                                         <Path.Style>
                                             <Style TargetType="Path" >
+                                                <Setter Property="Fill" Value="{StaticResource DgGray}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
-                                                        <Setter Property="Fill" Value="{StaticResource DgWhite}"/>
+                                                        <Setter Property="Fill" Value="{StaticResource DgHoverGreen}"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
                                                         <Setter Property="Fill" Value="{StaticResource DgRed}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                    <Path                                           
+                                          Stretch="Uniform"
+                                          Height="30"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          Margin="95, 55, 0, 5">
+                                        <Path.Style>
+                                            <Style TargetType="Path" >
+                                                <Setter Property="Fill" Value="{StaticResource DgWhite}"/>
+                                                <Setter Property="Data" Value="{StaticResource HighlightOff}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                                                        <Setter Property="Fill" Value="{StaticResource DgWhite}"/>
+                                                        <Setter Property="Data" Value="{StaticResource CheckCircle}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                                        <Setter Property="Fill" Value="{StaticResource DgWhite}"/>
+                                                        <Setter Property="Data" Value="{StaticResource ErrorOutline}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -194,23 +213,25 @@
                                                     cal:Message.Attach="SetOnOffLine"
                                                     FontSize="20" 
                                                     Foreground="{StaticResource DgWhite}"             
-                                                    Width="120" 
-                                                    Height="64" 
+                                                    Width="170" 
+                                                    Height="50" 
                                                     Visibility="{Binding Connected, Converter={StaticResource BooleanToVisibility}}"
                                                     IsEnabled="{Binding ActionEnabled}"
                                 >
                                     <dgmaterial:CustomButtonControlEx.Style>
                                         <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource POSOfflineCustomButtonControlExStyle}">
-                                            <Setter Property="Content" Value="Set Online"/>
+                                            <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagementSetOnline}"/>
                                             <Setter Property="Background" Value="{StaticResource DgDefaultButtonBackground}"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
-                                                    <Setter Property="Content" Value="Set Offline"/>
+                                                    <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagementSetOffline}"/>
                                                     <Setter Property="Background" Value="{StaticResource DgRed}"/>
+                                                    <Setter Property="HoverColor" Value="{StaticResource DgHoverRed}"/>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
-                                                    <Setter Property="Content" Value="Set Online"/>
-                                                    <Setter Property="Background" Value="{StaticResource DgDefaultButtonBackground}"/>
+                                                    <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagementSetOnline}"/>
+                                                    <Setter Property="Background" Value="{StaticResource DgGreen}"/>
+                                                    <Setter Property="HoverColor" Value="{StaticResource DgHoverGreen}"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>

@@ -137,7 +137,7 @@ Are you sure you want to end this session?</value>
     <value>Are You Sure?</value>
   </data>
   <data name="AreYouSureVoidTransactionMsg" xml:space="preserve">
-    <value>Are you sure you want to Void Transaction?  This transaction will be cleared.</value>
+    <value>Are you sure you want to cancel the transaction?  This will remove all vouchers from the transaction.</value>
   </data>
   <data name="BarcodeInvalidMaxCharacterMsg" xml:space="preserve">
     <value>Barcode must be {0} characters.</value>
@@ -245,8 +245,7 @@ Are you sure you want to end this session?</value>
     <value>Payout Station</value>
   </data>
   <data name="PayoutSuccessfulMsg" xml:space="preserve">
-    <value>Payout Transaction Successful.
-Total Amount:  {0:C}</value>
+    <value>Payout of amount {0:C} was Successful  </value>
   </data>
   <data name="PayoutTransactionFailedMsg" xml:space="preserve">
     <value>Payout failure.  Error: {0}</value>

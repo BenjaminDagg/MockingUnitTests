@@ -226,11 +226,11 @@
                         <ToggleButton Background="{StaticResource TransparentBrush}" Focusable="False" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Template="{StaticResource DgSmallComboBoxToggleButtonStyle}"/>
                         <Path Data="{StaticResource POSOffice2013ExportComboBoxIcon}" Fill="{StaticResource WhiteBrush}" HorizontalAlignment="Left" Height="16" Margin="4,0,0,0" Stretch="Fill" VerticalAlignment="Center" Width="16"/>
                         <Popup x:Name="DropDownPopUp" Focusable="False" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" PopupAnimation="Slide">
-                            <Grid MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}" SnapsToDevicePixels="True">
+                            <Grid MinWidth="{TemplateBinding ActualWidth}" MaxHeight="80" SnapsToDevicePixels="True">
                                 <Border BorderThickness="1,1,1,1" BorderBrush="{StaticResource SilverChaliceBrush}">
-                                    <ScrollViewer BorderThickness="0" BorderBrush="{StaticResource SilverChaliceBrush}"  Padding="0">
+                                    
                                         <ItemsPresenter x:Name="ItemsPresenter"  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Width="85"/>
-                                    </ScrollViewer>
+                                    
                                 </Border>
                             </Grid>
                         </Popup>
