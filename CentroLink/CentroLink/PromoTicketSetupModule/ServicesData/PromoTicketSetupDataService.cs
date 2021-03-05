@@ -64,5 +64,16 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
         {
             Db.Delete<PromoTicketSchedule>("WHERE PromoScheduleID = @0", promoScheduleId);
         }
+
+        public void StopItemSchedule(int promoScheduleId)
+        {
+            const string sql = @"UPDATE PROMO_SCHEDULE SET PromoEnd = GETDATE() WHERE PromoScheduleID =@PromoScheduleID";
+            
+            Db.Execute(sql, new
+            {
+                PromoScheduleID = promoScheduleId
+            });
+            
+        }
     }
 }

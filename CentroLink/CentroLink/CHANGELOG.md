@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ## 03/05/2021
 - 51728 - Centrolink - Create View in to load Ticket schedules
 - 51730 - Centrolink - Create View to edit Ticket schedules
+- 51729 Add Promo ticket implemented
+- 51731 Delete Promo Ticket Implemented
+- 50083 Promo Scheduler New Interface 
 
 ### fixes
 - Adjusted copy on buttons from 'PromoTicket' to 'Promo Ticket'

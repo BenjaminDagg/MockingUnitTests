@@ -14,5 +14,7 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
         void UpdatePromoTicketSchedule(PromoTicketSchedule promoTicketSchedule);
 
         void DeletePromoTicketSchedule(int promoScheduleId);
+
+        void StopItemSchedule(int promoScheduleId);
     }
 }

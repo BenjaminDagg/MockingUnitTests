@@ -66,9 +66,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         {
             bool isValid = true;
             Alerts.Clear();
-
             isValid = PromoTicket.Validate();
-
             return isValid;
         }
 
@@ -98,6 +96,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
 
                 if (isValid == false)
                 {
+                    Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = PromoTicket.Message });
                     return;
                 }
 

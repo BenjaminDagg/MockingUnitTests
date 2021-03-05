@@ -56,5 +56,15 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
         {
             throw new NotImplementedException();
         }
+
+        public void DeletePromoTicket(int promoScheduleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopScheduleItem(int promoScheduleId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
