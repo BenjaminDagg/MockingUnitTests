@@ -3,11 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:designTime="clr-namespace:CentroLink.PromoTicketSetupModule.ViewModels.DesignTime"
-             xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI" 
-             xmlns:viewmodels="clr-namespace:CentroLink.PromoTicketSetupModule.ViewModels"
-             cal:Bind.AtDesignTime="True"
+             xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
              d:DataContext="{d:DesignInstance Type=designTime:PromoTicketSetupListDesignTime,
                                               IsDesignTimeCreatable=True}"
              d:DesignHeight="600"
@@ -43,7 +40,7 @@
                           VerticalScrollBarVisibility="Auto">
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Path=PromoScheduleID}"
+                        <DataGridTextColumn Binding="{Binding Path=PromoTicketId}"
                                             Header="ID"
                                             IsReadOnly="True" />
 
@@ -55,20 +52,17 @@
                                             Header="Start Time"
                                             IsReadOnly="True" />
 
-                        <DataGridTextColumn 
-                                            Binding="{Binding Path=PromoEnd}"
+                        <DataGridTextColumn Binding="{Binding Path=PromoEnd}"
                                             Header="End Time"
                                             IsReadOnly="True" />
 
-                        <DataGridTextColumn Binding="{Binding Path=PromoStarted}"
+                        <DataGridCheckBoxColumn Binding="{Binding Path=PromoStarted}"
                                             Header="Started"
-                                            IsReadOnly="True">
-                        </DataGridTextColumn>
+                                            IsReadOnly="True"/>
 
-                        <DataGridTextColumn Binding="{Binding Path=PromoEnded}"
+                        <DataGridCheckBoxColumn Binding="{Binding Path=PromoEnded}"
                                             Header="Ended"
-                                            IsReadOnly="True">
-                        </DataGridTextColumn>
+                                            IsReadOnly="True"/>
 
                     </DataGrid.Columns>
                     <DataGrid.CellStyle>
@@ -91,26 +85,24 @@
 
             <StackPanel Grid.Row="1" Height="80">
 
-                <StackPanel Margin="0,6,0,6"
+                <StackPanel Margin="0,4,0,6"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
-                    <TextBlock Text="Show promotions that have ended in the past "/>
-                    <!--<TextBox Width="50" Text="{Binding DayNumberLimit}"/>-->
-                    <controls:CustomTextBoxControl Grid.Row="1"
-                                               TabIndex="9"
-                                               Grid.Column="2"
-                                               Width="20"
-                                               HorizontalAlignment="Left"
-                                               NumericMode="True"
-                                               Text="{Binding DayNumberLimit,
+                    <TextBlock Margin="0, 4, 0, 0" Text="Show promotions that have ended in the past "/>
+
+                    <controls:NumericUpDownControl 
+                                      Value="{Binding DayNumberLimit,
                                                           Mode=TwoWay,
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Text=" calendar days."/>
+                                                          UpdateSourceTrigger=PropertyChanged}"
+                                      MaxValue="1000"
+                                      MinValue="0" />
+
+                    <TextBlock Margin="0, 4, 0, 0" Text=" calendar days."/>
                 </StackPanel>
 
-                <StackPanel Margin="0,8,0,0"
+                <StackPanel Margin="0,2,0,0"
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
