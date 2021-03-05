@@ -25,3 +25,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Adjusted/formatted Changelog with dates of changes
 - Added external controls for datepicker to exteact time
 
+### Update
+- Updated Promo Ticket View formatting
+

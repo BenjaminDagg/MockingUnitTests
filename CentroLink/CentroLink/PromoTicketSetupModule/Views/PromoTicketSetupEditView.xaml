@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:designTime="clr-namespace:CentroLink.PromoTicketSetupModule.ViewModels.DesignTime"
              xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
@@ -72,32 +73,34 @@
                        Text="Promo Start" />
 
 
-                <DatePicker Grid.Row="3"
-                                               TabIndex="1"
-                                           Grid.Column="0"
-                                           Width="285"
-                                           Text="{Binding PromoTicket.PromoStart,
-                                                          StringFormat='dd/MM/yyyy HH:mm',
-                                                          Mode=TwoWay,
-                                                          ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
-                                            />
+                <xctk:DateTimePicker Format="Custom"
+                                     x:Name="PromoStart"
+                                     Grid.Row="3"
+                                     Grid.Column="0"
+                                     FormatString="MM/dd/yyyy hh:mm"
+                                     TimeFormat="Custom"
+                                     TimeFormatString="hh:mm"
+                                     VerticalAlignment="Top" 
+                                     Watermark="Promotion Start Date"
+                                     Value="{Binding Path=PromoTicket.PromoStart, Mode=TwoWay, ValidatesOnDataErrors=True,
+                                                          UpdateSourceTrigger=PropertyChanged}"  Width="285" />
 
                 <TextBlock Grid.Row="4"
                            Grid.Column="0" 
                            Text="Promo End" />
 
-                <DatePicker Grid.Row="5"
-                                               Grid.Column="0"
-                                               TabIndex="2"
-                                               Width="285"
-                                               HorizontalAlignment="Left"
-                                               Text="{Binding PromoTicket.PromoEnd,
-                                                          StringFormat='dd/MM/yyyy HH:mm',
-                                                          Mode=TwoWay,
-                                                          ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
-                                               />
+
+                <xctk:DateTimePicker Format="Custom"
+                                     x:Name="PromoEnd"
+                                     Grid.Row="5"
+                                     Grid.Column="0"
+                                     FormatString="MM/dd/yyyy hh:mm"
+                                     TimeFormat="Custom"
+                                     TimeFormatString="hh:mm"
+                                     Watermark="Promotion End Date"
+                                     VerticalAlignment="Top" 
+                                     Value="{Binding Path=PromoTicket.PromoEnd, Mode=TwoWay, ValidatesOnDataErrors=True,
+                                                          UpdateSourceTrigger=PropertyChanged}"  Width="285" />
 
             </Grid>
 
