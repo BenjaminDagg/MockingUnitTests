@@ -23,4 +23,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### fixes
 - Adjusted copy on buttons from 'PromoTicket' to 'Promo Ticket'
 - Adjusted/formatted Changelog with dates of changes
+- Added external controls for datepicker to exteact time
 

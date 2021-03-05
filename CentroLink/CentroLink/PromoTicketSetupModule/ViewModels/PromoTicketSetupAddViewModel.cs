@@ -96,7 +96,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
 
                 if (isValid == false)
                 {
-                    Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = PromoTicket.Message });
+                    Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = PromoTicket.ValidationMessage });
                     return;
                 }
 

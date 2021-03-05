@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.6.5" />
   </ItemGroup>
 
