@@ -55,9 +55,9 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
             Db.Execute(sql, new
             {
                 PromoScheduleID = promoTicketSchedule.PromoScheduleID,
-                ScheduleComments = promoTicketSchedule.Comments,
-                PromoStartTime = promoTicketSchedule.PromoStart,
-                PromoEndTime = promoTicketSchedule.PromoEnd
+                Comments = promoTicketSchedule.Comments,
+                PromoSTart = promoTicketSchedule.PromoStart,
+                PromoEnd = promoTicketSchedule.PromoEnd
             });
         }
         public void DeletePromoTicketSchedule(int promoScheduleId)
