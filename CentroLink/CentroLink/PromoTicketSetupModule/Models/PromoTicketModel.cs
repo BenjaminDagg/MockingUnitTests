@@ -108,6 +108,7 @@ namespace CentroLink.PromoTicketSetupModule.Models
             }
         }
 
+        public string Message { get; set; }
         public PromoTicketModel()
         {
             Comments = String.Empty;
@@ -117,6 +118,35 @@ namespace CentroLink.PromoTicketSetupModule.Models
             PromoEnded = false;
             TotalPromoAmountTickets = 0;
             TotalPromoFactorTickets = 0;
+            Message = "";
+        }
+
+        public override bool Validate()
+        {
+            
+            var currentDate = DateTime.Now;
+            if (PromoStart < currentDate)
+            {
+                Message = "Starting Date and Time may not be in the past";
+                return false;
+            }
+            else if (PromoStart > PromoEnd)
+            {
+                Message = "Starting Date and Time must be before the Ending Date and Time.";
+                return false;
+            }
+            else if (PromoEnd.Subtract(PromoStart).TotalDays > 365)
+            {
+                Message = "The Ending Date and Time may not be more than 1 year from the starting Date and Time.";
+                return false;
+            }
+            else if (PromoEnd.Subtract(PromoStart).TotalMinutes < 60)
+            {
+                Message = "The total promotion time may not be for a period of less than 1 hour.";
+                return false;
+            }
+            
+            return base.Validate();
         }
     }
 }

@@ -42,5 +42,15 @@ namespace CentroLink.PromoTicketSetupModule.Services
         {
             _promoTicketSetupDataService.UpdatePromoTicketSchedule(PromoTicketSetupTranslator.Translate(promoTicket));
         }
+
+        public void DeletePromoTicket(int promoScheduleId)
+        {
+            _promoTicketSetupDataService.DeletePromoTicketSchedule(promoScheduleId);
+        }
+
+        public void StopScheduleItem(int promoScheduleId)
+        {
+            _promoTicketSetupDataService.StopItemSchedule(promoScheduleId);
+        }
     }
 }
