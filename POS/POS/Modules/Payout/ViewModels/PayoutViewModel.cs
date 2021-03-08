@@ -125,7 +125,7 @@ namespace POS.Modules.Payout.ViewModels
 
         public async void RemoveTransactionItem(VoucherItem voucher)
         {
-            if (await ConfirmAreYouSureRemoveTransaction() == PromptOptions.Yes)
+            if (await ConfirmAreYouSureRemoveTransaction(voucher) == PromptOptions.Yes)
             {
                 TransactionViewModel.RemoveTransactionItem(voucher);
             }

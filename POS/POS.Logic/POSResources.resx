@@ -131,7 +131,7 @@ Are you sure you want to end this session?</value>
     <value>Leaving this screen will end your current session.  Are you sure you want to end this session?</value>
   </data>
   <data name="AreYouSureRemoveTransactionItemMsg" xml:space="preserve">
-    <value>Are you sure you want to remove this item from the transaction?</value>
+    <value>Are you sure you want to remove voucher {0}, with amount {1} from the transaction?</value>
   </data>
   <data name="AreYouSureTitle" xml:space="preserve">
     <value>Are You Sure?</value>

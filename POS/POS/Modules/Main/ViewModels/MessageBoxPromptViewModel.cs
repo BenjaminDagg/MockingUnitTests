@@ -1,6 +1,4 @@
 ﻿using Framework.Infrastructure.Validation;
-using Framework.WPF.Modules.Shell.ViewModels;
-using Framework.WPF.ScreenManagement.Prompt;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +7,7 @@ using System.Linq;
 
 namespace POS.Modules.Main.ViewModels
 {
-    public class MessageBoxPromptViewModel : PromptBoxViewModel, IDataErrorInfo
+    public class MessageBoxPromptViewModel : Framework.WPF.Modules.Shell.ViewModels.PromptBoxViewModel, IDataErrorInfo
     {
         protected EntityValidationResult ValidationResult;
 

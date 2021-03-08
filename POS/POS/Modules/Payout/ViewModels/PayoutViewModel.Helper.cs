@@ -220,11 +220,11 @@ namespace POS.Modules.Payout.ViewModels
 
             await Task.CompletedTask;
         }
-        private async Task<PromptOptions> ConfirmAreYouSureRemoveTransaction()
+        private async Task<PromptOptions> ConfirmAreYouSureRemoveTransaction(VoucherItem voucher = default)
         {
             return await _messageBoxService.PromptAsync
                 (
-                    POSResources.AreYouSureRemoveTransactionItemMsg,
+                    String.Format(POSResources.AreYouSureRemoveTransactionItemMsg, voucher.Barcode.Value, voucher.Amount),
                     POSResources.AreYouSureTitle,
                     PromptOptions.YesNo,
                     PromptTypes.Question

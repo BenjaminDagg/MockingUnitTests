@@ -98,7 +98,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to remove this item from the transaction?.
+        ///   Looks up a localized string similar to Are you sure you want to remove voucher {0}, with amount {1} from the transaction?.
         /// </summary>
         public static string AreYouSureRemoveTransactionItemMsg {
             get {

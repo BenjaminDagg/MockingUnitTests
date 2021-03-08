@@ -99,5 +99,9 @@ Implement new POS Theme
 - 51726 Prompt message changed
 
 ##03/03/2021
-- 51840 Layout of cash drawer history changed
+- 51840 Layout of cash drawer history changed 
 - 51841 Icon Added to Device Management for readability 
+
+##03/08/2021
+- Updated Cancel Voucher - Added barcode and amount to message dialog
+- fixed PromptView for MessageboxService
