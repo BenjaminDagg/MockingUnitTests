@@ -82,7 +82,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         /// </summary>
         private void SetDefaults()
         {
-            DisplayName = "Promo Ticket Setup";
+            DisplayName = "Promotional Entry Tickets Schedule";
             DayNumberLimit = _promoTicketSetupSettings.DefaultPromoEntryScheduleDayLimit;
         }
 
@@ -143,7 +143,6 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         public async void Delete()
         {
             if (CanDeleteSelectedPromoTicket == false) return;
-            var arg = SelectedPromoTicket.PromoTicketId;
             try
             {
                 if (SelectedPromoTicket.PromoEnd < DateTime.Now)
@@ -158,19 +157,19 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                         PromptOptions.YesNo, PromptTypes.Question);
                     if (validatePromo == PromptOptions.Yes)
                     {
-                        _promoTicketSetupService.StopScheduleItem(arg);
-                        await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketModified, $"Promo Schedule Stopped Prematurely", null);
+                        _promoTicketSetupService.StopScheduleItem(SelectedPromoTicket.PromoTicketId);
+                        await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketModified, "Promo Schedule Stopped Prematurely", null);
                         RefreshList();
                     }
                 }
                 else
                 {
-                    var result = await PromptUserAsync("Are you sure that you want to delete PromoScheduleID" + arg + ".", "Confirm Action",
+                    var result = await PromptUserAsync($"Are you sure that you want to delete Promo Schedule Id: {SelectedPromoTicket.PromoTicketId} ({SelectedPromoTicket.Comments})?", "Confirm Action",
                         PromptOptions.YesNo, PromptTypes.Question);
                     if (result == PromptOptions.Yes)
                     {
-                        _promoTicketSetupService.DeletePromoTicket(arg);
-                        await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeleted, $"Promo Schedule Deleted", null);
+                        _promoTicketSetupService.DeletePromoTicket(SelectedPromoTicket.PromoTicketId);
+                        await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeleted, "Promo Schedule Deleted", null);
                         RefreshList();
                     }
                 }
@@ -178,7 +177,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
             catch (Exception ex)
             {
                 Alerts.Clear();
-                var message = "An error occurred while deleting promoTicket setup to database.";
+                var message = "An error occurred while deleting Promo Schedule.";
                 Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = message });
                 await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeletedFailed, message + " " + ex.Message, ex);
                 await HandleErrorAsync(message + Environment.NewLine + ex.Message, ex);

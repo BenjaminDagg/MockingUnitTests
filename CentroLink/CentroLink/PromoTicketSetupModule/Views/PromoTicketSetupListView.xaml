@@ -122,7 +122,7 @@
                             Visibility="{Binding Path=HasAccessToDeletePromoTicket, Converter={StaticResource BooleanToVisibility}}"
                             IsEnabled="{Binding Path=CanDeleteSelectedPromoTicket}"
                             Margin="8,0"
-                            Content="Delete Selected PromoTicket" />
+                            Content="Delete Selected Promo Ticket" />
 
                     <Button x:Name="RefreshList"
                             Margin="8,0"

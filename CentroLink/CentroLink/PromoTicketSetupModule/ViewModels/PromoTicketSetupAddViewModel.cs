@@ -40,7 +40,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         /// </summary>
         public void SetDefaults()
         {
-            DisplayName = "Add New PromoTicket";            
+            DisplayName = "Add New Promotional Entry Ticket Schedule";            
         }
 
         protected override void OnViewLoaded(object view)
@@ -72,7 +72,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
 
         public virtual async void BackToPromoTicketSetup()
         {
-            var message = "Are you sure you want to go back to PromoTicket Setup List?"
+            var message = "Are you sure you want to go back to Promotional Entry Ticket Schedule Setup List?"
                           + Environment.NewLine + "Unsaved changes will be lost.";
 
             var result = await PromptUserAsync(message, "Confirm Action",
@@ -103,15 +103,15 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                 _promoTicketSetupService.CreatePromoTicket(PromoTicket);
 
                 Alerts.Clear();
-                Alerts.Add(new TaskAlert { AlertType = AlertType.Success, Message = "Successfully saved promoTicket." });
-                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketAdded, $"Successfully added promoTicket with PromoTicket Id {PromoTicket.PromoTicketId}", null);
-                await PromptUserAsync("Successfully saved promoTicket.", "Success", PromptOptions.Ok, PromptTypes.Success);
+                Alerts.Add(new TaskAlert { AlertType = AlertType.Success, Message = "Successfully saved Promotional Entry Ticket Schedule." });
+                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketAdded, $"Successfully added Promotional Entry Ticket Schedule with PromoTicket Id {PromoTicket.PromoTicketId}", null);
+                await PromptUserAsync("Successfully saved Promotional Entry Ticket Schedule.", "Success", PromptOptions.Ok, PromptTypes.Success);
                 Back();
             }
             catch (Exception ex)
             {
                 Alerts.Clear();
-                var message = "An error occurred while saving promoTicket setup to database.";
+                var message = "An error occurred while saving Promotional Entry Ticket Schedule setup to database.";
                 Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = message });
                 await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketAddedFailed, message + " " + ex.Message, ex);
                 await HandleErrorAsync(message + Environment.NewLine + ex.Message, ex);

@@ -28,3 +28,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### Update
 - Updated Promo Ticket View formatting
 
+### update
+- formatting/cosmetic changes to Promo Ticket Module

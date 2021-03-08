@@ -67,13 +67,12 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
 
         public void StopItemSchedule(int promoScheduleId)
         {
-            const string sql = @"UPDATE PROMO_SCHEDULE SET PromoEnd = GETDATE() WHERE PromoScheduleID =@PromoScheduleID";
+            const string sql = @"UPDATE PROMO_SCHEDULE SET PromoEnd = GETDATE() WHERE PromoScheduleID = @PromoScheduleID";
             
             Db.Execute(sql, new
             {
                 PromoScheduleID = promoScheduleId
-            });
-            
+            });            
         }
     }
 }
