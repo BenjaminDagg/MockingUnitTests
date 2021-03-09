@@ -40,12 +40,8 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             IsAuthenticated = default;
             Alerts = new ObservableCollection<TaskAlert>();
             DisplayName = (transType == TransactionType.R) ? POSResources.RemoveCashTitle : POSResources.AddCashTitle;
-            ButtonBackground= (transType == TransactionType.R) ? "Red" : "Green";
-            ButtonHover = (transType == TransactionType.R) ? "Red" : "Green";
             Options = PromptOptions.OkCancel;
         }
-        public string ButtonHover { get; set; }
-        public string ButtonBackground { get; set; }
         private decimal _cashLimit;
         public decimal CashLimit
         {

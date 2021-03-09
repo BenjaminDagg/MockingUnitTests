@@ -108,3 +108,4 @@ Implement new POS Theme
 
 ##03/09/2021
 - Updated Config Settings to utilize 'DataConfigItem' to load and use settings from the database
+- 51143 utilized MVVM patterns to set/trigger the color changes in the view. 

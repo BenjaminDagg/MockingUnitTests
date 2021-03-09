@@ -63,14 +63,28 @@
             <dgmaterial:CustomButtonControlEx x:Name="Ok"
                                               FontSize="16" 
                                               Foreground="{StaticResource DgWhite}"
-                                              Background="{Binding ButtonBackground}"
-                                              HoverColor="{Binding ButtonHover}"
                                               Width="137" 
                                               Height="34"
                                               Margin="10, 0"
                                               Content="{Binding Path=DisplayName}"
                                               Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}"
-                                              />
+                                              >
+                <dgmaterial:CustomButtonControlEx.Style>
+                    <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource POSOfflineCustomButtonControlExStyle}">
+                        <Setter Property="Background" Value="{StaticResource DgDefaultButtonBackground}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Value="Remove Cash">
+                                <Setter Property="Background" Value="{StaticResource DgRed}"/>
+                                <Setter Property="HoverColor" Value="{StaticResource DgHoverRed}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Value="Add Cash">
+                                <Setter Property="Background" Value="{StaticResource DgGreen}"/>
+                                <Setter Property="HoverColor" Value="{StaticResource DgHoverGreen}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </dgmaterial:CustomButtonControlEx.Style>
+            </dgmaterial:CustomButtonControlEx>
             <dgmaterial:CustomButtonControlEx x:Name="Cancel"
                                               FontSize="16" 
                                               Foreground="{StaticResource DgWhite}"
