@@ -5,34 +5,39 @@ using Framework.WPF.ErrorHandling;
 using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Core;
-using POS.Core.Config;
 using POS.Core.Transaction;
 using POS.Modules.Main.ViewModels;
+using POS.Modules.Payout.Settings;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
-using Framework.Infrastructure.Data.Configuration;
 
 namespace POS.Modules.Payout.ViewModels.Prompts
 {
     public class AddRemoveCashPromptViewModel : MessageBoxPromptViewModel
     {      
-        private readonly IUserAuthenticationService _authenticateUser;
+        private readonly IUserAuthenticationService _userAuthenticateService;
         private readonly IErrorHandlingService _errorHandlingService;
-        private readonly IUserSession _user;
+        private readonly IUserSession _userSession;
+        private readonly CashdrawerConfigSettings _cashdrawerConfigSettings;
 
-        public AddRemoveCashPromptViewModel(IUserAuthenticationService authenticateUser, IErrorHandlingService errorHandlingService, IUserSession user, IConfigurationDataService appSettings)
+        public AddRemoveCashPromptViewModel(
+            IUserAuthenticationService userAuthenticateService, 
+            IErrorHandlingService errorHandlingService, 
+            IUserSession userSession, 
+            CashdrawerConfigSettings cashdrawerConfigSettings)
         {
-            _authenticateUser = authenticateUser;
+            _userAuthenticateService = userAuthenticateService;
             _errorHandlingService = errorHandlingService;
-            _user = user;
-            CashLimit = Convert.ToDecimal(appSettings.GetAppConfig().Single(x => x.ConfigKey == "AddCashLimit").ConfigValue);
+            _userSession = userSession;
+            _cashdrawerConfigSettings = cashdrawerConfigSettings;
+
+            CashLimit = _cashdrawerConfigSettings.AddCashLimit;
         }
         public void Initialize(TransactionType transType)
         {
-            IsAuthenticated = default(bool);
+            IsAuthenticated = default;
             Alerts = new ObservableCollection<TaskAlert>();
             DisplayName = (transType == TransactionType.R) ? POSResources.RemoveCashTitle : POSResources.AddCashTitle;
             ButtonBackground= (transType == TransactionType.R) ? "Red" : "Green";
@@ -88,7 +93,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                         return;
                     }
 
-                    var loginResult = await _authenticateUser.LoginAsync(_user.User.UserName, Password);
+                    var loginResult = await _userAuthenticateService.LoginAsync(_userSession.User.UserName, Password);
 
                     var errorMessage = GetLoginErrorMessage(loginResult);
 

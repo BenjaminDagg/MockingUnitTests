@@ -7,6 +7,7 @@ using Framework.WPF.ErrorHandling;
 using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Common;
+using POS.Common.Events;
 using POS.Core;
 using POS.Core.Interfaces;
 using POS.Core.Interfaces.Data;
@@ -16,12 +17,12 @@ using POS.Core.Session;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
-using POS.Common.Events;
+using POS.Modules.Payout.Settings;
+using POS.Modules.Payout.ViewModels.Prompts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using POS.Modules.Payout.ViewModels.Prompts;
 
 namespace POS.Modules.Payout.ViewModels
 {
@@ -36,6 +37,7 @@ namespace POS.Modules.Payout.ViewModels
         private readonly ILastReceiptService _lastReceiptService;
         private readonly IPrintService _printService;
         private readonly IVoucherRepository _voucherRepository;
+        private readonly SupervisorConfigSettings _supervisorConfigSettings;
         private readonly SystemContext _systemContext;
         private readonly Session _session;
         private readonly Transaction _transaction;

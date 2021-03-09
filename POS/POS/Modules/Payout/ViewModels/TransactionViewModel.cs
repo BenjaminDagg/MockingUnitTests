@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Framework.Core.Logging;
 using Framework.Core.Modularity.Framework.Core.Modularity;
+using Framework.Infrastructure.Data.Configuration;
 using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.ErrorHandling;
 using Framework.WPF.ScreenManagement.Prompt;
@@ -13,14 +14,10 @@ using POS.Core.Session;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
+using POS.Modules.Payout.Settings;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
-using POS.Core.Config;
-using System.Windows;
-using Framework.Infrastructure.Data.Configuration;
-using Framework.WPF.Modules.RemoteConnection.DataServices;
 
 namespace POS.Modules.Payout.ViewModels
 {
@@ -47,12 +44,14 @@ namespace POS.Modules.Payout.ViewModels
             ILogEventDataService logEventDataService,
             IPrintService printService,
             ILastReceiptService lastReceiptService,
-            IConfigurationDataService appSettings)
+            IConfigurationDataService appSettings,
+            SupervisorConfigSettings supervisorConfigSettings)
         {
             _messageBoxService = messageBoxService;
             _session = session;
             _logEventDataService = logEventDataService;
             _lastReceiptService = lastReceiptService;
+            _supervisorConfigSettings = supervisorConfigSettings;
             _printService = printService;
             _errorHandlingService = errorHandlingService;
             _voucherRepository = voucherRepository;
@@ -60,11 +59,13 @@ namespace POS.Modules.Payout.ViewModels
             _serviceLocator = serviceLocator;
             _systemContext = systemContext;
             _eventAggregator = eventAggregator;
-            NeedsApproval = Convert.ToBoolean(appSettings.GetAppConfig().Single(x => x.ConfigKey == "IsSupervisorApprovalActive").ConfigValue);
+
+            NeedsApproval = _supervisorConfigSettings.IsSupervisorApprovalActive;
             _transaction = new Transaction();
         }
 
         private bool _needApproval;
+
         public bool NeedsApproval
         {
             get => _needApproval; set

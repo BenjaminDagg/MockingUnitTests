@@ -105,3 +105,6 @@ Implement new POS Theme
 ##03/08/2021
 - Updated Cancel Voucher - Added barcode and amount to message dialog
 - fixed PromptView for MessageboxService
+
+##03/09/2021
+- Updated Config Settings to utilize 'DataConfigItem' to load and use settings from the database
