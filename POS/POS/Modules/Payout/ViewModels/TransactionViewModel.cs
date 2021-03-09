@@ -44,7 +44,6 @@ namespace POS.Modules.Payout.ViewModels
             ILogEventDataService logEventDataService,
             IPrintService printService,
             ILastReceiptService lastReceiptService,
-            IConfigurationDataService appSettings,
             SupervisorConfigSettings supervisorConfigSettings)
         {
             _messageBoxService = messageBoxService;
