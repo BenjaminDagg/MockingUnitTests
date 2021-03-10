@@ -14,6 +14,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- checkout: git://AppDev_CommonLite
+- checkout: self
+
 - task: PowerShell@2
   displayName: 'Build and Publish Database $(RetailDatabaseId)'
   inputs:
