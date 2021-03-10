@@ -36,7 +36,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UIReportHeaderReportName}" Binding="{Binding Name}"  Width="*"
                                     FontSize="20"   />
-                <DataGridTextColumn Header="{x:Static resx:POSResources.UIReportHeaderLastRun}" Binding="{Binding LastRun}" Width="200"
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UIReportHeaderLastRun}" Binding="{Binding LastRun}" Width="240"
                                     FontSize="20">
                     <DataGridTextColumn.ElementStyle>
                         <Style>

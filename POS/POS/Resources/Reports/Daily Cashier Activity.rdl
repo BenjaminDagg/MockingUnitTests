@@ -1381,13 +1381,17 @@
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
-  <DataSources>
-    <DataSource Name="LotteryRetail">
-      <DataSourceReference>LotteryRetail</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>16779642-86a0-4378-8276-860c76e7bd7d</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
+	<DataSources>
+		<DataSource Name="LotteryRetail">
+			<ConnectionProperties>
+				<DataProvider>SQL</DataProvider>
+				<ConnectString>;</ConnectString>
+				<IntegratedSecurity>true</IntegratedSecurity>
+			</ConnectionProperties>
+			<rd:SecurityType>Integrated</rd:SecurityType>
+			<rd:DataSourceID>16779642-86a0-4378-8276-860c76e7bd7d</rd:DataSourceID>
+		</DataSource>
+	</DataSources>
   <DataSets>
     <DataSet Name="DailyCashierActivity">
       <Query>
