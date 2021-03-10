@@ -14,20 +14,43 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: PowerShell@2
+  displayName: 'Build and Publish Database $(RetailDatabaseId)'
   inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
+    targetType: 'inline'
+    script: |
+      #Importing the SQL Change libraries         
+        
+        Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
+         
+         $dbScripts = "$(RetailDbSourcePath)"
+         
+         Write-Host "Building and validating the database"
+         $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts 
+         
+         Write-Host "Packaging the database scripts"                                     
+         $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
+         
+         Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
+         Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip
+                
+- task: PowerShell@2
+  displayName: 'Build and Publish Database $(CentralDatabaseId)'
   inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-  condition: false
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    targetType: 'inline'
+    script: |
+      #Importing the SQL Change libraries         
+        
+        Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
+         
+         $dbScripts = "$(CentralDbSourcePath)"
+         
+         Write-Host "Building and validating the database"
+         $validatedDb = Invoke-DatabaseBuild -FilterPath $(CentralFilterPath) -InputObject $dbScripts 
+         
+         Write-Host "Packaging the database scripts"
+         $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(CentralDatabaseId) -PackageVersion $(DatabasePackageVersion)
+         
+         Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
+         Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip 
+        
