@@ -154,9 +154,9 @@ namespace POS.Core {
         /// <summary>
         ///   Looks up a localized string similar to Please enter amount less than {0:C}.
         /// </summary>
-        public static string CashDrawerAmountLimitmessage {
+        public static string CashDrawerAmountLimitMessage {
             get {
-                return ResourceManager.GetString("CashDrawerAmountLimitmessage", resourceCulture);
+                return ResourceManager.GetString("CashDrawerAmountLimitMessage", resourceCulture);
             }
         }
         

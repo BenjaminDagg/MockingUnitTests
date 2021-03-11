@@ -85,7 +85,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                     }
                     if(Amount.GetValueOrDefault()>CashLimit)
                     {
-                        Alerts.Add(new TaskAlert(AlertType.Error, String.Format(POSResources.CashDrawerAmountLimitmessage,CashLimit)));
+                        Alerts.Add(new TaskAlert(AlertType.Error, String.Format(POSResources.CashDrawerAmountLimitMessage,CashLimit)));
                         return;
                     }
 

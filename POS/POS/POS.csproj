@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿	<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<UseWPF>true</UseWPF>
@@ -27,7 +27,6 @@
 		<None Remove="Resources\Cashier_Balance.rdl" />
 		<None Remove="Resources\Reports\Cash Bank Activity.rdl" />
 		<None Remove="Resources\Reports\Cashier Balance.rdl" />
-		<None Remove="Resources\Reports\Daily Cashier Activity.rdl" />
 		<None Remove="Resources\Reports\Drop by Date Range Report.rdl" />
 		<None Remove="Resources\Reports\Promo_Entry_Schedule_Report.rdl" />
 		<None Remove="Resources\Reports\Revenue By Machine.rdl" />
@@ -50,9 +49,6 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Reports\Cash Bank Activity.rdl">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Resources\Reports\Daily Cashier Activity.rdl">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Reports\Drop by Date Range Report.rdl" />
@@ -112,6 +108,12 @@
 
 	<ItemGroup>
 	  <Resource Include="dg.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Resources\Reports\Daily Cashier Activity.rdl">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

@@ -148,7 +148,7 @@ Are you sure you want to end this session?</value>
   <data name="BarcodeRequiredMsg" xml:space="preserve">
     <value>Barcode is required.</value>
   </data>
-  <data name="CashDrawerAmountLimitmessage" xml:space="preserve">
+  <data name="CashDrawerAmountLimitMessage" xml:space="preserve">
     <value>Please enter amount less than {0:C}</value>
   </data>
   <data name="CashDrawerCannotRemoveGreaterThanBalanceMsg" xml:space="preserve">

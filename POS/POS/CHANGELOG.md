@@ -115,3 +115,9 @@ Implement new POS Theme
 ###fixed
 - Update report views to adjust the run date cut off in the datagrid view
 - Update report properties and datasource
+
+###updated
+- Removed 'Daily Cashier Activity' from the application execution folder
+
+##03/11/2021
+- updated 'CashDrawerAmountLimitmessage' to PascalCase 'CashDrawerAmountLimitMessage'
