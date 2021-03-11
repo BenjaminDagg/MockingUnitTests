@@ -13,8 +13,10 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
 
         void UpdatePromoTicketSchedule(PromoTicketSchedule promoTicketSchedule);
 
-        void DeletePromoTicketSchedule(int promoScheduleId);
+        bool DeletePromoTicketSchedule(int promoScheduleId);
 
-        void StopItemSchedule(int promoScheduleId);
+        bool StopItemSchedule(int promoScheduleId);
+
+        int GetAccountingOffset();
     }
 }

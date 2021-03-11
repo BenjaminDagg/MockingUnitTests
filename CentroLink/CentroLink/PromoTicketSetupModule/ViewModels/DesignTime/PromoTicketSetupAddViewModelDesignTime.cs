@@ -1,9 +1,7 @@
 ﻿using CentroLink.PromoTicketSetupModule.Breadcrumbs;
 using CentroLink.PromoTicketSetupModule.Models;
-using CentroLink.PromoTicketSetupModule.Services;
 using Framework.WPF.ScreenManagement.Breadcrumb;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
@@ -27,44 +25,6 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
                 TotalPromoAmountTickets = 1,
                 TotalPromoFactorTickets = 0
             };
-        }
-    }
-
-    public class MockPromoTicketService : IPromoTicketSetupService
-    {
-        public bool CheckPermission(string permissionName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreatePromoTicket(PromoTicketModel promoTicket)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PromoTicketModel GetPromoTicketEditModel(int promoScheduleId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<PromoTicketModel> GetPromoTicketSetupList(int dayLimit)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdatePromoTicket(PromoTicketModel promoTicket)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeletePromoTicket(int promoScheduleId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StopScheduleItem(int promoScheduleId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

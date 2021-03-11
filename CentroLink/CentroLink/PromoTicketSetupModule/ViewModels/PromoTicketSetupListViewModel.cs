@@ -145,32 +145,41 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
             if (CanDeleteSelectedPromoTicket == false) return;
             try
             {
-                if (SelectedPromoTicket.PromoEnd < DateTime.Now)
+                if (SelectedPromoTicket != null)
                 {
-                    await PromptUserAsync("Finished schedules cannot be deleted.", "Message",
-                        PromptOptions.Ok, PromptTypes.Info);
-                    return;
-                }
-                else if (SelectedPromoTicket.PromoStart < DateTime.Now)
-                {
-                    var validatePromo = await PromptUserAsync("Active schedules cannot be deleted. Schedule can be modified to disable promotion as soon as possible. Would you like to stop the current promotion", "Please Confirm",
-                        PromptOptions.YesNo, PromptTypes.Question);
-                    if (validatePromo == PromptOptions.Yes)
+                    if (SelectedPromoTicket.PromoEnd <= DateTime.Now)
                     {
-                        _promoTicketSetupService.StopScheduleItem(SelectedPromoTicket.PromoTicketId);
-                        await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketModified, "Promo Schedule Stopped Prematurely", null);
-                        RefreshList();
+                        await PromptUserAsync("Finished schedules cannot be deleted.", "Message",
+                            PromptOptions.Ok, PromptTypes.Info);
+                        return;
                     }
-                }
-                else
-                {
-                    var result = await PromptUserAsync($"Are you sure that you want to delete Promo Schedule Id: {SelectedPromoTicket.PromoTicketId} ({SelectedPromoTicket.Comments})?", "Confirm Action",
-                        PromptOptions.YesNo, PromptTypes.Question);
-                    if (result == PromptOptions.Yes)
+                    else if (SelectedPromoTicket.PromoStart <= DateTime.Now)
                     {
-                        _promoTicketSetupService.DeletePromoTicket(SelectedPromoTicket.PromoTicketId);
-                        await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeleted, "Promo Schedule Deleted", null);
-                        RefreshList();
+                        var validatePromo = await PromptUserAsync("Active schedules cannot be deleted. Schedule can be modified to disable promotion as soon as possible. Would you like to stop the current promotion?", "Please Confirm",
+                            PromptOptions.YesNo, PromptTypes.Question);
+                        if (validatePromo == PromptOptions.Yes)
+                        {
+                            if (_promoTicketSetupService.StopScheduleItem(SelectedPromoTicket.PromoTicketId))
+                            {
+                                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketModified, 
+                                    $"Promo Schedule Stopped Prematurely with StartDate: {SelectedPromoTicket.PromoStart}, EndDate: {SelectedPromoTicket.PromoEnded}, Description: {SelectedPromoTicket.Comments}");
+                                RefreshList();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var result = await PromptUserAsync($"Are you sure that you want to delete Promo Schedule Id: {SelectedPromoTicket.PromoTicketId} ({SelectedPromoTicket.Comments})?", "Confirm Action",
+                            PromptOptions.YesNo, PromptTypes.Question);
+                        if (result == PromptOptions.Yes)
+                        {
+                            if (_promoTicketSetupService.DeletePromoTicket(SelectedPromoTicket.PromoTicketId))
+                            {
+                                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeleted,
+                                    $"Promo Schedule Deleted with StartDate: {SelectedPromoTicket.PromoStart}, EndDate: {SelectedPromoTicket.PromoEnded}, Description: {SelectedPromoTicket.Comments}");
+                                RefreshList();
+                            }
+                        }
                     }
                 }
             }

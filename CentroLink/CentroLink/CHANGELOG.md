@@ -29,4 +29,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Updated Promo Ticket View formatting
 
 ### update
-- formatting/cosmetic changes to Promo Ticket Module
+- Formatting/cosmetic changes to Promo Ticket Module
+
+## 03/111/2021
+### fixes
+- 51729 - Added the Accounting Offset for the start date and end date
+- 51730 - Added Checkboxes on Edit View to show if ticket started and/or ended
+- 51731 - Modified Delete logic to match old system

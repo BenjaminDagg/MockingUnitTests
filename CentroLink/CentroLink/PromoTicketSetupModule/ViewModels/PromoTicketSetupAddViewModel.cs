@@ -54,7 +54,14 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
 
         protected virtual void Refresh()
         {
-            PromoTicket = new PromoTicketModel();
+            var accountingOffset = _promoTicketSetupService.GetAccountingOffset();
+            var adjustedDate = new DateTime(DateTime.Now.Date.Ticks).AddDays(1).AddSeconds(accountingOffset);
+
+            PromoTicket = new PromoTicketModel
+            {
+              PromoStart = adjustedDate,
+              PromoEnd = adjustedDate.AddDays(1)
+            };
         }
 
 

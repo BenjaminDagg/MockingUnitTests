@@ -43,14 +43,19 @@ namespace CentroLink.PromoTicketSetupModule.Services
             _promoTicketSetupDataService.UpdatePromoTicketSchedule(PromoTicketSetupTranslator.Translate(promoTicket));
         }
 
-        public void DeletePromoTicket(int promoScheduleId)
+        public bool DeletePromoTicket(int promoScheduleId)
         {
-            _promoTicketSetupDataService.DeletePromoTicketSchedule(promoScheduleId);
+            return _promoTicketSetupDataService.DeletePromoTicketSchedule(promoScheduleId);
         }
 
-        public void StopScheduleItem(int promoScheduleId)
+        public bool StopScheduleItem(int promoScheduleId)
         {
-            _promoTicketSetupDataService.StopItemSchedule(promoScheduleId);
+            return _promoTicketSetupDataService.StopItemSchedule(promoScheduleId);
+        }
+
+        public int GetAccountingOffset()
+        {
+            return _promoTicketSetupDataService.GetAccountingOffset();
         }
     }
 }

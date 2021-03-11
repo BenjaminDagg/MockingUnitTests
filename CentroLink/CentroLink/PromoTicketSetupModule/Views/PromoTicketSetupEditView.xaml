@@ -85,6 +85,16 @@
                                      Value="{Binding Path=PromoTicket.PromoStart, Mode=TwoWay, ValidatesOnDataErrors=True,
                                                           UpdateSourceTrigger=PropertyChanged}"  Width="285" />
 
+
+                <CheckBox Grid.Row="3"
+                          Grid.Column="1"
+                          IsEnabled="False"
+                          Margin="20, 0"
+                          Content="Promo has already Started"
+                          IsChecked="{Binding Path=PromoTicket.PromoStarted, Mode=TwoWay, ValidatesOnDataErrors=True,
+                                                          UpdateSourceTrigger=PropertyChanged}"/>                
+                
+
                 <TextBlock Grid.Row="4"
                            Grid.Column="0" 
                            Text="Promo End" />
@@ -101,6 +111,14 @@
                                      VerticalAlignment="Top" 
                                      Value="{Binding Path=PromoTicket.PromoEnd, Mode=TwoWay, ValidatesOnDataErrors=True,
                                                           UpdateSourceTrigger=PropertyChanged}"  Width="285" />
+
+                <CheckBox Grid.Row="6"
+                          Grid.Column="1"
+                          IsEnabled="False"
+                          Margin="20, 0"
+                          Content="Promo has already Ended"
+                          IsChecked="{Binding Path=PromoTicket.PromoEnded, Mode=TwoWay, ValidatesOnDataErrors=True,
+                                                          UpdateSourceTrigger=PropertyChanged}"/>
 
             </Grid>
 

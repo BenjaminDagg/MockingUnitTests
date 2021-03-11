@@ -60,19 +60,32 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
                 PromoEnd = promoTicketSchedule.PromoEnd
             });
         }
-        public void DeletePromoTicketSchedule(int promoScheduleId)
+        public bool DeletePromoTicketSchedule(int promoScheduleId)
         {
-            Db.Delete<PromoTicketSchedule>("WHERE PromoScheduleID = @0", promoScheduleId);
+            var deletedRowsAffected = Db.Delete<PromoTicketSchedule>("WHERE PromoScheduleID = @0", promoScheduleId);
+
+            return deletedRowsAffected > 0;
         }
 
-        public void StopItemSchedule(int promoScheduleId)
+        public bool StopItemSchedule(int promoScheduleId)
         {
             const string sql = @"UPDATE PROMO_SCHEDULE SET PromoEnd = GETDATE() WHERE PromoScheduleID = @PromoScheduleID";
             
-            Db.Execute(sql, new
+            var updatedRowsAffected = Db.Execute(sql, new
             {
                 PromoScheduleID = promoScheduleId
-            });            
+            });
+
+            return updatedRowsAffected > 0;
+        }
+
+        public int GetAccountingOffset()
+        {
+            const string sql = "SELECT [dbo].[ufnGetCutoffSeconds]() AS Offset";
+
+            var offSet = Db.SingleOrDefault<int>(sql);
+
+            return offSet;
         }
     }
 }
