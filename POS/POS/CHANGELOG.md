@@ -121,3 +121,6 @@ Implement new POS Theme
 
 ##03/11/2021
 - updated 'CashDrawerAmountLimitmessage' to PascalCase 'CashDrawerAmountLimitMessage'
+
+## Updated 
+- Changes to UI for consistency 

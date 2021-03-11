@@ -196,7 +196,7 @@
                                          <ContentPresenter Margin="0" VerticalAlignment="Center">
                                 <ContentPresenter.Resources>
                                     <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="FontSize" Value="20" />
+                                        <Setter Property="FontSize" Value="25" />
                                         <Setter Property="TextWrapping" Value="Wrap" />
                                     </Style>
                                 </ContentPresenter.Resources>
@@ -425,7 +425,7 @@
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <TextBlock Grid.Row="0" FontSize="15" Foreground="{StaticResource DgWhite}" Text="{Binding UserName}" Margin=" 0 10 0 0"  />
+                                                    <TextBlock Grid.Row="0" FontSize="15" Foreground="{StaticResource DgWhite}" Text="{Binding UserName}"  />
                                                     <TextBlock Grid.Row="1" Grid.Column="0" FontSize="12" Foreground="{StaticResource DgWhite}" Text="{Binding SessionId}" Visibility="{Binding SessionId, Converter={StaticResource NullOrEmptyVisibilityConverter}}" />
                                                     <!--<dgmaterial:CustomButtonControlEx   
                                                         Style="{DynamicResource DgLogoutButtonControlExStyle}"

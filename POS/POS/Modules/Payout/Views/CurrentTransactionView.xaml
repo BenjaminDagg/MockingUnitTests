@@ -46,7 +46,7 @@
             <TextBlock Text="{x:Static resx:POSResources.UICurrentTransactionEmptyTransactionMsg}" FontStyle="Italic" FontSize="24"/>
         </Border>
 
-        <DataGrid Grid.Row="0" x:Name="VouchersGrid" MaxHeight="600"
+        <DataGrid Grid.Row="0" x:Name="VouchersGrid" MaxHeight="800"
             Style="{StaticResource DgDataGridStyle}" 
             Visibility="{Binding TransactionViewModel.HasItems, Converter={StaticResource BooleanToVisibility}}" 
             ItemsSource="{Binding Path=TransactionViewModel.VoucherItems}"

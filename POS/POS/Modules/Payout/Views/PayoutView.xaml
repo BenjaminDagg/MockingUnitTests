@@ -74,7 +74,7 @@
                 <local:CurrentTransactionView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 50 0 0 "  DataContext="{Binding}"/>
                 <local:SearchVoucherView DataContext="{Binding}" Grid.Column="1" Grid.Row="0" />
                 <local:CashDrawerView DataContext="{Binding}" Visibility="{Binding HasCashDrawer, Converter={StaticResource BooleanToVisibility}}" 
-                                      Margin="20, 0, 20, 20" 
+                                      Margin="20, 0, 20, 10" 
                                       Grid.Column="1" 
                                       Grid.Row="1"  />
 

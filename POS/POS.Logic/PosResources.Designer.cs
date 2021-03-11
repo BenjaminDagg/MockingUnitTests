@@ -1296,15 +1296,6 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DGE ID.
-        /// </summary>
-        public static string UIDeviceManagementDEGID {
-            get {
-                return ResourceManager.GetString("UIDeviceManagementDEGID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string UIDeviceManagementDescription {
@@ -1346,6 +1337,15 @@ namespace POS.Core {
         public static string UIDeviceManagementMachineCount {
             get {
                 return ResourceManager.GetString("UIDeviceManagementMachineCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mach NO.
+        /// </summary>
+        public static string UIDeviceManagementMachNo {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementMachNo", resourceCulture);
             }
         }
         

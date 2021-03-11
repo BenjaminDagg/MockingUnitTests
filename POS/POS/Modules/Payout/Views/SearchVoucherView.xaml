@@ -8,16 +8,16 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" >
 
-    <StackPanel Margin="20" FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}" Name="ParentPanel">
+    <StackPanel Margin="20 20 0 20" FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}" Name="ParentPanel">
 
         <extenedcontrols:CustomTextBoxControlExtended x:Name="VoucherNumberTextBox"
                                             CursorIndex="{Binding Path=SearchBarcodeItem.CursorIndex, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                                             TextChanged="ValidationNumberTextBox_OnTextChanged"
                                             MaxLength="18" 
                                             Margin="20, 0, 0, 0" 
-                                            Width="524"
+                                            Width="564"
                                             HorizontalAlignment="Left"
-                                            FontSize="18" 
+                                            FontSize="23" 
                                             Text="{Binding Path=SearchBarcodeItem.Barcode,
                                                     Mode=TwoWay,
                                                     ValidatesOnDataErrors=True,
@@ -39,7 +39,7 @@
             </extenedcontrols:CustomTextBoxControlExtended.Style>
         </extenedcontrols:CustomTextBoxControlExtended>
 
-        <Grid Margin="20" MinHeight="535" MinWidth="536">
+        <Grid Margin="20 20 20 20" MinHeight="565" MinWidth="536">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

@@ -18,11 +18,11 @@
         <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
-                <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
+                <RowDefinition Height="1300"/>
                 <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2145"/>
+                <ColumnDefinition Width="2245"/>
             </Grid.ColumnDefinitions>
 
             <Border Background="#15191C" BorderThickness="0" Margin="20 10 20 10" Padding="6" HorizontalAlignment="Left">
@@ -32,23 +32,25 @@
                     <dgmaterial:CustomButtonControlEx  
                                     cal:Message.Attach="SetAllOnLine"
                                     Content="{x:Static resx:POSResources.UIDeviceManagementSetAllOnline}" 
-                                    FontSize="18" 
+                                    FontSize="23"
+                                    FontWeight="Bold"
                                     Foreground="{StaticResource DgWhite}"
                                     Background="{StaticResource DgGreen}"
                                     HoverColor="{StaticResource DgHoverGreen}"
                                     IsEnabled="{Binding SelectAllOnLineActionEnabled}"
-                                    Width="137" 
+                                    Width="170" 
                                     Height="54"
                                     Margin="5"/>
                     <dgmaterial:CustomButtonControlEx            
                                     cal:Message.Attach="SetAllOffline"
                                     Content="{x:Static resx:POSResources.UIDeviceManagementSetAllOffline}" 
-                                    FontSize="18" 
+                                    FontSize="23" 
+                                    FontWeight="Bold"
                                     Foreground="{StaticResource DgWhite}"
                                     Background="{StaticResource DgRed}"
                                     HoverColor="{StaticResource DgRedShade}"
                                     IsEnabled="{Binding SelectAllOffLineActionEnabled}"
-                                    Width="137" 
+                                    Width="170" 
                                     Height="54"
                                     Margin="5"/>
 
@@ -73,6 +75,7 @@
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell" BasedOn="{StaticResource POSDeviceManagementDataGridCellStyle}"  >
                         <Setter Property="Foreground" Value="{StaticResource DgGray}"/>
+                        
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
                                 <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
@@ -86,7 +89,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow" BasedOn="{StaticResource POSDeviceManagementDataGridRowStyle}" >
                         <Setter Property="Background" Value="{StaticResource DgBackground3}"/>
-                       
+                        
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Resources>
@@ -141,9 +144,9 @@
                                         </Path.Style>
                                     </Path>
                                     <TextBlock Text="{Binding CasinoMachNumber}" 
-                                               Margin="30, 0, 0, 0"
+                                               Margin="-45, 0, 0, 0"
                                                FontSize="18"
-                                               HorizontalAlignment="Left"
+                                               HorizontalAlignment="Center"
                                                VerticalAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock" >
@@ -162,7 +165,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementDEGID}" Binding="{Binding DegID}" FontSize="25"  Width="200">
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementMachNo}" Binding="{Binding DegID}" FontSize="30"  Width="200">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
@@ -170,17 +173,8 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementIP}"   Binding="{Binding IP}" FontSize="25"  Width="200"/>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementLastPlayed}"  Binding="{Binding LastPlayed, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" FontSize="18"  Width="120">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementTransType}"   Binding="{Binding TransType}" FontSize="25"  Width="160">
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementIP}"   Binding="{Binding IP}" FontSize="30"  Width="200"/>
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementLastPlayed}"  Binding="{Binding LastPlayed, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" FontSize="25"  Width="150">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -189,7 +183,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementDescription}"   Binding="{Binding Description}" FontSize="25"  Width="*">
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementTransType}"   Binding="{Binding TransType}" FontSize="30"  Width="160">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -198,7 +192,16 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementBalance}"   Binding="{Binding Balance, StringFormat=C}" FontSize="25"  Width="180">
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementDescription}"   Binding="{Binding Description}" FontSize="30"  Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementBalance}"   Binding="{Binding Balance, StringFormat=C}" FontSize="30"  Width="180">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
@@ -211,7 +214,8 @@
                                 <dgmaterial:CustomButtonControlEx   
                                                     VerticalAlignment="Bottom" 
                                                     cal:Message.Attach="SetOnOffLine"
-                                                    FontSize="20" 
+                                                    FontSize="25"
+                                                    FontWeight="Bold"
                                                     Foreground="{StaticResource DgWhite}"             
                                                     Width="170" 
                                                     Height="50" 

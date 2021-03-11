@@ -530,9 +530,6 @@ Scan Voucher.</value>
   <data name="UIDeviceManagementCasinoMachID" xml:space="preserve">
     <value>Mach ID</value>
   </data>
-  <data name="UIDeviceManagementDEGID" xml:space="preserve">
-    <value>DGE ID</value>
-  </data>
   <data name="UIDeviceManagementDescription" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -547,6 +544,9 @@ Scan Voucher.</value>
   </data>
   <data name="UIDeviceManagementMachineCount" xml:space="preserve">
     <value>Machine Count: {0}</value>
+  </data>
+  <data name="UIDeviceManagementMachNo" xml:space="preserve">
+    <value>Mach NO</value>
   </data>
   <data name="UIDeviceManagementRefreshInterval" xml:space="preserve">
     <value>Refresh Interval: {0} sec.</value>
