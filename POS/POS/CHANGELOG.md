@@ -124,3 +124,9 @@ Implement new POS Theme
 
 ## Updated 
 - Changes to UI for consistency 
+
+##03/12/2021
+
+###fixed
+- Fixed Issue with error handling in LastPrintedRecieptViewModel
+- Fixed currency formatting on LastPrintedReceiptView

@@ -80,7 +80,7 @@
                            Margin="20, 0, 0, 0" />
                 <dgmaterial:CustomTextBoxControlEx x:Name="TotalPayout"
                                                    Style="{StaticResource DgCustomTextBoxControlExStyle}"
-                                                   Text="{Binding Path=TotalPayout, Mode=OneWay}"
+                                                   Text="{Binding Path=TotalPayout, StringFormat={}{0:C}, Mode=OneWay}"
                                                    Margin="0, 0, 0, 30" 
                                                    Width="440"
                                                    HorizontalAlignment="Center"
