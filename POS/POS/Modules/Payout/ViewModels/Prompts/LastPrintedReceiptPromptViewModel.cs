@@ -133,13 +133,14 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             if (canReprintResult.IsFailure)
             {
                 Alerts.Add(new TaskAlert(AlertType.Error, canReprintResult.Error));
+                return;
             }
 
             var voucherList = new List<(Barcode Barcode, Money VoucherAmount)>();
             var voucherData = canReprintResult.Value;
-            voucherData.ForEach(x =>
+            voucherData.ForEach(voucher =>
             {
-                voucherList.Add(((Barcode)x.Barcode, (Money)x.VoucherAmount));
+                voucherList.Add(((Barcode)voucher.Barcode, (Money)voucher.VoucherAmount));
             });
 
             _printService.PrintTransaction(new PrintTransactionRequest(_session.Username, _systemContext.Location.LocationName,
@@ -158,7 +159,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             }
 
             var voucherReceiptData = await _voucherRepository.GetVoucherReceiptData(receiptNumber);
-            if (voucherReceiptData == null)
+            if (voucherReceiptData == null || !voucherReceiptData.Any())
             {
                 return Result.Failure<List<VoucherReprintDataDto>>(POSResources.VoucherDataNotFoundMsg);
             }

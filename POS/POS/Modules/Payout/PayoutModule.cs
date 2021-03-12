@@ -28,8 +28,7 @@ namespace POS.Modules.Payout
             services.AddTransient<IPayoutViewServices, PayoutViewServices>();
 
             var voucherSettings = configuration.GetConfigurationSection<VoucherSettingsFileConfig>("UserVoucherSettings");
-            services.AddSingleton<IVoucherSettings>(voucherSettings);
-           
+            services.AddSingleton<IVoucherSettings>(voucherSettings);           
         }
     }
 }
