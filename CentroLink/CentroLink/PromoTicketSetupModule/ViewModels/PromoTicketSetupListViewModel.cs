@@ -190,9 +190,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                 Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = message });
                 await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeletedFailed, message + " " + ex.Message, ex);
                 await HandleErrorAsync(message + Environment.NewLine + ex.Message, ex);
-            }
-          
-           
+            }   
         }
     }
 }

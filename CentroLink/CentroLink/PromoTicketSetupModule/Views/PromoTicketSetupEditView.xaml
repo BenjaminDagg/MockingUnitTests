@@ -89,7 +89,7 @@
                 <CheckBox Grid.Row="3"
                           Grid.Column="1"
                           IsEnabled="False"
-                          Margin="20, 0"
+                          Margin="20, 2"
                           Content="Promo has already Started"
                           IsChecked="{Binding Path=PromoTicket.PromoStarted, Mode=TwoWay, ValidatesOnDataErrors=True,
                                                           UpdateSourceTrigger=PropertyChanged}"/>                
@@ -115,7 +115,7 @@
                 <CheckBox Grid.Row="6"
                           Grid.Column="1"
                           IsEnabled="False"
-                          Margin="20, 0"
+                          Margin="20, 2"
                           Content="Promo has already Ended"
                           IsChecked="{Binding Path=PromoTicket.PromoEnded, Mode=TwoWay, ValidatesOnDataErrors=True,
                                                           UpdateSourceTrigger=PropertyChanged}"/>
