@@ -83,7 +83,17 @@
                                      VerticalAlignment="Top" 
                                      Watermark="Promotion Start Date"
                                      Value="{Binding Path=PromoTicket.PromoStart, Mode=TwoWay, ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"  Width="285" />
+                                                          UpdateSourceTrigger=PropertyChanged}"  Width="285" >
+                    <xctk:DateTimePicker.Style>
+                        <Style TargetType="xctk:DateTimePicker">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=PromoTicket.PromoStarted}" Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </xctk:DateTimePicker.Style>
+                </xctk:DateTimePicker>
 
 
                 <CheckBox Grid.Row="3"
