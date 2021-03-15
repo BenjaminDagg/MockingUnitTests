@@ -180,6 +180,11 @@ namespace POS.Modules.Payout.ViewModels
                 $"Printed Receipt No: {receiptNumber} SessionId: {_session.Id.Value}", _userSession.UserId);
         }
 
+        private Result CheckIfPrinterSetupAndAvailable()
+        {
+            return _printService.IsReceiptPrinterSetup();
+        }
+
         private Result CanPerformCashoutTransaction()
         {
             return _transaction.CanCashoutTransaction

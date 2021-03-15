@@ -87,7 +87,8 @@ Implement new POS Theme
 - 51147 - POS Device Management Tab - Offline / Online format changes & refresh settings
 
 ## 03/01/2021
-### fixed merge issue in CurrentTransationView.xaml
+### fixed 
+- merge issue in CurrentTransationView.xaml
 
 ## 03/02/2021
 - 51150 update diamond icon based on meeting feedback
@@ -111,7 +112,6 @@ Implement new POS Theme
 - 51143 utilized MVVM patterns to set/trigger the color changes in the AddRemoveCashPromptView view. 
 
 ##03/10/2021
-
 ###fixed
 - Update report views to adjust the run date cut off in the datagrid view
 - Update report properties and datasource
@@ -126,7 +126,11 @@ Implement new POS Theme
 - Changes to UI for consistency 
 
 ##03/12/2021
-
 ###fixed
 - Fixed Issue with error handling in LastPrintedRecieptViewModel
 - Fixed currency formatting on LastPrintedReceiptView
+
+##03/15/2021
+###Updated
+- Added check to ensure printer is configured before each payout transaction
+- 52233 - Review POS Requirements and Document comparable changes with OLD POS System

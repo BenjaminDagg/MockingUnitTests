@@ -111,6 +111,17 @@ namespace POS.Modules.Payout.ViewModels
         {
             try
             {
+                var isPrinterSetupAndAvailable = CheckIfPrinterSetupAndAvailable();
+                if (isPrinterSetupAndAvailable.IsFailure)
+                {
+                    await AlertUiOfError(isPrinterSetupAndAvailable.Error);
+                    await _messageBoxService.PromptAsync(
+                        isPrinterSetupAndAvailable.Error, 
+                        POSResources.PrinterNotSetupOrAvailableTitle, 
+                        promptType: PromptTypes.Error);
+                    return;
+                }
+
                 var canCashoutResult = CanPerformCashoutTransaction();
                 if (canCashoutResult.IsFailure)
                 {
