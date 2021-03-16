@@ -138,3 +138,6 @@ Implement new POS Theme
 ##03/16/2021
 - Updated paremerts for starting balance input and minor UI Fixes
 - 52232 - Review POS Requirements and Document comparable changes with OLD POS System
+
+###Updated
+- Added Customer duplicate Receipt functionality

@@ -12,10 +12,10 @@ namespace POS.Core.Interfaces.Printer
 
         void PrintStartSession(string username, string sessionId, decimal startBalance);
 
-        void PrintSessionSummary(PrintSessionSummaryRequest r);
+        void PrintSessionSummary(PrintSessionSummaryRequest printSessionSummaryRequest);
 
-        void PrintTransaction(PrintTransactionRequest r);
+        void PrintTransaction(PrintTransactionRequest printTransactionRequest);
 
-        void PrintAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest r);
+        void PrintAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest printAddRemoveCashReceiptRequest);
     }
 }

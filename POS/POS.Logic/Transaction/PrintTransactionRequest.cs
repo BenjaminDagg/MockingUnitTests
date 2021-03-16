@@ -14,6 +14,7 @@ namespace POS.Core.Transaction
         public bool IsReprint { get; set; }
 
         public bool IsCustomerReceipt { get; set; }
+        public bool IsCustomerDuplicateReceipt { get; set; }
 
         public int ReceiptNumber { get; set; }
 

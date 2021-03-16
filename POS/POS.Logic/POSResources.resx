@@ -298,6 +298,9 @@ Are you sure you want to end this session?</value>
   <data name="RawPrintDate" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="RawPrintDuplicateCustomerReceipt" xml:space="preserve">
+    <value>Duplicate Customer Receipt</value>
+  </data>
   <data name="RawPrintEndingBalance" xml:space="preserve">
     <value>Ending Balance</value>
   </data>

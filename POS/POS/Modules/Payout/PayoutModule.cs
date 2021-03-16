@@ -8,6 +8,7 @@ using POS.Core.Config;
 using POS.Infrastructure.Config;
 using POS.Modules.Payout.Services.ViewModels;
 using POS.Modules.Payout.Settings;
+using System.Collections.Generic;
 
 namespace POS.Modules.Payout
 {
@@ -22,6 +23,10 @@ namespace POS.Modules.Payout
             var cashdrawerConfigSettings = new CashdrawerConfigSettings();
             services.AddSingleton<IDataConfig>(_ => cashdrawerConfigSettings);
             services.AddSingleton(_ => cashdrawerConfigSettings);
+
+            var payoutPrintingConfigSettings = new PayoutPrintingConfigSettings();
+            services.AddSingleton<IDataConfig>(_ => payoutPrintingConfigSettings);
+            services.AddSingleton(_ => payoutPrintingConfigSettings);
 
             services.AddTransient<IErrorHandlingService, ErrorHandlerService>();
             services.AddTransient<IMessageBoxService, MessageBoxService>();

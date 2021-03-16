@@ -8,41 +8,38 @@ namespace POS.Infrastructure.Services
 {
     public class SystemContextService : IPayoutContextService
     {
-        private readonly ISystemParametersRepository systemDataService;
-        private readonly ILocationRepository locationDataService;
-        private readonly SystemContext context;
+        private readonly ISystemParametersRepository _systemParametersRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly SystemContext _systemContext;
 
-        public SystemContextService(ISystemParametersRepository systemSvc, ILocationRepository locationSvc, SystemContext payoutCtx)
+        public SystemContextService(ISystemParametersRepository systemParametersRepository, ILocationRepository locationRepository, SystemContext systemContext)
         {
-            systemDataService = systemSvc;
-            locationDataService = locationSvc;
-            context = payoutCtx;
+            _systemParametersRepository = systemParametersRepository;
+            _locationRepository = locationRepository;
+            _systemContext = systemContext;
         }
-
-      
-
 
         public async Task RefreshPayoutContext()
         {
-            var systemParameters = await systemDataService.GetSystemParameters();
-            var location = await locationDataService.GetLocationInfo();
-            context.Location = location;
+            var systemParameters = await _systemParametersRepository.GetSystemParameters();
+            var location = await _locationRepository.GetLocationInfo();
+            _systemContext.Location = location;
             
             var sitePayoutActive = systemParameters.FirstOrDefault(x => x.Name == "SiteStatusPayoutsActive");
-            context.SiteStatusPayoutsActive = sitePayoutActive?.Value1 != "0";
+            _systemContext.SiteStatusPayoutsActive = sitePayoutActive?.Value1 != "0";
             
             var autoCashDrawer = systemParameters.FirstOrDefault(x => x.Name == "AUTOCASHDRAWERUSEDFLG");
-            context.AutoCashDrawerUsed = autoCashDrawer?.Value1 != "0";
+            _systemContext.AutoCashDrawerUsed = autoCashDrawer?.Value1 != "0";
             
             var printCasinoReceipt = systemParameters.FirstOrDefault(x => x.Name == "PRINT_CASINO_PAYOUT_RECEIPT");
             if (printCasinoReceipt != null && !string.IsNullOrEmpty(printCasinoReceipt.Value1))
             {
-                context.PrintCasinoPayoutReceipt = bool.Parse(printCasinoReceipt.Value1);
+                _systemContext.PrintCasinoPayoutReceipt = bool.Parse(printCasinoReceipt.Value1);
             }
             
             var supervisorApprovalEnabled = systemParameters.FirstOrDefault(x => x.Name == "DEFAULT_LOCKUP_AMOUNT");
             //default to true if not there
-            context.SupervisorApprovalRequired = supervisorApprovalEnabled == null || string.IsNullOrEmpty(supervisorApprovalEnabled.Value2) || bool.Parse(supervisorApprovalEnabled.Value2);
+            _systemContext.SupervisorApprovalRequired = supervisorApprovalEnabled == null || string.IsNullOrEmpty(supervisorApprovalEnabled.Value2) || bool.Parse(supervisorApprovalEnabled.Value2);
         }
 
     }

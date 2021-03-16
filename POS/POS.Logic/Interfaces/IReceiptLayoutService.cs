@@ -7,10 +7,10 @@ namespace POS.Core.Interfaces
     {
         string BuildSessionStartReceipt(string user, string sessionId, decimal startBalance);
 
-        string BuildSessionSummary(PrintSessionSummaryRequest r);
+        string BuildSessionSummary(PrintSessionSummaryRequest printSessionSummaryRequest);
 
-        string BuildTransactionReceipt(PrintTransactionRequest r);
+        string BuildTransactionReceipt(PrintTransactionRequest printTransactionRequest);
 
-        string BuildAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest r);
+        string BuildAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest printAddRemoveCashReceiptRequest);
     }
 }

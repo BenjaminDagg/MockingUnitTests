@@ -44,13 +44,15 @@ namespace POS.Modules.Payout.ViewModels
             ILogEventDataService logEventDataService,
             IPrintService printService,
             ILastReceiptService lastReceiptService,
-            SupervisorConfigSettings supervisorConfigSettings)
+            SupervisorConfigSettings supervisorConfigSettings,
+            PayoutPrintingConfigSettings payoutPrintingConfigSettings)
         {
             _messageBoxService = messageBoxService;
             _session = session;
             _logEventDataService = logEventDataService;
             _lastReceiptService = lastReceiptService;
             _supervisorConfigSettings = supervisorConfigSettings;
+            _payoutPrintingConfigSettings = payoutPrintingConfigSettings;
             _printService = printService;
             _errorHandlingService = errorHandlingService;
             _voucherRepository = voucherRepository;
@@ -63,7 +65,7 @@ namespace POS.Modules.Payout.ViewModels
             _transaction = new Transaction();
         }
 
-        private bool _needApproval;
+        private bool _needApproval;       
 
         public bool NeedsApproval
         {

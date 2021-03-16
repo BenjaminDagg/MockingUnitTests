@@ -38,6 +38,7 @@ namespace POS.Modules.Payout.ViewModels
         private readonly IPrintService _printService;
         private readonly IVoucherRepository _voucherRepository;
         private readonly SupervisorConfigSettings _supervisorConfigSettings;
+        private readonly PayoutPrintingConfigSettings _payoutPrintingConfigSettings;
         private readonly SystemContext _systemContext;
         private readonly Session _session;
         private readonly Transaction _transaction;
@@ -169,6 +170,12 @@ namespace POS.Modules.Payout.ViewModels
                 receiptNumber, TotalPayout, voucherList);
 
             _printService.PrintTransaction(printTransaction);
+
+            if(_payoutPrintingConfigSettings.PrintDuplicateCustomerReceipt)
+            {
+                printTransaction.IsCustomerDuplicateReceipt = true;
+                _printService.PrintTransaction(printTransaction);
+            }
 
             if (_systemContext.PrintCasinoPayoutReceipt)
             {

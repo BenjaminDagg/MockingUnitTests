@@ -602,6 +602,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duplicate Customer Receipt.
+        /// </summary>
+        public static string RawPrintDuplicateCustomerReceipt {
+            get {
+                return ResourceManager.GetString("RawPrintDuplicateCustomerReceipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ending Balance.
         /// </summary>
         public static string RawPrintEndingBalance {
