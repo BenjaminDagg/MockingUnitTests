@@ -57,7 +57,7 @@
         </dgmaterial:CustomPasswordControlEx>
 
         <StackPanel 
-                    Margin="0, 100, 20, 20"
+                    Margin="0, 20, 20, 20"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <dgmaterial:CustomButtonControlEx x:Name="Ok"

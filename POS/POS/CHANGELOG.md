@@ -134,3 +134,7 @@ Implement new POS Theme
 ###Updated
 - Added check to ensure printer is configured before each payout transaction
 - 52233 - Review POS Requirements and Document comparable changes with OLD POS System
+
+##03/16/2021
+- Updated paremerts for starting balance input and minor UI Fixes
+- 52232 - Review POS Requirements and Document comparable changes with OLD POS System

@@ -15,7 +15,7 @@ namespace POS.Core.ValueObjects
 
         public static Result<StartingBalance> Create(Money value)
         {
-            if (value < 1 || value > 250000)
+            if (value <= 0 || value > 250000)
                 return Result.Failure<StartingBalance>(POSResources.StartingBalanceValidationMsg);
             return Result.Success(new StartingBalance(value));
         }
