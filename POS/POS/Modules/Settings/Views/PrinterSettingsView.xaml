@@ -8,7 +8,7 @@
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="1000">
-    <GroupBox  >
+    <GroupBox>
         <StackPanel>
             <ItemsControl Margin="0,2,0,2"
                       HorizontalAlignment="Stretch"
@@ -44,25 +44,15 @@
 
             <StackPanel Orientation="Horizontal" >
                 <StackPanel  Margin="0, 0, 10, 0">
-                    <Label Content="{x:Static resx:POSResources.UIReceiptPrinter}" Foreground="{StaticResource DgWhite}" FontSize="16"/>
-                    <dgmaterial:CustomComboBoxControlEx Style="{StaticResource DgComboBoxStyle}"
+                    <Label Content="{x:Static resx:POSResources.UIReceiptPrinter}" Foreground="{StaticResource DgWhite}" FontSize="25"/>
+                    <dgmaterial:CustomComboBoxControlEx Style="{StaticResource POSSettingsComboBoxStyle}"
                                                         PlaceholderText="{x:Static resx:POSResources.UIPrinterSelectionPlaceholder}" 
                                                         FontSize="30" 
-                                                        Width="400"
+                                                        Height="50"
+                                                        Width="450"
                                                         ItemsSource="{Binding Printers}" 
                                                         SelectedItem="{Binding ReceiptPrinter, ValidatesOnDataErrors=true}" 
                                                         />
-                </StackPanel>
-                <StackPanel Margin="20, 0, 0, 0">
-                    <Label Content="{x:Static resx:POSResources.UIReportPrinter}" Foreground="{StaticResource DgWhite}" FontSize="16"/>
-                    <dgmaterial:CustomComboBoxControlEx Style="{StaticResource DgComboBoxStyle}"
-                                                        PlaceholderText="{x:Static resx:POSResources.UIPrinterSelectionPlaceholder}" 
-                                                        FontSize="30" 
-                                                        Width="400"
-                                                        ItemsSource="{Binding Printers}" 
-                                                        SelectedItem="{Binding ReportPrinter}" 
-                                                        />
-
                 </StackPanel>
             </StackPanel>
 

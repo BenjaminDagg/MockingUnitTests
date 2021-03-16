@@ -561,4 +561,156 @@
         </Setter>
     </Style>
 
+
+    <!-- Settings ComboBox -->
+    <Style x:Key="POSSettingsComboBoxStyle" TargetType="{x:Type dgmaterial:CustomComboBoxControlEx}">
+        <Setter Property="Foreground" Value="{StaticResource DgWhite}"/>
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type dgmaterial:CustomComboBoxControlEx}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <ToggleButton Name="ToggleButton" 
+                                      Template="{StaticResource DgComboBoxToggleButtonStyle}" 
+                                      Grid.Column="2" 
+                                      Focusable="false" 
+                                      IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      ClickMode="Press"/>
+                            <ContentPresenter Name="ContentSite" 
+                                          IsHitTestVisible="False"  
+                                          Content="{TemplateBinding SelectionBoxItem}" 
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                                          Margin="3,3,23,3"      
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Left">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="FontSize" Value="22" />
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+                            <TextBox x:Name="PART_EditableTextBox" 
+                                 CaretBrush="{StaticResource DgWhite}"
+                                 Style="{x:Null}" 
+                                 Template="{StaticResource ComboBoxTextBox}" 
+                                 HorizontalAlignment="Left" 
+                                 VerticalAlignment="Center" 
+                                 Margin="3,3,23,3" 
+                                 Focusable="True" 
+                                 FontSize="18"
+                                 Background="{StaticResource DgTransparent}" 
+                                 Foreground="{StaticResource DgWhite}" 
+                                 Visibility="Hidden" 
+                                 IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <TextBlock x:Name="PART_PlaceHolderTextBlock" 
+                                 Text="{TemplateBinding PlaceholderText}"
+                                 Style="{x:Null}" 
+                                 HorizontalAlignment="Left" 
+                                 VerticalAlignment="Center" 
+                                 Margin="3,3,23,3" 
+                                 FontSize="18"
+                                 Background="{StaticResource DgTransparent}" 
+                                 Foreground="{StaticResource DgWhite}" 
+                                 Visibility="Hidden" />
+                            <Popup VerticalOffset="-1" SnapsToDevicePixels="True" 
+                               Name="Popup" 
+                               Placement="Bottom" 
+                               IsOpen="{TemplateBinding IsDropDownOpen}" 
+                               AllowsTransparency="True"  
+                               Focusable="False" 
+                               PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="{StaticResource DgBackground}" BorderThickness="1" BorderBrush="{StaticResource DgTransparent}"/>
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+
+                        </Grid>
+                        <Border x:Name="container" Visibility="Collapsed" BorderThickness="0, 0, 0, 0.5"/>
+                        <Path x:Name="ValidationIcon" 
+                              Grid.Column="1"
+                              Fill="{StaticResource DgRed}"
+                              Data="{StaticResource Error}"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center"
+                              Margin="6,0,4,0"
+                              Stretch="UniformToFill"
+                              Height="30"
+                              Width="30"
+                              Visibility="Collapsed"
+                              />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SelectedItem" Value="{x:Null}">
+                            <Setter TargetName="PART_PlaceHolderTextBlock" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                        </Trigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                        <Trigger Property="IsEditable" Value="true">
+                            <Setter Property="IsTabStop" Value="false"/>
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter TargetName="container" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="container" Property="BorderBrush" Value="{StaticResource DgRed}" />
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                            <Setter Property="ToolTip.Visibility" Value="Visible" />
+                            <Setter TargetName="ValidationIcon" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="Height" Value="38"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ComboBoxItem">
+                            <Border Name="Border" SnapsToDevicePixels="true">
+                                <ContentPresenter VerticalAlignment="Center" >
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="FontSize" Value="18" />
+                                            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsHighlighted" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource DgSelected}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+
 </ResourceDictionary>

@@ -6,13 +6,27 @@
              xmlns:local="clr-namespace:POS.Modules.Settings.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
+    <Viewbox
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Width="{Binding SystemParameters.PrimaryScreenWidth}"
+        Height="{Binding SystemParameters.PrimaryScreenHeight}">
 
-        <StackPanel>
+        <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
+                <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2045"/>
+            </Grid.ColumnDefinitions>
 
-            <local:PrinterSettingsView DataContext="{Binding PrinterSettingsViewModel}"/>
+                <local:PrinterSettingsView DataContext="{Binding PrinterSettingsViewModel}"/>
 
-            <local:DeviceManagementSettingsView DataContext="{Binding DeviceManagementSettingsViewModel}"/>
+                <local:DeviceManagementSettingsView Grid.Row="1" DataContext="{Binding DeviceManagementSettingsViewModel}"/>
 
-        </StackPanel>
+            
+        </Grid>
+    </Viewbox>
     
 </UserControl>
