@@ -72,7 +72,7 @@
       </Queue>
       <Role version="1">
         <Include>True</Include>
-        <Expression />
+        <Expression>TRUE</Expression>
       </Role>
       <Route version="1">
         <Include>True</Include>
@@ -107,8 +107,8 @@
         <Expression>TRUE</Expression>
       </ServiceBinding>
       <StoredProcedure version="1">
-        <Include>True</Include>
-        <Expression>TRUE</Expression>
+        <Include>False</Include>
+        <Expression>(@NAME = 'Create_Daily_Job') OR (@NAME = 'Delete_Job_By_Name') OR (@NAME = 'InsertDbInfo') OR (@NAME = 'rpt_Daily_SC_Sessions_MV')</Expression>
       </StoredProcedure>
       <SymmetricKey version="1">
         <Include>True</Include>
@@ -124,15 +124,15 @@
       </Table>
       <User version="1">
         <Include>True</Include>
-        <Expression />
+        <Expression>TRUE</Expression>
       </User>
       <UserDefinedType version="1">
         <Include>True</Include>
         <Expression>TRUE</Expression>
       </UserDefinedType>
       <View version="1">
-        <Include>True</Include>
-        <Expression>TRUE</Expression>
+        <Include>False</Include>
+        <Expression>(@NAME = 'uvwEDealPurgeList')</Expression>
       </View>
       <XmlSchemaCollection version="1">
         <Include>True</Include>
