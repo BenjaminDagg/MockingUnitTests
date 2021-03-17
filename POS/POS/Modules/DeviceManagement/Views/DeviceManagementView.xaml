@@ -169,17 +169,24 @@
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementIP}"   Binding="{Binding IP}" FontSize="30"  Width="200"/>
+                    <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementIP}"   Binding="{Binding IP}" FontSize="30"  Width="200">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementLastPlayed}"  Binding="{Binding LastPlayed, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" FontSize="25"  Width="150">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -188,7 +195,7 @@
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -197,14 +204,14 @@
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementBalance}"   Binding="{Binding Balance, StringFormat=C}" FontSize="30"  Width="180">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
-                                <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>

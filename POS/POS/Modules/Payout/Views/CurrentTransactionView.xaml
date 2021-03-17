@@ -112,12 +112,12 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                            <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
+                            <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridCheckBoxColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderNeedsApproval}" Binding="{Binding Path=RequiresApproval, Mode=OneWay}"  
-                                        Width="170"
+                                        Width="180"
                                         CellStyle="{StaticResource DgBodyContentDataGridStyle}"
                                         IsReadOnly="True"
                                         Visibility="{Binding Data.TransactionViewModel.NeedsApproval, Source={StaticResource proxy}, Converter={StaticResource BooleanToVisibility}}">
@@ -125,7 +125,7 @@
                         <Style>
                             <Setter Property="CheckBox.Margin" Value="20, 0, 0, 0"/>
                             <Setter Property="CheckBox.IsEnabled" Value="False"/>
-                         </Style>
+                        </Style>
                     </DataGridCheckBoxColumn.ElementStyle>
                 </DataGridCheckBoxColumn>
                 <DataGridTemplateColumn  Width="90">

@@ -39,12 +39,12 @@
               HorizontalAlignment="Stretch" 
               Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1124"/>
+                    <ColumnDefinition Width="1224"/>
                     <ColumnDefinition Width="650" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"  MinHeight="20"/>
-                    <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" MinHeight="280"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock x:Name="CurrentTransactionTxt" 

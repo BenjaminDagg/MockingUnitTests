@@ -94,7 +94,7 @@ namespace POS.Modules.Payout.ViewModels
             var roles = await _userAdministrationService.GetUserRoleListAsync(_session.UserId);
             if(roles != null && roles.Any())
             {
-                _session.HasCashDrawer = roles.Exists(r => r.RoleName == PayoutRoleType.Cashier.ToString());
+                _session.HasCashDrawer = roles.Exists(r => r.RoleName == PayoutRoleType.Cashier.ToString()) && _systemContext.AutoCashDrawerUsed;
             }
 
             _systemContext.PayoutSettings = await _payoutSettingsRepository.GetPayoutSettings();
