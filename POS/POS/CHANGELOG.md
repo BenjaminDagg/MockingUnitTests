@@ -143,3 +143,6 @@ Implement new POS Theme
 - Added Customer duplicate Receipt functionality
 - Updated UI
 - Added condition for using system without cash drawer
+
+##03/18/2021
+- Removed the extra seperator from Device management settings

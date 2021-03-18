@@ -42,7 +42,7 @@
                 <Separator BorderBrush="{StaticResource DgWhite}" Margin="0, 2, 0, 10" />
 
             </StackPanel>
-            <Separator BorderBrush="{StaticResource DgWhite}" Margin="0, 2, 0, 10" />
+            
             <StackPanel Orientation="Horizontal">
                     <dgmaterial:CustomTextBoxControlEx x:Name="ServerIPAddress"
                                                              Style="{StaticResource DgCustomTextBoxControlExStyle}"
