@@ -1359,6 +1359,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TurnPromo Ticket Off.
+        /// </summary>
+        public static string UIDeviceManagementPromoTicketOff {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementPromoTicketOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn Promo Ticket On.
+        /// </summary>
+        public static string UIDeviceManagementPromoTicketOn {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementPromoTicketOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Refresh Interval: {0} sec..
         /// </summary>
         public static string UIDeviceManagementRefreshInterval {

@@ -19,7 +19,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
                 <RowDefinition Height="1300"/>
-                <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2245"/>
@@ -57,7 +57,22 @@
                 </StackPanel>
                     
             </Border>
+            <dgmaterial:CustomButtonControlEx x:Name="PromoTicketOnOff"
+                                              Style="{StaticResource DgCustomButtonControlExStyle}"
+                                              Content="{x:Static resx:POSResources.UIDeviceManagementPromoTicketOn}"
+                                              FontSize="24" 
+                                              Foreground="{StaticResource DgWhite}" 
+                                              Background="{StaticResource DgDefaultButtonBackground}" 
+                                              Width="300"
+                                              FontWeight="Bold"
+                                              Height="54"
+                                              VerticalAlignment="Top"
+                                              HorizontalAlignment="Right"
+                                              Grid.Column="0"
+                                              Grid.Row="0" 
+                                              Margin="0 20 28 20">
 
+            </dgmaterial:CustomButtonControlEx>
             <DataGrid Grid.Row="1" 
                 ItemsSource="{Binding Devices}" 
                 SelectedItem="{Binding SelectedDevice}"
@@ -102,10 +117,10 @@
                                 <Grid >
                                     <Path Data="{StaticResource Screen_Icon_Large}"                                          
                                             Stretch="Uniform"
-                                            Height="80"
+                                            Height="100"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Center"
-                                            Margin="20, 5, 0, 5">
+                                            Margin="20, 10, 0, 5">
                                         <Path.Style>
                                             <Style TargetType="Path" >
                                                 <Setter Property="Fill" Value="{StaticResource DgGray}"/>
@@ -125,7 +140,7 @@
                                           Height="30"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Center"
-                                          Margin="95, 55, 0, 5">
+                                          Margin="115, 65, 0, 5">
                                         <Path.Style>
                                             <Style TargetType="Path" >
                                                 <Setter Property="Fill" Value="{StaticResource DgWhite}"/>
@@ -144,8 +159,8 @@
                                         </Path.Style>
                                     </Path>
                                     <TextBlock Text="{Binding CasinoMachNumber}" 
-                                               Margin="-45, 0, 0, 0"
-                                               FontSize="18"
+                                               Margin="-20 0, 0, 0"
+                                               FontSize="23"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center">
                                         <TextBlock.Style>
@@ -169,7 +184,7 @@
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="15, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -177,7 +192,7 @@
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -186,7 +201,7 @@
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="10, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -195,7 +210,7 @@
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="15, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -204,14 +219,14 @@
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                 <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="15, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{x:Static resx:POSResources.UIDeviceManagementBalance}"   Binding="{Binding Balance, StringFormat=C}" FontSize="30"  Width="180">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
-                                <Setter Property="TextBlock.Margin" Value="25, 0, 0, 0"/>
+                                <Setter Property="TextBlock.Margin" Value="15, 0, 0, 0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
@@ -225,7 +240,7 @@
                                                     FontWeight="Bold"
                                                     Foreground="{StaticResource DgWhite}"             
                                                     Width="170" 
-                                                    Height="50" 
+                                                    Height="70" 
                                                     Visibility="{Binding Connected, Converter={StaticResource BooleanToVisibility}}"
                                                     IsEnabled="{Binding ActionEnabled}"
                                 >

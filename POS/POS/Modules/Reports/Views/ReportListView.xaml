@@ -40,7 +40,7 @@
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource POSDataGridCellStyle}"/>
             </DataGrid.CellStyle>
             <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow" BasedOn="{StaticResource POSDataGridRowStyle}" />
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource POSReportsDataGridRowStyle}" />
             </DataGrid.RowStyle>
             <DataGrid.Resources>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource DgScrollBarStyle}"/>

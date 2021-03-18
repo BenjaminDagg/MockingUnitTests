@@ -551,6 +551,12 @@ Scan Voucher.</value>
   <data name="UIDeviceManagementMachNo" xml:space="preserve">
     <value>Mach NO</value>
   </data>
+  <data name="UIDeviceManagementPromoTicketOff" xml:space="preserve">
+    <value>TurnPromo Ticket Off</value>
+  </data>
+  <data name="UIDeviceManagementPromoTicketOn" xml:space="preserve">
+    <value>Turn Promo Ticket On</value>
+  </data>
   <data name="UIDeviceManagementRefreshInterval" xml:space="preserve">
     <value>Refresh Interval: {0} sec.</value>
   </data>
