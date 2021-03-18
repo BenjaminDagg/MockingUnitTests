@@ -47,7 +47,7 @@
                                               Margin="0, 0, 0, 0"
                                               Data="{StaticResource Leftcorner_Background_Small}"/>
                         <Border x:Name="DgR_Border"
-                                            Margin="-15, 0, 0, 0"
+                                            Margin="-1, 0, 0, 0"
                                             BorderBrush="{TemplateBinding BorderBrush}"
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             Background="{TemplateBinding Background}"                                                                                    
@@ -711,6 +711,12 @@
                 </Setter>
             </Style>
         </Style.Resources>
+    </Style>
+
+
+    <Style x:Key="POSReportsDataGridRowStyle"  TargetType="DataGridRow" BasedOn="{StaticResource DgDataGridRowStyle}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Height" Value="130"/>
     </Style>
 
 </ResourceDictionary>

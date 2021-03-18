@@ -18,10 +18,10 @@
        >
         <StackPanel>
             <ItemsControl DockPanel.Dock="Top"
-                      Margin="0,2,0,2"
+                      Margin="10,2,0,2"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
-                      Width="1124"
+                      Width="1824"
                       ItemsSource="{Binding Path=Alerts}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -39,7 +39,7 @@
               HorizontalAlignment="Stretch" 
               Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1224"/>
+                        <ColumnDefinition Width="1224"/>
                     <ColumnDefinition Width="650" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
