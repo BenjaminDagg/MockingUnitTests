@@ -46,16 +46,16 @@ namespace POS.Core.Transaction
             _voucherItems.Remove(voucher);
         }
 
-        private Result CanVoucherBeAdded(AddVoucherRequest r)
+        private Result CanVoucherBeAdded(AddVoucherRequest addVoucherRequest)
         {
             //was this barcode already added?
-            var alreadyExists = VoucherItems.Any(x => x.Barcode == r.Voucher.Barcode);
+            var alreadyExists = VoucherItems.Any(voucher => voucher.Barcode == addVoucherRequest.Voucher.Barcode);
             if (alreadyExists)
             {
-                return Result.Failure(String.Format(POSResources.TransactionVoucherAlreadyScannedMsg, r.Voucher.Barcode));
+                return Result.Failure(String.Format(POSResources.TransactionVoucherAlreadyScannedMsg, addVoucherRequest.Voucher.Barcode));
             }
             //validate voucher
-            var validationResult = new IsVoucherRequestValid().Validate(r);
+            var validationResult = new IsVoucherRequestValid(addVoucherRequest.Voucher).Validate(addVoucherRequest);
             return !validationResult.IsValid
                 ? Result.Failure(validationResult.Message) 
                 : Result.Success();

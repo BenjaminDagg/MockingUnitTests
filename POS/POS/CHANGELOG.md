@@ -141,5 +141,14 @@ Implement new POS Theme
 
 ###Updated
 - Added Customer duplicate Receipt functionality
+
+##03/17/2021
+###Updated
 - Updated UI
+
+###Fixed
 - Added condition for using system without cash drawer
+
+##03/178/2021
+###Updated
+- Updated voucher validation error messages to include the barcode.

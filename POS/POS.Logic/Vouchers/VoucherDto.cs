@@ -13,11 +13,11 @@ namespace POS.Core.Vouchers
         
        // public string BarcodeToFormat { get; set; }
 
-       // public DateTime? RedeemedDate { get; set; }
+        public DateTime? RedeemedDate { get; set; }
 
         public bool RedeemedState { get; set; }
 
-        //public string RedeemedLocation { get; set; }
+        public string RedeemedLocation { get; set; }
 
         public DateTime CreateDate { get; set; }
 

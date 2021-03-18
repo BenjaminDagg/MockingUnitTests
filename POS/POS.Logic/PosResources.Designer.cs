@@ -2322,7 +2322,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher has already been redeemed..
+        ///   Looks up a localized string similar to Voucher {0} was redeemed on {1} at POS station {2}.
         /// </summary>
         public static string VoucherAlreadyRedeemedMsg {
             get {
@@ -2349,7 +2349,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher amount exceeds the cash drawer balance.  Please add cash to the cash drawer and try again..
+        ///   Looks up a localized string similar to Voucher {0} amount exceeds the cash drawer balance.  Please add cash to the cash drawer and try again..
         /// </summary>
         public static string VoucherExceedsCashDrawerMsg {
             get {
@@ -2358,7 +2358,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher is expired..
+        ///   Looks up a localized string similar to Voucher {0} is expired..
         /// </summary>
         public static string VoucherExpiredMsg {
             get {
@@ -2367,7 +2367,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher has an invalid checksum value.  Please call the supervisor..
+        ///   Looks up a localized string similar to Voucher {0} has an invalid CheckSum.  The Voucher data may have been tampered with, call a Supervisor..
         /// </summary>
         public static string VoucherInvalidChecksumMsg {
             get {
@@ -2394,7 +2394,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher is a Non-Cashable Promotional Voucher..
+        ///   Looks up a localized string similar to Voucher {0} is a Non-Cashable Promotional Voucher..
         /// </summary>
         public static string VoucherNonCashableMsg {
             get {
@@ -2403,7 +2403,16 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher is not in a valid state.  Please call supervisor..
+        ///   Looks up a localized string similar to Voucher {0} has not been marked as transferred..
+        /// </summary>
+        public static string VoucherNotTransferredMsg {
+            get {
+                return ResourceManager.GetString("VoucherNotTransferredMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voucher {0} is not in a valid state.  Please call supervisor..
         /// </summary>
         public static string VoucherNotValidMsg {
             get {
@@ -2412,7 +2421,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher amount is too small for cashout..
+        ///   Looks up a localized string similar to Voucher {0} amount is too small for cashout..
         /// </summary>
         public static string VoucherTooSmallMsg {
             get {

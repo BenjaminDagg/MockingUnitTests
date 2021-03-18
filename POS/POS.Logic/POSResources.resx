@@ -873,7 +873,7 @@ Scan Voucher.</value>
     <value>View Cashdrawer History</value>
   </data>
   <data name="VoucherAlreadyRedeemedMsg" xml:space="preserve">
-    <value>Voucher has already been redeemed.</value>
+    <value>Voucher {0} was redeemed on {1} at POS station {2}</value>
   </data>
   <data name="VoucherDataNotFoundMsg" xml:space="preserve">
     <value>Voucher data not found.</value>
@@ -882,13 +882,13 @@ Scan Voucher.</value>
     <value>Voucher Detail</value>
   </data>
   <data name="VoucherExceedsCashDrawerMsg" xml:space="preserve">
-    <value>Voucher amount exceeds the cash drawer balance.  Please add cash to the cash drawer and try again.</value>
+    <value>Voucher {0} amount exceeds the cash drawer balance.  Please add cash to the cash drawer and try again.</value>
   </data>
   <data name="VoucherExpiredMsg" xml:space="preserve">
-    <value>Voucher is expired.</value>
+    <value>Voucher {0} is expired.</value>
   </data>
   <data name="VoucherInvalidChecksumMsg" xml:space="preserve">
-    <value>Voucher has an invalid checksum value.  Please call the supervisor.</value>
+    <value>Voucher {0} has an invalid CheckSum.  The Voucher data may have been tampered with, call a Supervisor.</value>
   </data>
   <data name="VoucherJackpotExceedsThresholdMsg" xml:space="preserve">
     <value>Jackpot voucher exceeds the payout threshold.</value>
@@ -897,13 +897,16 @@ Scan Voucher.</value>
     <value>Jackpot winner vouchers must be cashed individually.  Please complete your current transaction and try again.</value>
   </data>
   <data name="VoucherNonCashableMsg" xml:space="preserve">
-    <value>Voucher is a Non-Cashable Promotional Voucher.</value>
+    <value>Voucher {0} is a Non-Cashable Promotional Voucher.</value>
+  </data>
+  <data name="VoucherNotTransferredMsg" xml:space="preserve">
+    <value>Voucher {0} has not been marked as transferred.</value>
   </data>
   <data name="VoucherNotValidMsg" xml:space="preserve">
-    <value>Voucher is not in a valid state.  Please call supervisor.</value>
+    <value>Voucher {0} is not in a valid state.  Please call supervisor.</value>
   </data>
   <data name="VoucherTooSmallMsg" xml:space="preserve">
-    <value>Voucher amount is too small for cashout.</value>
+    <value>Voucher {0} amount is too small for cashout.</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>POS</value>
