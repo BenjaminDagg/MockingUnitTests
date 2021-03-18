@@ -146,3 +146,4 @@ Implement new POS Theme
 
 ##03/18/2021
 - Removed the extra seperator from Device management settings
+- seperator height changed for Device management settings
