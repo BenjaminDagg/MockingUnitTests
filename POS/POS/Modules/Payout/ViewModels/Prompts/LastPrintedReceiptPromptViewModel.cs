@@ -16,6 +16,7 @@ using POS.Core.Transaction;
 using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
 using POS.Modules.Main.ViewModels;
+using POS.Modules.Payout.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,8 +37,10 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         private readonly IServiceLocator _serviceLocator;
         private readonly IMessageBoxService _messageBoxService;
         private readonly ILogEventDataService _logEventDataService;
-        private readonly SystemContext _systemContext;
         private readonly Session _session;
+        private readonly SystemContext _systemContext;
+        private readonly PayoutConfigSettings _payoutConfigSettings;
+        private readonly BankSetupConfigSettings _bankSetupConfigSettings;        
 
         public decimal TotalPayout { get; set; }
 
@@ -55,12 +58,14 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             IServiceLocator serviceLocator,
             IMessageBoxService messageBoxService, 
             ILastReceiptService lastReceiptService, 
-            IVoucherRepository voucherRepository, 
-            Session session, 
+            IVoucherRepository voucherRepository,             
             IUserSession userSession, 
             ILogEventDataService logEventDataService, 
-            IErrorHandlingService errorHandlingService, 
-            SystemContext systemContext)
+            IErrorHandlingService errorHandlingService,
+            Session session,
+            SystemContext systemContext,
+            PayoutConfigSettings payoutConfigSettings,
+            BankSetupConfigSettings bankSetupConfigSettings)
         {
             _printService = printService;
             _logEventDataService = logEventDataService;
@@ -72,6 +77,8 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             _errorHandlingService = errorHandlingService;
             _lastReceiptService = lastReceiptService;
             _systemContext = systemContext;
+            _payoutConfigSettings = payoutConfigSettings;
+            _bankSetupConfigSettings = bankSetupConfigSettings;
             Init();
         }
 
@@ -136,15 +143,23 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                 return;
             }
 
-            var voucherList = new List<(Barcode Barcode, Money VoucherAmount)>();
+            var voucherList = new List<(Barcode Barcode, Money VoucherAmount, int VoucherType)>();
             var voucherData = canReprintResult.Value;
             voucherData.ForEach(voucher =>
             {
-                voucherList.Add(((Barcode)voucher.Barcode, (Money)voucher.VoucherAmount));
+                voucherList.Add(((Barcode)voucher.Barcode, (Money)voucher.VoucherAmount, voucher.VoucherType));
             });
 
-            _printService.PrintTransaction(new PrintTransactionRequest(_session.Username, _systemContext.Location.LocationName,
-                true, false, receiptNumber, (Money)voucherData.First().ReceiptTotalAmount, voucherList));
+            _printService.PrintTransaction(new PrintTransactionRequest(
+                _session.Username, 
+                _systemContext.Location.LocationName,
+                true, 
+                false, 
+                receiptNumber, 
+                (Money)voucherData.First().ReceiptTotalAmount, 
+                voucherList, 
+                _payoutConfigSettings.PrintNameAndSSNLabelsForJackpot, 
+                _bankSetupConfigSettings.DefaultBankLockupAmount));
 
             _logEventDataService.LogEventToDatabase(PayoutEventType.ReprintPayoutReceipt, PayoutEventType.ReprintPayoutReceipt.ToString(),
                 $"Reprinted Receipt No: {receiptNumber} SessionId: {_session.Id.Value}", _userSession.UserId);

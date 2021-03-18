@@ -304,6 +304,12 @@ Are you sure you want to end this session?</value>
   <data name="RawPrintEndingBalance" xml:space="preserve">
     <value>Ending Balance</value>
   </data>
+  <data name="RawPrintJackpotName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="RawPrintJackpotSSN" xml:space="preserve">
+    <value>SSN</value>
+  </data>
   <data name="RawPrintNumberOfTransactions" xml:space="preserve">
     <value>Number of Transactions</value>
   </data>

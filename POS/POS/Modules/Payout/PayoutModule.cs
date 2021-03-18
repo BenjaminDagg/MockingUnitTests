@@ -16,15 +16,11 @@ namespace POS.Modules.Payout
     {
         public static void AddPayoutModule(this IServiceCollection services, IConfiguration configuration)
         {
-            var supervisorConfigSettings = new SupervisorConfigSettings();
-            services.AddSingleton<IDataConfig>(_ => supervisorConfigSettings);
-            services.AddSingleton(_ => supervisorConfigSettings);
+            var bankSetupConfigSettings = new BankSetupConfigSettings();
+            services.AddSingleton<IDataConfig>(_ => bankSetupConfigSettings);
+            services.AddSingleton(_ => bankSetupConfigSettings);
 
-            var cashdrawerConfigSettings = new CashdrawerConfigSettings();
-            services.AddSingleton<IDataConfig>(_ => cashdrawerConfigSettings);
-            services.AddSingleton(_ => cashdrawerConfigSettings);
-
-            var payoutPrintingConfigSettings = new PayoutPrintingConfigSettings();
+            var payoutPrintingConfigSettings = new PayoutConfigSettings();
             services.AddSingleton<IDataConfig>(_ => payoutPrintingConfigSettings);
             services.AddSingleton(_ => payoutPrintingConfigSettings);
 

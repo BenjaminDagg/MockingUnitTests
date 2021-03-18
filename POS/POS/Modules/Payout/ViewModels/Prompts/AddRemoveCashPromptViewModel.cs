@@ -20,20 +20,20 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         private readonly IUserAuthenticationService _userAuthenticateService;
         private readonly IErrorHandlingService _errorHandlingService;
         private readonly IUserSession _userSession;
-        private readonly CashdrawerConfigSettings _cashdrawerConfigSettings;
+        private readonly PayoutConfigSettings _payoutConfigSettings;
 
         public AddRemoveCashPromptViewModel(
             IUserAuthenticationService userAuthenticateService, 
             IErrorHandlingService errorHandlingService, 
-            IUserSession userSession, 
-            CashdrawerConfigSettings cashdrawerConfigSettings)
+            IUserSession userSession,
+            PayoutConfigSettings payoutConfigSettings)
         {
             _userAuthenticateService = userAuthenticateService;
             _errorHandlingService = errorHandlingService;
             _userSession = userSession;
-            _cashdrawerConfigSettings = cashdrawerConfigSettings;
+            _payoutConfigSettings = payoutConfigSettings;
 
-            CashLimit = _cashdrawerConfigSettings.AddCashLimit;
+            CashLimit = _payoutConfigSettings.AddCashLimit;
         }
         public void Initialize(TransactionType transType)
         {

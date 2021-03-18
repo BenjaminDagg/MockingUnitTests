@@ -145,10 +145,15 @@ Implement new POS Theme
 ##03/17/2021
 ###Updated
 - Updated UI
-
 ###Fixed
 - Added condition for using system without cash drawer
 
-##03/178/2021
+##03/18/2021
 ###Updated
+- Removed the extra seperator from Device management settings
+- seperator height changed for Device management settings
 - Updated voucher validation error messages to include the barcode.
+- Modified Payout Config Keys to have category 'Payout' and consolidate into one class
+- Added functionality to modify recipt printout for Jackpot
+- Added bold to payout label and amount on the payout receipt
+- Updated ReceiptLayoutService to use StringBuilder 

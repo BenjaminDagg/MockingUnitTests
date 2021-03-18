@@ -620,6 +620,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string RawPrintJackpotName {
+            get {
+                return ResourceManager.GetString("RawPrintJackpotName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSN.
+        /// </summary>
+        public static string RawPrintJackpotSSN {
+            get {
+                return ResourceManager.GetString("RawPrintJackpotSSN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of Transactions.
         /// </summary>
         public static string RawPrintNumberOfTransactions {

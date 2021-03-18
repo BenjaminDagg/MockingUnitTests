@@ -76,7 +76,7 @@ namespace POS.Infrastructure.Data
 
         public async Task<List<VoucherReprintDataDto>> GetVoucherReceiptData(int receiptNumber)
         {
-            const string sql = @"SELECT vr.VOUCHER_COUNT, vr.RECEIPT_TOTAL_AMOUNT, v.BARCODE, v.VOUCHER_AMOUNT, ct.CREATED_BY 
+            const string sql = @"SELECT vr.VOUCHER_COUNT, vr.RECEIPT_TOTAL_AMOUNT, v.BARCODE, v.VOUCHER_AMOUNT, v.VOUCHER_TYPE, ct.CREATED_BY 
             FROM VOUCHER_RECEIPT vr JOIN VOUCHER_RECEIPT_DETAILS vpd ON vr.VOUCHER_RECEIPT_NO = vpd.VOUCHER_RECEIPT_NO 
             JOIN VOUCHER v ON v.VOUCHER_ID = vpd.VOUCHER_ID JOIN CASHIER_TRANS ct ON ct.CASHIER_TRANS_ID = vpd.CashierTransID 
             WHERE vr.VOUCHER_RECEIPT_NO = @ReceiptNumber";

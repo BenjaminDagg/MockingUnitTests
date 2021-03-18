@@ -44,15 +44,15 @@ namespace POS.Modules.Payout.ViewModels
             ILogEventDataService logEventDataService,
             IPrintService printService,
             ILastReceiptService lastReceiptService,
-            SupervisorConfigSettings supervisorConfigSettings,
-            PayoutPrintingConfigSettings payoutPrintingConfigSettings)
+            PayoutConfigSettings payoutConfigSettings,
+            BankSetupConfigSettings bankSetupConfigSettings)
         {
             _messageBoxService = messageBoxService;
             _session = session;
             _logEventDataService = logEventDataService;
             _lastReceiptService = lastReceiptService;
-            _supervisorConfigSettings = supervisorConfigSettings;
-            _payoutPrintingConfigSettings = payoutPrintingConfigSettings;
+            _payoutConfigSettings = payoutConfigSettings;
+            _bankSetupConfigSettings = bankSetupConfigSettings;
             _printService = printService;
             _errorHandlingService = errorHandlingService;
             _voucherRepository = voucherRepository;
@@ -61,12 +61,11 @@ namespace POS.Modules.Payout.ViewModels
             _systemContext = systemContext;
             _eventAggregator = eventAggregator;
 
-            NeedsApproval = _supervisorConfigSettings.IsSupervisorApprovalActive;
+            NeedsApproval = _payoutConfigSettings.IsSupervisorApprovalActive;
             _transaction = new Transaction();
         }
 
-        private bool _needApproval;       
-
+        private bool _needApproval;      
         public bool NeedsApproval
         {
             get => _needApproval; set

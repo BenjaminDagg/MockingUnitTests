@@ -29,6 +29,7 @@ namespace POS.Infrastructure.Data
                     x.Column(y => y.ReceiptTotalAmount).WithName("RECEIPT_TOTAL_AMOUNT");
                     x.Column(y => y.VoucherAmount).WithName("VOUCHER_AMOUNT");
                     x.Column(y => y.VoucherCount);
+                    x.Column(y => y.VoucherType).WithName("VOUCHER_TYPE");
                 });
             For<CashDrawerSummaryDto>()
                 .Columns(x =>

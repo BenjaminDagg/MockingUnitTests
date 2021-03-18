@@ -37,8 +37,8 @@ namespace POS.Modules.Payout.ViewModels
         private readonly ILastReceiptService _lastReceiptService;
         private readonly IPrintService _printService;
         private readonly IVoucherRepository _voucherRepository;
-        private readonly SupervisorConfigSettings _supervisorConfigSettings;
-        private readonly PayoutPrintingConfigSettings _payoutPrintingConfigSettings;
+        private readonly PayoutConfigSettings _payoutConfigSettings;
+        private readonly BankSetupConfigSettings _bankSetupConfigSettings;
         private readonly SystemContext _systemContext;
         private readonly Session _session;
         private readonly Transaction _transaction;
@@ -156,22 +156,31 @@ namespace POS.Modules.Payout.ViewModels
         private void PrintReceipt(int receiptNumber)
         {
             //get voucher data for receipt
-            var voucherList = new List<(Barcode Barcode, Money VoucherAmount)>();
+            var voucherList = new List<(Barcode Barcode, Money VoucherAmount, int VoucherType)>();
             VoucherItems.ToList().ForEach(item =>
             {
                 voucherList.Add(
                     (Barcode.Create(item.Barcode).Value,
-                    Money.Create(item.Amount).Value)
+                    Money.Create(item.Amount).Value,
+                    item.VoucherType)
                     );
             });
 
             //print receipt
-            var printTransaction = new PrintTransactionRequest(_session.Username, _systemContext.Location.LocationName, false, true,
-                receiptNumber, TotalPayout, voucherList);
+            var printTransaction = new PrintTransactionRequest(
+                _session.Username,
+                _systemContext.Location.LocationName, 
+                false, 
+                true,
+                receiptNumber, 
+                TotalPayout, 
+                voucherList,
+                _payoutConfigSettings.PrintNameAndSSNLabelsForJackpot,
+                _bankSetupConfigSettings.DefaultBankLockupAmount);
 
             _printService.PrintTransaction(printTransaction);
 
-            if(_payoutPrintingConfigSettings.PrintDuplicateCustomerReceipt)
+            if(_payoutConfigSettings.PrintDuplicateCustomerReceipt)
             {
                 printTransaction.IsCustomerDuplicateReceipt = true;
                 _printService.PrintTransaction(printTransaction);

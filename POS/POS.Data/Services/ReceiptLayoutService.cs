@@ -3,12 +3,14 @@ using POS.Core.Interfaces;
 using POS.Core.Transaction;
 using POS.Printer.Models;
 using System;
+using System.Text;
 
 namespace POS.Infrastructure.Services
 {
     public class ReceiptLayoutService : IReceiptLayoutService
     {
         private const string dashLine = "----------------------------------------";
+        private const string underLine = "_______________________________";
         private readonly string centerText = $"{(char)27}{(char)97}{(char)49}";
         private readonly string leftAlignText = $"{(char)27}{(char)97}{(char)48}";
         private readonly string crlf = $"{(char)13}{(char)10}";
@@ -28,93 +30,108 @@ namespace POS.Infrastructure.Services
 
         public string BuildSessionStartReceipt(string user, string sessionId, decimal startBalance)
         {
-            var rawPrintData = String.Empty;
+            StringBuilder rawPrintData = new StringBuilder();
 
-            rawPrintData += $"{centerText}{POSResources.RawPrintStartSession}{crlf}{crlf}";
-            rawPrintData += $"{leftAlignText}{POSResources.RawPrintCashier}: {user}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintDate}: {DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintSession}: {sessionId}{crlf}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintStartingBalance}: {startBalance:C}{crlf}";
+            rawPrintData.Append($"{centerText}{POSResources.RawPrintStartSession}{crlf}{crlf}");
+            rawPrintData.Append($"{leftAlignText}{POSResources.RawPrintCashier}: {user}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintDate}: {DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintSession}: {sessionId}{crlf}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintStartingBalance}: {startBalance:C}{crlf}");
 
             return BuildReceiptHeader() + rawPrintData + BuildReceiptFooter();
         }
 
         public string BuildSessionSummary(PrintSessionSummaryRequest printSessionSummaryRequest)
         {
-            var rawPrintData = String.Empty;
+            StringBuilder rawPrintData = new StringBuilder();
 
-            rawPrintData = rawPrintData + centerText + POSResources.RawPrintSessionDetails + crlf + crlf + leftAlignText;
-            rawPrintData += $"{DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintUser}: {printSessionSummaryRequest.Session.Username}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintSession}: {printSessionSummaryRequest.Session.Id.Value}{crlf}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintNumberOfTransactions}: {printSessionSummaryRequest.Session.NumberTransactions}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintNumberOfVouchers}: {printSessionSummaryRequest.Session.VouchersCashed}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintStartingBalance}: {printSessionSummaryRequest.StartBalance:C}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintTotalPayouts}: {printSessionSummaryRequest.TotalPayout:C}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintCashAdded}: {printSessionSummaryRequest.CashAdded:C}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintCashRemoved}: {printSessionSummaryRequest.CashRemoved:C}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintEndingBalance}: {printSessionSummaryRequest.EndBalance:C}{crlf}";
+            rawPrintData.Append(centerText + POSResources.RawPrintSessionDetails + crlf + crlf + leftAlignText);
+            rawPrintData.Append($"{DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintUser}: {printSessionSummaryRequest.Session.Username}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintSession}: {printSessionSummaryRequest.Session.Id.Value}{crlf}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintNumberOfTransactions}: {printSessionSummaryRequest.Session.NumberTransactions}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintNumberOfVouchers}: {printSessionSummaryRequest.Session.VouchersCashed}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintStartingBalance}: {printSessionSummaryRequest.StartBalance:C}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintTotalPayouts}: {printSessionSummaryRequest.TotalPayout:C}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintCashAdded}: {printSessionSummaryRequest.CashAdded:C}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintCashRemoved}: {printSessionSummaryRequest.CashRemoved:C}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintEndingBalance}: {printSessionSummaryRequest.EndBalance:C}{crlf}");
 
-            rawPrintData += $"-------------------{crlf}";
+            rawPrintData.Append($"-------------------{crlf}");
 
-            return BuildReceiptHeader() + rawPrintData + BuildReceiptFooter();
+            return BuildReceiptHeader() + rawPrintData.ToString() + BuildReceiptFooter();
         }
 
         public string BuildTransactionReceipt(PrintTransactionRequest printTransactionRequest)
         {
-            string rawPrintData = $"{centerText} {POSResources.RawPrintVoucherPayout}{crlf}{printTransactionRequest.LocationName}{crlf}";
+            var isJackPot = false;
+
+            StringBuilder rawPrintData = new StringBuilder();
+            rawPrintData.Append($"{centerText} {POSResources.RawPrintVoucherPayout}{crlf}{printTransactionRequest.LocationName}{crlf}");
 
             if (printTransactionRequest.IsReprint)
             {
-                rawPrintData += $"{crlf} -- {POSResources.RawPrintReprintedReceipt} -- {crlf}";
+                rawPrintData.Append($"{crlf} -- {POSResources.RawPrintReprintedReceipt} -- {crlf}");
             }
 
             if (printTransactionRequest.IsCustomerReceipt && printTransactionRequest.IsCustomerDuplicateReceipt)
             {
-                rawPrintData = rawPrintData + crlf + POSResources.RawPrintDuplicateCustomerReceipt + crlf;
+                rawPrintData.Append(crlf + POSResources.RawPrintDuplicateCustomerReceipt + crlf);
             }
             else if (printTransactionRequest.IsCustomerReceipt)
             {
-                rawPrintData = rawPrintData + crlf + POSResources.RawPrintCustomerReceipt + crlf;
+                rawPrintData.Append(crlf + POSResources.RawPrintCustomerReceipt + crlf);
             }
 
-            rawPrintData += $"{crlf}{leftAlignText}";
+            rawPrintData.Append($"{crlf}{leftAlignText}");
 
-            rawPrintData += $"{crlf}{DateTime.Now:M/dd/yyy HH:mm:ss}";
-            rawPrintData += $"{crlf}{POSResources.RawPrintCashier}: {printTransactionRequest.Username}";
-            rawPrintData += $"{crlf}{POSResources.RawPrintReceiptNo}: {printTransactionRequest.ReceiptNumber}";
-            rawPrintData += $"{crlf}{POSResources.RawPrintVoucherCount}: {printTransactionRequest.Vouchers.Count}{crlf}";
+            rawPrintData.Append($"{crlf}{DateTime.Now:M/dd/yyy HH:mm:ss}");
+            rawPrintData.Append($"{crlf}{POSResources.RawPrintCashier}: {printTransactionRequest.Username}");
+            rawPrintData.Append($"{crlf}{POSResources.RawPrintReceiptNo}: {printTransactionRequest.ReceiptNumber}");
+            rawPrintData.Append($"{crlf}{POSResources.RawPrintVoucherCount}: {printTransactionRequest.Vouchers.Count}{crlf}");
 
-            rawPrintData += $"{crlf}{POSResources.RawPrintVouchersRedeemed}:{crlf}";
+            rawPrintData.Append($"{crlf}{POSResources.RawPrintVouchersRedeemed}:{crlf}");
 
-            foreach (var (Barcode, Amount) in printTransactionRequest.Vouchers)
+            foreach (var (Barcode, Amount, Type) in printTransactionRequest.Vouchers)
             {
-                rawPrintData += $"{crlf}{dashLine}";
+                isJackPot = (Type == 1 && Amount >= printTransactionRequest.BankLockupAmont);
 
-                rawPrintData += $"{crlf}{POSResources.RawPrintBarcode}: {Barcode.FormattedBarcode}";
-                rawPrintData += $"{crlf}{POSResources.RawPrintAmount}: {Amount}";
+                rawPrintData.Append($"{crlf}{dashLine}");
+
+                rawPrintData.Append($"{crlf}{POSResources.RawPrintBarcode}: {Barcode.FormattedBarcode}");
+                rawPrintData.Append($"{crlf}{POSResources.RawPrintAmount}: {Amount}");
             }
 
-            rawPrintData += $"{crlf}{dashLine}";
+            rawPrintData.Append($"{crlf}{dashLine}");
 
-            rawPrintData += $"{crlf}{crlf}{POSResources.RawPrintPayoutAmount}: {printTransactionRequest.PayoutAmount:C}";
+            rawPrintData.Append($"{boldOn}{crlf}{crlf}{POSResources.RawPrintPayoutAmount}: {printTransactionRequest.PayoutAmount:C}{boldOff}");
 
-            return BuildReceiptHeader() + rawPrintData + BuildReceiptFooter();
+            if(printTransactionRequest.PrintNameAndSSNLabels && isJackPot)
+            {
+                rawPrintData.Append($"{crlf}");
+                rawPrintData.Append($"{crlf}{POSResources.RawPrintJackpotName}: {underLine}");
+                rawPrintData.Append($"{crlf}");
+                rawPrintData.Append($"{crlf}{POSResources.RawPrintJackpotSSN}:  {underLine}");
+            }
+
+            return BuildReceiptHeader() + rawPrintData.ToString() + BuildReceiptFooter();
         }
 
         public string BuildAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest printAddRemoveCashReceiptRequest)
         {
-            string rawPrintData = crlf + centerText;
-            rawPrintData += $"{POSResources.RawPrintDataCashDrawerTransaction}{crlf}";
-            rawPrintData += $"{DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}{crlf}";
-            rawPrintData += $"{leftAlignText}{POSResources.RawPrintUser}: {printAddRemoveCashReceiptRequest.Username}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintSession}: {printAddRemoveCashReceiptRequest.SessionId}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintRefNbr}: {printAddRemoveCashReceiptRequest.ReferenceNumber}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintAmount}: {printAddRemoveCashReceiptRequest.Amount:C}{crlf}";
-            rawPrintData += $"{POSResources.RawPrintAction}: {printAddRemoveCashReceiptRequest.Action}{crlf}";
-            rawPrintData += $"{centerText}{dashLine}{crlf}";
+            StringBuilder rawPrintData = new StringBuilder();
+
+            rawPrintData.Append(crlf + centerText);
+            rawPrintData.Append($"{POSResources.RawPrintDataCashDrawerTransaction}{crlf}");
+            rawPrintData.Append($"{DateTime.Now:M/dd/yyy HH:mm:ss}{crlf}{crlf}");
+            rawPrintData.Append($"{leftAlignText}{POSResources.RawPrintUser}: {printAddRemoveCashReceiptRequest.Username}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintSession}: {printAddRemoveCashReceiptRequest.SessionId}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintRefNbr}: {printAddRemoveCashReceiptRequest.ReferenceNumber}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintAmount}: {printAddRemoveCashReceiptRequest.Amount:C}{crlf}");
+            rawPrintData.Append($"{POSResources.RawPrintAction}: {printAddRemoveCashReceiptRequest.Action}{crlf}");
+            rawPrintData.Append($"{centerText}{dashLine}{crlf}");
             
-            return BuildReceiptHeader() + rawPrintData + BuildReceiptFooter();
+            return BuildReceiptHeader() + rawPrintData.ToString() + BuildReceiptFooter();
         }
     }
 }
