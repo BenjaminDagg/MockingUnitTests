@@ -9,6 +9,7 @@ using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using POS.Common.Events;
+using POS.Core;
 using POS.Core.Reports;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace POS.Modules.Reports.ViewModels
             _eventAggregator = eventAggregator;
             _serviceLocator = serviceLocator;
 
-            DisplayName = "ReportView";
+            DisplayName = POSResources.UITabReportView;
         }
 
         public async Task HandleLoaded(RoutedEventArgs eventArgs)

@@ -98,7 +98,7 @@ namespace POS.Modules.Payout.ViewModels
             var roles = await _userAdministrationService.GetUserRoleListAsync(_session.UserId);
             if(roles != null && roles.Any())
             {
-                _session.HasCashDrawer = roles.Exists(r => r.RoleName == PayoutRoleType.Cashier.ToString()) && _systemContext.AutoCashDrawerUsed;
+                _session.HasCashDrawer = roles.Exists(role => role.RoleName == PayoutRoleType.Cashier.ToString()) && _systemContext.AutoCashDrawerUsed;
             }
 
             _systemContext.PayoutSettings = await _payoutSettingsRepository.GetPayoutSettings();
@@ -290,10 +290,10 @@ namespace POS.Modules.Payout.ViewModels
 
         public async Task<Result> RemoveCash(Money amount)
         {
-            var r = _cashDrawer.RemoveCash(amount);
-            if (r.IsFailure)
+            var removeCashResult = _cashDrawer.RemoveCash(amount);
+            if (removeCashResult.IsFailure)
             {
-                return r;
+                return removeCashResult;
             }
             var id = await _cashDrawerRepository.InsertTransaction(_session.Username, _session.Id, TransactionType.R, amount, Environment.MachineName, _systemContext.Location.LocationId);
             _printService.PrintAddRemoveCashReceipt(new PrintAddRemoveCashReceiptRequest(_session.Username, _session.Id, amount, id, TransactionType.R));

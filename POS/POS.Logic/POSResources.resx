@@ -448,6 +448,21 @@ Are you sure you want to end this session?</value>
   <data name="UICashDrawerFormatTotalPayout" xml:space="preserve">
     <value>Total Payout: {0:C}</value>
   </data>
+  <data name="UICashDrawerHistoryAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="UICashDrawerHistoryEndingBalance" xml:space="preserve">
+    <value>Ending Balance</value>
+  </data>
+  <data name="UICashDrawerHistoryPayout" xml:space="preserve">
+    <value>Payout</value>
+  </data>
+  <data name="UICashDrawerHistoryRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="UICashDrawerHistoryStartingBalance" xml:space="preserve">
+    <value>Starting Balance</value>
+  </data>
   <data name="UICashDrawerRemoveCash" xml:space="preserve">
     <value>Remove Cash</value>
   </data>

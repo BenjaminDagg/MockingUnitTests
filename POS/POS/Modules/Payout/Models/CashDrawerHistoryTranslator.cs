@@ -1,4 +1,5 @@
-﻿using POS.Core.CashDrawer;
+﻿using POS.Core;
+using POS.Core.CashDrawer;
 using POS.Core.Transaction;
 using POS.Modules.Payout.Models;
 using System;
@@ -63,15 +64,15 @@ namespace POS.Modules.CashDrawerHistorys.Models
             switch (transactionType)
             {
                 case TransactionType.A:
-                    return "Add";
+                    return POSResources.UICashDrawerHistoryAdd;
                 case TransactionType.R:
-                    return "Remove";
+                    return POSResources.UICashDrawerHistoryRemove;
                 case TransactionType.P:
-                    return "Payout";
+                    return POSResources.UICashDrawerHistoryPayout;
                 case TransactionType.S:
-                    return "Starting Balance";
+                    return POSResources.UICashDrawerHistoryStartingBalance;
                 case TransactionType.E:
-                    return "Ending Balance";
+                    return POSResources.UICashDrawerHistoryEndingBalance;
                 default:
                     return String.Empty;
             }

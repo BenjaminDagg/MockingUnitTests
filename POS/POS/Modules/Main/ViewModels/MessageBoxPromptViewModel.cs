@@ -55,7 +55,7 @@ namespace POS.Modules.Main.ViewModels
         {
             if (shouldExclude)
             {
-                ValidationResult.Errors.RemoveAll(x => x.MemberNames.ToList().Contains(propertyName));
+                ValidationResult.Errors.RemoveAll(validationResult => validationResult.MemberNames.ToList().Contains(propertyName)) ;
             }
         }
 
@@ -64,7 +64,7 @@ namespace POS.Modules.Main.ViewModels
             if (ValidationEnabled == false) return string.Empty;
 
             ValidateEntity();
-            var validationErrors = ValidationResult.Errors.Where(v => v.MemberNames.Contains(propertyName));
+            var validationErrors = ValidationResult.Errors.Where(validationResult => validationResult.MemberNames.Contains(propertyName));
             var errors = validationErrors.Select(validationResult => validationResult.ErrorMessage).ToList();
 
             var output = string.Empty;

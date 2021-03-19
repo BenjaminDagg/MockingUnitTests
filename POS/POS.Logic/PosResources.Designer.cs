@@ -1052,6 +1052,51 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string UICashDrawerHistoryAdd {
+            get {
+                return ResourceManager.GetString("UICashDrawerHistoryAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ending Balance.
+        /// </summary>
+        public static string UICashDrawerHistoryEndingBalance {
+            get {
+                return ResourceManager.GetString("UICashDrawerHistoryEndingBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payout.
+        /// </summary>
+        public static string UICashDrawerHistoryPayout {
+            get {
+                return ResourceManager.GetString("UICashDrawerHistoryPayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string UICashDrawerHistoryRemove {
+            get {
+                return ResourceManager.GetString("UICashDrawerHistoryRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Balance.
+        /// </summary>
+        public static string UICashDrawerHistoryStartingBalance {
+            get {
+                return ResourceManager.GetString("UICashDrawerHistoryStartingBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove Cash.
         /// </summary>
         public static string UICashDrawerRemoveCash {

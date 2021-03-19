@@ -9,7 +9,6 @@ using POS.Core.CashDrawer;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;
 using POS.Modules.Main.ViewModels;
-using POS.Modules.Payout.Settings;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;

@@ -120,10 +120,12 @@ Implement new POS Theme
 - Removed 'Daily Cashier Activity' from the application execution folder
 
 ##03/11/2021
-- updated 'CashDrawerAmountLimitmessage' to PascalCase 'CashDrawerAmountLimitMessage'
+- 52232
+	- updated 'CashDrawerAmountLimitmessage' to PascalCase 'CashDrawerAmountLimitMessage'
 
 ## Updated 
-- Changes to UI for consistency 
+- 52232
+	- Changes to UI for consistency 
 
 ##03/12/2021
 ###fixed
@@ -140,25 +142,32 @@ Implement new POS Theme
 - 52232 - Review POS Requirements and Document comparable changes with OLD POS System
 
 ###Updated
-- Added Customer duplicate Receipt functionality
+- 52232
+	- Added Customer duplicate Receipt functionality
 
 ##03/17/2021
 ###Updated
-- Updated UI
+- 52232
+	- Updated UI
 ###Fixed
-- Added condition for using system without cash drawer
+- 52232
+	- Added condition for using system without cash drawer
 
 ##03/18/2021
 ###Updated
-- Removed the extra seperator from Device management settings
-- seperator height changed for Device management settings
-- Updated voucher validation error messages to include the barcode.
-- Modified Payout Config Keys to have category 'Payout' and consolidate into one class
-- Added functionality to modify receipt printout for Jackpot
-- Added bold to payout label and amount on the payout receipt
-- Updated ReceiptLayoutService to use StringBuilder 
+- 52232
+	- Removed the extra seperator from Device management settings
+	- seperator height changed for Device management settings
+	- Updated voucher validation error messages to include the barcode.
+	- Modified Payout Config Keys to have category 'Payout' and consolidate into one class
+	- Added functionality to modify receipt printout for Jackpot (show Name and SSN field on receipt)
+	- Added bold to payout label and amount on the payout receipt
+	- Updated ReceiptLayoutService to use StringBuilder 
 
 ##03/19/2021
 ###Updated
-- Updated Cash Drawer Limit so that the total amount in the cash drawer is bounded by the configured limit
-- Updated the Starting balance functionality to honor the Cash Drawer limit that is configured in database
+- 52232
+	- Updated Cash Drawer Limit so that the total amount in the cash drawer is bounded by the configured limit
+	- Updated the Starting balance functionality to honor the Cash Drawer limit that is configured in database
+	- Updated CashDrawerHistory UI text to be configured in resources
+	- Code cleanup and refactor variable names for readability
