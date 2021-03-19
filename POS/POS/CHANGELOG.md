@@ -171,5 +171,5 @@ Implement new POS Theme
 	- Updated the Starting balance functionality to honor the Cash Drawer limit that is configured in database
 	- Updated CashDrawerHistory UI text to be configured in resources
 	- Code cleanup and refactor variable names for readability
-	- Updated On pop issue on loading Payout Screen
-	- Updated Alert Messages
+	- Fixed the pop re-appearing after initializaion on loading Payout Screen
+	- Updated Alert Messages to fit propery in the designated area
