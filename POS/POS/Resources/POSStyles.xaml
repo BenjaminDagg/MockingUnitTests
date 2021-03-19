@@ -362,7 +362,42 @@
     <Style x:Key="POSKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgKeyPadStyle}"/>
     <Style x:Key="POSClearKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgClearKeyPadStyle}"/>
     <Style x:Key="POSBackKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgBackKeyPadStyle}" />
-    <Style x:Key="POSEnterKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgEnterKeyPadStyle}" />
+    <Style x:Key="POSEnterKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgEnterKeyPadStyle}" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Canvas x:Name="DgCanvas">
+                            <Path x:Name="DgButtonData" Data="{StaticResource Keypad}" Fill="{StaticResource DgHoverBackground}" Width="120.137"></Path>
+                            <Rectangle x:Name="DgButtonBottomData" Width="120.137" Height="131.729" Fill="{StaticResource DgHoverBackground}"
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" 
+                                       Canvas.Top="132.24"
+                                       Canvas.Left="0"/>
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                           Foreground="{StaticResource DgWhite}" 
+                                           FontSize="30" 
+                                           FontWeight="Light"
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" 
+                                       Canvas.Top="48"
+                                       Canvas.Left="28"/>
+                        </Canvas>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="DgButtonData" Property="Fill" Value="green"/>
+                            <Setter TargetName="DgButtonBottomData" Property="Fill" Value="green"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed"  Value="True">
+                            <Setter TargetName="DgButtonData" Property="Fill" Value="{StaticResource DgSelected}"/>
+                            <Setter TargetName="DgButtonBottomData" Property="Fill" Value="{StaticResource DgSelected}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!--body content datagrid cell vertical centering-->
 

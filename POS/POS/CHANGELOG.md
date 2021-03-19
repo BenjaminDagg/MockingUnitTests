@@ -173,3 +173,4 @@ Implement new POS Theme
 	- Code cleanup and refactor variable names for readability
 	- Fixed the pop reappering after initializaion on loading Payout Screen
 	- Updated Alert Messages to fit propery in the designated area
+	- Updated Enter Button Style for POS
