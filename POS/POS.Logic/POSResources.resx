@@ -149,7 +149,7 @@ Are you sure you want to end this session?</value>
     <value>Barcode is required.</value>
   </data>
   <data name="CashDrawerAmountLimitMessage" xml:space="preserve">
-    <value>Please enter amount less than {0:C}</value>
+    <value>The cash drawer cannot contain more than {0:C}.</value>
   </data>
   <data name="CashDrawerCannotRemoveGreaterThanBalanceMsg" xml:space="preserve">
     <value>The amount to remove is greater than the current balance.</value>
@@ -388,11 +388,14 @@ Are you sure you want to end this session?</value>
   <data name="StartingBalanceNotSetMsg" xml:space="preserve">
     <value>Starting Balance was not set.</value>
   </data>
+  <data name="StartingBalanceRequiredValidationMsg" xml:space="preserve">
+    <value>Starting balance is required.</value>
+  </data>
   <data name="StartingBalanceValidationFormatMsg" xml:space="preserve">
     <value>Starting balance must be numeric.</value>
   </data>
   <data name="StartingBalanceValidationMsg" xml:space="preserve">
-    <value>To continue you must enter a starting balance greater than 0 and less than or equal to $250,000.</value>
+    <value>To continue you must enter a starting balance greater than 0 and less than or equal to {0:C}.</value>
   </data>
   <data name="SuccessTitle" xml:space="preserve">
     <value>Success</value>

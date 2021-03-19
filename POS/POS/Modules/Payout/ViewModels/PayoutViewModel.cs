@@ -9,7 +9,6 @@ using POS.Core;
 using POS.Core.Vouchers;
 using POS.Modules.Main;
 using POS.Modules.Payout.Services.ViewModels;
-using POS.Modules.Settings.ViewModels;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -10,7 +10,6 @@ using POS.Core.ValueObjects;
 using POS.Core.Vouchers;
 using POS.Modules.Payout.Services.ViewModels;
 using POS.Modules.Payout.ViewModels.Prompts;
-using POS.Modules.Settings.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

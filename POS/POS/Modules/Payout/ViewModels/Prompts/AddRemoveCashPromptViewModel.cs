@@ -5,7 +5,9 @@ using Framework.WPF.ErrorHandling;
 using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Core;
+using POS.Core.CashDrawer;
 using POS.Core.Transaction;
+using POS.Core.ValueObjects;
 using POS.Modules.Main.ViewModels;
 using POS.Modules.Payout.Settings;
 using System;
@@ -20,36 +22,28 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         private readonly IUserAuthenticationService _userAuthenticateService;
         private readonly IErrorHandlingService _errorHandlingService;
         private readonly IUserSession _userSession;
-        private readonly PayoutConfigSettings _payoutConfigSettings;
+        private CashDrawer _cashDrawer;
+        private TransactionType _transType;
 
         public AddRemoveCashPromptViewModel(
             IUserAuthenticationService userAuthenticateService, 
             IErrorHandlingService errorHandlingService, 
-            IUserSession userSession,
-            PayoutConfigSettings payoutConfigSettings)
+            IUserSession userSession)
         {
             _userAuthenticateService = userAuthenticateService;
             _errorHandlingService = errorHandlingService;
             _userSession = userSession;
-            _payoutConfigSettings = payoutConfigSettings;
-
-            CashLimit = _payoutConfigSettings.AddCashLimit;
         }
-        public void Initialize(TransactionType transType)
+        public void Initialize(TransactionType transType, CashDrawer cashDrawer)
         {
+            _transType = transType;
+            _cashDrawer = cashDrawer;
             IsAuthenticated = default;
             Alerts = new ObservableCollection<TaskAlert>();
             DisplayName = (transType == TransactionType.R) ? POSResources.RemoveCashTitle : POSResources.AddCashTitle;
             Options = PromptOptions.OkCancel;
         }
-        private decimal _cashLimit;
-        public decimal CashLimit
-        {
-            get => _cashLimit; set
-            {
-                _cashLimit = value;
-            }
-        }
+
         private decimal? _amount;
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "UIErrorCashPromptAmountRequiredMsg", ErrorMessageResourceType = typeof(POSResources))]
         [RegularExpression(@"^(\d+(\.\d{0,2})?|\.?\d{1,2})$", ErrorMessageResourceName = "UIErrorCashPromptAmountFormatMsg", ErrorMessageResourceType = typeof(POSResources))]
@@ -77,39 +71,44 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             {
                 Alerts.Clear();
                 if (Validate())
-                {                    
-                    if (Amount.GetValueOrDefault() == 0 || string.IsNullOrEmpty(Password))
+                {
+                    if (_transType == TransactionType.R || _transType == TransactionType.A)
                     {
-                        Alerts.Add(new TaskAlert(AlertType.Error, POSResources.CashDrawerPromptAmountPasswordMsg));
-                        return;
-                    }
-                    if(Amount.GetValueOrDefault()>CashLimit)
-                    {
-                        Alerts.Add(new TaskAlert(AlertType.Error, String.Format(POSResources.CashDrawerAmountLimitMessage,CashLimit)));
-                        return;
-                    }
-
-                    var loginResult = await _userAuthenticateService.LoginAsync(_userSession.User.UserName, Password);
-
-                    var errorMessage = GetLoginErrorMessage(loginResult);
-
-                    var noLogingError = string.IsNullOrWhiteSpace(errorMessage);
-
-                    if (noLogingError)
-                    {
-                        IsAuthenticated = true;
-                        await base.Ok();
-                    }
-                    else
-                    {
-                        Alerts.Add(new TaskAlert
+                        if (Amount.GetValueOrDefault() == 0 || string.IsNullOrEmpty(Password))
                         {
-                            AlertType = AlertType.Error,
-                            Message = errorMessage
-                        });
+                            Alerts.Add(new TaskAlert(AlertType.Error, POSResources.CashDrawerPromptAmountPasswordMsg));
+                            return;
+                        }
 
-                        //for security purposes clear the password
-                        Password = string.Empty;
+                        var isCachDrawerActionValid = _cashDrawer.ValidateAction(Money.Create(Amount.GetValueOrDefault()).Value, _transType == TransactionType.A);
+                        if (isCachDrawerActionValid.IsFailure)
+                        {
+                            Alerts.Add(new TaskAlert(AlertType.Error, isCachDrawerActionValid.Error));
+                            return;
+                        }
+
+                        var loginResult = await _userAuthenticateService.LoginAsync(_userSession.User.UserName, Password);
+
+                        var errorMessage = GetLoginErrorMessage(loginResult);
+
+                        var noLogingError = string.IsNullOrWhiteSpace(errorMessage);
+
+                        if (noLogingError)
+                        {
+                            IsAuthenticated = true;
+                            await base.Ok();
+                        }
+                        else
+                        {
+                            Alerts.Add(new TaskAlert
+                            {
+                                AlertType = AlertType.Error,
+                                Message = errorMessage
+                            });
+
+                            //for security purposes clear the password
+                            Password = string.Empty;
+                        }
                     }
                 }
                 else

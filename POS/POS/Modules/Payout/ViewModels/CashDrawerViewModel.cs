@@ -17,6 +17,7 @@ using POS.Core.PayoutSettings;
 using POS.Core.Session;
 using POS.Core.Transaction;
 using POS.Core.ValueObjects;
+using POS.Modules.Payout.Settings;
 using POS.Modules.Payout.ViewModels.Prompts;
 using POS.Printer.Models;
 using System;
@@ -40,6 +41,7 @@ namespace POS.Modules.Payout.ViewModels
         private readonly ILogEventDataService _logEventService;
 
         private readonly Session _session;
+        private readonly PayoutConfigSettings _payoutConfigSettings;
         private readonly SystemContext _systemContext;
         private readonly IUserAdministrationService _userAdministrationService;
         private CashDrawer _cashDrawer = default;
@@ -64,6 +66,7 @@ namespace POS.Modules.Payout.ViewModels
         public CashDrawerViewModel(
             SystemContext systemContext,
             Session session,
+            PayoutConfigSettings payoutConfigSettings,
             IMessageBoxService messageBoxService, 
             ILogEventDataService logEventService, 
             IPrintService printService, 
@@ -76,6 +79,7 @@ namespace POS.Modules.Payout.ViewModels
         {
             _systemContext = systemContext;
             _session = session;
+            _payoutConfigSettings = payoutConfigSettings;
             _messageBoxService = messageBoxService;            
             _logEventService = logEventService;
             _printService = printService;
@@ -134,7 +138,8 @@ namespace POS.Modules.Payout.ViewModels
                     (
                         isRemoveCash ? 
                         TransactionType.R : 
-                        TransactionType.A
+                        TransactionType.A,
+                        _cashDrawer
                     );
                 var removeCashPromptViewModelResult = _messageBoxService.ShowModal(addRemoveCashPromptViewModel);
 
@@ -209,7 +214,7 @@ namespace POS.Modules.Payout.ViewModels
                 return Result.Success();
             }
 
-            var startingBalancePromptViewModel = new StartingBalancePromptViewModel();
+            var startingBalancePromptViewModel = _serviceLocator.Resolve<StartingBalancePromptViewModel>();
             var startingBalancePromptViewModelResult = _messageBoxService.ShowModal(startingBalancePromptViewModel);
             if (startingBalancePromptViewModelResult.Selection == PromptOptions.Cancel)
             {
@@ -217,7 +222,7 @@ namespace POS.Modules.Payout.ViewModels
                 return Result.Failure(POSResources.StartingBalanceNotSetMsg);
             }
 
-            _cashDrawer = new CashDrawer((StartingBalance)startingBalancePromptViewModelResult.StartingBalanceValue);
+            _cashDrawer = new CashDrawer((StartingBalance)startingBalancePromptViewModelResult.StartingBalanceValue, Money.Create(_payoutConfigSettings.CashDrawerLimit).Value);
             _session.CurrentCashDrawerBalance = _cashDrawer.CurrentBalance;
             
             if (_session.HasCashDrawer)
@@ -237,7 +242,7 @@ namespace POS.Modules.Payout.ViewModels
                 if (_session.HasCashDrawer)
                 {
                     var cashDrawerSummaryDto = await _cashDrawerRepository.GetCashDrawerSummary(_session.Id);
-                    _cashDrawer = new CashDrawer((StartingBalance)cashDrawerSummaryDto.StartingBalance);
+                    _cashDrawer = new CashDrawer((StartingBalance)cashDrawerSummaryDto.StartingBalance, Money.Create(_payoutConfigSettings.CashDrawerLimit).Value);
                     _cashDrawer.SetCashDrawerValues(cashDrawerSummaryDto);
                     _session.CurrentCashDrawerBalance = CurrentBalance;
                     NotifyCashDrawerChanged();
@@ -271,10 +276,10 @@ namespace POS.Modules.Payout.ViewModels
 
         public async Task<Result> AddCash(Money amount)
         {
-            var r = _cashDrawer.AddCash(amount);
-            if (r.IsFailure)
+            var addCashResult = _cashDrawer.AddCash(amount);
+            if (addCashResult.IsFailure)
             {
-                return r;
+                return addCashResult;
             }
             var id = await _cashDrawerRepository.InsertTransaction(_session.Username, _session.Id, TransactionType.A, amount, Environment.MachineName, _systemContext.Location.LocationId);
             _printService.PrintAddRemoveCashReceipt(new PrintAddRemoveCashReceiptRequest(_session.Username, _session.Id, amount, id, TransactionType.A));

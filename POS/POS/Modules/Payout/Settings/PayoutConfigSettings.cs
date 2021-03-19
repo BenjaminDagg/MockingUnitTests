@@ -7,6 +7,6 @@ namespace POS.Modules.Payout.Settings
         public bool PrintNameAndSSNLabelsForJackpot { get; set; }
         public bool PrintDuplicateCustomerReceipt { get; set; }
         public bool IsSupervisorApprovalActive { get; set; }
-        public decimal AddCashLimit { get; set; }
+        public decimal CashDrawerLimit { get; set; }
     }
 }

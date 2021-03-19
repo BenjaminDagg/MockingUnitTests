@@ -154,6 +154,11 @@ Implement new POS Theme
 - seperator height changed for Device management settings
 - Updated voucher validation error messages to include the barcode.
 - Modified Payout Config Keys to have category 'Payout' and consolidate into one class
-- Added functionality to modify recipt printout for Jackpot
+- Added functionality to modify receipt printout for Jackpot
 - Added bold to payout label and amount on the payout receipt
 - Updated ReceiptLayoutService to use StringBuilder 
+
+##03/19/2021
+###Updated
+- Updated Cash Drawer Limit so that the total amount in the cash drawer is bounded by the configured limit
+- Updated the Starting balance functionality to honor the Cash Drawer limit that is configured in database

@@ -41,7 +41,7 @@ namespace POS.Infrastructure.Printer
 
         public Result PrintRaw(string printerName, string data)
         {
-            Result r;
+            Result result;
             var hPrinter = IntPtr.Zero;
             var dataSize = data.Length;
             var dataToSend = Marshal.StringToCoTaskMemAnsi(data);
@@ -57,17 +57,17 @@ namespace POS.Infrastructure.Printer
                 EndPagePrinter(hPrinter);
                 EndDocPrinter(hPrinter);
                 ClosePrinter(hPrinter);
-                r = Result.Success(true);
+                result = Result.Success(true);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                r = Result.Failure(e.Message);
+                result = Result.Failure(exception.Message);
             }
             finally
             {
                 Marshal.FreeCoTaskMem(dataToSend);
             }
-            return r;
+            return result;
         }        
     }
 }

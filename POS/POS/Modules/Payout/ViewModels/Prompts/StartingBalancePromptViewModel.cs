@@ -3,6 +3,7 @@ using Framework.WPF.ScreenManagement.Prompt;
 using POS.Core;
 using POS.Core.ValueObjects;
 using POS.Modules.Main.ViewModels;
+using POS.Modules.Payout.Settings;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -11,15 +12,17 @@ namespace POS.Modules.Payout.ViewModels.Prompts
 {
     public class StartingBalancePromptViewModel : MessageBoxPromptViewModel
     {
-        public StartingBalancePromptViewModel()
+        private readonly PayoutConfigSettings _payoutConfigSettings;
+        public StartingBalancePromptViewModel(PayoutConfigSettings payoutConfigSettings)
         {
-            Initialize();
+            _payoutConfigSettings = payoutConfigSettings;
+            Initialize();            
         }
         public ObservableCollection<TaskAlert> Alerts { get; set; }
 
-        private decimal? startingBalance;
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "StartingBalanceValidationMsg", ErrorMessageResourceType = typeof(POSResources))]
-        [Range(typeof(decimal), "0", "250000.00", ErrorMessageResourceName = "StartingBalanceValidationMsg", ErrorMessageResourceType = typeof(POSResources))]
+        private decimal? startingBalance;       
+
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "StartingBalanceRequiredValidationMsg", ErrorMessageResourceType = typeof(POSResources))]
         [RegularExpression(@"^(\d+(\.\d{0,2})?|\.?\d{1,2})$", ErrorMessageResourceName = "StartingBalanceValidationFormatMsg", ErrorMessageResourceType = typeof(POSResources))]
         public decimal? StartingBalanceValue 
         {
@@ -32,6 +35,16 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             DisplayName = POSResources.CashDrawerStartingBalanceTitle;
             Options = PromptOptions.OkCancel;
             Alerts = new ObservableCollection<TaskAlert>();
+        }
+
+        public override bool Validate()
+        {
+            if(StartingBalanceValue.GetValueOrDefault() > _payoutConfigSettings.CashDrawerLimit)
+            {
+                Error = string.Format(POSResources.StartingBalanceValidationMsg, _payoutConfigSettings.CashDrawerLimit);
+                return false;
+            }
+            return base.Validate();
         }
 
         public override async Task Ok()

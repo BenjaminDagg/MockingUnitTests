@@ -152,7 +152,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter amount less than {0:C}.
+        ///   Looks up a localized string similar to The cash drawer cannot contain more than {0:C}..
         /// </summary>
         public static string CashDrawerAmountLimitMessage {
             get {
@@ -872,6 +872,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Starting balance is required..
+        /// </summary>
+        public static string StartingBalanceRequiredValidationMsg {
+            get {
+                return ResourceManager.GetString("StartingBalanceRequiredValidationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Starting balance must be numeric..
         /// </summary>
         public static string StartingBalanceValidationFormatMsg {
@@ -881,7 +890,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To continue you must enter a starting balance greater than 0 and less than or equal to $250,000..
+        ///   Looks up a localized string similar to To continue you must enter a starting balance greater than 0 and less than or equal to {0:C}..
         /// </summary>
         public static string StartingBalanceValidationMsg {
             get {
