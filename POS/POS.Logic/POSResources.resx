@@ -395,7 +395,8 @@ Are you sure you want to end this session?</value>
     <value>Starting balance must be numeric.</value>
   </data>
   <data name="StartingBalanceValidationMsg" xml:space="preserve">
-    <value>To continue you must enter a starting balance greater than 0 and less than or equal to {0:C}.</value>
+    <value>To continue you must enter a starting balance greater than 0
+and less than or equal to {0:C}.</value>
   </data>
   <data name="SuccessTitle" xml:space="preserve">
     <value>Success</value>
@@ -410,7 +411,8 @@ Are you sure you want to end this session?</value>
     <value>Unable to scan voucher.  You cannot exceed 25 vouchers in a transaction.</value>
   </data>
   <data name="TotalPayoutExceedsCashDrawerMsg" xml:space="preserve">
-    <value>The amount to pay exceeds the cash drawer balance.  Please add cash to the cash drawer and try again.</value>
+    <value>The amount to pay exceeds the cash drawer balance.
+Please add cash to the cash drawer and try again.</value>
   </data>
   <data name="TransactionVoucherAlreadyScannedMsg" xml:space="preserve">
     <value>Voucher {0} has already been scanned.</value>
@@ -912,7 +914,8 @@ Scan Voucher.</value>
     <value>Voucher Detail</value>
   </data>
   <data name="VoucherExceedsCashDrawerMsg" xml:space="preserve">
-    <value>Voucher {0} amount exceeds the cash drawer balance.  Please add cash to the cash drawer and try again.</value>
+    <value>Voucher {0} amount exceeds the cash drawer balance.
+Please add cash to the cash drawer and try again.</value>
   </data>
   <data name="VoucherExpiredMsg" xml:space="preserve">
     <value>Voucher {0} is expired.</value>

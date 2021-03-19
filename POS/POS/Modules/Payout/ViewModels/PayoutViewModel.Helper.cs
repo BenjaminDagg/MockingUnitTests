@@ -26,6 +26,7 @@ namespace POS.Modules.Payout.ViewModels
         private SearchBarcodeViewModel _searchBarcodeViewModel;
         private TransactionViewModel _transactionViewModel;
         private bool? _payoutInitializedSuccessfully = null;
+        private bool _isPayoutInitialized = false;
         private static readonly SemaphoreSlim _semaphoreSlimInitialize = new SemaphoreSlim(1, 1);
 
         private async Task Initialize()
@@ -62,6 +63,7 @@ namespace POS.Modules.Payout.ViewModels
                     if (beginUserSessionResult.IsSuccess && canPayoutInitializeResult.IsSuccess)
                     {
                         PayoutInitializedSuccessfully = true;
+                        IsPayoutInitialized = true;
                         Alerts.Add(new TaskAlert(AlertType.Success, POSResources.PayoutSessionInitializedSuccessfullyMsg));
                         await OnSessionSucessActivity();
                     }
@@ -191,6 +193,7 @@ namespace POS.Modules.Payout.ViewModels
             _payoutViewServices.Session.EndSession();
             _payoutViewServices.Context.Reset();
             _payoutViewServices.EventAggregator.Unsubscribe(this);
+            IsPayoutInitialized = false;
 
             var msg = $"Payout Session Ended {_payoutViewServices.Session.Id.Value}";
             _payoutViewServices.LogEventService.LogEventToDatabase(PayoutEventType.SessionEnded, PayoutEventType.SessionEnded.ToString(), msg, _payoutViewServices.Session.UserId);

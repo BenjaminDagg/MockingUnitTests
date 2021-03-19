@@ -44,7 +44,7 @@ namespace POS.Modules.Payout.Views
             Application.Current.Dispatcher.Invoke(() =>
             {
                if(VoucherNumberTextBox != null)
-                {
+               {
                     VoucherNumberTextBox.Focus();
                     VoucherNumberTextBox.CaretIndex = VoucherNumberTextBox.Text.Length;
                }

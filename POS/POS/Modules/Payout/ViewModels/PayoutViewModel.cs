@@ -68,7 +68,11 @@ namespace POS.Modules.Payout.ViewModels
             get => _payoutInitializedSuccessfully; 
             set => Set(ref _payoutInitializedSuccessfully, value); 
         }
-
+        public bool IsPayoutInitialized
+        {
+            get => _isPayoutInitialized;
+            set => Set(ref _isPayoutInitialized, value);
+        }
         public SearchBarcodeViewModel SearchBarcodeItem 
         { 
             get => _searchBarcodeViewModel; 
@@ -101,8 +105,10 @@ namespace POS.Modules.Payout.ViewModels
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-
-            await Initialize();
+            if (!_isPayoutInitialized)
+            {
+                await Initialize();
+            }
         }
         public override async Task TryCloseAsync(bool? dialogResult = null)
         {

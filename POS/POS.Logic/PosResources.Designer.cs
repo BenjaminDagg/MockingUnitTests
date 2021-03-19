@@ -890,7 +890,8 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To continue you must enter a starting balance greater than 0 and less than or equal to {0:C}..
+        ///   Looks up a localized string similar to To continue you must enter a starting balance greater than 0
+        ///and less than or equal to {0:C}..
         /// </summary>
         public static string StartingBalanceValidationMsg {
             get {
@@ -935,7 +936,8 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount to pay exceeds the cash drawer balance.  Please add cash to the cash drawer and try again..
+        ///   Looks up a localized string similar to The amount to pay exceeds the cash drawer balance.
+        ///Please add cash to the cash drawer and try again..
         /// </summary>
         public static string TotalPayoutExceedsCashDrawerMsg {
             get {
@@ -2439,7 +2441,8 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voucher {0} amount exceeds the cash drawer balance.  Please add cash to the cash drawer and try again..
+        ///   Looks up a localized string similar to Voucher {0} amount exceeds the cash drawer balance.
+        ///Please add cash to the cash drawer and try again..
         /// </summary>
         public static string VoucherExceedsCashDrawerMsg {
             get {
