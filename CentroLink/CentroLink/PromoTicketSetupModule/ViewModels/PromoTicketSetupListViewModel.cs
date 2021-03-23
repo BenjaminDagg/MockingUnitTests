@@ -190,9 +190,13 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                     }
                 }
                 catch(Exception exception)
-                {
+                {   
+                    Alerts.Clear();
+                    var message = "Promo Ticket failed to turn on or off.";
+                    Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = message });
                     await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.TurnPromoTicketOnOffFailed,
-                                        $"Promo Ticket failed to turn on or off.", exception);
+                                        message + " " + exception.Message, exception);
+                    await HandleErrorAsync(message + Environment.NewLine + exception.Message, exception);
                 }
             }
         }
