@@ -389,6 +389,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
         private string GetFormattedMessageCommand(string message, string ipAddress = default)
         {
             StringBuilder commandStringBuilder = new StringBuilder();
+            serial++;
             return commandStringBuilder
                 .Append(serial.ToString())
                 .Append(",")

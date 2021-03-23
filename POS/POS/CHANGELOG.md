@@ -174,3 +174,8 @@ Implement new POS Theme
 	- Fixed the pop re-appearing after initializaion on loading Payout Screen
 	- Updated Alert Messages to fit propery in the designated area
 	- Updated Enter Button Style for POS
+
+##03/23/2021
+###Updated
+- 52232
+	- Updated the sequence number in messages when communication with TCP
