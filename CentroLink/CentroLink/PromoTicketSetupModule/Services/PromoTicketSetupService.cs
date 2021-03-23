@@ -57,5 +57,13 @@ namespace CentroLink.PromoTicketSetupModule.Services
         {
             return _promoTicketSetupDataService.GetAccountingOffset();
         }
+        public int GetPrintPromo()
+        {
+            return _promoTicketSetupDataService.GetPrintPromo();
+        }
+        public void SetPrintPromo(bool printEntryTicket)
+        {
+             _promoTicketSetupDataService.SetPrintPromo(printEntryTicket);
+        }
     }
 }

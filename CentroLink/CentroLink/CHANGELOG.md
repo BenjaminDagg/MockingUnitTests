@@ -40,3 +40,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ##03/11/2021
 ###Update
 - updated Promo Start DatePicker to be disabled if promo schedule started
+
+##03/23/2021
+- 53041 - Create functionality to toggle Promo Ticket Printing On/Off.

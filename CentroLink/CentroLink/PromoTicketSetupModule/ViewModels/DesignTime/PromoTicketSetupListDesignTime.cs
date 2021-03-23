@@ -11,7 +11,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels.DesignTime
     public class PromoTicketSetupListDesignTime : PromoTicketSetupListViewModel
     {
         public PromoTicketSetupListDesignTime()
-            : base(null, null, null)
+            : base(null, null, null, null)
         {
             PromoTicketList = new ObservableCollection<PromoTicketModel>();
             for (int i = 1; i <= 30; i++)
