@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using CentroLink.PromoTicketSetupModule.DatabaseEntities;
 using Framework.WPF.ScreenManagement.Alert;
 using Framework.WPF.ScreenManagement.Prompt;
+using CentroLink.PromoTicketSetupModule.Tcp;
+using System.Text;
 
 namespace CentroLink.PromoTicketSetupModule.ViewModels
 {
@@ -20,9 +22,12 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
     {
         private readonly IPromoTicketSetupService _promoTicketSetupService;
         private readonly PromoTicketSetupSettings _promoTicketSetupSettings;
+        private readonly TcpConnectionSettings _tcpConnectionSettings;
         private ObservableCollection<PromoTicketModel> _promoTicketList;
         private PromoTicketModel _selectedPromoTicket;
         private int _dayNumberLimit;
+        private int _promoTicketSwitch;
+        private int _serial = default;
 
         public int DayNumberLimit
         {
@@ -31,6 +36,16 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
             {
                 _dayNumberLimit = value;
                 NotifyOfPropertyChange(nameof(DayNumberLimit));
+            }
+        }
+
+        public int PromoTicketSwitch
+        {
+            get => _promoTicketSwitch;
+            set
+            {
+                _promoTicketSwitch = value;
+                NotifyOfPropertyChange(nameof(PromoTicketSwitch));
             }
         }
         public PromoTicketModel SelectedPromoTicket
@@ -68,12 +83,15 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
             }
         }
 
-        public PromoTicketSetupListViewModel(IScreenServices screenServices, 
-            IPromoTicketSetupService promoTicketSetupService, PromoTicketSetupSettings promoTicketSetupSettings)
+        public PromoTicketSetupListViewModel(IScreenServices screenServices,
+            IPromoTicketSetupService promoTicketSetupService,
+            PromoTicketSetupSettings promoTicketSetupSettings,
+            TcpConnectionSettings tcpConnectionSettings)
             : base(screenServices)
         {
             _promoTicketSetupService = promoTicketSetupService;
             _promoTicketSetupSettings = promoTicketSetupSettings;
+            _tcpConnectionSettings = tcpConnectionSettings;
             SetDefaults();
         }
 
@@ -84,6 +102,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         {
             DisplayName = "Promotional Entry Tickets Schedule";
             DayNumberLimit = _promoTicketSetupSettings.DefaultPromoEntryScheduleDayLimit;
+            PromoTicketSwitch = _promoTicketSetupService.GetPrintPromo();
         }
 
         /// <summary>
@@ -103,7 +122,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         /// Refreshes the promoTicket setup list. Also called by Refresh button
         /// </summary>
         public virtual void RefreshList()
-        {            
+        {
             PromoTicketList = new ObservableCollection<PromoTicketModel>(
                 _promoTicketSetupService.GetPromoTicketSetupList(DayNumberLimit)
                 );
@@ -132,9 +151,53 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
         {
             if (CanEditSelectedPromoTicket == false) return;
             var breadcrumb = new EditSelectedPromoTicketBreadcrumbDef().GetBreadcrumb();
-            var arg = SelectedPromoTicket.PromoTicketId;
             var source = new PromoTicketSetupMenuItem(Services.Navigation);
-            NavigateToScreen(typeof(PromoTicketSetupEditViewModel), source, breadcrumb, navigationArgument:arg);
+            NavigateToScreen(typeof(PromoTicketSetupEditViewModel), source, breadcrumb, navigationArgument: SelectedPromoTicket.PromoTicketId);
+        }
+
+        public async void TogglePromoTicket()
+        {
+            var isPromoTicketOff = PromoTicketSwitch == 0;
+            var confirmPromoTicketSwitch = await PromptUserAsync($"Are you sure you want to turn the Promo Ticket Printing {(isPromoTicketOff ? "on" : "off")}?", "Please Confirm",
+                            PromptOptions.YesNo, PromptTypes.Question);
+
+            if (confirmPromoTicketSwitch == PromptOptions.Yes)
+            {
+                TcpCommunicator tcpCommunicator = new TcpCommunicator(
+                    _tcpConnectionSettings.ServerAddress,
+                    _tcpConnectionSettings.ServerPort,
+                    _tcpConnectionSettings.ConnectionTimeoutMilliseconds
+                    );
+
+                var response = tcpCommunicator.SendMessage(
+                    BuildFormattedMessage(isPromoTicketOff ? "EntryTicketOn" : "EntryTicketOff")
+                    );
+                var reponseErrorCode = response.Split(',')[3];
+                if (reponseErrorCode == "0")
+                {
+                    _promoTicketSetupService.SetPrintPromo(isPromoTicketOff);
+                    PromoTicketSwitch = _promoTicketSetupService.GetPrintPromo();
+
+                    await LogEventToDatabaseAsync(isPromoTicketOff ? PromoTicketSetupEventTypes.TurnPromoTicketOn : PromoTicketSetupEventTypes.TurnPromoTicketOff,
+                                    $"Promo Ticket is turned {(isPromoTicketOff ? "ON" : "OFF")}");
+                }
+            }
+        }
+
+        private string BuildFormattedMessage(string message)
+        {
+            StringBuilder commandStringBuilder = new StringBuilder();
+            _serial++;
+            return commandStringBuilder
+                .Append(_serial.ToString())
+                .Append(",")
+                .Append("Z")
+                .Append(",")
+                .Append(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+                .Append(",")
+                .Append(message)
+                .Append(Environment.NewLine)
+                .ToString();
         }
 
         /// <summary>
@@ -161,7 +224,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                         {
                             if (_promoTicketSetupService.StopScheduleItem(SelectedPromoTicket.PromoTicketId))
                             {
-                                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketModified, 
+                                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketModified,
                                     $"Promo Schedule Stopped Prematurely with StartDate: {SelectedPromoTicket.PromoStart}, EndDate: {SelectedPromoTicket.PromoEnded}, Description: {SelectedPromoTicket.Comments}");
                                 RefreshList();
                             }
@@ -183,14 +246,14 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exeption)
             {
                 Alerts.Clear();
                 var message = "An error occurred while deleting Promo Schedule.";
                 Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = message });
-                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeletedFailed, message + " " + ex.Message, ex);
-                await HandleErrorAsync(message + Environment.NewLine + ex.Message, ex);
-            }   
+                await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.PromoTicketDeletedFailed, message + " " + exeption.Message, exeption);
+                await HandleErrorAsync(message + Environment.NewLine + exeption.Message, exeption);
+            }
         }
     }
 }

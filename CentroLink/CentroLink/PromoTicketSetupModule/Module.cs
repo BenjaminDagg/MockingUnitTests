@@ -16,6 +16,10 @@ namespace CentroLink.PromoTicketSetupModule
             services.AddSingleton<IDataConfig>(_ => promoTicketSetupSettings);
             services.AddSingleton(_ => promoTicketSetupSettings);
 
+            var tcpConnectionSettings = new TcpConnectionSettings();
+            services.AddSingleton<IDataConfig>(_ => tcpConnectionSettings);
+            services.AddSingleton(_ => tcpConnectionSettings);
+
             services.AddTransient<IMenuItem, PromoTicketSetupMenuItem>();
             services.AddTransient<IPromoTicketSetupService, PromoTicketSetupService>();
             services.AddTransient<IPromoTicketSetupDataService, PromoTicketSetupDataService>();

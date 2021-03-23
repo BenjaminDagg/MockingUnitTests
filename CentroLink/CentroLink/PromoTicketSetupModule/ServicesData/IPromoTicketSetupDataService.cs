@@ -18,5 +18,7 @@ namespace CentroLink.PromoTicketSetupModule.ServicesData
         bool StopItemSchedule(int promoScheduleId);
 
         int GetAccountingOffset();
+        int GetPrintPromo();
+        void SetPrintPromo(bool printEntryTicket);
     }
 }

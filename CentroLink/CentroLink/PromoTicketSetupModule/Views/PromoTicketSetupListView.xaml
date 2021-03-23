@@ -102,8 +102,10 @@
                     <TextBlock Margin="0, 4, 0, 0" Text=" calendar days."/>
                 </StackPanel>
 
+                <DockPanel HorizontalAlignment="Stretch">
                 <StackPanel Margin="0,2,0,0"
                             VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
                             Orientation="Horizontal">
 
                     <Button x:Name="Add"
@@ -127,7 +129,29 @@
                     <Button x:Name="RefreshList"
                             Margin="8,0"
                             Content="Refresh" />
+                    
                 </StackPanel>
+                    <StackPanel Margin="0,2,0,0" HorizontalAlignment="Right">
+                        <Button x:Name="TogglePromoTicket"
+                            Margin="8,0"
+                            HorizontalAlignment="Right">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Content" Value="Turn Promo Ticket On"/>
+                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="BorderBrush" Value="DarkRed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding PromoTicketSwitch}" Value="1">
+                                            <Setter Property="Content" Value="Turn Promo Ticket Off"/>
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="BorderBrush" Value="DarkGreen"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                    </DockPanel>
 
             </StackPanel>
 
