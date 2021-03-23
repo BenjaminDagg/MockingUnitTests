@@ -163,28 +163,36 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
 
             if (confirmPromoTicketSwitch == PromptOptions.Yes)
             {
-                TcpCommunicator tcpCommunicator = new TcpCommunicator(
-                    _tcpConnectionSettings.ServerAddress,
-                    _tcpConnectionSettings.ServerPort,
-                    _tcpConnectionSettings.ConnectionTimeoutMilliseconds
-                    );
-
-                var response = tcpCommunicator.SendMessage(
-                    BuildFormattedMessage(isPromoTicketOff ? "EntryTicketOn" : "EntryTicketOff")
-                    );
-                var reponseErrorCode = response.Split(',')[3];
-                if (reponseErrorCode == "0")
+                try
                 {
-                    _promoTicketSetupService.SetPrintPromo(isPromoTicketOff);
-                    PromoTicketSwitch = _promoTicketSetupService.GetPrintPromo();
+                    TcpCommunicator tcpCommunicator = new TcpCommunicator(
+                        _tcpConnectionSettings.ServerAddress,
+                        _tcpConnectionSettings.ServerPort,
+                        _tcpConnectionSettings.ConnectionTimeoutMilliseconds
+                        );
 
-                    await LogEventToDatabaseAsync(isPromoTicketOff ? PromoTicketSetupEventTypes.TurnPromoTicketOn : PromoTicketSetupEventTypes.TurnPromoTicketOff,
-                                    $"Promo Ticket is turned {(isPromoTicketOff ? "ON" : "OFF")}");
+                    var response = tcpCommunicator.SendMessage(
+                        BuildFormattedMessage(isPromoTicketOff ? "EntryTicketOn" : "EntryTicketOff")
+                        );
+                    var reponseErrorCode = response.Split(',')[3];
+                    if (reponseErrorCode == "0")
+                    {
+                        _promoTicketSetupService.SetPrintPromo(isPromoTicketOff);
+                        PromoTicketSwitch = _promoTicketSetupService.GetPrintPromo();
+
+                        await LogEventToDatabaseAsync(isPromoTicketOff ? PromoTicketSetupEventTypes.TurnPromoTicketOn : PromoTicketSetupEventTypes.TurnPromoTicketOff,
+                                        $"Promo Ticket is turned {(isPromoTicketOff ? "ON" : "OFF")}");
+                    }
+                    else
+                    {
+                        await PromptUserAsync($"Error occurred while turning {(isPromoTicketOff ? "on" : "off")} Promo Ticket Printing.", "Error",
+                            availableOptions: PromptOptions.Ok);
+                    }
                 }
-                else
+                catch(Exception exception)
                 {
-                    await PromptUserAsync($"Error occurred while turning {(isPromoTicketOff ? "on" : "off")} Promo Ticket Printing.", "Error", 
-                        availableOptions: PromptOptions.Ok);
+                    await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.TurnPromoTicketOnOffFailed,
+                                        $"Promo Ticket failed to turn on or off.", exception);
                 }
             }
         }

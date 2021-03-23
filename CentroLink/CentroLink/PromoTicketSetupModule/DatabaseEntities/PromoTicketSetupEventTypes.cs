@@ -10,6 +10,7 @@
         PromoTicketDeleted = 1122,
         PromoTicketDeletedFailed = 1123,
         TurnPromoTicketOn = 1124,
-        TurnPromoTicketOff = 1125
+        TurnPromoTicketOff = 1125,
+        TurnPromoTicketOnOffFailed = 1126
     }
 }
