@@ -183,7 +183,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                 }
                 else
                 {
-                    await PromptUserAsync($"Error occurred while turning {(isPromoTicketOff ? "on" : "off")} Promo Ticket Printing.", "Error", 
+                    await PromptUserAsync($"Error occurred while turning {(isPromoTicketOff ? "on" : "off")} Promo Ticket Printing.", "Error",
                         availableOptions: PromptOptions.Ok);
                 }
             }
