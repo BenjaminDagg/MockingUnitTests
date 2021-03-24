@@ -184,4 +184,5 @@ Implement new POS Theme
 - 53401 Buttond made bigger for accessibility 
 - 53402 Pop up title size increased , Cash Drawer font Increased ,Kepad adjusted and cureent transaction made bigger,Approval checkbox made bigger
 - 53501 Reports tab row size and font increased
+- 53180 - Implement Turn Promo Ticket On/Off
 - 53500 Added Print functionality for Cash drawer History
