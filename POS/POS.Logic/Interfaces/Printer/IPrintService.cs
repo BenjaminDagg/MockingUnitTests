@@ -17,5 +17,7 @@ namespace POS.Core.Interfaces.Printer
         void PrintTransaction(PrintTransactionRequest printTransactionRequest);
 
         void PrintAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest printAddRemoveCashReceiptRequest);
+
+        void PrintCashHistoryReceipt(PrintCashDrawerHistory printCashDrawerHistoryRequest);
     }
 }

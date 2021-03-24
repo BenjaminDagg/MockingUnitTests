@@ -12,5 +12,7 @@ namespace POS.Core.Interfaces
         string BuildTransactionReceipt(PrintTransactionRequest printTransactionRequest);
 
         string BuildAddRemoveCashReceipt(PrintAddRemoveCashReceiptRequest printAddRemoveCashReceiptRequest);
+
+        string BuildCashHistoryReceipt(PrintCashDrawerHistory printHistory);
     }
 }

@@ -175,6 +175,12 @@ Are you sure you want to end this session?</value>
   <data name="CashDrawerTitle" xml:space="preserve">
     <value>Cash Drawer</value>
   </data>
+  <data name="CashHistoryPrintedSuccessfully" xml:space="preserve">
+    <value>Cash History Printed Succesfully</value>
+  </data>
+  <data name="CashHistoryPrintFailed" xml:space="preserve">
+    <value>Failed To Print Cash History</value>
+  </data>
   <data name="ConfirmActionTitle" xml:space="preserve">
     <value>Confirm Action</value>
   </data>
@@ -192,6 +198,9 @@ Are you sure you want to end this session?</value>
   </data>
   <data name="DidNotGetPayoutApprovalMsg" xml:space="preserve">
     <value>Payout failure.  Supervisor authorization is required for one or more vouchers.  Please try again.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="HomeMenu" xml:space="preserve">
     <value>Home</value>
@@ -249,6 +258,18 @@ Are you sure you want to end this session?</value>
   </data>
   <data name="PayoutTransactionFailedMsg" xml:space="preserve">
     <value>Payout failure.  Error: {0}</value>
+  </data>
+  <data name="POSCashDrawerHistory" xml:space="preserve">
+    <value>Cash Drawer History</value>
+  </data>
+  <data name="POSCashHistoryAdded" xml:space="preserve">
+    <value>Cash Added</value>
+  </data>
+  <data name="POSCashHistoryDate" xml:space="preserve">
+    <value>Transaction Date</value>
+  </data>
+  <data name="POSCashHistoryRemoved" xml:space="preserve">
+    <value>Cash Removed</value>
   </data>
   <data name="PrintAddCashReceiptAction" xml:space="preserve">
     <value>Cash Added</value>

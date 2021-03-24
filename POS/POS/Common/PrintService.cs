@@ -89,5 +89,12 @@ namespace POS.Common
             var addRemoveCashReceipt = _layoutService.BuildAddRemoveCashReceipt(printAddRemoveCashReceiptRequest);
             _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, addRemoveCashReceipt);
         }
+
+        public void PrintCashHistoryReceipt(PrintCashDrawerHistory printCashDrawerHistoryRequest)
+        {
+            var cashDrawerHistoryReceipt = _layoutService.BuildCashHistoryReceipt(printCashDrawerHistoryRequest);
+            _rawPrintService.PrintRaw(_printerSettings.ReceiptPrinterName, cashDrawerHistoryReceipt);
+
+        }
     }
 }

@@ -133,5 +133,39 @@ namespace POS.Infrastructure.Services
             
             return BuildReceiptHeader() + rawPrintData.ToString() + BuildReceiptFooter();
         }
+
+        public string BuildCashHistoryReceipt(PrintCashDrawerHistory printHistory)
+        {
+            StringBuilder rawPrintData = new StringBuilder();
+            rawPrintData.Append(centerText + POSResources.POSCashDrawerHistory + crlf + crlf + leftAlignText);
+            rawPrintData.Append($"{leftAlignText}{POSResources.RawPrintUser}: {printHistory.Username}{crlf}");
+            foreach (var (Type, Amount,TransactionDate) in printHistory.PrintList)
+            {
+               rawPrintData.Append($"{crlf}{dashLine}"); 
+               if(Type=="Add")
+               {
+                   rawPrintData.Append($"{crlf}{POSResources.POSCashHistoryAdded}:{Amount:C}{crlf}");
+                   rawPrintData.Append($"{POSResources.POSCashHistoryDate}:{TransactionDate:M/d/yy HH:mm tt}");
+               } 
+               else if (Type == "Remove")
+               {
+                   rawPrintData.Append($"{crlf}{POSResources.POSCashHistoryRemoved}:{Amount:C}{crlf}");
+                   rawPrintData.Append($"{POSResources.POSCashHistoryDate}:{TransactionDate:M/d/yy HH:mm tt}");
+               }
+               else if (Type == "Payout")
+               {
+                   rawPrintData.Append($"{crlf}{POSResources.RawPrintPayoutAmount}:{Amount:C}{crlf}");
+                   rawPrintData.Append($"{POSResources.POSCashHistoryDate}:{TransactionDate:M/d/yy HH:mm tt}");
+               }
+               else
+               {
+                   rawPrintData.Append($"{crlf}{Type}:{Amount:C}{crlf}");
+                   rawPrintData.Append($"{POSResources.POSCashHistoryDate}:{TransactionDate:M/d/yy HH:mm tt}");
+               }
+            }
+               
+            rawPrintData.Append($"{crlf}{dashLine}");
+            return BuildReceiptHeader() + rawPrintData.ToString() + BuildReceiptFooter();
+        }
     }
 }

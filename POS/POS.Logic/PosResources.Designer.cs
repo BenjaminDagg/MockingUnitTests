@@ -233,6 +233,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash History Printed Succesfully.
+        /// </summary>
+        public static string CashHistoryPrintedSuccessfully {
+            get {
+                return ResourceManager.GetString("CashHistoryPrintedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed To Print Cash History.
+        /// </summary>
+        public static string CashHistoryPrintFailed {
+            get {
+                return ResourceManager.GetString("CashHistoryPrintFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Action.
         /// </summary>
         public static string ConfirmActionTitle {
@@ -283,6 +301,15 @@ namespace POS.Core {
         public static string DidNotGetPayoutApprovalMsg {
             get {
                 return ResourceManager.GetString("DidNotGetPayoutApprovalMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string ErrorTitle {
+            get {
+                return ResourceManager.GetString("ErrorTitle", resourceCulture);
             }
         }
         
@@ -454,6 +481,42 @@ namespace POS.Core {
         public static string PayoutTransactionFailedMsg {
             get {
                 return ResourceManager.GetString("PayoutTransactionFailedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash Drawer History.
+        /// </summary>
+        public static string POSCashDrawerHistory {
+            get {
+                return ResourceManager.GetString("POSCashDrawerHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash Added.
+        /// </summary>
+        public static string POSCashHistoryAdded {
+            get {
+                return ResourceManager.GetString("POSCashHistoryAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction Date.
+        /// </summary>
+        public static string POSCashHistoryDate {
+            get {
+                return ResourceManager.GetString("POSCashHistoryDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash Removed.
+        /// </summary>
+        public static string POSCashHistoryRemoved {
+            get {
+                return ResourceManager.GetString("POSCashHistoryRemoved", resourceCulture);
             }
         }
         
