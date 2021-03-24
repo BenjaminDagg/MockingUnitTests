@@ -179,3 +179,8 @@ Implement new POS Theme
 ###Updated
 - 52232
 	- Updated the sequence number in messages when communication with TCP
+##03/24/2021
+- 53400 Tab order changed to Payout-DeviceManagement-Reports-Settings
+- 53401 Buttond made bigger for accessibility 
+- 53402 Pop up title size increased , Cash Drawer font Increased ,Kepad adjusted and cureent transaction made bigger,Approval checkbox made bigger
+- 53501 Reports tab row size and font increased

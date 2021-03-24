@@ -467,6 +467,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print Cash History.
+        /// </summary>
+        public static string PrintCashHistory {
+            get {
+                return ResourceManager.GetString("PrintCashHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receipt printer is not available or configured..
         /// </summary>
         public static string PrinterNotAvailableMsg {

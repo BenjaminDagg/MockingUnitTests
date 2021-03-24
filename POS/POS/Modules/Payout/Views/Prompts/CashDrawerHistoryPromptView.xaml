@@ -6,7 +6,7 @@
                               xmlns:controls="clr-namespace:Framework.WPF.UI.Controls;assembly=Framework.WPF.UI"
                               xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
                               xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
-                              Title="{Binding Path=DisplayName}"  
+                              Title="{Binding Path=DisplayName}"
                               Width="700"
                               mc:Ignorable="d"
                               WindowStartupLocation="CenterOwner"
@@ -85,18 +85,29 @@
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Bottom"
                                 />
-
-            <dgmaterial:CustomButtonControlEx x:Name="Ok"
-                                              FontSize="18" 
-                                              Foreground="{StaticResource DgWhite}"
-                                              Background="{StaticResource DgDefaultButtonBackground}" 
-                                              Width="137" 
-                                              Height="40"
-                                              HorizontalAlignment="Right"
-                                              Content="{x:Static resx:POSResources.UIOk}"
-                                              Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}"
-                                              Margin="0 0 0 0"
-                                              />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <dgmaterial:CustomButtonControlEx x:Name="PrintHistory"
+                                                  FontSize="18" 
+                                                  Foreground="{StaticResource DgWhite}"
+                                                  Background="{StaticResource DgDefaultButtonBackground}" 
+                                                  Width="167" 
+                                                  Height="40"
+                                                  HorizontalAlignment="Right"
+                                                  Content="{x:Static resx:POSResources.PrintCashHistory}"
+                                                  Margin="0 0 0 0"
+                />
+                <dgmaterial:CustomButtonControlEx x:Name="Ok"
+                                                  FontSize="18" 
+                                                  Foreground="{StaticResource DgWhite}"
+                                                  Background="{StaticResource DgDefaultButtonBackground}" 
+                                                  Width="137" 
+                                                  Height="40"
+                                                  HorizontalAlignment="Right"
+                                                  Content="{x:Static resx:POSResources.UIOk}"
+                                                  Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}"
+                                                  Margin="10 0 0 0"
+                />
+            </StackPanel>
         </StackPanel>
     </StackPanel>
 </controls:CustomWindowControl>

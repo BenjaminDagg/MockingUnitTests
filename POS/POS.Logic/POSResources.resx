@@ -253,6 +253,9 @@ Are you sure you want to end this session?</value>
   <data name="PrintAddCashReceiptAction" xml:space="preserve">
     <value>Cash Added</value>
   </data>
+  <data name="PrintCashHistory" xml:space="preserve">
+    <value>Print Cash History</value>
+  </data>
   <data name="PrinterNotAvailableMsg" xml:space="preserve">
     <value>Receipt printer is not available or configured.</value>
   </data>

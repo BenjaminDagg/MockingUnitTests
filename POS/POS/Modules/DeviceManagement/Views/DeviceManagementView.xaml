@@ -39,7 +39,7 @@
                                     HoverColor="{StaticResource DgHoverGreen}"
                                     IsEnabled="{Binding SelectAllOnLineActionEnabled}"
                                     Width="170" 
-                                    Height="54"
+                                    Height="74"
                                     Margin="5"/>
                     <dgmaterial:CustomButtonControlEx            
                                     cal:Message.Attach="SetAllOffline"
@@ -51,7 +51,7 @@
                                     HoverColor="{StaticResource DgRedShade}"
                                     IsEnabled="{Binding SelectAllOffLineActionEnabled}"
                                     Width="170" 
-                                    Height="54"
+                                    Height="74"
                                     Margin="5"/>
 
                 </StackPanel>
@@ -70,7 +70,7 @@
                                               HorizontalAlignment="Right"
                                               Grid.Column="0"
                                               Grid.Row="0" 
-                                              Margin="0 20 28 20">
+                                              Margin="0 40 50 20">
 
             </dgmaterial:CustomButtonControlEx>
             <DataGrid Grid.Row="1" 

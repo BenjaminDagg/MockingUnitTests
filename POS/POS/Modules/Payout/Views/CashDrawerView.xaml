@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="1000">
 
-    <GroupBox>
+    <GroupBox Margin="0,2,-10,2">
         <StackPanel>
             <ItemsControl Margin="0,2,0,2"
                       HorizontalAlignment="Stretch"
@@ -30,7 +30,7 @@
                         <TextBlock Grid.Column="0" 
                                     Text="{x:Static resx:POSResources.UICashDrawerTitle}" 
                                     Foreground="{StaticResource DgWhite}" 
-                                    FontSize="34" 
+                                    FontSize="45" 
                                     HorizontalAlignment="Left" 
                                     VerticalAlignment="Center"                               
                                     />
@@ -52,7 +52,7 @@
                                 Text="{Binding CashDrawerViewModel.CurrentBalance, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCurrentBalance}}" 
                                 Foreground="{StaticResource DgWhite}"
                                 FontWeight="Bold" 
-                                FontSize="30" 
+                                FontSize="35" 
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Bottom"
                                 />
@@ -62,15 +62,15 @@
 
             <TextBlock Text="{Binding CashDrawerViewModel.StartingBalance, StringFormat={x:Static resx:POSResources.UICashDrawerFormatStartingBalance}}"
                    Foreground="{StaticResource DgWhite}" 
-                   FontSize="25"
+                   FontSize="30"
                    Margin="0, 3"/>
             <TextBlock Text="{Binding CashDrawerViewModel.CashAdded, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCashAdded}}" 
                    Foreground="{StaticResource DgWhite}" 
-                   FontSize="25"
+                   FontSize="30"
                    Margin="0, 3"/>
             <TextBlock 
                    Foreground="{StaticResource DgWhite}"    
-                   FontSize="25"
+                   FontSize="30"
                    Margin="0, 3">
                 <Run Text="{x:Static resx:POSResources.UICashRemovedText}"/>
                 <Run Text=":"/>
@@ -78,7 +78,7 @@
             </TextBlock>
             <TextBlock Text="{Binding CashDrawerViewModel.TotalPayout, StringFormat={x:Static resx:POSResources.UICashDrawerFormatTotalPayout}}" 
                    Foreground="{StaticResource DgWhite}" 
-                   FontSize="25"
+                   FontSize="30"
                    Margin="0, 3"/>
 
             <StackPanel Margin="0, 20, 0, 0"

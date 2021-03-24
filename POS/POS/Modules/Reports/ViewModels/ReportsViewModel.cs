@@ -27,7 +27,7 @@ namespace POS.Modules.Reports.ViewModels
         }
 
         #region ITabItem
-        private int _indexPriority = 1004;
+        private int _indexPriority = 1003;
         public int IndexPriority
         {
             get => _indexPriority;
