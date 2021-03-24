@@ -1532,6 +1532,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Promo Ticket is turned {0}..
+        /// </summary>
+        public static string UIDeviceManagementSettingsPromoTicketMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagementSettingsPromoTicketMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connected.
         /// </summary>
         public static string UIDeviceManagementStateConnected {
@@ -1595,6 +1604,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to off.
+        /// </summary>
+        public static string UIDeviceManagerSettingsPromoTicketOff {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsPromoTicketOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to on.
+        /// </summary>
+        public static string UIDeviceManagerSettingsPromoTicketOn {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsPromoTicketOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure?.
         /// </summary>
         public static string UIDeviceManagerSettingsSetAllOfflineConfirm {
@@ -1645,6 +1672,42 @@ namespace POS.Core {
         public static string UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg {
             get {
                 return ResourceManager.GetString("UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Confirm.
+        /// </summary>
+        public static string UIDeviceManagerSettingsTogglePromoTicketConfirm {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsTogglePromoTicketConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to turn the Promo Ticket Printing {0}?.
+        /// </summary>
+        public static string UIDeviceManagerSettingsTogglePromoTicketMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsTogglePromoTicketMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn Promo Ticket Off.
+        /// </summary>
+        public static string UIDeviceManagerSettingsTurnPromoTicketOff {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsTurnPromoTicketOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn Promo Ticket On.
+        /// </summary>
+        public static string UIDeviceManagerSettingsTurnPromoTicketOn {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsTurnPromoTicketOn", resourceCulture);
             }
         }
         

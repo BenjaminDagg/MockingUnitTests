@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Common;
 using POS.Common.Events;
@@ -35,6 +36,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
         private readonly ITransactionPortalCommunicator _transactionPortalCommunicator;
         private readonly IEnumerable<IMessageAction> _messageActions;
         private readonly IDeviceDataService _deviceDataService;
+        private readonly IPromoTicketService _promoTicketService;
+        private readonly IUserSession _userSession;
         private IMessageAction _getAllMachinesAction = default;
 
         public readonly System.Timers.Timer _connectionStateTimer;
@@ -51,6 +54,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
             {
                 try
                 {
+                    PromoTicketSwitch = _promoTicketService.GetPrintPromo();
+
                     var deviceManagerSettingsAvailable = await CheckAndPrompForDeviceManagerSetup();
 
                     Server = String.Format("{0}:{1}", _deviceManagerSettings.ServiceEndPoint, _deviceManagerSettings.ServicePort);
@@ -74,7 +79,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                         var logMessage = Services.LogEvent.LogEventToDatabaseAsync(
                             TransactionPortalEventType.StartUpFailed,
                             "Connected to Transaction Portal successfully.",
-                            String.Empty
+                            String.Empty,
+                            _userSession.UserId
                             );
 
                         await SendMessageToTransactionPortal(ProcessGetMachinesDataRecieved, TransactionPortalActions.COMMAND_GETALLMACHINES);
@@ -94,7 +100,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                     await Services.LogEvent.LogEventToDatabaseAsync(
                         TransactionPortalEventType.StartUpFailed,
                         exception.Message,
-                        exception.ToString()
+                        exception.ToString(),
+                        _userSession.UserId
                         );
                 }
                 finally
@@ -121,7 +128,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                     await Services.LogEvent.LogEventToDatabaseAsync(
                         TransactionPortalEventType.SentMessageFailed,
                         $"Message: {message}, Error: {exception.Message}",
-                        exception.ToString()
+                        exception.ToString(),
+                        _userSession.UserId
                         );
                 }
             }
@@ -163,7 +171,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                             await Services.LogEvent.LogEventToDatabaseAsync(
                                 TransactionPortalEventType.StartUpFailed,
                                 "Connected to Transaction Portal successfully.",
-                                String.Empty
+                                String.Empty,
+                                _userSession.UserId
                                 );
                         }
                         catch (Exception exception)
@@ -171,7 +180,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                             await Services.LogEvent.LogEventToDatabaseAsync(
                                 TransactionPortalEventType.StartUpFailed,
                                 exception.Message,
-                                exception.ToString()
+                                exception.ToString(),
+                                _userSession.UserId
                                 );
                         }
                     }
@@ -229,6 +239,18 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 NotifyOfChangeToActionButtons();
             }
         }
+        private async Task TogglePromoTicketOnOff(string command)
+        {
+            if (_serverStatus != POSResources.UIDeviceManagementStateConnected)
+            {
+                await _messageBoxService.PromptAsync(POSResources.UIDeviceManagementServerDisabledMsg,
+                    POSResources.UIDeviceManagementServerDisabledCaptionMsg, PromptOptions.Ok, PromptTypes.Error);
+
+                return;
+            }
+
+            await SendMessageToTransactionPortal(null, command);
+        }
         private async void PollingAction()
         {
             if (_serverStatus == POSResources.UIDeviceManagementStateConnected)
@@ -247,7 +269,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 await Services.LogEvent.LogEventToDatabaseAsync(
                     TransactionPortalEventType.RecievedMessageFailed,
                     $"Message: {dataRecieved}, Error: {exception.Message}",
-                    exception.ToString()
+                    exception.ToString(),
+                    _userSession.UserId
                     );
             }
         }
@@ -402,6 +425,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 .Append(Environment.NewLine)
                 .ToString();
         }
+
         private async void ShutdownPortalCommunication()
         {
             _deviceManagementInitializedSuccessfully = false;
@@ -411,7 +435,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 await Services.LogEvent.LogEventToDatabaseAsync(
                     TransactionPortalEventType.ShutDownSuccess,
                     "Disconnect from Transaction Portal successfully.",
-                    String.Empty
+                    String.Empty,
+                    _userSession.UserId
                     );
             }
             catch (Exception exception)
@@ -419,7 +444,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 await Services.LogEvent.LogEventToDatabaseAsync(
                     TransactionPortalEventType.ShutDownFailed,
                     $"Message: Disconnect from Transaction Portal failed, Error: {exception.Message}",
-                    exception.ToString()
+                    exception.ToString(),
+                    _userSession.UserId
                     );
             }
         }

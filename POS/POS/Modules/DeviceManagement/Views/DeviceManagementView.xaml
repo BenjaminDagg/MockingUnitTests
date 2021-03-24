@@ -57,12 +57,10 @@
                 </StackPanel>
                     
             </Border>
-            <dgmaterial:CustomButtonControlEx x:Name="PromoTicketOnOff"
-                                              Style="{StaticResource DgCustomButtonControlExStyle}"
-                                              Content="{x:Static resx:POSResources.UIDeviceManagementPromoTicketOn}"
+            <dgmaterial:CustomButtonControlEx x:Name="TogglePromoTicketBtn"
+                                              cal:Message.Attach="TogglePromoTicket"
                                               FontSize="24" 
                                               Foreground="{StaticResource DgWhite}" 
-                                              Background="{StaticResource DgDefaultButtonBackground}" 
                                               Width="300"
                                               FontWeight="Bold"
                                               Height="54"
@@ -71,7 +69,18 @@
                                               Grid.Column="0"
                                               Grid.Row="0" 
                                               Margin="0 40 50 20">
-
+                <dgmaterial:CustomButtonControlEx.Style>
+                    <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource DgCustomButtonControlExStyle}">
+                        <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagerSettingsTurnPromoTicketOn}"/>
+                        <Setter Property="Background" Value="Red"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PromoTicketSwitch}" Value="1">
+                                <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagerSettingsTurnPromoTicketOff}"/>
+                                <Setter Property="Background" Value="Green"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </dgmaterial:CustomButtonControlEx.Style>
             </dgmaterial:CustomButtonControlEx>
             <DataGrid Grid.Row="1" 
                 ItemsSource="{Binding Devices}" 

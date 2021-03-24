@@ -1,10 +1,12 @@
 ﻿using Caliburn.Micro;
+using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using Framework.WPF.ScreenManagement.Prompt;
 using POS.Common;
 using POS.Core;
 using POS.Core.Config;
+using POS.Core.PromoTicket;
 using POS.Core.TransactionPortal;
 using POS.Infrastructure.TransactionPortal;
 using POS.Modules.DeviceManagement.Constants;
@@ -32,7 +34,9 @@ namespace POS.Modules.DeviceManagement.ViewModels
             IScreenServices screenManagementServices,
             ITransactionPortalCommunicator transactionPortalCommunicator,
             IEnumerable<IMessageAction> messageActions,
-            IDeviceDataService deviceDataService) : base(screenManagementServices)
+            IDeviceDataService deviceDataService,
+            IPromoTicketService promoTicketService,
+            IUserSession userSession) : base(screenManagementServices)
         {
             DisplayName = POSResources.UITabDeviceManagement;
 
@@ -42,7 +46,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
             _transactionPortalCommunicator = transactionPortalCommunicator;
             _messageActions = messageActions;
             _deviceDataService = deviceDataService;
-
+            _promoTicketService = promoTicketService;
+            _userSession = userSession;
             _connectionStateTimer = new System.Timers.Timer(1000);
             DeviceList = new ObservableCollection<Device>();
             Devices = CollectionViewSource.GetDefaultView(DeviceList);
@@ -51,6 +56,13 @@ namespace POS.Modules.DeviceManagement.ViewModels
         }
 
         #region PropertyChangeed Properties
+
+        private int _promoTicketSwitch;
+        public int PromoTicketSwitch
+        {
+            get => _promoTicketSwitch;
+            set => Set(ref _promoTicketSwitch, value);
+        }
         public bool? DeviceManagementInitializedSuccessfully
         {
             get => _deviceManagementInitializedSuccessfully;
@@ -204,7 +216,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                     await Services.LogEvent.LogEventToDatabaseAsync(
                             SelectedDevice.Online ? TransactionPortalEventType.DisableMachine : TransactionPortalEventType.EnableMachine,
                             $"Machine ID {SelectedDevice.DegID} has been {(SelectedDevice.Online ? "disabled" : "enabled")}.",
-                            String.Empty
+                            String.Empty,
+                            _userSession.UserId
                             );
                 }
 
@@ -229,7 +242,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 await Services.LogEvent.LogEventToDatabaseAsync(
                     TransactionPortalEventType.DisableAllMachines,
                     "All machines have been disabled.",
-                    String.Empty
+                    String.Empty,
+                    _userSession.UserId
                     );
             }
         }
@@ -251,8 +265,47 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 await Services.LogEvent.LogEventToDatabaseAsync(
                     TransactionPortalEventType.EnableAllMachines,
                     "All machines have been enabled.",
-                    String.Empty
+                    String.Empty,
+                    _userSession.UserId
                     );
+            }
+        }
+
+        public async Task TogglePromoTicket()
+        {
+            var isPromoTicketOff = PromoTicketSwitch == 0;
+            var onOff = (isPromoTicketOff ? POSResources.UIDeviceManagerSettingsPromoTicketOn : POSResources.UIDeviceManagerSettingsPromoTicketOff);
+
+            var promptOpion = await _messageBoxService.PromptAsync(
+                    String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketMsg, onOff),
+                    POSResources.UIDeviceManagerSettingsTogglePromoTicketConfirm,
+                    PromptOptions.YesNo,
+                    promptType: PromptTypes.Question
+                    );
+
+            if (promptOpion == PromptOptions.Yes)
+            {
+                try
+                {
+                    await TogglePromoTicketOnOff(isPromoTicketOff ? TransactionPortalActions.COMMAND_ENTRY_TICKET_ON : TransactionPortalActions.COMMAND_ENTRY_TICKET_OFF);
+
+                    _promoTicketService.SetPrintPromo(isPromoTicketOff);
+                    PromoTicketSwitch = _promoTicketService.GetPrintPromo();
+
+                    await Services.LogEvent.LogEventToDatabaseAsync(
+                        isPromoTicketOff ? PromoTicketEventType.TurnPromoTicketOn : PromoTicketEventType.TurnPromoTicketOff,
+                        String.Format(POSResources.WindowTitle, onOff),
+                        String.Empty,
+                        _userSession.UserId
+                        );
+                }
+                catch(Exception exception)
+                {
+                    var message = $"Promo Ticket failed to turn {onOff}.";
+                    await Services.LogEvent.LogEventToDatabaseAsync(PromoTicketEventType.TurnPromoTicketOnOffFailed,
+                                        message + " " + exception.Message, exception.ToString(), _userSession.UserId);
+                    await HandleErrorAsync(message + Environment.NewLine + exception.Message, exception);
+                }
             }
         }
     }

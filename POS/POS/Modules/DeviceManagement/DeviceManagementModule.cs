@@ -11,6 +11,7 @@ namespace POS.Modules.DeviceManagement
         {
             services.AddTransient<IMessageAction, GetAllMachinesMessageAction>();
             services.AddTransient<IDeviceDataService, DeviceDataService>();
+            services.AddTransient<IPromoTicketService, PromoTicketService>();
         }
     }
 }

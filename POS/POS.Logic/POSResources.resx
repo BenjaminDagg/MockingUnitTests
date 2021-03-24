@@ -610,6 +610,9 @@ Scan Voucher.</value>
   <data name="UIDeviceManagementSetOnline" xml:space="preserve">
     <value>Set Online</value>
   </data>
+  <data name="UIDeviceManagementSettingsPromoTicketMsg" xml:space="preserve">
+    <value>Promo Ticket is turned {0}.</value>
+  </data>
   <data name="UIDeviceManagementStateConnected" xml:space="preserve">
     <value>Connected</value>
   </data>
@@ -631,6 +634,12 @@ Scan Voucher.</value>
   <data name="UIDeviceManagerSettingsNotAvailableErrorMsg" xml:space="preserve">
     <value>Device Manager Settings not set. Please set the Device Manager Settings under the Settings tab.</value>
   </data>
+  <data name="UIDeviceManagerSettingsPromoTicketOff" xml:space="preserve">
+    <value>off</value>
+  </data>
+  <data name="UIDeviceManagerSettingsPromoTicketOn" xml:space="preserve">
+    <value>on</value>
+  </data>
   <data name="UIDeviceManagerSettingsSetAllOfflineConfirm" xml:space="preserve">
     <value>Are you sure?</value>
   </data>
@@ -648,6 +657,18 @@ Scan Voucher.</value>
   </data>
   <data name="UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg" xml:space="preserve">
     <value>Are you sure you would like to set Casino Machine ID {0} {1}?</value>
+  </data>
+  <data name="UIDeviceManagerSettingsTogglePromoTicketConfirm" xml:space="preserve">
+    <value>Please Confirm</value>
+  </data>
+  <data name="UIDeviceManagerSettingsTogglePromoTicketMsg" xml:space="preserve">
+    <value>Are you sure you want to turn the Promo Ticket Printing {0}?</value>
+  </data>
+  <data name="UIDeviceManagerSettingsTurnPromoTicketOff" xml:space="preserve">
+    <value>Turn Promo Ticket Off</value>
+  </data>
+  <data name="UIDeviceManagerSettingsTurnPromoTicketOn" xml:space="preserve">
+    <value>Turn Promo Ticket On</value>
   </data>
   <data name="UIDeviceOfflineStatus" xml:space="preserve">
     <value>Offline</value>

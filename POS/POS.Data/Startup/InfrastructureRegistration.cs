@@ -26,6 +26,7 @@ namespace POS.Infrastructure.Startup
             services.AddTransient<IDeviceManagementRepository, DeviceManagementRepository>();
             services.AddTransient<ILastReceiptRepository, LastReceiptRepository>();
             services.AddTransient<IReportEventsRepository, ReportEventsRepository>();
+            services.AddTransient<IPromoTicketRepository, PromoTicketRepository>();
 
             services.AddTransient<IReceiptLayoutService, ReceiptLayoutService>();
             services.AddTransient<ILastReceiptService, LastReceiptService>();
