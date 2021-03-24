@@ -103,34 +103,35 @@
                 </StackPanel>
 
                 <DockPanel HorizontalAlignment="Stretch">
-                <StackPanel Margin="0,2,0,0"
+                    <StackPanel Margin="0,2,0,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
                             Orientation="Horizontal">
 
-                    <Button x:Name="Add"
+                        <Button x:Name="Add"
                             Visibility="{Binding Path=HasAccessToAddPromoTicket, Converter={StaticResource BooleanToVisibility}}"
                             IsEnabled="{Binding Path=CanAddPromoTicket}"
                             Margin="0,0,8,0"
                             Content="Add New Promo Ticket" />
 
-                    <Button x:Name="Edit"
+                        <Button x:Name="Edit"
                             Visibility="{Binding Path=HasAccessToEditPromoTicket, Converter={StaticResource BooleanToVisibility}}"
                             IsEnabled="{Binding Path=CanEditSelectedPromoTicket}"
                             Margin="8,0"
                             Content="Edit Selected Promo Ticket" />
 
-                    <Button x:Name="Delete"
+                        <Button x:Name="Delete"
                             Visibility="{Binding Path=HasAccessToDeletePromoTicket, Converter={StaticResource BooleanToVisibility}}"
                             IsEnabled="{Binding Path=CanDeleteSelectedPromoTicket}"
                             Margin="8,0"
                             Content="Delete Selected Promo Ticket" />
 
-                    <Button x:Name="RefreshList"
+                        <Button x:Name="RefreshList"
                             Margin="8,0"
                             Content="Refresh" />
+
+                    </StackPanel>
                     
-                </StackPanel>
                     <StackPanel Margin="0,2,0,0" HorizontalAlignment="Right">
                         <Button x:Name="TogglePromoTicket"
                             Margin="8,0"
@@ -151,7 +152,7 @@
                             </Button.Style>
                         </Button>
                     </StackPanel>
-                    </DockPanel>
+                </DockPanel>
 
             </StackPanel>
 

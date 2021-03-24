@@ -1,6 +1,4 @@
-﻿using CentroLink.PromoTicketSetupModule.Settings;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
@@ -32,14 +30,11 @@ namespace CentroLink.PromoTicketSetupModule.Tcp
             {   
                 byte[] bytes = Encoding.ASCII.GetBytes(message);
 
-                using (NetworkStream stream = tcpClient.GetStream())
-                {
-                    stream.Write(bytes, 0, bytes.Length);
-                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-                    {
-                        response = reader.ReadLine();
-                    }
-                }
+                using NetworkStream stream = tcpClient.GetStream();
+                stream.Write(bytes, 0, bytes.Length);
+
+                using StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                response = reader.ReadLine();
             }
             finally
             {

@@ -43,3 +43,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ##03/23/2021
 - 53041 - Create functionality to toggle Promo Ticket Printing On/Off.
+
+##03/24/2021
+###Update
+- Cleanup and Simplified TcpCommunicator logic
