@@ -77,7 +77,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
             set => Set(ref _selectedDevice, value);
         }
 
-        private int _indexPriority = 1003;
+        private int _indexPriority = 1002;
         public int IndexPriority
         {
             get => _indexPriority;

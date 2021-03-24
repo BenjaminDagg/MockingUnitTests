@@ -43,7 +43,7 @@ namespace POS.Modules.Settings.ViewModels
             await base.OnActivateAsync(cancellationToken);           
         }
         #region ITabItem
-        private int _indexPriority = 1002;
+        private int _indexPriority = 1004;
         public int IndexPriority
         {
             get => _indexPriority;

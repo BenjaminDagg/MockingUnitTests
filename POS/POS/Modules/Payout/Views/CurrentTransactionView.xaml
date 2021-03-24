@@ -58,7 +58,7 @@
             ColumnWidth="*"
             AutoGenerateColumns="False" 
             IsReadOnly="True"
-            RowHeight="44" 
+            RowHeight="84" 
             >
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource POSDataGridCellStyle}"/>
@@ -72,7 +72,7 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderBarcode}" Binding="{Binding Path=Barcode.Value}" 
-                                    FontSize="24" MinWidth="260">
+                                    FontSize="30" MinWidth="325">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
@@ -81,7 +81,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderAmount}" Binding="{Binding Path=Amount, StringFormat={}{0:C}}" 
-                                    FontSize="24" Width="170" >
+                                    FontSize="30" Width="170" >
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
@@ -90,7 +90,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderID}" Binding="{Binding Path=VoucherId}" 
-                                    FontSize="24" Width="120" >
+                                    FontSize="30" Width="125" >
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
@@ -99,16 +99,17 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderCreated}" Binding="{Binding Path=Created, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" 
-                                    FontSize="24" Width="280" >
+                                    FontSize="30" Width="190" >
                     <DataGridTextColumn.ElementStyle>
                         <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
                             <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderLocation}" Binding="{Binding Path=Location}" 
-                                    FontSize="24" Width="180">
+                                    FontSize="30" Width="180">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
@@ -123,8 +124,13 @@
                                         Visibility="{Binding Data.TransactionViewModel.NeedsApproval, Source={StaticResource proxy}, Converter={StaticResource BooleanToVisibility}}">
                     <DataGridCheckBoxColumn.ElementStyle>
                         <Style>
-                            <Setter Property="CheckBox.Margin" Value="20, 0, 0, 0"/>
+                            <Setter Property="CheckBox.Margin" Value="20, 5, 0, 0"/>
                             <Setter Property="CheckBox.IsEnabled" Value="False"/>
+                            <Setter Property="CheckBox.LayoutTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                </Setter.Value>
+                            </Setter>
                         </Style>
                     </DataGridCheckBoxColumn.ElementStyle>
                 </DataGridCheckBoxColumn>

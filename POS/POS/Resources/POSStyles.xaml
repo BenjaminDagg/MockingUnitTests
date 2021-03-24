@@ -352,7 +352,75 @@
     <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource DgProgressBarStyle}"/>
    
     <Style x:Key="POSPromptViewStyle" TargetType="{x:Type UserControl}" BasedOn="{StaticResource DgPromptViewStyle}"/>
-    <Style x:Key="POSPromptWindowStyle" TargetType="{x:Type controls:CustomWindowControl}" BasedOn="{StaticResource DgPromptWindowStyle}"/>
+    <Style x:Key="POSPromptWindowStyle" TargetType="{x:Type controls:CustomWindowControl}" BasedOn="{StaticResource DgPromptWindowStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border x:Name="MainWindowBorder" BorderBrush="{StaticResource DgTransparent}" BorderThickness="0" >
+                        <Grid x:Name="parentContainer" Background="{StaticResource DgTransparent}">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height ="Auto"/>
+                                <RowDefinition Height ="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Window chrome-->
+                            <Grid Grid.Row="0" Margin="0, -1" Height="90" Background="{StaticResource DgTransparent}">
+                                <Grid x:Name="HeaderGrid" Width="{Binding Path=Width,
+                                                                      RelativeSource={RelativeSource TemplatedParent}}">
+
+                                    <Rectangle   Margin="0, 0, 0, 0" 
+                                            Stroke="{StaticResource DgTransparent}" 
+                                            StrokeThickness="0" 
+                                            Name="RectangleFill" 
+                                            Fill="{StaticResource DgBackground}" 
+                                            Stretch="UniformToFill"
+                                            Width="{Binding ActualWidth, ElementName=HeaderGrid}"                                                       
+                                            />
+
+                                    <Border Name="PART_Title"
+                                        BorderBrush="{StaticResource DgTransparent}"
+                                        BorderThickness="0">
+                                        <TextBlock Text="{Binding Path=Title,
+                                                                      RelativeSource={RelativeSource TemplatedParent},
+                                                                      FallbackValue='Default MessageBox Title'}" 
+                                                   TextWrapping="WrapWithOverflow"
+                                                   VerticalAlignment="Top" 
+                                                   FontSize="35" 
+                                                   Foreground="{StaticResource DgWhite}" 
+                                                   Margin="30, 30, 0, 0"
+                                                  />
+                                    </Border>
+
+                                </Grid>
+
+                                <!--Caption buttons-->
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Right" 
+                                            VerticalAlignment="Top"
+                                            Visibility="{Binding Path=CloseButtonVisibility,
+                                                           RelativeSource={RelativeSource AncestorType={x:Type controls:CustomWindowControl}}}"
+                                            >
+                                    <Button x:Name="PART_CloseButton" 
+                                            Style="{DynamicResource DgCloseButtonStyle}" 
+                                            WindowChrome.IsHitTestVisibleInChrome="True" 
+                                            ToolTip="Close"
+                                            />
+
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Content -->
+                            <Grid Grid.Row="1" x:Name="AppMainContent" Background="{StaticResource DgBackground}" Width="{Binding Path=Width,
+                                                                      RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ContentPresenter  Margin="0" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="POSLoginViewStyle" TargetType="{x:Type UserControl}" BasedOn="{StaticResource DgLoginViewStyle}"/>
 
@@ -363,40 +431,7 @@
     <Style x:Key="POSClearKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgClearKeyPadStyle}"/>
     <Style x:Key="POSBackKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgBackKeyPadStyle}" />
     <Style x:Key="POSEnterKeyPadStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource DgEnterKeyPadStyle}" >
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Canvas x:Name="DgCanvas">
-                            <Path x:Name="DgButtonData" Data="{StaticResource Keypad}" Fill="{StaticResource DgHoverBackground}" Width="120.137"></Path>
-                            <Rectangle x:Name="DgButtonBottomData" Width="120.137" Height="131.729" Fill="{StaticResource DgHoverBackground}"
-                                       VerticalAlignment="Center" 
-                                       HorizontalAlignment="Center" 
-                                       Canvas.Top="132.24"
-                                       Canvas.Left="0"/>
-                            <TextBlock Text="{TemplateBinding Content}" 
-                                           Foreground="{StaticResource DgWhite}" 
-                                           FontSize="30" 
-                                           FontWeight="Light"
-                                       VerticalAlignment="Center" 
-                                       HorizontalAlignment="Center" 
-                                       Canvas.Top="48"
-                                       Canvas.Left="28"/>
-                        </Canvas>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="DgButtonData" Property="Fill" Value="green"/>
-                            <Setter TargetName="DgButtonBottomData" Property="Fill" Value="green"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed"  Value="True">
-                            <Setter TargetName="DgButtonData" Property="Fill" Value="{StaticResource DgSelected}"/>
-                            <Setter TargetName="DgButtonBottomData" Property="Fill" Value="{StaticResource DgSelected}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+
     </Style>
 
     <!--body content datagrid cell vertical centering-->
