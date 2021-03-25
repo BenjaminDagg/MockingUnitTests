@@ -186,3 +186,7 @@ Implement new POS Theme
 - 53501 Reports tab row size and font increased
 - 53180 - Implement Turn Promo Ticket On/Off
 - 53500 Added Print functionality for Cash drawer History
+
+##03/25/2021
+- 53501 updated font size and renamed report , Removed report Revenue by Machine
+- Updated UI Changes

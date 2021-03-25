@@ -386,7 +386,7 @@
                                                                       FallbackValue='Default MessageBox Title'}" 
                                                    TextWrapping="WrapWithOverflow"
                                                    VerticalAlignment="Top" 
-                                                   FontSize="35" 
+                                                   FontSize="32" 
                                                    Foreground="{StaticResource DgWhite}" 
                                                    Margin="30, 30, 0, 0"
                                                   />

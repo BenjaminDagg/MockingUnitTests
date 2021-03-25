@@ -32,7 +32,7 @@
                       SelectedItem="{Binding SelectedReport, Mode=TwoWay}"
                       SelectionMode="Single"
                       IsReadOnly="True"
-                      RowHeight="64"
+                      RowHeight="84"
                       MinHeight="1400"
                       cal:Message.Attach="[Event SelectionChanged] = [OnReportSelectionChangedAction]"
             >
@@ -47,7 +47,7 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UIReportHeaderReportName}" Binding="{Binding Name}"  Width="*"
-                                    FontSize="50"   />
+                                    FontSize="65"   />
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UIReportHeaderLastRun}" Binding="{Binding LastRun}" Width="320"
                                     FontSize="30">
                     <DataGridTextColumn.ElementStyle>

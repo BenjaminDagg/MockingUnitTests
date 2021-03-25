@@ -18,6 +18,7 @@
                     <DataTemplate>
                         <dgmaterial:AlertMessageControlEx Margin="0,3"
                                                   HorizontalAlignment="Stretch"
+                                                  FontSize="25"
                                                   Alert="{Binding AlertType}"
                                                   Message="{Binding Message}" />
                     </DataTemplate>
@@ -64,7 +65,7 @@
                                                                ValidatesOnDataErrors=True, TargetNullValue=''}"
                                                              MaxLength="18" 
                                                              Margin="35, 20, 0, 0" 
-                                                             Width="240"
+                                                             Width="280"
                                                              HorizontalAlignment="Center"
                                                              FontSize="25" 
                                                              NumericMode="True"
@@ -79,7 +80,7 @@
                                                                ValidatesOnDataErrors=True, TargetNullValue=''}"
                                                              MaxLength="18" 
                                                              Margin="35, 20, 0, 0" 
-                                                             Width="240"
+                                                             Width="280"
                                                              HorizontalAlignment="Center"
                                                              FontSize="25" 
                                                              NumericMode="True"

@@ -91,7 +91,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                 await _logEventDataService.LogEventToDatabaseAsync(CashDrawerHistoryEventType.CashDrawerHistoryPrintFail, CashDrawerHistoryEventType.CashDrawerHistoryPrintFail.ToString() + " " + exception.Message, exception.ToString(), _userSession.UserId);
                 await _messageBoxService.PromptAsync(POSResources.CashHistoryPrintFailed, POSResources.ErrorTitle, PromptOptions.Ok, PromptTypes.Error);
                 await base.Yes();
-                //await HandleErrorAsync(message + Environment.NewLine + exception.Message, exception);
+               // await HandleErrorAsync(POSResources.CashHistoryPrintFailed + Environment.NewLine + exception.Message, exception);
             }
 
 
