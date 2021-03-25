@@ -17,25 +17,25 @@ steps:
 - checkout: git://AppDev_CommonLite
 - checkout: self
 
-- task: PowerShell@2
-  displayName: 'Build and Publish Database $(RetailDatabaseId)'
-  inputs:
-    targetType: 'inline'
-    script: |
-      #Importing the SQL Change libraries         
+# - task: PowerShell@2
+#   displayName: 'Build and Publish Database $(RetailDatabaseId)'
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       #Importing the SQL Change libraries         
         
-        Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
+#         Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
          
-         $dbScripts = "$(RetailDbSourcePath)"
+#          $dbScripts = "$(RetailDbSourcePath)"
          
-         Write-Host "Building and validating the database"
-         $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts
+#          Write-Host "Building and validating the database"
+#          $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts
          
-         Write-Host "Packaging the database scripts"                                     
-         $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
+#          Write-Host "Packaging the database scripts"                                     
+#          $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
          
-         Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
-         Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip
+#          Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
+#          Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip
                 
 - task: PowerShell@2
   displayName: 'Build and Publish Database $(CentralDatabaseId)'
