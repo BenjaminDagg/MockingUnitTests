@@ -131,8 +131,8 @@
         <Expression>TRUE</Expression>
       </UserDefinedType>
       <View version="1">
-        <Include>True</Include>
-        <Expression>TRUE</Expression>
+        <Include>False</Include>
+        <Expression>(@NAME LIKE '%uvwVoucherInfo%')</Expression>
       </View>
       <XmlSchemaCollection version="1">
         <Include>True</Include>
