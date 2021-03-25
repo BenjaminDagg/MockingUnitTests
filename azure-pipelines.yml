@@ -18,10 +18,6 @@ steps:
 - checkout: self
 
 - task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'ping 10.0.70.107'
-- task: PowerShell@2
   displayName: 'Build and Publish Database $(RetailDatabaseId)'
   inputs:
     targetType: 'inline'
