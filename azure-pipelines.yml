@@ -33,7 +33,7 @@ steps:
          $dbScripts = "$(RetailDbSourcePath)"
          
          Write-Host "Building and validating the database"
-         $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts -TemporaryDatabaseServer "Data Source=10.0.70.107"
+         $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts
          
          Write-Host "Packaging the database scripts"                                     
          $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
