@@ -47,3 +47,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ##03/24/2021
 ###Update
 - Cleanup and Simplified TcpCommunicator logic
+
+##03/25/2021
+###Update
+- Update Promo Ticket functionality to prompt and notify user if Print Promo Ticket failed

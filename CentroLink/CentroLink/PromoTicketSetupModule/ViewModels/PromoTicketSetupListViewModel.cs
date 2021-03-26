@@ -184,13 +184,20 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
                         _promoTicketSetupService.SetPrintPromo(isPromoTicketOff);
                         PromoTicketSwitch = _promoTicketSetupService.GetPrintPromo();
 
+                        Alerts.Clear();
+                        var message = $"Print Promo Ticket is turned {onOff}.";
+                        Alerts.Add(new TaskAlert { AlertType = AlertType.Success, Message = message });
+
                         await LogEventToDatabaseAsync(isPromoTicketOff ? PromoTicketSetupEventTypes.TurnPromoTicketOn : PromoTicketSetupEventTypes.TurnPromoTicketOff,
-                                        $"Promo Ticket is turned {onOff}.");
+                                        message);
                     }
                     else
                     {
-                        await PromptUserAsync($"Error occurred while turning {onOff} Promo Ticket Printing.", "Error",
-                            availableOptions: PromptOptions.Ok);
+                        Alerts.Clear();
+                        var message = $"Error occurred while turning {onOff} Promo Ticket Printing.";
+                        Alerts.Add(new TaskAlert { AlertType = AlertType.Error, Message = message });
+
+                        await LogEventToDatabaseAsync(PromoTicketSetupEventTypes.TurnPromoTicketOnOffFailed, message);
                     }
                 }
                 catch(Exception exception)
