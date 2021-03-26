@@ -109,6 +109,10 @@ namespace POS.Modules.Main.ViewModels
                 PromptOptions.YesNo,
                 PromptTypes.Question
                 );
+            if (result == PromptOptions.Yes)
+            {
+                await _eventAggregator.PublishOnUIThreadAsync(new LogoutEventMessage());
+            }
             return result == PromptOptions.Yes;
         }
 
