@@ -189,7 +189,10 @@ Implement new POS Theme
 
 ##03/25/2021
 - 53501 updated font size and renamed report, Removed report Revenue by Machine
-- Updated UI Changes
+- Increased Reports List font
+- Increased Device Mansgement tab alert font size
+- Renamed Promo ticket Entry Schedule report
+- Adjusted font size for Pop up Headers
 - 54221 - Modify Handle Error Function in Framework to use UserId
 - Add userId in ErrorHanling to ensure that userId is logged with error events
 - Adjust/Format Payout Screen - Moved Cashdrawer closer to number Pad, enlarge number pad numbers, widen current transaction view, etc. 
@@ -206,3 +209,4 @@ Implement new POS Theme
 
 ##03/26/2021
 - 54342 Loging out session to print session end reciept on close of application
+- Added User session to report list view model

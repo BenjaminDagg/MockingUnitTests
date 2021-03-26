@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Framework.Core.FileSystem;
 using Framework.Core.Modularity.Framework.Core.Modularity;
+using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.ScreenManagement;
 using POS.Common.Events;
@@ -24,6 +25,7 @@ namespace POS.Modules.Reports.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IServiceLocator _serviceLocator;
         private readonly ReportContext _reportContext;
+        private readonly IUserSession _userSession;
 
         #region IPropertyChanged
         private Report _selectedReport;
@@ -73,14 +75,17 @@ namespace POS.Modules.Reports.ViewModels
             IFileSystemService fileSystemService,
             IReportEventService reportEventService,
             IEventAggregator eventAggregator,
-            IServiceLocator serviceLocator) : base(screenManagementServices)
+            IServiceLocator serviceLocator, 
+            IUserSession userSession) : base(screenManagementServices)
         {
             _fileSystemService = fileSystemService;
             _reportEventService = reportEventService;
             _eventAggregator = eventAggregator;
             _serviceLocator = serviceLocator;
             _reportContext = reportContext;
-            
+            _userSession = userSession;
+
+
             Init();
         }
 
