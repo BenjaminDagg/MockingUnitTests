@@ -124,13 +124,10 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             try
             {
                 await ReprintReceipt(ReceiptNumber);
-                //not closing in case want to still see dialog
-                await _messageBoxService.PromptAsync(POSResources.ReprintSucessful, POSResources.SuccessTitle, PromptOptions.Ok, PromptTypes.Success);
-                await base.Yes();
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true, userId: _session.UserId);
             }
         }
 
@@ -139,6 +136,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             var canReprintResult = await CanReprint(receiptNumber);
             if (canReprintResult.IsFailure)
             {
+                Alerts.Clear();
                 Alerts.Add(new TaskAlert(AlertType.Error, canReprintResult.Error));
                 return;
             }
@@ -160,6 +158,10 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                 voucherList, 
                 _payoutConfigSettings.PrintNameAndSSNLabelsForJackpot, 
                 _bankSetupConfigSettings.DefaultBankLockupAmount));
+
+            Alerts.Clear();
+            Alerts.Add(new TaskAlert(AlertType.Success, String.Format(POSResources.UILastReceiptPrintSuccessMsg, receiptNumber)));
+            await base.Ok();
 
             _logEventDataService.LogEventToDatabase(PayoutEventType.ReprintPayoutReceipt, PayoutEventType.ReprintPayoutReceipt.ToString(),
                 $"Reprinted Receipt No: {receiptNumber} SessionId: {_session.Id.Value}", _userSession.UserId);

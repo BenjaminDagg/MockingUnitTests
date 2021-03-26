@@ -80,7 +80,7 @@ namespace POS.Modules.Reports.ViewModels
             {
                 _logEventDataService.LogEventToDatabase(ReportEventType.ReportExecutedFailed, String.Format("'{0}' Report access failed", _reportContext.SelectedReport.Name),
                 exception.ToString(),  _userSession.UserId);
-                await HandleErrorAsync(exception.Message, exception);
+                await HandleErrorAsync(exception.Message, exception, userId: _userSession.UserId);
             }
         }
 

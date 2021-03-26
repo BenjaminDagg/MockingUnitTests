@@ -14,7 +14,20 @@
                               Background="{StaticResource DgTransparent}" 
                               SizeToContent="WidthAndHeight">
     <StackPanel>
-
+        
+        <ItemsControl Margin="0,2,0,7"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Alerts}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <dgmaterial:AlertMessageControlEx Margin="0,3"
+                                                  HorizontalAlignment="Stretch"
+                                                  Alert="{Binding AlertType}"
+                                                  Message="{Binding Message}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
         <Separator Margin="0 -20 0 0"/>
         <StackPanel Margin="10">
 
@@ -86,24 +99,24 @@
                                 VerticalAlignment="Bottom"
                                 />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <dgmaterial:CustomButtonControlEx x:Name="PrintHistory"
+                <dgmaterial:CustomButtonControlEx x:Name="Ok"
                                                   FontSize="18" 
                                                   Foreground="{StaticResource DgWhite}"
                                                   Background="{StaticResource DgDefaultButtonBackground}" 
-                                                  Width="167" 
+                                                  Width="187" 
                                                   Height="40"
                                                   HorizontalAlignment="Right"
                                                   Content="{x:Static resx:POSResources.PrintCashHistory}"
                                                   Margin="0 0 0 0"
                 />
-                <dgmaterial:CustomButtonControlEx x:Name="Ok"
+                <dgmaterial:CustomButtonControlEx x:Name="Cancel"
                                                   FontSize="18" 
                                                   Foreground="{StaticResource DgWhite}"
                                                   Background="{StaticResource DgDefaultButtonBackground}" 
-                                                  Width="137" 
+                                                  Width="177" 
                                                   Height="40"
                                                   HorizontalAlignment="Right"
-                                                  Content="{x:Static resx:POSResources.UIOk}"
+                                                  Content="{x:Static resx:POSResources.UICancel}"
                                                   Visibility="{Binding OkVisible, Converter={StaticResource BooleanToVisibility}}"
                                                   Margin="10 0 0 0"
                 />

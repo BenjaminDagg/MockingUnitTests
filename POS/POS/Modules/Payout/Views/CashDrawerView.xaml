@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="1000">
 
-    <GroupBox Margin="0,2,-10,2">
+    <GroupBox>
         <StackPanel>
             <ItemsControl Margin="0,2,0,2"
                       HorizontalAlignment="Stretch"
@@ -35,7 +35,7 @@
                                     VerticalAlignment="Center"                               
                                     />
                         <dgmaterial:CustomButtonControlEx DockPanel.Dock="Right"  
-                                                        Command="{Binding CashDrawerViewModel.ViewCashDrawerHistoryCommand}"
+                                                        Command="{Binding CashDrawerViewModel.PrintCashDrawerHistoryCommand}"
                                                         CommandParameter="null"
                                                         ToolTip="{x:Static resx:POSResources.ViewCashdrawerHistoryToolTip}"
                                                         Style="{StaticResource DgGeometryButtonStyle}"

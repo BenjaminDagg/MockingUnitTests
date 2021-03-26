@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.ErrorHandling;
 using Framework.WPF.Mvvm;
 using Framework.WPF.ScreenManagement.Alert;
@@ -21,6 +22,7 @@ namespace POS.Modules.Settings.ViewModels
         private readonly IPrinterSettings _printerSettings;
         private readonly IEventAggregator _eventAggregator;
         private readonly IErrorHandlingService _errorHandlingService;
+        private readonly IUserSession _userSession;
         private readonly IPrinterSettingsService _printerSettingsService;
 
         public ICommand SaveCommand => new RelayCommand<object>(async (o) => await Save(o));
@@ -54,13 +56,14 @@ namespace POS.Modules.Settings.ViewModels
         public PrinterSettingsViewModel(IPrinterSettingsService printerSettingsService, 
             IPrinterSettings settings, 
             IEventAggregator eventAggregator, 
-            IErrorHandlingService errorHandlingService)
+            IErrorHandlingService errorHandlingService,
+            IUserSession userSession)
         {
             _printerSettingsService = printerSettingsService;
             _printerSettings = settings;
             _eventAggregator = eventAggregator;
             _errorHandlingService = errorHandlingService;
-
+            _userSession = userSession;
             Initialize();
         }
 
@@ -107,7 +110,7 @@ namespace POS.Modules.Settings.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, false);
+                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, false, userId: _userSession.UserId);
             }
         }
     }

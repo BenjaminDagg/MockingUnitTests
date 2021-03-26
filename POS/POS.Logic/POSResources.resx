@@ -199,6 +199,9 @@ Are you sure you want to end this session?</value>
   <data name="DidNotGetPayoutApprovalMsg" xml:space="preserve">
     <value>Payout failure.  Supervisor authorization is required for one or more vouchers.  Please try again.</value>
   </data>
+  <data name="EndCashDrawerSessionFailedMsg" xml:space="preserve">
+    <value>An error occured while ending cash drawer session.</value>
+  </data>
   <data name="ErrorTitle" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -682,6 +685,12 @@ Scan Voucher.</value>
   <data name="UIDeviceManagerSettingsTogglePromoTicketConfirm" xml:space="preserve">
     <value>Please Confirm</value>
   </data>
+  <data name="UIDeviceManagerSettingsTogglePromoTicketErrorCaption" xml:space="preserve">
+    <value>Print Promo Ticket Error</value>
+  </data>
+  <data name="UIDeviceManagerSettingsTogglePromoTicketErrorMsg" xml:space="preserve">
+    <value>Print Promo Ticket failed to turn {0}.</value>
+  </data>
   <data name="UIDeviceManagerSettingsTogglePromoTicketMsg" xml:space="preserve">
     <value>Are you sure you want to turn the Promo Ticket Printing {0}?</value>
   </data>
@@ -747,6 +756,9 @@ Scan Voucher.</value>
   </data>
   <data name="UILastReceiptNumber" xml:space="preserve">
     <value>Reciept Number</value>
+  </data>
+  <data name="UILastReceiptPrintSuccessMsg" xml:space="preserve">
+    <value>Last receipt {0} was reprinted successfully.</value>
   </data>
   <data name="UILastTotalNumberOfVouchers" xml:space="preserve">
     <value>Number of Vouchers</value>

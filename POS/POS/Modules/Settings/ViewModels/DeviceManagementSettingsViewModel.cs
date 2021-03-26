@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Framework.Infrastructure.Identity.Services;
 using Framework.WPF.ErrorHandling;
 using Framework.WPF.Mvvm;
 using Framework.WPF.ScreenManagement.Alert;
@@ -21,18 +22,20 @@ namespace POS.Modules.Settings.ViewModels
         private readonly IErrorHandlingService _errorHandlingService;
         private readonly IDeviceManagerSettings _deviceManagerSettings;
         private readonly IDeviceManagerSettingsService _deviceManagerSettingsService;
+        private readonly IUserSession _userSession;
 
         public DeviceManagementSettingsViewModel(
             IEventAggregator eventAggregator, 
             IErrorHandlingService errorHandlingService,
             IDeviceManagerSettings deviceManagerSettings,
-            IDeviceManagerSettingsService deviceManagerSettingsService)
+            IDeviceManagerSettingsService deviceManagerSettingsService,
+            IUserSession userSession)
         {
             _eventAggregator = eventAggregator;
             _errorHandlingService = errorHandlingService;
             _deviceManagerSettings = deviceManagerSettings;
             _deviceManagerSettingsService = deviceManagerSettingsService;
-
+            _userSession = userSession;
             Initialize();
         }
         public void Initialize()
@@ -120,7 +123,7 @@ namespace POS.Modules.Settings.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, false);
+                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, false, userId: _userSession.UserId);
             }
         }
     }

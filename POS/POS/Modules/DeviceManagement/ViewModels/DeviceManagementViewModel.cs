@@ -20,6 +20,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace POS.Modules.DeviceManagement.ViewModels
@@ -63,6 +64,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
             get => _promoTicketSwitch;
             set => Set(ref _promoTicketSwitch, value);
         }
+        private bool? _deviceManagementInitializedSuccessfully = null;
         public bool? DeviceManagementInitializedSuccessfully
         {
             get => _deviceManagementInitializedSuccessfully;
@@ -273,11 +275,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
 
         public async Task TogglePromoTicket()
         {
-            var isPromoTicketOff = PromoTicketSwitch == 0;
-            var onOff = (isPromoTicketOff ? POSResources.UIDeviceManagerSettingsPromoTicketOn : POSResources.UIDeviceManagerSettingsPromoTicketOff);
-
             var promptOpion = await _messageBoxService.PromptAsync(
-                    String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketMsg, onOff),
+                    String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketMsg, OnOff),
                     POSResources.UIDeviceManagerSettingsTogglePromoTicketConfirm,
                     PromptOptions.YesNo,
                     promptType: PromptTypes.Question
@@ -287,25 +286,67 @@ namespace POS.Modules.DeviceManagement.ViewModels
             {
                 try
                 {
-                    await TogglePromoTicketOnOff(isPromoTicketOff ? TransactionPortalActions.COMMAND_ENTRY_TICKET_ON : TransactionPortalActions.COMMAND_ENTRY_TICKET_OFF);
+                    await TogglePromoTicketOnOff(
+                        ProcessPromoTicketResponse, 
+                        (IsPromoTicketOff ? TransactionPortalActions.COMMAND_ENTRY_TICKET_ON : TransactionPortalActions.COMMAND_ENTRY_TICKET_OFF)
+                        );
+                    
+                }
+                catch(Exception exception)
+                {
+                    var message = String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketMsg, OnOff);
+                    await HandleErrorAsync(message, exception, eventType: PromoTicketEventType.TurnPromoTicketOnOffFailed, userId:_userSession.UserId);
+                }
+            }
+        }
 
-                    _promoTicketService.SetPrintPromo(isPromoTicketOff);
-                    PromoTicketSwitch = _promoTicketService.GetPrintPromo();
+        private async void ProcessPromoTicketResponse(string responseData)
+        {
+            try
+            {                
+                var reponseErrorCode = responseData.Split(',')[3];
+                if (reponseErrorCode == "0")
+                {
+                    _promoTicketService.SetPrintPromo(IsPromoTicketOff);
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        PromoTicketSwitch = _promoTicketService.GetPrintPromo();
+                    });
 
                     await Services.LogEvent.LogEventToDatabaseAsync(
-                        isPromoTicketOff ? PromoTicketEventType.TurnPromoTicketOn : PromoTicketEventType.TurnPromoTicketOff,
-                        String.Format(POSResources.WindowTitle, onOff),
+                        IsPromoTicketOff ? PromoTicketEventType.TurnPromoTicketOn : PromoTicketEventType.TurnPromoTicketOff,
+                        String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketMsg, OnOff),
                         String.Empty,
                         _userSession.UserId
                         );
                 }
-                catch(Exception exception)
+                else
                 {
-                    var message = $"Promo Ticket failed to turn {onOff}.";
+                    await Application.Current.Dispatcher.Invoke(async () =>
+                    {
+                        await _messageBoxService.PromptAsync(
+                            String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketErrorMsg, OnOff),
+                            POSResources.UIDeviceManagerSettingsTogglePromoTicketErrorCaption,
+                            PromptOptions.Ok,
+                            promptType: PromptTypes.Error
+                        );
+                    });
+
                     await Services.LogEvent.LogEventToDatabaseAsync(PromoTicketEventType.TurnPromoTicketOnOffFailed,
-                                        message + " " + exception.Message, exception.ToString(), _userSession.UserId);
-                    await HandleErrorAsync(message + Environment.NewLine + exception.Message, exception);
+                        String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketErrorMsg, OnOff),
+                        String.Empty,
+                        _userSession.UserId
+                        );
                 }
+            }
+            catch (Exception exception)
+            {
+                await Application.Current.Dispatcher.Invoke(async() =>
+                {
+                    var message = String.Format(POSResources.UIDeviceManagerSettingsTogglePromoTicketErrorMsg, OnOff);
+                    await HandleErrorAsync(message, exception, true, eventType: PromoTicketEventType.TurnPromoTicketOnOffFailed, userId: _userSession.UserId);
+                });
             }
         }
     }

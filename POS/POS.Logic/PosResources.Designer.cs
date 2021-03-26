@@ -305,6 +305,15 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while ending cash drawer session..
+        /// </summary>
+        public static string EndCashDrawerSessionFailedMsg {
+            get {
+                return ResourceManager.GetString("EndCashDrawerSessionFailedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string ErrorTitle {
@@ -1748,6 +1757,24 @@ namespace POS.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print Promo Ticket Error.
+        /// </summary>
+        public static string UIDeviceManagerSettingsTogglePromoTicketErrorCaption {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsTogglePromoTicketErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print Promo Ticket failed to turn {0}..
+        /// </summary>
+        public static string UIDeviceManagerSettingsTogglePromoTicketErrorMsg {
+            get {
+                return ResourceManager.GetString("UIDeviceManagerSettingsTogglePromoTicketErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to turn the Promo Ticket Printing {0}?.
         /// </summary>
         public static string UIDeviceManagerSettingsTogglePromoTicketMsg {
@@ -1942,6 +1969,15 @@ namespace POS.Core {
         public static string UILastReceiptNumber {
             get {
                 return ResourceManager.GetString("UILastReceiptNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last receipt {0} was reprinted successfully..
+        /// </summary>
+        public static string UILastReceiptPrintSuccessMsg {
+            get {
+                return ResourceManager.GetString("UILastReceiptPrintSuccessMsg", resourceCulture);
             }
         }
         

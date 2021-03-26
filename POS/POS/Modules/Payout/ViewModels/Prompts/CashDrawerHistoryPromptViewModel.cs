@@ -16,6 +16,9 @@ using POS.Common;
 using POS.Core.CashDrawer;
 using POS.Core.Interfaces.Printer;
 using POS.Core.Transaction;
+using Framework.WPF.ErrorHandling;
+using Framework.WPF.ScreenManagement.Alert;
+using System.Threading.Tasks;
 
 namespace POS.Modules.Payout.ViewModels.Prompts
 {
@@ -27,8 +30,11 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         private readonly ILogEventDataService _logEventDataService;
         private readonly IUserSession _userSession;
         private readonly IMessageBoxService _messageBoxService;
+        private readonly IErrorHandlingService _errorHandlingService;
 
         #region NotifyChangeProperties
+        public ObservableCollection<TaskAlert> Alerts { get; set; }
+
         public ObservableCollection<CashDrawerHistory> _cashDrawerHistory;
         public ObservableCollection<CashDrawerHistory> CashDrawerHistory
         {
@@ -43,7 +49,14 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         }
         #endregion
 
-        public CashDrawerHistoryPromptViewModel(Session session, ICashDrawerRepository cashDrawerRepository, IPrintService printService, ILogEventDataService logEventDataService, IUserSession userSession, IMessageBoxService messageBoxService)
+        public CashDrawerHistoryPromptViewModel(
+            Session session, 
+            ICashDrawerRepository cashDrawerRepository, 
+            IPrintService printService, 
+            ILogEventDataService logEventDataService, 
+            IUserSession userSession, 
+            IMessageBoxService messageBoxService,
+            IErrorHandlingService errorHandlingService)
         {            
             _session = session;
             _cashDrawerRepository = cashDrawerRepository;
@@ -51,13 +64,20 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             _logEventDataService = logEventDataService;
             _userSession = userSession;
             _messageBoxService = messageBoxService;
-            Initialize();
+            _errorHandlingService = errorHandlingService;
+            SetDefaults();
         }
 
-        private async void Initialize()
+        public void SetDefaults()
         {
             DisplayName = POSResources.CashdrawerHistoryTitle;
             Options = PromptOptions.Ok;
+            Alerts = new ObservableCollection<TaskAlert>();
+        }
+
+        public async void Initialize(decimal currentBalance)
+        {
+            CurrentBalance = Convert.ToDouble(currentBalance);
 
             var cashDrawerHistory = await _cashDrawerRepository.GetCashDrawerHistory(_session.Id.Value);
             CashDrawerHistory = new ObservableCollection<CashDrawerHistory>
@@ -66,8 +86,8 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                 );
         }
 
-        public async void PrintHistory()
-        {
+        public override async Task Ok()
+        {            
             try
             {
                 var printList = new List<(string Type, Double Amount, DateTime TransactionDate)>();
@@ -80,21 +100,20 @@ namespace POS.Modules.Payout.ViewModels.Prompts
                 var printHistory = new PrintCashDrawerHistory(_session.Username, printList);
                 _printService.PrintCashHistoryReceipt(printHistory);
 
-                await _logEventDataService.LogEventToDatabaseAsync(CashDrawerHistoryEventType.CashDrawerHistoryPrintSuccess,CashDrawerHistoryEventType.CashDrawerHistoryPrintSuccess.ToString(),
-                    $"SessionId: {_session.Id.Value}", _userSession.UserId);
-                await _messageBoxService.PromptAsync(POSResources.CashHistoryPrintedSuccessfully, POSResources.SuccessTitle, PromptOptions.Ok, PromptTypes.Success);
-                await base.Yes();
-            }
+                Alerts.Clear();
+                Alerts.Add(new TaskAlert(AlertType.Success, POSResources.CashHistoryPrintedSuccessfully));
 
+                await base.Ok();
+
+                await _logEventDataService.LogEventToDatabaseAsync(CashDrawerHistoryEventType.CashDrawerHistoryPrintSuccess,CashDrawerHistoryEventType.CashDrawerHistoryPrintSuccess.ToString(),
+                    $"SessionId: {_session.Id.Value}", _userSession.UserId);             
+            }
             catch (Exception exception)
             {
-                await _logEventDataService.LogEventToDatabaseAsync(CashDrawerHistoryEventType.CashDrawerHistoryPrintFail, CashDrawerHistoryEventType.CashDrawerHistoryPrintFail.ToString() + " " + exception.Message, exception.ToString(), _userSession.UserId);
-                await _messageBoxService.PromptAsync(POSResources.CashHistoryPrintFailed, POSResources.ErrorTitle, PromptOptions.Ok, PromptTypes.Error);
-                await base.Yes();
-               // await HandleErrorAsync(POSResources.CashHistoryPrintFailed + Environment.NewLine + exception.Message, exception);
+                Alerts.Clear();
+                Alerts.Add(new TaskAlert(AlertType.Error, POSResources.CashHistoryPrintFailed));
+                await _errorHandlingService.HandleErrorAsync(POSResources.CashHistoryPrintFailed, exception, false, eventType: CashDrawerHistoryEventType.CashDrawerHistoryPrintFail, userId: _userSession.UserId);
             }
-
-
         }
     }
 }

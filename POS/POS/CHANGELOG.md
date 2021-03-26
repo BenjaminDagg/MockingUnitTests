@@ -190,3 +190,13 @@ Implement new POS Theme
 ##03/25/2021
 - 53501 updated font size and renamed report , Removed report Revenue by Machine
 - Updated UI Changes
+- 54221 - Modify Handle Error Function in Framework to use UserId
+- Add userId in ErrorHanling to ensure that userId is logged with error events
+- Adjust/Format Payout Screen - Moved Cashdrawer closer to number Pad, enlarge number pad numbers, widen current transaction view, etc. 
+	to fit better on screen; also modified the created date on current transaction view to show the time in smaller font under the date, etc.
+- Disable DeviceManagement Views is Device Settings are not available
+- Modified Cashdrawer history view to show alerts and pass alerts to main view
+- Adjust Cashdrawer history view butons to be wider and changed Ok to Cancel
+- Added Callback function when Toggling Promo Ticket - this will wait on response to update the UI
+- Changed LastReceiptModal to display Alerts on Payout screen when action is complete
+- Removed VoucherDetailPromt view and viewmodel as it is not used

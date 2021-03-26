@@ -51,9 +51,9 @@ namespace POS.Modules.Payout.ViewModels
                 await AddRemoveCash(isRemoveCash)
             );
 
-        public ICommand ViewCashDrawerHistoryCommand => new RelayCommand<object>(
+        public ICommand PrintCashDrawerHistoryCommand => new RelayCommand<object>(
             async _ =>
-                await ViewCashDrawerHistory(_)
+                await PrintCashDrawerHistory(_)
             );
 
         public Money CashAdded => _cashDrawer?.CashAdded ?? Money.None;
@@ -189,7 +189,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception ex)
             {
-                await _errorHandlingService.HandleErrorAsync(String.Format(POSResources.AddRemoveCashErrorMsg, ex.Message), ex, true);
+                await _errorHandlingService.HandleErrorAsync(String.Format(POSResources.AddRemoveCashErrorMsg, ex.Message), ex, true, userId: _session.UserId);
             }
         }
 
@@ -203,7 +203,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true, userId: _session.UserId);
             }
         }
         public async Task<Result> GetStartingBalance()
@@ -250,7 +250,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true, userId: _session.UserId);
             }
         }
 
@@ -270,7 +270,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                await _errorHandlingService.HandleErrorAsync(POSResources.EndCashDrawerSessionFailedMsg, exception, true, userId: _session.UserId);
             }
         }
 
@@ -302,12 +302,22 @@ namespace POS.Modules.Payout.ViewModels
             return Result.Success();
         }
 
-        public async Task ViewCashDrawerHistory(object _ = null)
+        public async Task PrintCashDrawerHistory(object _ = null)
         {
             var cashDrawerHistoryPromptViewModel = _serviceLocator.Resolve<CashDrawerHistoryPromptViewModel>();
-            cashDrawerHistoryPromptViewModel.CurrentBalance = Convert.ToDouble(CurrentBalance.Value);
+            cashDrawerHistoryPromptViewModel.Initialize(CurrentBalance.Value);
 
-            _messageBoxService.ShowModal(cashDrawerHistoryPromptViewModel);
+            var cashDrawerHistoryPromptViewModelResult = _messageBoxService.ShowModal(cashDrawerHistoryPromptViewModel);
+            if (cashDrawerHistoryPromptViewModelResult.Selection == PromptOptions.Ok)
+            {
+                if (cashDrawerHistoryPromptViewModelResult.Alerts != null && cashDrawerHistoryPromptViewModelResult.Alerts.Any())
+                {
+                    foreach (var alert in cashDrawerHistoryPromptViewModelResult.Alerts)
+                    {
+                        await _eventAggregator.PublishOnUIThreadAsync(new ShowUiAlert(alert.AlertType, alert.Message));
+                    }
+                }
+            }
             await Task.CompletedTask;
         }
 

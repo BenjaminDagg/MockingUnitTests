@@ -84,7 +84,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                _errorHandlingService.HandleErrorAsync(exception.Message, exception, true, userId: _userSession.UserId);
             }
         }
         public void RemoveTransactionItem(VoucherItem voucherItem)
@@ -96,7 +96,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                _errorHandlingService.HandleErrorAsync(exception.Message, exception, true, userId: _userSession.UserId);
             }
         }
 
@@ -146,7 +146,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(String.Format(POSResources.PayoutTransactionFailedMsg, exception.Message), exception, true);
+                await _errorHandlingService.HandleErrorAsync(String.Format(POSResources.PayoutTransactionFailedMsg, exception.Message), exception, true, userId: _userSession.UserId);
             }
         }
         public void NotifyTransactionChanged()

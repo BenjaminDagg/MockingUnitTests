@@ -109,7 +109,7 @@ namespace POS.Modules.Reports.ViewModels
             }
             catch (Exception exception)
             {
-                await HandleErrorAsync(exception.Message, exception);
+                await HandleErrorAsync(exception.Message, exception, userId: _userSession.UserId);
             }
 
             await base.OnActivateAsync(cancellationToken);

@@ -8,14 +8,14 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" >
 
-    <StackPanel Margin="20 20 0 20" FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}" Name="ParentPanel">
+    <StackPanel FocusManager.FocusedElement="{Binding ElementName=VoucherNumberTextBox}" Name="ParentPanel">
 
         <extenedcontrols:CustomTextBoxControlExtended x:Name="VoucherNumberTextBox"
                                             CursorIndex="{Binding Path=SearchBarcodeItem.CursorIndex, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                                             TextChanged="ValidationNumberTextBox_OnTextChanged"
                                             MaxLength="18" 
-                                            Margin="20, 0, 0, 0" 
-                                            Width="500"
+                                            Margin="5, 0, 0, 0" 
+                                            Width="520"
                                             HorizontalAlignment="Left"
                                             FontSize="30" 
                                             Text="{Binding Path=SearchBarcodeItem.Barcode,
@@ -54,9 +54,9 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Button Content="1"  Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="1" Grid.Row="0" Grid.Column="0" Style="{DynamicResource POSKeyPadStyle}" />
-            <Button Content="2" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="2" Grid.Row="0" Grid.Column="1" Style="{DynamicResource POSKeyPadStyle}" />
-            <Button Content="3" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="3" Grid.Row="0" Grid.Column="2" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Content="1" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="1" Grid.Row="0" Grid.Column="0" Style="{DynamicResource POSKeyPadStyle}" />
+            <Button Content="2" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="2" Grid.Row="0" Grid.Column="1" Style="{DynamicResource POSKeyPadStyle}" />
+            <Button Content="3" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="3" Grid.Row="0" Grid.Column="2" Style="{DynamicResource POSKeyPadStyle}"/>
             <Button Grid.Row="0"  
                     Command="{Binding SearchBarcodeItem.ClearCommand}" 
                     CommandParameter="{Binding SearchBarcodeItem.CursorIndex}"                     
@@ -65,9 +65,9 @@
                     Content="{x:Static resx:POSResources.UIClear}"
                     />
 
-            <Button Content="4" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="4" Grid.Row="1" Grid.Column="0" Style="{DynamicResource POSKeyPadStyle}"/>
-            <Button Content="5" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="5" Grid.Row="1" Grid.Column="1" Style="{DynamicResource POSKeyPadStyle}"/>
-            <Button Content="6" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="6" Grid.Row="1" Grid.Column="2" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Content="4" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="4" Grid.Row="1" Grid.Column="0" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Content="5" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="5" Grid.Row="1" Grid.Column="1" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Content="6" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="6" Grid.Row="1" Grid.Column="2" Style="{DynamicResource POSKeyPadStyle}"/>
             <Button Command="{Binding SearchBarcodeItem.EnterCommand}" 
                     CommandParameter="null" 
                     Grid.Row="1" 
@@ -77,9 +77,9 @@
                     Content="{x:Static resx:POSResources.UIEnter}"
                     />
 
-            <Button Content="7" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="7" Grid.Row="2" Grid.Column="0" Style="{DynamicResource DgKeyPadStyle}"/>
-            <Button Content="8" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="8" Grid.Row="2" Grid.Column="1" Style="{DynamicResource DgKeyPadStyle}"/>
-            <Button Content="9" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="9" Grid.Row="2" Grid.Column="2" Style="{DynamicResource DgKeyPadStyle}"/>
+            <Button Content="7" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="7" Grid.Row="2" Grid.Column="0" Style="{DynamicResource DgKeyPadStyle}"/>
+            <Button Content="8" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="8" Grid.Row="2" Grid.Column="1" Style="{DynamicResource DgKeyPadStyle}"/>
+            <Button Content="9" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="9" Grid.Row="2" Grid.Column="2" Style="{DynamicResource DgKeyPadStyle}"/>
             <Button Command="{Binding SearchBarcodeItem.RemoveLastCharacterCommand}" 
                     CommandParameter="{Binding SearchBarcodeItem.CursorIndex}" 
                     Grid.Row="3" 
@@ -87,7 +87,7 @@
                     Style="{DynamicResource DgBackKeyPadStyle}"
                     />
 
-            <Button Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="0" Content="0" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Style="{DynamicResource POSKeyPadStyle}"/>
+            <Button Content="0" FontSize="100" Command="{Binding SearchBarcodeItem.AddCharacterCommand}" CommandParameter="0" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Style="{DynamicResource POSKeyPadStyle}"/>
 
         </Grid>
 

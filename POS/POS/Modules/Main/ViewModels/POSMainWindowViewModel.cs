@@ -131,7 +131,7 @@ namespace POS.Modules.Main.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(POSResources.UIApplicatioLoadingWindowErrorMsg, exception, true);
+                await _errorHandlingService.HandleErrorAsync(POSResources.UIApplicatioLoadingWindowErrorMsg, exception, true, userId: _userSession.UserId);
                 await TryCloseAsync();
             }
         }
@@ -184,7 +184,7 @@ namespace POS.Modules.Main.ViewModels
 
             if (startupExeption == null) return true;
 
-            await _errorHandlingService.HandleErrorAsync(startupExeption.Message, startupExeption, true, true);
+            await _errorHandlingService.HandleErrorAsync(startupExeption.Message, startupExeption, true, true, userId: _userSession.UserId);
 
             return false;
         }

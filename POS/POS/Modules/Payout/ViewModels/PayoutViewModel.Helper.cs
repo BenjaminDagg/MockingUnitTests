@@ -177,7 +177,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                await HandleErrorAsync(exception.Message, exception);
+                await HandleErrorAsync(exception.Message, exception, userId: _payoutViewServices.Session.UserId);
             }
         }
         private async Task EndPayoutSession()
@@ -232,24 +232,22 @@ namespace POS.Modules.Payout.ViewModels
                     PromptTypes.Question
                 );
         }
-        private void ShowVoucherDetail(VoucherItem voucherItem)
-        {
-            if (voucherItem == null)
-            {
-                return;
-            }
-
-            var voucherDetailPromptViewModel =
-                _payoutViewServices.ServiceLocator.Resolve<VoucherDetailPromptViewModel>();
-
-            voucherDetailPromptViewModel.Barcode = voucherItem.Barcode?.Value;
-            _messageBoxService.ShowModal(voucherDetailPromptViewModel);
-        }
-
         private void  LastReceiptPrint()
         {
             var lastPrintedReceipt = _payoutViewServices.ServiceLocator.Resolve<LastPrintedReceiptPromptViewModel>();
-            _messageBoxService.ShowModal(lastPrintedReceipt);
-            }
+            var lastPrintedReceiptResult = _messageBoxService.ShowModal(lastPrintedReceipt);
+
+            if (lastPrintedReceiptResult.Selection == PromptOptions.Ok)
+            {
+                if (lastPrintedReceiptResult.Alerts != null && lastPrintedReceiptResult.Alerts.Any())
+                {
+                    Alerts.Clear();
+                    foreach (var alert in lastPrintedReceiptResult.Alerts)
+                    {
+                        Alerts.Add(alert);
+                    }
+                }
+            } 
+        }
     }
 }

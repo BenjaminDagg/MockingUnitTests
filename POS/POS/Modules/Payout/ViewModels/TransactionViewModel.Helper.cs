@@ -149,7 +149,7 @@ namespace POS.Modules.Payout.ViewModels
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true, userId: _userSession.UserId);
             }
         }
 

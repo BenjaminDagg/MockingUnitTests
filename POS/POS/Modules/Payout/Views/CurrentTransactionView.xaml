@@ -11,7 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
 
-    <Grid Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.Resources>
             <FrameworkElement x:Key="ProxyElement"
                          DataContext="{Binding}"/>
@@ -98,16 +98,17 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderCreated}" Binding="{Binding Path=Created, StringFormat={}{0:MM/dd/yyyy hh:mm tt}}" 
-                                    FontSize="30" Width="190" >
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                            <Setter Property="TextBlock.Margin" Value="20, 0, 0, 0"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGridTemplateColumn Width="140" Header="{x:Static resx:POSResources.UICurrentTransactionHeaderCreated}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="0, 3">
+                            <Run Text="{Binding Path=Created, Mode=OneWay, StringFormat={}{0:MM/dd/yyyy}}" FontSize="25"/>
+                            <LineBreak/>
+                            <Run Text="{Binding Path=Created, Mode=OneWay, StringFormat={}{0:hh:mm tt}}" FontSize="20"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderLocation}" Binding="{Binding Path=Location}" 
                                     FontSize="30" Width="180">
                     <DataGridTextColumn.ElementStyle>
@@ -142,7 +143,7 @@
                                                                 Style="{StaticResource DgGeometryButtonStyle}"
                                                                 PathIcon="{StaticResource Remove}"
                                                                 IconColor="{StaticResource DgWhite}"
-                                                                Height="30" 
+                                                                Height="55" 
                                                                 Margin="0, 0, 10, 0"
                                                                 />
                         </DataTemplate>
@@ -156,11 +157,11 @@
             <TextBlock DockPanel.Dock="Left" 
                             Text="{Binding TransactionViewModel.ItemCount, StringFormat={x:Static resx:POSResources.UICurrentTransactionVoucherCount}}" 
                             Foreground="{StaticResource DgWhite}" 
-                            FontSize="20" 
+                            FontSize="40" 
                             HorizontalAlignment="Left" 
                             Margin="10"/>
             <TextBlock Text="{Binding TransactionViewModel.TotalPayout, StringFormat={x:Static resx:POSResources.UICurrentTransactionTotalPayout}}" 
-                            FontSize="20" 
+                            FontSize="40" 
                             Foreground="{StaticResource DgWhite}" 
                             HorizontalAlignment="Right" 
                             Margin="10"/>

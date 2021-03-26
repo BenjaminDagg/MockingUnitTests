@@ -118,7 +118,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
             }
             catch (Exception exception)
             {
-                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true);
+                await _errorHandlingService.HandleErrorAsync(exception.Message, exception, true, userId: _userSession.UserId);
             }
         }
         private string GetLoginErrorMessage(LoginEventType result)

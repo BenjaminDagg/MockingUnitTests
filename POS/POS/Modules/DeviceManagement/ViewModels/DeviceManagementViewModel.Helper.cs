@@ -23,7 +23,6 @@ namespace POS.Modules.DeviceManagement.ViewModels
 {
     public partial class DeviceManagementViewModel
     {
-        private bool? _deviceManagementInitializedSuccessfully = null;
         private static readonly SemaphoreSlim _semaphoreSlimConnectionTimer = new SemaphoreSlim(1, 1);
         private static readonly SemaphoreSlim _semaphoreSlimSendMessage = new SemaphoreSlim(1, 1);
         private static readonly SemaphoreSlim _semaphoreSlimUpdateMachines = new SemaphoreSlim(1, 1);
@@ -43,7 +42,14 @@ namespace POS.Modules.DeviceManagement.ViewModels
         public readonly System.Timers.Timer _connectionStateTimer;
 
         private int serial = default;
-
+        private bool IsPromoTicketOff
+        {
+            get => PromoTicketSwitch == 0;
+        }
+        private string OnOff
+        {
+            get => (IsPromoTicketOff ? POSResources.UIDeviceManagerSettingsPromoTicketOn : POSResources.UIDeviceManagerSettingsPromoTicketOff);
+        }
         private async Task Initialize()
         {
             if (!await _semaphoreSlimInitialize.WaitAsync(0))
@@ -239,7 +245,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 NotifyOfChangeToActionButtons();
             }
         }
-        private async Task TogglePromoTicketOnOff(string command)
+        private async Task TogglePromoTicketOnOff(Action<string> responseAction, string command)
         {
             if (_serverStatus != POSResources.UIDeviceManagementStateConnected)
             {
@@ -249,8 +255,10 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 return;
             }
 
-            await SendMessageToTransactionPortal(null, command);
+            await SendMessageToTransactionPortal(responseAction, command);
         }
+
+
         private async void PollingAction()
         {
             if (_serverStatus == POSResources.UIDeviceManagementStateConnected)

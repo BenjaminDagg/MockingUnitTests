@@ -136,11 +136,6 @@ namespace POS.Modules.Payout.ViewModels
             }
         }
 
-        public void ViewVoucherDetail(VoucherItem voucher)
-        {
-            ShowVoucherDetail(voucher);
-        }
-
         public async Task HandleAsync(TriggerSearch message, CancellationToken cancellationToken)
         {
             await SearchBarcode();
