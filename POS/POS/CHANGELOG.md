@@ -203,3 +203,6 @@ Implement new POS Theme
 - Added Callback function when Toggling Promo Ticket - this will wait on response to update the UI
 - Changed LastReceiptModal to display Alerts on Payout screen when action is complete
 - Removed VoucherDetailPromt view and viewmodel as it is not used
+
+##03/26/2021
+- 54342 Loging out session to print session end reciept on close of application

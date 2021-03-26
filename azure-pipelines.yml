@@ -57,3 +57,13 @@ steps:
          Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
          Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip 
         
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(RetailDatabaseId) '
+  inputs:
+    PathtoPublish: '$(DatabaseOutputDirectory)/$(RetailDatabaseId).Zip'
+    ArtifactName: '$(RetailDatabaseId) '
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(CentralDatabaseId) '
+  inputs:
+    PathtoPublish: '$(DatabaseOutputDirectory)/$(CentralDatabaseId).Zip'
+    ArtifactName: '$(CentralDatabaseId) '  
