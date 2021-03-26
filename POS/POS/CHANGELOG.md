@@ -79,7 +79,7 @@ Implement new POS Theme
 - 51115 - Added Limit for Max Cash Added
 - 51120 - Added hide functionalilty of needs Approval
 
-###fixed
+### fixed
 - adjusted the CashdrawerHistoryPropmtView to fix grid header and button margin
 - added pos.ico as resource
 
@@ -99,27 +99,27 @@ Implement new POS Theme
 - 51725 Daily cash activity and Promo Enrty Reports added
 - 51726 Prompt message changed
 
-##03/03/2021
+## 03/03/2021
 - 51840 Layout of cash drawer history changed 
 - 51841 Icon Added to Device Management for readability 
 
-##03/08/2021
+## 03/08/2021
 - Updated Cancel Voucher - Added barcode and amount to message dialog
 - fixed PromptView for MessageboxService
 
-##03/09/2021
+## 03/09/2021
 - Updated Config Settings to utilize 'DataConfigItem' to load and use settings from the database
 - 51143 utilized MVVM patterns to set/trigger the color changes in the AddRemoveCashPromptView view. 
 
-##03/10/2021
-###fixed
+## 03/10/2021
+### fixed
 - Update report views to adjust the run date cut off in the datagrid view
 - Update report properties and datasource
 
-###updated
+### updated
 - Removed 'Daily Cashier Activity' from the application execution folder
 
-##03/11/2021
+## 03/11/2021
 - 52232
 	- updated 'CashDrawerAmountLimitmessage' to PascalCase 'CashDrawerAmountLimitMessage'
 
@@ -127,34 +127,34 @@ Implement new POS Theme
 - 52232
 	- Changes to UI for consistency 
 
-##03/12/2021
-###fixed
+## 03/12/2021
+### fixed
 - Fixed Issue with error handling in LastPrintedRecieptViewModel
 - Fixed currency formatting on LastPrintedReceiptView
 
-##03/15/2021
-###Updated
+## 03/15/2021
+### Updated
 - Added check to ensure printer is configured before each payout transaction
 - 52233 - Review POS Requirements and Document comparable changes with OLD POS System
 
-##03/16/2021
+## 03/16/2021
 - Updated paremerts for starting balance input and minor UI Fixes
 - 52232 - Review POS Requirements and Document comparable changes with OLD POS System
 
-###Updated
+### Updated
 - 52232
 	- Added Customer duplicate Receipt functionality
 
-##03/17/2021
-###Updated
+## 03/17/2021
+### Updated
 - 52232
 	- Updated UI
-###Fixed
+### Fixed
 - 52232
 	- Added condition for using system without cash drawer
 
-##03/18/2021
-###Updated
+## 03/18/2021
+### Updated
 - 52232
 	- Removed the extra seperator from Device management settings
 	- seperator height changed for Device management settings
@@ -164,8 +164,8 @@ Implement new POS Theme
 	- Added bold to payout label and amount on the payout receipt
 	- Updated ReceiptLayoutService to use StringBuilder 
 
-##03/19/2021
-###Updated
+## 03/19/2021
+### Updated
 - 52232
 	- Updated Cash Drawer Limit so that the total amount in the cash drawer is bounded by the configured limit
 	- Updated the Starting balance functionality to honor the Cash Drawer limit that is configured in database
@@ -175,11 +175,11 @@ Implement new POS Theme
 	- Updated Alert Messages to fit propery in the designated area
 	- Updated Enter Button Style for POS
 
-##03/23/2021
-###Updated
+## 03/23/2021
+### Updated
 - 52232
 	- Updated the sequence number in messages when communication with TCP
-##03/24/2021
+## 03/24/2021
 - 53400 Tab order changed to Payout-DeviceManagement-Reports-Settings
 - 53401 Buttond made bigger for accessibility 
 - 53402 Pop up title size increased , Cash Drawer font Increased ,Kepad adjusted and cureent transaction made bigger,Approval checkbox made bigger
@@ -187,7 +187,7 @@ Implement new POS Theme
 - 53180 - Implement Turn Promo Ticket On/Off
 - 53500 Added Print functionality for Cash drawer History
 
-##03/25/2021
+## 03/25/2021
 - 53501 updated font size and renamed report, Removed report Revenue by Machine
 - Increased Reports List font
 - Increased Device Mansgement tab alert font size
@@ -207,6 +207,9 @@ Implement new POS Theme
 - Changed LastReceiptModal to display Alerts on Payout screen when action is complete
 - Removed VoucherDetailPromt view and viewmodel as it is not used
 
-##03/26/2021
+## 03/26/2021
 - 54342 Loging out session to print session end reciept on close of application
 - Added User session to report list view model
+### Update
+- Format changelog to be more readable
+- Updated Created Date field on Current Transaction View to alighn with cell data
