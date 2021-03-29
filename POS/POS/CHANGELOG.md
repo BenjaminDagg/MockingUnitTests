@@ -213,3 +213,10 @@ Implement new POS Theme
 ### Update
 - Format changelog to be more readable
 - Updated Created Date field on Current Transaction View to alighn with cell data
+
+##03/29/2021
+##Updated
+- Added Margin in Cash Drawer history Pop up 
+- 53501 Changed backgroud for the Reports Tab
+- Changed Font size For Payout settings
+- Removed Hover effect from Device Management
