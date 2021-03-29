@@ -23,14 +23,6 @@
                     <Border Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <ContentPresenter Margin="-10,3,6,3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource DgHoverBackground}"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{StaticResource DgSelected}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>        
@@ -80,16 +72,7 @@
                             </SelectiveScrollingGrid>
                         </Border>
                     </StackPanel>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="DgR_Border" Property="Background" Value="{StaticResource DgHoverBackground}" />
-                            <Setter TargetName="TopCorner" Property="Fill" Value="{StaticResource DgHoverBackground}" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="DgR_Border" Property="Background" Value="{StaticResource DgSelected}" />
-                            <Setter TargetName="TopCorner" Property="Fill" Value="{StaticResource DgSelected}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -669,7 +652,7 @@
                                           HorizontalAlignment="Left">
                                 <ContentPresenter.Resources>
                                     <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="FontSize" Value="22" />
+                                        <Setter Property="FontSize" Value="30" />
                                     </Style>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>
@@ -765,7 +748,7 @@
                                 <ContentPresenter VerticalAlignment="Center" >
                                     <ContentPresenter.Resources>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="FontSize" Value="18" />
+                                            <Setter Property="FontSize" Value="25" />
                                             <Setter Property="Margin" Value="10, 0, 0, 0"/>
                                         </Style>
                                     </ContentPresenter.Resources>

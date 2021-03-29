@@ -47,7 +47,7 @@
                 <TextBlock x:Name="CurrentTransactionTxt" 
                            Visibility="{Binding PayoutInitializedSuccessfully, Converter={StaticResource BooleanToVisibility}}"
                            Text="{x:Static resx:POSResources.UIPaymentCurrentTransaction}" 
-                           FontSize="40"
+                           FontSize="50"
                            Grid.Column="0" 
                            Foreground="{StaticResource DgWhite}"  
                            Margin="20, 10, 0, 0" />

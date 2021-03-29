@@ -33,7 +33,7 @@
 
             <DataGrid Grid.Row="0" x:Name="VouchersGrid" MaxHeight="600"
                     Style="{StaticResource DgDataGridStyle}" 
-                    Margin="10, 0"
+                    Margin="10,  0 10 10"
                     ItemsSource="{Binding Path=CashDrawerHistory}"
                     HorizontalAlignment="Stretch"  
                     CanUserResizeColumns="False"
@@ -98,7 +98,7 @@
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Bottom"
                                 />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
                 <dgmaterial:CustomButtonControlEx x:Name="Ok"
                                                   FontSize="18" 
                                                   Foreground="{StaticResource DgWhite}"
