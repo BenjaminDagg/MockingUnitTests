@@ -98,7 +98,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderCreated}" Width="190" >
+                <DataGridTextColumn Header="{x:Static resx:POSResources.UICurrentTransactionHeaderCreated}" Width="190" Binding="{Binding Created}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                         <Setter Property="Template">

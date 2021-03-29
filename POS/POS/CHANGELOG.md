@@ -213,3 +213,4 @@ Implement new POS Theme
 ### Update
 - Format changelog to be more readable
 - Updated Created Date field on Current Transaction View to alighn with cell data
+- Refactored CanClose method in POSMainWindowViewModel to reuse ConfirmLogout method

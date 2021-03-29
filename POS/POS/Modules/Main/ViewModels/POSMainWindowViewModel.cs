@@ -103,17 +103,13 @@ namespace POS.Modules.Main.ViewModels
 
         public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken = default)
         {
-            var result = await _messageBoxService.PromptAsync(
-                POSResources.AreYouSureEndSessionMsg,
-                POSResources.ConfirmActionTitle,
-                PromptOptions.YesNo,
-                PromptTypes.Question
-                );
-            if (result == PromptOptions.Yes)
+            var confirmedLogout = await ConfirmLogout() == PromptOptions.Yes;
+            if (confirmedLogout)
             {
                 await _eventAggregator.PublishOnUIThreadAsync(new LogoutEventMessage());
             }
-            return result == PromptOptions.Yes;
+
+            return confirmedLogout;
         }
 
         protected override async void OnViewLoaded(object view)
