@@ -13,7 +13,8 @@
              d:DesignWidth="900"
              mc:Ignorable="d">
 
-    <controls:ExtendedScreenControl MinWidth="800"
+    <controls:ExtendedScreenControl MinWidth="500"
+                                    Width="Auto"
                                     MinHeight="400"
                                     Margin="3"
                                     HorizontalAlignment="Stretch"

@@ -23,8 +23,7 @@
 
             <Grid Name="DataGridRow" Grid.Row="0">
 
-                <DataGrid Width="{Binding ActualWidth,
-                                          ElementName=DataGridRow}"
+                <DataGrid Width="Auto"
                           Height="{Binding ActualHeight,
                                            ElementName=DataGridRow}"
                           Margin="0, 0, 20, 0"

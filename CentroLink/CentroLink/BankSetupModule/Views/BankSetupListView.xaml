@@ -18,7 +18,8 @@
             <viewModels:BoolToStringConverter x:Key="CYesNo" FalseValue="No" TrueValue="Yes" />
         </UserControl.Resources>
 
-    <controls:ExtendedScreenControl MinWidth="800"
+    <controls:ExtendedScreenControl MinWidth="600"
+                                    Width="Auto"
                                     MinHeight="400"
                                     Margin="3"
                                     HorizontalAlignment="Stretch"
@@ -55,7 +56,13 @@
                         <DataGridTextColumn Width="*"
                                             Binding="{Binding Path=Description}"
                                             Header="Description"
-                                            IsReadOnly="True" />
+                                            IsReadOnly="True" >
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
 
                         <DataGridTextColumn Binding="{Binding Path=GameTypeCode}"
                                             Header="Game&#x0a;Type Code "

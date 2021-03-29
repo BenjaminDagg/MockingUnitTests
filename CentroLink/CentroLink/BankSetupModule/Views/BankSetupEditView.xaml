@@ -18,7 +18,8 @@
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
-        <controls:ExtendedScreenControl MinWidth="800"
+        <controls:ExtendedScreenControl MinWidth="600"
+                                        Width="Auto"
                                         MinHeight="400"
                                         Margin="3"
                                         HorizontalAlignment="Stretch"
