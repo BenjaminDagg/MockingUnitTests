@@ -106,10 +106,10 @@ namespace CentroLink.BankSetupModule.ViewModels
             BankSetupModel = new BankSetupAddEditValidationModel
             {
                 IsPromoEntryTicketEnabled = _settings.PromoEntryTicketEnabled,
-                PromoTicketFactor = _settings.PromoEntryDefaultFactor.ToString(),
-                PromoTicketAmount = _settings.PromoEntryDefaultTicketAmount.ToString("0.00"),
-                LockupAmount = _settings.DefaultBankLockupAmount.ToString("0.00"),
-                DbaLockupAmount = _settings.DefaultBankDbaLockupAmount.ToString("0.00"),
+                PromoTicketFactor = _settings.PromoEntryDefaultFactor,
+                PromoTicketAmount = _settings.PromoEntryDefaultTicketAmount,
+                LockupAmount = _settings.DefaultBankLockupAmount,
+                DbaLockupAmount = _settings.DefaultBankDbaLockupAmount,
 
              };
 

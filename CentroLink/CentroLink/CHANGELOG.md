@@ -37,20 +37,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - 51730 - Added Checkboxes on Edit View to show if ticket started and/or ended
 - 51731 - Modified Delete logic to match old system
 
-##03/11/2021
-###Update
+## 03/11/2021
+### Update
 - updated Promo Start DatePicker to be disabled if promo schedule started
 
-##03/23/2021
+## 03/23/2021
 - 53041 - Create functionality to toggle Promo Ticket Printing On/Off.
 
-##03/24/2021
-###Update
+## 03/24/2021
+### Update
 - Cleanup and Simplified TcpCommunicator logic
 
-##03/25/2021
-###Update
+## 03/25/2021
+### Update
 - Update Promo Ticket functionality to prompt and notify user if Print Promo Ticket failed
 
-##03/29/2021
+## 03/29/2021
 - Adjusted dimentions for proper rendering in multiple resolution
+### Fixed
+- Fixed Numeric Textbox Validation issue by setting IsNumeric=true, TargetNullValue='', and modifying validation attributes
+- Changed IP Address Validation Regex
+- Fixed Issue when creating new user
+	- Error: "This SqlTransaction has completed; it is no longer usable."
+	- 2 Commits in one method called (refactored to fix)
+
+## 2021-03-30
+ - Change validation message for currency from "Value must be whole number"
+ - Changed data types in bank module from string to int and decimal
+ - removed hard coded "00" as currency format

@@ -222,12 +222,13 @@
                 <controls:CustomTextBoxControl Grid.Row="9"
                                                Grid.Column="2"
                                                TabIndex="13"
+                                               NumericMode="True"
                                                Width="285"
                                                HorizontalAlignment="Left"
                                                Text="{Binding Location.CashoutTimeout,
                                                           Mode=TwoWay,
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
+                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                                TextBoxIcon="Pencil" />
 
                 <StackPanel Grid.Row="9" Grid.Column="0" Orientation="Horizontal" >
@@ -277,11 +278,12 @@
                                                Grid.Column="2"
                                                TabIndex="14"
                                                Width="285"
+                                               NumericMode="True"
                                                HorizontalAlignment="Left"
                                                Text="{Binding Location.MaxBalanceAdjustment,
-                                                          Mode=TwoWay, StringFormat={}{0:C0}.00,
+                                                          Mode=TwoWay, StringFormat={}{0:C2},
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
+                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                                TextBoxIcon="Pencil" />
 
 
@@ -308,11 +310,12 @@
                                                Grid.Column="2"
                                                TabIndex="15"
                                                Width="285"
+                                               NumericMode="True"
                                                HorizontalAlignment="Left"
                                                Text="{Binding Location.PayoutAuthorizationAmount,
-                                                          Mode=TwoWay, StringFormat={}{0:C0}.00,
+                                                          Mode=TwoWay, StringFormat={}{0:C2},
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
+                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                                TextBoxIcon="Pencil" />
 
                 <TextBlock Grid.Row="16"

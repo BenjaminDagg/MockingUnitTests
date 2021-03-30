@@ -111,7 +111,7 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
 
         public virtual async void BackToPromoTicketSetup()
         {
-            var message = "Are you sure you want to go back to PromoTicket Setup List?"
+            var message = "Are you sure you want to go back to Promo Ticket Setup List?"
                           + Environment.NewLine + "Unsaved changes will be lost.";
 
             var result = await PromptUserAsync(message, "Confirm Action", PromptOptions.YesNo, PromptTypes.Question);

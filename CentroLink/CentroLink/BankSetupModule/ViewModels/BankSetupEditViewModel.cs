@@ -56,10 +56,10 @@ namespace CentroLink.BankSetupModule.ViewModels
           
             BankSetupModel.BankNumber = bank.BankNumber.ToString();
             BankSetupModel.Description = bank.Description;
-            BankSetupModel.LockupAmount = bank.LockupAmount.ToString("0.00");
-            BankSetupModel.DbaLockupAmount = bank.DbaLockupAmount.ToString("0.00");
-            BankSetupModel.PromoTicketAmount = bank.PromoTicketAmount.ToString("0.00");
-            BankSetupModel.PromoTicketFactor = bank.PromoTicketFactor.ToString();
+            BankSetupModel.LockupAmount = bank.LockupAmount;
+            BankSetupModel.DbaLockupAmount = bank.DbaLockupAmount;
+            BankSetupModel.PromoTicketAmount = bank.PromoTicketAmount;
+            BankSetupModel.PromoTicketFactor = bank.PromoTicketFactor;
 
             var gametype = BankSetupModel.AvailableGameTypeCodes.SingleOrDefault(b => b.GameTypeCode == bank.GameTypeCode);
             var productLine = BankSetupModel.AvailableProductLines.SingleOrDefault(p => p.ProductLineId == bank.ProductLineId);

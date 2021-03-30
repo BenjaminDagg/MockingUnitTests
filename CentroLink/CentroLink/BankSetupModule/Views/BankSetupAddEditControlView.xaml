@@ -118,22 +118,25 @@
             <controls:CustomTextBoxControl Grid.Row="7"
                                            Grid.Column="0"
                                            Width="200"
+                                           NumericMode="True"
                                            Text="{Binding Path=BankSetupModel.LockupAmount,
-                                                          StringFormat={}{0:n2},
+                                                          StringFormat={}{0:C2},
                                                           Mode=TwoWay,
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
+                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                            TextBoxIcon="Dollar"
                                            WatermarkText="0.00" />
+            
 
             <controls:CustomTextBoxControl Grid.Row="7"
                                            Grid.Column="2"
                                            Width="200"
+                                           NumericMode="True"
                                            Text="{Binding Path=BankSetupModel.DbaLockupAmount,
-                                                          StringFormat={}{0:n2},
+                                                          StringFormat={}{0:C2},
                                                           Mode=TwoWay,
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
+                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                            TextBoxIcon="Dollar"
                                            WatermarkText="0.00" />
 
@@ -165,10 +168,11 @@
             <controls:CustomTextBoxControl Grid.Row="11"
                                            Grid.Column="0"
                                            Width="200"
+                                           NumericMode="True"
                                            Text="{Binding Path=BankSetupModel.PromoTicketFactor,
                                                           Mode=TwoWay,
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
+                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                            TextBoxIcon="Pencil"
                                            Visibility="{Binding Path=BankSetupModel.IsPromoEntryTicketEnabled,
                                                                 Converter={StaticResource BooleanToVisibility}}"
@@ -177,10 +181,11 @@
             <controls:CustomTextBoxControl Grid.Row="11"
                                            Grid.Column="2"
                                            Width="200"
+                                           NumericMode="True"
                                            Text="{Binding Path=BankSetupModel.PromoTicketAmount,
-                                                          Mode=TwoWay,
+                                                          Mode=TwoWay, StringFormat={}{0:C2},
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"
+                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                            TextBoxIcon="Dollar"
                                            Visibility="{Binding Path=BankSetupModel.IsPromoEntryTicketEnabled,
                                                                 Converter={StaticResource BooleanToVisibility}}"

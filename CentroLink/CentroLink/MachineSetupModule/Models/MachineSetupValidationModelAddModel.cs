@@ -75,7 +75,7 @@ namespace CentroLink.MachineSetupModule.Models
         /// </summary>
         [MaxLength(24)]
         [Required]
-        [RegularExpression(@"\d\d?\d?\.\d\d?\d?\.\d\d?\d?\.\d\d?\d?", ErrorMessage = "Not a valid IP address.")]
+        [RegularExpression(@"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", ErrorMessage = "Not a valid IP address.")]
         public string IpAddress
         {
             get => _ipAddress;

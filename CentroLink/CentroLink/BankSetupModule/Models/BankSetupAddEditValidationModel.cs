@@ -11,10 +11,10 @@ namespace CentroLink.BankSetupModule.Models
     {
         private string _bankNumber;
         private string _description;
-        private string _lockupAmount;
-        private string _dbaLockupAmount;
-        private string _promoTicketFactor;
-        private string _promoTicketAmount;
+        private decimal _lockupAmount;
+        private decimal _dbaLockupAmount;
+        private int _promoTicketFactor;
+        private decimal _promoTicketAmount;
         private ProductLineDropDownModel _selectedProductLine;
         private List<ProductLineDropDownModel> _availableProductLines;
         private GameTypeCodeDropdownModel _selectedGameTypeCode;
@@ -112,8 +112,7 @@ namespace CentroLink.BankSetupModule.Models
         /// Gets or sets the lockup amount.
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        [RegularExpression(@"\d{0,9}(\.\d{1,2})?", ErrorMessage = "Must be a valid whole number.")]
-        public string LockupAmount
+        public decimal LockupAmount
         {
             get => _lockupAmount;
             set
@@ -127,8 +126,7 @@ namespace CentroLink.BankSetupModule.Models
         /// Gets or sets the dba lockup amount.
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        [RegularExpression(@"\d{0,9}(\.\d{1,2})?", ErrorMessage = "Must be a valid whole number.")]
-        public string DbaLockupAmount
+        public decimal DbaLockupAmount
         {
             get => _dbaLockupAmount;
             set
@@ -143,7 +141,7 @@ namespace CentroLink.BankSetupModule.Models
         /// </summary>
         [Required(ErrorMessage = "Required")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Must be a valid whole number.")]
-        public string PromoTicketFactor
+        public int PromoTicketFactor
         {
             get => _promoTicketFactor;
             set
@@ -158,8 +156,7 @@ namespace CentroLink.BankSetupModule.Models
         /// Gets or sets the promo ticket amount.
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        [RegularExpression(@"\d{0,9}(\.\d{1,2})?", ErrorMessage = "Must be a valid whole number.")]
-        public string PromoTicketAmount
+        public decimal PromoTicketAmount
         {
             get => _promoTicketAmount;
             set
@@ -216,10 +213,10 @@ namespace CentroLink.BankSetupModule.Models
                 ProductLineId = SelectedProductLine.ProductLineId,
                 Description = Description,
                 IsPaper = IsPaper,
-                LockupAmount = decimal.Parse(LockupAmount),
-                DbaLockupAmount = decimal.Parse(DbaLockupAmount),
-                PromoTicketFactor = int.Parse(PromoTicketFactor),
-                PromoTicketAmount = decimal.Parse(PromoTicketAmount)
+                LockupAmount = LockupAmount,
+                DbaLockupAmount = DbaLockupAmount,
+                PromoTicketFactor = PromoTicketFactor,
+                PromoTicketAmount = PromoTicketAmount
             };
 
             return bankSetup;
