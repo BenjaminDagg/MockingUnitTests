@@ -86,12 +86,35 @@ steps:
     LogLevel: 'verbose'
     FailOnWarning: false
     DisableTelemetry: false
+
+- task: Assembly-Info-NetCore@2
+  displayName: 'Set Assembly Info for POS'
+  inputs:
+    Path: '$(Build.SourcesDirectory)/AppDev_MOLite'
+    FileNames: '**/POS.csproj'
+    InsertAttributes: true
+    FileEncoding: 'auto'
+    InformationalVersion: '$(Build.BuildNumber)'
+    WriteBOM: true
+    Authors: 'Diamond Game'
+    Company: 'Diamond Game'
+    Product: 'POS'
+    Description: 'Payout Station for the retail gaming location.'
+    Copyright: '2021 Diamond Game'    
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false
     
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '**/CentroLink.sln'
+    
+    
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '**/POS.sln'
 
 - task: VSBuild@1
   displayName: 'Build CentroLink $(buildConfiguration)'
@@ -114,4 +137,27 @@ steps:
   inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
       ArtifactName: 'CentroLink'
+      publishLocation: 'Container'
+
+- task: VSBuild@1
+  displayName: 'Build POS $(buildConfiguration)'
+  inputs:
+    solution: '**/POS.sln'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: ArchiveFiles@2
+  displayName: 'Archive POS'
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/POS.zip'
+    replaceExistingArchive: true 
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact POS'
+  inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/POS.zip'
+      ArtifactName: 'POS'
       publishLocation: 'Container'
