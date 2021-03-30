@@ -116,48 +116,62 @@ steps:
   inputs:
     restoreSolution: '**/POS.sln'
 
-- task: VSBuild@1
-  displayName: 'Build CentroLink $(buildConfiguration)'
+- task: VisualStudioTestPlatformInstaller@1
   inputs:
-    solution: '**/CentroLink.sln'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    packageFeedSelector: 'nugetOrg'
+    versionSelector: 'latestStable'
 
-- task: ArchiveFiles@2
-  displayName: 'Archive CentroLink'
+- task: VSTest@2
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/CentroLink/CentroLink/bin/Release/netcoreapp3.1'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
-    replaceExistingArchive: true 
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact CentroLink'
-  inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
-      ArtifactName: 'CentroLink'
-      publishLocation: 'Container'
+# - task: VSBuild@1
+#   displayName: 'Build CentroLink $(buildConfiguration)'
+#   inputs:
+#     solution: '**/CentroLink.sln'
+#     platform: '$(buildPlatform)'
+#     configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  displayName: 'Build POS $(buildConfiguration)'
-  inputs:
-    solution: '**/POS.sln'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+# - task: ArchiveFiles@2
+#   displayName: 'Archive CentroLink'
+#   inputs:
+#     rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/CentroLink/CentroLink/bin/Release/netcoreapp3.1'
+#     includeRootFolder: false
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
+#     replaceExistingArchive: true 
 
-- task: ArchiveFiles@2
-  displayName: 'Archive POS'
-  inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/POS.zip'
-    replaceExistingArchive: true 
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact CentroLink'
+#   inputs:
+#       PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
+#       ArtifactName: 'CentroLink'
+#       publishLocation: 'Container'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact POS'
-  inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/POS.zip'
-      ArtifactName: 'POS'
-      publishLocation: 'Container'
+# - task: VSBuild@1
+#   displayName: 'Build POS $(buildConfiguration)'
+#   inputs:
+#     solution: '**/POS.sln'
+#     platform: '$(buildPlatform)'
+#     configuration: '$(buildConfiguration)'
+
+# - task: ArchiveFiles@2
+#   displayName: 'Archive POS'
+#   inputs:
+#     rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1'
+#     includeRootFolder: false
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/POS.zip'
+#     replaceExistingArchive: true 
+
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact POS'
+#   inputs:
+#       PathtoPublish: '$(Build.ArtifactStagingDirectory)/POS.zip'
+#       ArtifactName: 'POS'
+#       publishLocation: 'Container'
