@@ -129,13 +129,21 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-
 - task: VSBuild@1
   displayName: 'Build POS $(buildConfiguration)'
   inputs:
     solution: '**/POS.sln'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: |
+      **\bin\$(BuildConfiguration)\**
+      **\$(BuildConfiguration)\*test*.dll 
+      !**\obj\**
+    TargetFolder: '$(build.artifactstagingdirectory)'
 
 - task: VSTest@2
   inputs:
