@@ -65,3 +65,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
  - Change validation message for currency from "Value must be whole number"
  - Changed data types in bank module from string to int and decimal
  - removed hard coded "00" as currency format
+
+ ## 2021-03-31
+ - 54192 - Centrolink - Review and Test functionality against requirements
+         - Fixed Currency formatting simultaneously while editing. Enabled formatting on LostFocus 

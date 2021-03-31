@@ -118,27 +118,51 @@
             <controls:CustomTextBoxControl Grid.Row="7"
                                            Grid.Column="0"
                                            Width="200"
-                                           NumericMode="True"
-                                           Text="{Binding Path=BankSetupModel.LockupAmount,
-                                                          StringFormat={}{0:C2},
-                                                          Mode=TwoWay,
-                                                          ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                           DecimalMode="True"
                                            TextBoxIcon="Dollar"
-                                           WatermarkText="0.00" />
-            
+                                           WatermarkText="0.00" >
+                <controls:CustomTextBoxControl.Style>
+                    <Style TargetType="{x:Type controls:CustomTextBoxControl}" BasedOn="{StaticResource {x:Type controls:CustomTextBoxControl}}">
+                        <Setter Property="Text" Value="{Binding Path=BankSetupModel.LockupAmount,
+                                                                  Mode=TwoWay, StringFormat={}{0:C2},
+                                                                  ValidatesOnDataErrors=True,
+                                                                  UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                        <Style.Triggers>
+                            <Trigger Property="Control.IsFocused" Value="True">
+                                <Setter Property="Text" Value="{Binding Path=BankSetupModel.LockupAmount,
+                                                                  Mode=TwoWay, StringFormat=F2,
+                                                                  ValidatesOnDataErrors=True,
+                                                                  UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </controls:CustomTextBoxControl.Style>
+            </controls:CustomTextBoxControl>
+
 
             <controls:CustomTextBoxControl Grid.Row="7"
                                            Grid.Column="2"
                                            Width="200"
-                                           NumericMode="True"
-                                           Text="{Binding Path=BankSetupModel.DbaLockupAmount,
-                                                          StringFormat={}{0:C2},
-                                                          Mode=TwoWay,
-                                                          ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                           DecimalMode="True"
                                            TextBoxIcon="Dollar"
-                                           WatermarkText="0.00" />
+                                           WatermarkText="0.00" >
+                <controls:CustomTextBoxControl.Style>
+                    <Style TargetType="{x:Type controls:CustomTextBoxControl}" BasedOn="{StaticResource {x:Type controls:CustomTextBoxControl}}">
+                        <Setter Property="Text" Value="{Binding Path=BankSetupModel.DbaLockupAmount,
+                                                                  Mode=TwoWay, StringFormat={}{0:C2},
+                                                                  ValidatesOnDataErrors=True,
+                                                                  UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                        <Style.Triggers>
+                            <Trigger Property="Control.IsFocused" Value="True">
+                                <Setter Property="Text" Value="{Binding Path=BankSetupModel.DbaLockupAmount,
+                                                                  Mode=TwoWay, StringFormat=F2,
+                                                                  ValidatesOnDataErrors=True,
+                                                                  UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </controls:CustomTextBoxControl.Style>
+            </controls:CustomTextBoxControl>
 
             <TextBlock Grid.Row="8"
                        Grid.Column="0"
@@ -181,15 +205,28 @@
             <controls:CustomTextBoxControl Grid.Row="11"
                                            Grid.Column="2"
                                            Width="200"
-                                           NumericMode="True"
-                                           Text="{Binding Path=BankSetupModel.PromoTicketAmount,
-                                                          Mode=TwoWay, StringFormat={}{0:C2},
-                                                          ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                           DecimalMode="True"
                                            TextBoxIcon="Dollar"
                                            Visibility="{Binding Path=BankSetupModel.IsPromoEntryTicketEnabled,
                                                                 Converter={StaticResource BooleanToVisibility}}"
-                                           WatermarkText="0.00" />
+                                           WatermarkText="0.00" >
+                <controls:CustomTextBoxControl.Style>
+                    <Style TargetType="{x:Type controls:CustomTextBoxControl}" BasedOn="{StaticResource {x:Type controls:CustomTextBoxControl}}">
+                        <Setter Property="Text" Value="{Binding Path=BankSetupModel.PromoTicketAmount,
+                                                              Mode=TwoWay, StringFormat={}{0:C2},
+                                                              ValidatesOnDataErrors=True,
+                                                              UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                        <Style.Triggers>
+                            <Trigger Property="Control.IsFocused" Value="True">
+                                <Setter Property="Text" Value="{Binding Path=BankSetupModel.PromoTicketAmount,
+                                                              Mode=TwoWay, StringFormat=F2,
+                                                              ValidatesOnDataErrors=True,
+                                                              UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    </controls:CustomTextBoxControl.Style>
+            </controls:CustomTextBoxControl>
             
         </Grid>
     </Grid>

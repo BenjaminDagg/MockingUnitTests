@@ -278,13 +278,26 @@
                                                Grid.Column="2"
                                                TabIndex="14"
                                                Width="285"
-                                               NumericMode="True"
+                                               DecimalMode="True"
                                                HorizontalAlignment="Left"
-                                               Text="{Binding Location.MaxBalanceAdjustment,
+                                               TextBoxIcon="Pencil" >
+                    <controls:CustomTextBoxControl.Style>
+                        <Style TargetType="{x:Type controls:CustomTextBoxControl}" BasedOn="{StaticResource {x:Type controls:CustomTextBoxControl}}">
+                            <Setter Property="Text" Value="{Binding Location.MaxBalanceAdjustment,
                                                           Mode=TwoWay, StringFormat={}{0:C2},
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
-                                               TextBoxIcon="Pencil" />
+                                                          UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                            <Style.Triggers>
+                                <Trigger Property="Control.IsFocused" Value="True">
+                                    <Setter Property="Text" Value="{Binding Location.MaxBalanceAdjustment,
+                                                          Mode=TwoWay, StringFormat=F2,
+                                                          ValidatesOnDataErrors=True,
+                                                          UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:CustomTextBoxControl.Style>
+                </controls:CustomTextBoxControl>
 
 
                 <TextBlock Grid.Row="13"
@@ -310,13 +323,26 @@
                                                Grid.Column="2"
                                                TabIndex="15"
                                                Width="285"
-                                               NumericMode="True"
+                                               DecimalMode="True"
                                                HorizontalAlignment="Left"
-                                               Text="{Binding Location.PayoutAuthorizationAmount,
+                                               TextBoxIcon="Pencil" >
+                    <controls:CustomTextBoxControl.Style>
+                        <Style TargetType="{x:Type controls:CustomTextBoxControl}" BasedOn="{StaticResource {x:Type controls:CustomTextBoxControl}}">
+                            <Setter Property="Text" Value="{Binding Location.PayoutAuthorizationAmount,
                                                           Mode=TwoWay, StringFormat={}{0:C2},
                                                           ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
-                                               TextBoxIcon="Pencil" />
+                                                          UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                            <Style.Triggers>
+                                <Trigger Property="Control.IsFocused" Value="True">
+                                    <Setter Property="Text" Value="{Binding Location.PayoutAuthorizationAmount,
+                                                          Mode=TwoWay, StringFormat=F2,
+                                                          ValidatesOnDataErrors=True,
+                                                          UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:CustomTextBoxControl.Style>
+                </controls:CustomTextBoxControl>
 
                 <TextBlock Grid.Row="16"
                            Grid.Column="0"
