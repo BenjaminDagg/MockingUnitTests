@@ -124,15 +124,7 @@ namespace CentroLink.MachineInUseModule.ViewModels
 
             if (IsDesignMode) return;
 
-            try
-            {
-                await LogEventToDatabaseAsync(MachineInUseEventTypes.AccessMachinesInUse, "", null);
-            }
-            catch (Exception e)
-            {
-                // ignored
-            }
-
+            await LogEventToDatabaseAsync(MachineInUseEventTypes.AccessMachinesInUse, "", null);
 
             RefreshList();
             _refreshTimer.Start();

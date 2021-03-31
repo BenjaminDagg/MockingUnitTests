@@ -71,15 +71,8 @@ namespace CentroLink.DealSetupModule.ViewModels
 
             if (IsDesignMode) return;
 
-            try
-            {
-                await LogEventToDatabaseAsync(DealSetupEventTypes.AccessDealSetupList, 
-                    "Accessed Deal Setup List.", null);
-            }
-            catch (Exception e)
-            {
-                // ignored
-            }
+            await LogEventToDatabaseAsync(DealSetupEventTypes.AccessDealSetupList, 
+                "Accessed Deal Setup List.", null);
 
             RefreshList();
         }

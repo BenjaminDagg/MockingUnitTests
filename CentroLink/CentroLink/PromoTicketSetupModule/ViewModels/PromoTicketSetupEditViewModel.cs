@@ -53,8 +53,10 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
             Refresh();
         }
 
-        protected virtual void Refresh()
+        public override void Refresh()
         {
+            base.Refresh();
+
             var promoScheduleId = NavigationArgument as int?;
 
             PromoTicket = _promoTicketService.GetPromoTicketEditModel(promoScheduleId.GetValueOrDefault());            

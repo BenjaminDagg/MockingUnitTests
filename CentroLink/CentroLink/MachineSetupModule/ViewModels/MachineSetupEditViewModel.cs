@@ -70,7 +70,7 @@ namespace CentroLink.MachineSetupModule.ViewModels
 
                 foreach (var gameSetup in setup.MachineSetupGames)
                 {
-                    DetailControlViewModel.AddGame();
+                    await DetailControlViewModel.AddGame();
                     var lastIndex = DetailControlViewModel.GameBankSetupList.Count - 1;
 
                     var avaliableBanks = DetailControlViewModel.GameBankSetupList[lastIndex].AvailableBankSetups;

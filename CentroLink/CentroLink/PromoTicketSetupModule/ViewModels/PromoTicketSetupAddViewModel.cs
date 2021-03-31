@@ -52,8 +52,10 @@ namespace CentroLink.PromoTicketSetupModule.ViewModels
             Refresh();
         }
 
-        protected virtual void Refresh()
+        public override void Refresh()
         {
+            base.Refresh();
+
             var accountingOffset = _promoTicketSetupService.GetAccountingOffset();
             var adjustedDate = new DateTime(DateTime.Now.Date.Ticks).AddDays(1).AddSeconds(accountingOffset);
 

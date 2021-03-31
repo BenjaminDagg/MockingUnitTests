@@ -53,18 +53,16 @@ namespace CentroLink.LocationSetupModule.ViewModels
 
             Refresh();
         }
-
-        protected virtual void Refresh()
+        public override void Refresh()
         {
+            base.Refresh();
 
             var tpiList = _locationService.GetTpiList();
-
             
             Location = new AddLocationValidationModel()
             {
                 TpiList = tpiList
             };
-
         }
 
 

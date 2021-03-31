@@ -54,12 +54,13 @@ namespace CentroLink.LocationSetupModule.ViewModels
             Refresh();
         }
 
-        protected virtual void Refresh()
+        public override void Refresh()
         {
+            base.Refresh();
+
             var dgeId = NavigationArgument as string;
 
-            Location = _locationService.GetLocationEditModel(dgeId);
-            
+            Location = _locationService.GetLocationEditModel(dgeId);            
         }
 
 
