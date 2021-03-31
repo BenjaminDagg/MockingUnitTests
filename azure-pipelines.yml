@@ -17,56 +17,56 @@ steps:
 - checkout: git://AppDev_CommonLite
 - checkout: self
 
-# - task: PowerShell@2
-#   displayName: 'Build and Publish Database $(RetailDatabaseId)'
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       #Importing the SQL Change libraries         
+- task: PowerShell@2
+  displayName: 'Build and Publish Database $(RetailDatabaseId)'
+  inputs:
+    targetType: 'inline'
+    script: |
+      #Importing the SQL Change libraries         
         
-#         Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
+        Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
          
-#          $dbScripts = "$(RetailDbSourcePath)"
+         $dbScripts = "$(RetailDbSourcePath)"
          
-#          Write-Host "Building and validating the database"
-#          $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts
+         Write-Host "Building and validating the database"
+         $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts
          
-#          Write-Host "Packaging the database scripts"                                     
-#          $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
+         Write-Host "Packaging the database scripts"                                     
+         $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
          
-#          Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
-#          Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip
+         Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
+         Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip
                 
-# - task: PowerShell@2
-#   displayName: 'Build and Publish Database $(CentralDatabaseId)'
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       #Importing the SQL Change libraries         
+- task: PowerShell@2
+  displayName: 'Build and Publish Database $(CentralDatabaseId)'
+  inputs:
+    targetType: 'inline'
+    script: |
+      #Importing the SQL Change libraries         
         
-#         Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
+        Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
          
-#          $dbScripts = "$(CentralDbSourcePath)"
+         $dbScripts = "$(CentralDbSourcePath)"
          
-#          Write-Host "Building and validating the database"
-#          $validatedDb = Invoke-DatabaseBuild -FilterPath $(CentralFilterPath) -InputObject $dbScripts 
+         Write-Host "Building and validating the database"
+         $validatedDb = Invoke-DatabaseBuild -FilterPath $(CentralFilterPath) -InputObject $dbScripts 
          
-#          Write-Host "Packaging the database scripts"
-#          $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(CentralDatabaseId) -PackageVersion $(DatabasePackageVersion)
+         Write-Host "Packaging the database scripts"
+         $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(CentralDatabaseId) -PackageVersion $(DatabasePackageVersion)
          
-#          Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
-#          Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip 
+         Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
+         Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip 
         
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact: $(RetailDatabaseId) '
-#   inputs:
-#     PathtoPublish: '$(DatabaseOutputDirectory)/$(RetailDatabaseId).Zip'
-#     ArtifactName: '$(RetailDatabaseId) '
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact: $(CentralDatabaseId) '
-#   inputs:
-#     PathtoPublish: '$(DatabaseOutputDirectory)/$(CentralDatabaseId).Zip'
-#     ArtifactName: '$(CentralDatabaseId) '  
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(RetailDatabaseId) '
+  inputs:
+    PathtoPublish: '$(DatabaseOutputDirectory)/$(RetailDatabaseId).Zip'
+    ArtifactName: '$(RetailDatabaseId) '
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(CentralDatabaseId) '
+  inputs:
+    PathtoPublish: '$(DatabaseOutputDirectory)/$(CentralDatabaseId).Zip'
+    ArtifactName: '$(CentralDatabaseId) '  
 
 
 - task: Assembly-Info-NetCore@2
@@ -116,12 +116,6 @@ steps:
   inputs:
     restoreSolution: '**/POS.sln'
 
-- task: VisualStudioTestPlatformInstaller@1
-  inputs:
-    packageFeedSelector: 'nugetOrg'
-    versionSelector: 'latestStable'
-
-
 - task: VSBuild@1
   displayName: 'Build CentroLink $(buildConfiguration)'
   inputs:
@@ -136,56 +130,35 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: CopyFiles@2
+
+- task: ArchiveFiles@2
+  displayName: 'Archive POS'
   inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: |
-      **\bin\$(BuildConfiguration)\**
-      **\$(BuildConfiguration)\*test*.dll 
-      !**\obj\**
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/POS.zip'
+    replaceExistingArchive: true 
 
-- task: UseDotNet@2
+- task: ArchiveFiles@2
+  displayName: 'Archive CentroLink'
   inputs:
-    packageType: 'sdk'
-    version: '3.1.201'
-- task: VSTest@2
+    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/CentroLink/CentroLink/bin/Release/netcoreapp3.1'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
+    replaceExistingArchive: true 
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact POS'
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/POS.zip'
+      ArtifactName: 'POS'
+      publishLocation: 'Container'
 
-# - task: ArchiveFiles@2
-#   displayName: 'Archive POS'
-#   inputs:
-#     rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1'
-#     includeRootFolder: false
-#     archiveType: 'zip'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/POS.zip'
-#     replaceExistingArchive: true 
-
-# - task: ArchiveFiles@2
-#   displayName: 'Archive CentroLink'
-#   inputs:
-#     rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/CentroLink/CentroLink/bin/Release/netcoreapp3.1'
-#     includeRootFolder: false
-#     archiveType: 'zip'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
-#     replaceExistingArchive: true 
-
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact POS'
-#   inputs:
-#       PathtoPublish: '$(Build.ArtifactStagingDirectory)/POS.zip'
-#       ArtifactName: 'POS'
-#       publishLocation: 'Container'
-
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact CentroLink'
-#   inputs:
-#       PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
-#       ArtifactName: 'CentroLink'
-#       publishLocation: 'Container'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact CentroLink'
+  inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
+      ArtifactName: 'CentroLink'
+      publishLocation: 'Container'
