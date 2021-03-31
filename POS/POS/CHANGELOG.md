@@ -219,3 +219,7 @@ Implement new POS Theme
 - 53501 Changed backgroud for the Reports Tab
 - Changed Font size For Payout settings
 - Removed Hover effect from Device Management
+
+## 03/31/2021
+#Updated
+- Added width to alert to reduce size when no other element present 
