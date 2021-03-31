@@ -20,6 +20,7 @@
             <ItemsControl DockPanel.Dock="Top"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Top"
+                      Width="1724"
                       ItemsSource="{Binding Path=Alerts}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
