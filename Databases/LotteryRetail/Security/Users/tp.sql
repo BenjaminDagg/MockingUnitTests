@@ -1,0 +1,2 @@
+CREATE USER [tp] FOR LOGIN [tp]
+GO
