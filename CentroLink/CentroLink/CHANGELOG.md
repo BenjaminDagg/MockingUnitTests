@@ -70,3 +70,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
  - 54192 - Centrolink - Review and Test functionality against requirements
          - Fixed Currency formatting simultaneously while editing. Enabled formatting on LostFocus 
          - Fixed Pipeline code analysis warnings.
+##04/01/2021
+- Updated nuget packages since Framework is updated

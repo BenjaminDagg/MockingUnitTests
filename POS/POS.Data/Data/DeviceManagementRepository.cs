@@ -29,7 +29,7 @@ namespace POS.Infrastructure.Data
         public async Task<IEnumerable<MachineDto>> GetConnectedMachines()
         {
             const string sql = @"SELECT MACH_NO, CASINO_MACH_NO, MODEL_DESC, IP_ADDRESS, REMOVED_FLAG, BALANCE, LAST_ACTIVITY FROM [dbo].[MACH_SETUP] WHERE REMOVED_FLAG = @RemovedFlag";
-            return await Db.QueryAsync<MachineDto>(sql, 
+            return await Db.FetchAsync<MachineDto>(sql, 
                 new
                  {
                     RemovedFlag = 0

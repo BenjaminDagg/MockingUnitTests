@@ -30,10 +30,10 @@ namespace POS.Infrastructure.Data
             const string sql = @"SELECT [TRANS_TYPE]
                                        ,[TRANS_AMT]
 	                                   ,[CREATE_DATE]
-                                   FROM [dbo].[CASHIER_TRANS]
+                                   FROM [dbo].[CASHIER_TRANS] updating nuget packages for other projects.  switched 2 npoco queries to use FetchAsync due to compilation error from nuget package update
                                    WHERE [SESSION_ID] = @SessionID
                                    ORDER BY [CREATE_DATE]";
-            return await Db.QueryAsync<CashDrawerHistoryDto>(sql,
+            return await Db.FetchAsync<CashDrawerHistoryDto>(sql,
                 new
                 {
                     SessionID = sessionId
