@@ -275,3 +275,7 @@ Implement new POS Theme
 ##04/01/2021
 - Updated nuget packages since Framework is updated and POS .net Standard projects from 2.0 to 2.1
 
+##Updated
+-Changed maximun Voucher Limit
+-Added enable disable feature for the last reprint button
+

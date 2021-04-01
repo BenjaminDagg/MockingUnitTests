@@ -27,6 +27,7 @@ namespace POS.Modules.Payout.ViewModels
         private TransactionViewModel _transactionViewModel;
         private bool? _payoutInitializedSuccessfully = null;
         private bool _isPayoutInitialized = false;
+        public bool _isReprintEnabled = false;
         private static readonly SemaphoreSlim _semaphoreSlimInitialize = new SemaphoreSlim(1, 1);
 
         private async Task Initialize()
@@ -43,7 +44,7 @@ namespace POS.Modules.Payout.ViewModels
 
                     Result canPayoutInitializeResult = default;
                     Result beginUserSessionResult = default;
-
+                    
                     if (!_payoutViewServices.Session.HasSessionInitialized)
                     {
                         beginUserSessionResult = await BeginUserSession();
@@ -63,6 +64,7 @@ namespace POS.Modules.Payout.ViewModels
                     if (beginUserSessionResult.IsSuccess && canPayoutInitializeResult.IsSuccess)
                     {
                         PayoutInitializedSuccessfully = true;
+                        CheckLastReceipt();
                         IsPayoutInitialized = true;
                         Alerts.Add(new TaskAlert(AlertType.Success, POSResources.PayoutSessionInitializedSuccessfullyMsg));
                         await OnSessionSucessActivity();
@@ -72,7 +74,7 @@ namespace POS.Modules.Payout.ViewModels
                         PayoutInitializedSuccessfully = false;
 
                         await CheckAndPrompForReceiptPrinterSetup();
-
+                      
                         if (beginUserSessionResult.IsFailure)
                         {
                             Alerts.Add(new TaskAlert(AlertType.Error, beginUserSessionResult.Error));
@@ -90,6 +92,24 @@ namespace POS.Modules.Payout.ViewModels
                 {
                     _semaphoreSlimInitialize.Release();
                 }
+            }
+        }
+
+        private void CheckLastReceipt()
+        {
+            try
+            {
+                IsReprintEnabled = _systemContext?.PayoutSettings?.AllowReceiptReprint ?? false;
+                var lastReceipt = _lastReceiptService.GetLastReceipt();
+                if (lastReceipt == null || lastReceipt.LastReceiptNumbers == 0)
+                {
+                    IsReprintEnabled = false;
+                }
+
+            }
+            catch (Exception)
+            {
+                Alerts.Add(new TaskAlert(AlertType.Error, POSResources.LastReceiptErrorMsg));
             }
         }
 

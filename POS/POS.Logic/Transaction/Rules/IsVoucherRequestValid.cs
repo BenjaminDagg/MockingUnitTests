@@ -16,7 +16,7 @@ namespace POS.Core.Transaction.Rules
         private void AddRules(VoucherDto voucher)
         {
             Add("MaxVoucherCountReached", new Rule<AddVoucherRequest>(
-                new IsExpressionValid<AddVoucherRequest>(request => request.CurrentVoucherCount <= 25), POSResources.TooManyVouchersInTransactionMsg));
+                new IsExpressionValid<AddVoucherRequest>(request => request.CurrentVoucherCount < 25), POSResources.TooManyVouchersInTransactionMsg));
 
             Add("IsValidState", new Rule<AddVoucherRequest>(
                 new IsExpressionValid<AddVoucherRequest>(request => request.Voucher.IsValid), String.Format(POSResources.VoucherNotValidMsg, voucher.Barcode)));
