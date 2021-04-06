@@ -1404,65 +1404,46 @@
             <Value>=Parameters!EndDate.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT
-   csht.CREATED_BY AS CreatedBy,
-   csht.SESSION_ID AS SessionId,
-   csht.TRANS_NO AS TransNumber,
-   csht.CREATE_DATE AS CreatedDate,
-   ct.CARD_ACCT_NO AS CardAccountNumber,
-   csht.CASHIER_STN AS CashierStation,
-   ct.TRANS_AMT AS TransAmount,
-   CAST(0 AS Bit) AS IsVoucherPayout,
-   csht.PAYMENT_TYPE AS PaymentType,
-   NULL AS ReceiptNumber
+        <CommandText>--Declare @startdate as date = '20210201'
+--Declare @Enddate as date = '20210207'
+
+SELECT
+   csht.CREATED_BY as CreatedBy,
+   csht.SESSION_ID as SessionId,
+   csht.TRANS_NO as TransNumber,
+   csht.CREATE_DATE as CreatedDate,
+   ct.CARD_ACCT_NO as CardAccountNumber,
+   csht.CASHIER_STN as CashierStation,
+   ct.TRANS_AMT as TransAmount,
+   CAST(0 AS Bit) as IsVoucherPayout,
+   csht.PAYMENT_TYPE as PaymentType,
+   NULL as ReceiptNumber
 FROM CASHIER_TRANS csht
    JOIN CASINO_TRANS ct ON csht.TRANS_NO = ct.TRANS_NO
 WHERE
-   (dbo.ufnGetAcctDateFromDate(csht.CREATE_DATE) BETWEEN @StartDate AND @EndDate) AND
+   (csht.CREATE_DATE BETWEEN @StartDate AND @EndDate) AND
    (csht.TRANS_TYPE &lt;&gt; 'CR') AND
-   (csht.VOUCHER_ID = 0 AND csht.TAB_PURCHASE_ID = 0)
+   (csht.VOUCHER_ID = 0)
 UNION
 -- Add Voucher payouts
 SELECT
-   csht.CREATED_BY AS CreatedBy,
-   csht.SESSION_ID AS SessionId,
-   csht.TRANS_NO AS TransNumber,
-   csht.CREATE_DATE AS CreatedDate,
-   '**************' + RIGHT(v.BARCODE, 4) AS CardAccountNumber,
-   csht.CASHIER_STN AS CashierStation,
-   csht.TRANS_AMT AS TransAmount,
-   CAST(1 AS Bit) AS IsVoucherPayout,
-   csht.PAYMENT_TYPE AS PaymentType,
-   VRD.VOUCHER_RECEIPT_NO AS ReceiptNumber
+   csht.CREATED_BY,
+   csht.SESSION_ID,
+   csht.TRANS_NO,
+   csht.CREATE_DATE,
+   '**************' + RIGHT(v.BARCODE, 4) AS CARD_ACCT_NO,
+   csht.CASHIER_STN,
+   csht.TRANS_AMT,
+   CAST(1 AS Bit) AS IS_VOUCHER_PAYOUT,
+   csht.PAYMENT_TYPE,
+   VRD.VOUCHER_RECEIPT_NO AS ReceiptNo
 FROM CASHIER_TRANS csht
    JOIN VOUCHER v ON csht.VOUCHER_ID = v.VOUCHER_ID
    JOIN VOUCHER_RECEIPT_DETAILS VRD ON VRD.VOUCHER_ID = v.VOUCHER_ID
 WHERE
-   (dbo.ufnGetAcctDateFromDate(csht.CREATE_DATE) BETWEEN @StartDate AND @EndDate) AND
+   (csht.CREATE_DATE BETWEEN @StartDate AND @EndDate) AND
    (csht.TRANS_TYPE &lt;&gt; 'CR') AND
-   (csht.VOUCHER_ID &gt; 0) AND
-   (v.Voucher_Type &lt;&gt; 5)
-
-UNION
--- Add tab payouts
-SELECT
-   csht.CREATED_BY AS CreatedBy,
-   csht.SESSION_ID AS SessionId,
-   csht.TRANS_NO AS TransNumber,
-   csht.CREATE_DATE AS CreatedDate,
-   'D:' + CONVERT(VARCHAR(10),tp.DealNumber) + ' T:' + CONVERT(VARCHAR(10),tp.TicketNumber) AS CardAccountNumber,
-   csht.CASHIER_STN AS CashierStation,
-   csht.TRANS_AMT AS TransAmount,
-   CAST(1 AS Bit) AS IsVoucherPayout,
-   csht.PAYMENT_TYPE AS PaymentType,
-   VRD.VOUCHER_RECEIPT_NO AS ReceiptNumber
-FROM CASHIER_TRANS csht
-   JOIN TabPurchase tp ON csht.TAB_PURCHASE_ID = tp.TabPurchaseId
-   JOIN VOUCHER_RECEIPT_DETAILS VRD ON VRD.TAB_PURCHASE_ID = tp.TabPurchaseId
-WHERE
-   (dbo.ufnGetAcctDateFromDate(csht.CREATE_DATE) BETWEEN @StartDate AND @EndDate) AND
-   (csht.TRANS_TYPE &lt;&gt; 'CR') AND
-   (csht.TAB_PURCHASE_ID &gt; 0)  
+   (csht.VOUCHER_ID &gt; 0)
 ORDER BY csht.CREATED_BY, csht.CREATE_DATE</CommandText>
       </Query>
       <Fields>
@@ -1597,7 +1578,7 @@ ORDER BY csht.CREATED_BY, csht.CREATE_DATE</CommandText>
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
-          <Value>="Version 3.3.2.1"</Value>
+          <Value>="Version MO 3.3.2.1"</Value>
         </Values>
       </DefaultValue>
       <Hidden>true</Hidden>

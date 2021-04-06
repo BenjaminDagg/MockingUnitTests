@@ -279,3 +279,9 @@ Implement new POS Theme
 -Changed maximun Voucher Limit
 -Added enable disable feature for the last reprint button
 
+##04/06/2021
+
+##Updated
+- Added New Daily Cashier Activity Report
+- Changed Colour for Promoticketon/Off Button
+
