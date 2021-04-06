@@ -55,55 +55,76 @@
 
                 <TextBlock Grid.Row="0"
                        Grid.Column="0"
-                       Text="Description" />
+                       Text="Description" Margin="0 0 0 10"/>
 
 
                 <controls:CustomTextBoxControl Grid.Row="1"
                                                TabIndex="0"
-                                           Grid.Column="0"
+                                               Grid.Column="0"
                                                Grid.ColumnSpan="3"
-                                           Width="600"
-                                           Text="{Binding PromoTicket.Comments,
+                                               Width="600"
+                                               Margin="0 0 0 10"
+                                               Text="{Binding PromoTicket.Comments,
                                                           ValidatesOnDataErrors=True,
                                                           Mode=TwoWay,
                                                           UpdateSourceTrigger=PropertyChanged}"
                                            TextBoxIcon="Pencil"
-                                           WatermarkText="Enter Promotional Ticket Description" />
+                                           WatermarkText="Enter Promotional Ticket Description" 
+                                               FontSize="15"/>
 
                 <TextBlock Grid.Row="2"
                        Grid.Column="0"
-                       Text="Promo Start" />
+                       Text="Promo Start" Margin="0 0 0 10 "/>
 
+                <StackPanel Grid.Row="3"
+                            Grid.Column="0" Orientation="Horizontal" >
 
-                <xctk:DateTimePicker Format="Custom"
-                                     x:Name="PromoStart"
-                                     Grid.Row="3"
-                                     Grid.Column="0"
-                                     FormatString="MM/dd/yyyy hh:mm tt"
-                                     TimeFormat="Custom"
-                                     TimeFormatString="hh:mm tt"
-                                     VerticalAlignment="Top" 
-                                     Watermark="Promotion Start Date"
-                                     Value="{Binding Path=PromoTicket.PromoStart, Mode=TwoWay, ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"  Width="285" />
-
+                    <controls:FontAwesomeTextControl FontIcon="Calendar" 
+                                                     Foreground="Black"
+                                                     Margin="0 0 5 10"/>
+                    <xctk:DateTimePicker Format="Custom"
+                                         x:Name="PromoStart"
+                                         Grid.Row="3"
+                                         Height="30"
+                                         Grid.Column="0"
+                                         FormatString="MM/dd/yyyy hh:mm tt"
+                                         TimeFormat="Custom"
+                                         TimeFormatString="hh:mm tt"
+                                         VerticalAlignment="Top" 
+                                         Watermark="Promotion Start Date"
+                                         ShowButtonSpinner="False"
+                                         FontSize="15"
+                                         Margin="0 0 0 10"
+                                         Value="{Binding Path=PromoTicket.PromoStart, Mode=TwoWay, ValidatesOnDataErrors=True,
+                                                              UpdateSourceTrigger=PropertyChanged}"  Width="285" />
+                </StackPanel>
                 <TextBlock Grid.Row="4"
                            Grid.Column="0" 
-                           Text="Promo End" />
+                           Text="Promo End"  Margin="0 0 0 10 "/>
 
+                <StackPanel Grid.Row="5"
+                            Grid.Column="0" Orientation="Horizontal" >
 
-                <xctk:DateTimePicker Format="Custom"
-                                     x:Name="PromoEnd"
-                                     Grid.Row="5"
-                                     Grid.Column="0"
-                                     FormatString="MM/dd/yyyy hh:mm tt"
-                                     TimeFormat="Custom"
-                                     TimeFormatString="hh:mm tt"
-                                     Watermark="Promotion End Date"
-                                     VerticalAlignment="Top" 
-                                     Value="{Binding Path=PromoTicket.PromoEnd, Mode=TwoWay, ValidatesOnDataErrors=True,
-                                                          UpdateSourceTrigger=PropertyChanged}"  Width="285" />
-
+                    <controls:FontAwesomeTextControl FontIcon="Calendar" 
+                                                     Foreground="Black"
+                                                     Margin="0 5 5 10"/>
+                    <xctk:DateTimePicker Format="Custom"
+                                         x:Name="PromoEnd"
+                                         Grid.Row="5"
+                                         Height="30"
+                                         Grid.Column="0"
+                                         FormatString="MM/dd/yyyy hh:mm tt"
+                                         TimeFormat="Custom"
+                                         TimeFormatString="hh:mm tt"
+                                         Watermark="Promotion End Date"
+                                         VerticalAlignment="Top" 
+                                         ShowButtonSpinner="False"
+                                         FontSize="15"
+                                         Value="{Binding Path=PromoTicket.PromoEnd, Mode=TwoWay, ValidatesOnDataErrors=True,
+                                                              UpdateSourceTrigger=PropertyChanged}"  Width="285" >
+                        
+                    </xctk:DateTimePicker>
+                </StackPanel>
             </Grid>
 
             <StackPanel Grid.Row="1"

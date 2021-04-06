@@ -72,3 +72,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
          - Fixed Pipeline code analysis warnings.
 ##04/01/2021
 - Updated nuget packages since Framework is updated
+
+##04/06/2021
+##Updated
+- Removed button scroller from the Date time picker
+- Added Calender Icon to Promo ticket page
+- Changed formating for better appearance 

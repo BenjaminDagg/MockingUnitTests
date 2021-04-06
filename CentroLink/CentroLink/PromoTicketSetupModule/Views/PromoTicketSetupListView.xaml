@@ -138,13 +138,13 @@
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                     <Setter Property="Content" Value="Turn Promo Ticket On"/>
-                                    <Setter Property="Background" Value="Red"/>
-                                    <Setter Property="BorderBrush" Value="DarkRed"/>
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="BorderBrush" Value="DarkGreen"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding PromoTicketSwitch}" Value="1">
                                             <Setter Property="Content" Value="Turn Promo Ticket Off"/>
-                                            <Setter Property="Background" Value="Green"/>
-                                            <Setter Property="BorderBrush" Value="DarkGreen"/>
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="BorderBrush" Value="DarkRed"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
