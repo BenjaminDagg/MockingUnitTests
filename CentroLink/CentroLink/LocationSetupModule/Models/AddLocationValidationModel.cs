@@ -48,7 +48,7 @@ namespace CentroLink.LocationSetupModule.Models
 
         [Required(ErrorMessage = "Location Id is required.")]
         [MaxLength(6)]
-        [Range(100000, 999999, ErrorMessage = "Location Id must be a value between 100000 and 999999")]
+        [Range(000000, 999999, ErrorMessage = "Location Id must be a value between 000000 and 999999")]
         public string LocationId
         {
             get => _locationId;
@@ -74,7 +74,7 @@ namespace CentroLink.LocationSetupModule.Models
         }
 
         [Required(ErrorMessage = "Retailer Number is required.")]
-        [Range(1000, 9999, ErrorMessage = "Retailer Number must be a value between 1000 and 9999.")]
+        [Range(000000, 999999, ErrorMessage = "Retailer Number must be a value between 000000 and 999999.")]
         [MinLength(4, ErrorMessage = "Retailer number must be exactly digits in length.")]
         public string RetailerNumber
         {

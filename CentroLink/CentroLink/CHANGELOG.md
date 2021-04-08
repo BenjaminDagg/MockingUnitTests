@@ -70,11 +70,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
  - 54192 - Centrolink - Review and Test functionality against requirements
          - Fixed Currency formatting simultaneously while editing. Enabled formatting on LostFocus 
          - Fixed Pipeline code analysis warnings.
-##04/01/2021
+## 04/01/2021
 - Updated nuget packages since Framework is updated
 
-##04/06/2021
-##Updated
+## 04/06/2021
+## Updated
 - Removed button scroller from the Date time picker
 - Added Calender Icon to Promo ticket page
 - Changed formating for better appearance 
+
+## 04/08/2021
+ - 54193 - Centrolink and POS – Integration Testing
+	 - Modified location Id and Retail Number to have a range between 000000 and 999999
+     - Added TestDbRetryConfiguration section to appsettings json file
