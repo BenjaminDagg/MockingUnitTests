@@ -79,11 +79,8 @@ Implement new POS Theme
 - 51115 - Added Limit for Max Cash Added
 - 51120 - Added hide functionalilty of needs Approval
 
-<<<<<<< Updated upstream
+
 ### fixed
-=======
-###fixed
->>>>>>> Stashed changes
 - adjusted the CashdrawerHistoryPropmtView to fix grid header and button margin
 - added pos.ico as resource
 
@@ -103,7 +100,7 @@ Implement new POS Theme
 - 51725 Daily cash activity and Promo Enrty Reports added
 - 51726 Prompt message changed
 
-<<<<<<< Updated upstream
+
 ## 03/03/2021
 - 51840 Layout of cash drawer history changed 
 - 51841 Icon Added to Device Management for readability 
