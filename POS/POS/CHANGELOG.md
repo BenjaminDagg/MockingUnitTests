@@ -291,4 +291,4 @@ Implement new POS Theme
 	 - Fixed issue with startup navigation and Starting Balance Dialogue
 	 - Added 'TestDbRetryConfiguration' to application config
 ## Updated
-- Chnaged query after nuget package update for Cash Drawer History
+- Changed query after nuget package update for Cash Drawer History
