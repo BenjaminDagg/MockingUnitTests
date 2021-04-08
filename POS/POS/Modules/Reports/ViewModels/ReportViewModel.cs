@@ -68,8 +68,7 @@ namespace POS.Modules.Reports.ViewModels
                     new DataSourceCredentials
                         {
                             ConnectionString = _securityDbConnectionInfo.GetConnectionString(),
-                            Name = REPORT_DATASOURCE_NAME,
-                            IntegratedSecurity = true
+                            Name = REPORT_DATASOURCE_NAME
                         }
                 });
 

@@ -218,70 +218,76 @@ Implement new POS Theme
 ### Update
 - Format changelog to be more readable- Updated Created Date field on Current Transaction View to alighn with cell data
 
-##03/29/2021
-##Updated
+## 03/29/2021
+## Updated
 - Added Margin in Cash Drawer history Pop up 
 - 53501 Changed backgroud for the Reports Tab
 - Changed Font size For Payout settings
 - Removed Hover effect from Device Management
 
 ## 03/31/2021
-#Updated
+# Updated
 - Added width to alert to reduce size when no other element present 
-=======
-##03/03/2021
+
+## 03/03/2021
 - 51840 Layout of cash drawer history changed 
 - 51841 Icon Added to Device Management for readability 
 
-##03/08/2021
+## 03/08/2021
 - Updated Cancel Voucher - Added barcode and amount to message dialog
 - fixed PromptView for MessageboxService
 
-##03/09/2021
+## 03/09/2021
 - Updated Config Settings to utilize 'DataConfigItem' to load and use settings from the database
 - 51143 utilized MVVM patterns to set/trigger the color changes in the AddRemoveCashPromptView view. 
 
-##03/10/2021
-###fixed
+## 03/10/2021
+### fixed
 - Update report views to adjust the run date cut off in the datagrid view
 - Update report properties and datasource
 
-###updated
+### updated
 - Removed 'Daily Cashier Activity' from the application execution folder
 
-##03/11/2021
+## 03/11/2021
 - updated 'CashDrawerAmountLimitmessage' to PascalCase 'CashDrawerAmountLimitMessage'
 
 ## Updated 
 - Changes to UI for consistency 
 
-##03/12/2021
-###fixed
+## 03/12/2021
+### fixed
 - Fixed Issue with error handling in LastPrintedRecieptViewModel
 - Fixed currency formatting on LastPrintedReceiptView
 
-##03/15/2021
-###Updated
+## 03/15/2021
+### Updated
 - Added check to ensure printer is configured before each payout transaction
 - 52233 - Review POS Requirements and Document comparable changes with OLD POS System
 
-##03/16/2021
+## 03/16/2021
 - Updated paremerts for starting balance input and minor UI Fixes
 - 52232 - Review POS Requirements and Document comparable changes with OLD POS System
 
-###Updated
+### Updated
 - Added Customer duplicate Receipt functionality
 
-##04/01/2021
+## 04/01/2021
 - Updated nuget packages since Framework is updated and POS .net Standard projects from 2.0 to 2.1
 
-##Updated
+## Updated
 -Changed maximun Voucher Limit
 -Added enable disable feature for the last reprint button
 
-##04/06/2021
+## 04/06/2021
 
-##Updated
+## Updated
 - Added New Daily Cashier Activity Report
 - Changed Colour for Promoticketon/Off Button
+
+## 04/08/2021
+ - 54193 - Centrolink and POS – Integration Testing
+	 - Reports are now able to connect to the remote server with integrated security disabled
+	 - Fixed issue with startup navigation and Starting Balance Dialogue
+	 - Added 'TestDbRetryConfiguration' to application config
 

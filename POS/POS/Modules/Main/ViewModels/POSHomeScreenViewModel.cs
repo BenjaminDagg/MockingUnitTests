@@ -23,9 +23,7 @@ namespace POS.Modules.Main.ViewModels
         private readonly IUserAdministrationService _userAdministrationService;
         private readonly IPayoutViewServices _payoutViewServices;
         private readonly IUserSession _userSession;
-        private PayoutViewModel _payoutViewModel;
 
-        public PayoutViewModel PayoutViewModel { get => _payoutViewModel; set => Set(ref _payoutViewModel, value); }
         public POSHomeScreenViewModel(
             IUserAdministrationService userAdministrationService,
             IPayoutViewServices payoutViewServices,
@@ -38,12 +36,10 @@ namespace POS.Modules.Main.ViewModels
 
             UpdateTabPermissions(ref tabViewModels);
             Items.AddRange(OrderByPriority(tabViewModels.Where(tab => tab.UserHasPermission)));
-            EnableTabs(true);
-
-            NavigateToStartupTabBasedOnUserRole();
+            EnableTabs(true);            
         }
 
-        private async void NavigateToStartupTabBasedOnUserRole()
+        private async Task NavigateToStartupTabBasedOnUserRole()
         {
             var roles = await _userAdministrationService.GetUserRoleListAsync(_userSession.UserId);
             if (roles != null && roles.Any())
@@ -140,6 +136,13 @@ namespace POS.Modules.Main.ViewModels
         {
             base.OnViewLoaded(view);
             _payoutViewServices.EventAggregator.SubscribeOnPublishedThread(this);
+        }
+        protected override async Task OnActivateAsync(CancellationToken cancellationToken)
+        {
+            await base.OnActivateAsync(cancellationToken);
+
+            ActiveItem = null;
+            await NavigateToStartupTabBasedOnUserRole();            
         }
         private IEnumerable<ITabItem> OrderByPriority(IEnumerable<ITabItem> tabViewModels)
         {
