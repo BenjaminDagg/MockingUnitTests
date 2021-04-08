@@ -290,4 +290,5 @@ Implement new POS Theme
 	 - Reports are now able to connect to the remote server with integrated security disabled
 	 - Fixed issue with startup navigation and Starting Balance Dialogue
 	 - Added 'TestDbRetryConfiguration' to application config
-
+## Updated
+- Chnaged query after nuget package update for Cash Drawer History
