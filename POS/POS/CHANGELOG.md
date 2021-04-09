@@ -294,3 +294,4 @@ Implement new POS Theme
 ##Updated
 - Reduce font size of Current balance to fit the max value
 - Removed Promo Entry Report
+- Enable disable Last recipt button on payout
