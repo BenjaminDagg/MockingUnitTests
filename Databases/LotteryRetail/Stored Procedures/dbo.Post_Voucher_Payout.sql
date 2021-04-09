@@ -66,6 +66,9 @@ Terry Watkins 11-15-2010     DCLottery v1.0.0
   
 Edris Khestoo 9-24-2012		
   Added @VoucherReceiptNo For multi Voucher support. Backwards compatiable. 
+
+Howard McCarthy 04-09-2021		
+  Removed the check for CURRENT_USER in VMod 
 --------------------------------------------------------------------------------
 */
 CREATE PROCEDURE [dbo].[Post_Voucher_Payout]
@@ -212,18 +215,6 @@ IF (@ErrorNbr = 0)
          END
    END
 
--- Any errors?
-IF (@ErrorNbr = 0)
-   -- No errors, check if current user can modify the VOUCHER table...
-   BEGIN
-      SET @IsInRole = [dbo].[UserInRole]('VMod', CURRENT_USER)
-      IF (@IsInRole <> 1)
-         BEGIN
-            -- Only members of VMod role can modify the VOUCHER table.
-            SET @ErrorNbr = 1
-            SET @ErrorText = 'Current user does not have permissions to update Voucher data.'
-         END
-   END
 
 -- If no errors, make sure voucher was not already marked as paid by the existance of a row in the CASHIER_TRANS table...
 IF (@ErrorNbr = 0)

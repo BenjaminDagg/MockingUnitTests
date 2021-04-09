@@ -1,3 +1,4 @@
+INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('PasswordExpirationWarningDays', 0, '110', 'Authentication', 'Number of days user will be warned of password expiration.')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('AccountLockoutDuration', 0, '1800', 'Authentication', 'Number of seconds to lockout account.')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('AccountLockoutThreshold', 0, '3', 'Authentication', 'Number of failed login or 2FA attempts before account is locked.')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('AllowedUserNameCharacters', 0, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+', 'Authentication', 'Characters allowed for username')
