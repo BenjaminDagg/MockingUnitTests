@@ -90,6 +90,9 @@ Created 05-02-2005 by Terry Watkins
 
 07-22-2008 Aldo Zamora
   Changed code to allow modifications only by VMod role members.
+
+Howard McCarthy 04-09-2021		
+  Removed the check for CURRENT_USER in VMod 
 --------------------------------------------------------------------------------
 */
 CREATE TRIGGER [dbo].[tu_Voucher_Update] ON [dbo].[VOUCHER] 
@@ -101,10 +104,6 @@ DECLARE @AmtOld   Money
 DECLARE @UserName VarChar(128)
 DECLARE @IsInRole Bit
 
--- Store current user name in lower case.
-SET @IsInRole = [dbo].[UserInRole]('VMod', CURRENT_USER)
-
-IF (@IsInRole = 1)
    BEGIN
       IF UPDATE(VOUCHER_AMOUNT)
          BEGIN
@@ -117,12 +116,7 @@ IF (@IsInRole = 1)
                END
          END
    END
-ELSE
-   -- User is not TP so raise an error...
-   BEGIN
-      RAISERROR('You are not authorized to modify VOUCHER table data.', 16, 1)
-      ROLLBACK
-   END
+
 GO
 ALTER TABLE [dbo].[VOUCHER] ADD CONSTRAINT [PK_VOUCHER] PRIMARY KEY CLUSTERED  ([VOUCHER_ID], [LOCATION_ID]) WITH (FILLFACTOR=80) ON [PRIMARY]
 GO
