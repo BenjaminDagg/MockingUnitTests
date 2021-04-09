@@ -137,6 +137,7 @@ namespace POS.Modules.Payout.ViewModels
         public async void Payout()
         {
             await TransactionViewModel.PayoutTransaction(default);
+            CheckLastReceipt();
         }
 
         public void VoidTransaction()
