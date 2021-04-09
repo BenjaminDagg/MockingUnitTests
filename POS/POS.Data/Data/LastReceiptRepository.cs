@@ -1,10 +1,6 @@
 ﻿using Framework.Infrastructure.Data.Database;
 using POS.Core.Interfaces.Data;
 using POS.Core.Transaction;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS.Infrastructure.Data
 {
@@ -15,11 +11,16 @@ namespace POS.Infrastructure.Data
 
         }
 
-        public LastReceiptDto GetLastTransactionDetails()
+        public LastReceiptDto GetLastTransactionDetails(string sessionId)
         {
-            const string sql = @"SELECT TOP (1) [VOUCHER_RECEIPT_NO],[VOUCHER_COUNT],[RECEIPT_TOTAL_AMOUNT]
-            FROM [dbo].[VOUCHER_RECEIPT] ORDER BY VOUCHER_RECEIPT_NO DESC";
-            var result =  Db.SingleOrDefault<LastReceiptDto>(sql);
+            const string sql = @"SELECT TOP (1) VR.[VOUCHER_RECEIPT_NO], VR.[VOUCHER_COUNT], VR.[RECEIPT_TOTAL_AMOUNT]
+                                FROM [dbo].[VOUCHER_RECEIPT]  VR
+			                    INNER JOIN VOUCHER_RECEIPT_DETAILS VRD ON VR.VOUCHER_RECEIPT_NO = VRD.VOUCHER_RECEIPT_NO
+			                    INNER JOIN CASHIER_TRANS CT ON VRD.VOUCHER_ID = CT.VOUCHER_ID
+			                    WHERE CT.TRANS_TYPE = 'P'
+			                    AND CT.SESSION_ID = @SessionId
+			                    ORDER BY VR.VOUCHER_RECEIPT_NO DESC";
+            var result =  Db.SingleOrDefault<LastReceiptDto>(sql, new { SessionId = sessionId });
             return result;
         }
     }

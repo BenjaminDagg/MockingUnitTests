@@ -295,3 +295,5 @@ Implement new POS Theme
 - Reduce font size of Current balance to fit the max value
 - Removed Promo Entry Report
 - Enable disable Last recipt button on payout
+- 54193 - Centrolink and POS – Integration Testing
+        - Retrieved Last Printed Receipt using the user session id.

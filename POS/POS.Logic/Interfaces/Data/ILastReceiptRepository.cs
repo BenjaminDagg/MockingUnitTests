@@ -8,6 +8,6 @@ namespace POS.Core.Interfaces.Data
 {
     public interface ILastReceiptRepository
     {
-        LastReceiptDto GetLastTransactionDetails();
+        LastReceiptDto GetLastTransactionDetails(string sessionId);
     }
 }

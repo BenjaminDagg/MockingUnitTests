@@ -4,7 +4,7 @@ namespace POS.Core.Interfaces
 {
     public interface ILastReceiptService
     {
-        LastTransaction GetLastReceipt();
+        LastTransaction GetLastReceipt(string sessionId);
          
     }
 }

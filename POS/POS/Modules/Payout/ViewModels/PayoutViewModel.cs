@@ -1,5 +1,4 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using Framework.WPF.Modules.CaliburnMicro;
 using Framework.WPF.Modules.LoginModule.Events;
 using Framework.WPF.ScreenManagement;
@@ -7,14 +6,13 @@ using Framework.WPF.ScreenManagement.Prompt;
 using POS.Common;
 using POS.Common.Events;
 using POS.Core;
+using POS.Core.Interfaces;
+using POS.Core.Session;
 using POS.Core.Vouchers;
 using POS.Modules.Main;
 using POS.Modules.Payout.Services.ViewModels;
 using System.Threading;
 using System.Threading.Tasks;
-using Framework.WPF.ScreenManagement.Alert;
-using POS.Core.Interfaces;
-using POS.Core.Session;
 
 namespace POS.Modules.Payout.ViewModels
 {
@@ -27,7 +25,7 @@ namespace POS.Modules.Payout.ViewModels
         private readonly ILastReceiptService _lastReceiptService;
         private readonly SystemContext _systemContext;
         public bool HasCashDrawer => _payoutViewServices?.Session?.HasCashDrawer ?? false;
-        public string SessionId => _payoutViewServices?.Session?.Id ?? string.Empty;
+        public string SessionId => _payoutViewServices?.Session?.Id.Value ?? string.Empty;
 
 
         public PayoutViewModel(IScreenServices screenManagementServices, IPayoutViewServices payoutViewServices, IMessageBoxService messageBoxService, ILastReceiptService lastReceiptService, SystemContext systemContext) : base(screenManagementServices)

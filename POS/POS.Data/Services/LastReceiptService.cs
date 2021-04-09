@@ -1,15 +1,6 @@
-﻿using Newtonsoft.Json;
-using POS.Core.Interfaces;
-using POS.Core.Transaction;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Framework.Core.Configuration;
-using Framework.Core.FileSystem;
-using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Linq;
+﻿using POS.Core.Interfaces;
 using POS.Core.Interfaces.Data;
-using System.Threading.Tasks;
+using POS.Core.Transaction;
 
 namespace POS.Infrastructure.Services
 {
@@ -25,10 +16,10 @@ namespace POS.Infrastructure.Services
         }
 
 
-        public LastTransaction GetLastReceipt()
+        public LastTransaction GetLastReceipt(string sessionId)
         {
 
-            var LastTransctionDetails =_lastReceiptRepository.GetLastTransactionDetails();
+            var LastTransctionDetails =_lastReceiptRepository.GetLastTransactionDetails(sessionId);
             if (LastTransctionDetails == null) return null;
             LastTransaction lastTrnsaction = new LastTransaction
             {

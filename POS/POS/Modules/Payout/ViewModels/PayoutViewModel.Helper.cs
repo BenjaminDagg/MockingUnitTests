@@ -100,7 +100,7 @@ namespace POS.Modules.Payout.ViewModels
             try
             {
                 IsReprintEnabled = _systemContext?.PayoutSettings?.AllowReceiptReprint ?? false;
-                var lastReceipt = _lastReceiptService.GetLastReceipt();
+                var lastReceipt = _lastReceiptService.GetLastReceipt(SessionId);
                 if (lastReceipt == null || lastReceipt.LastReceiptNumbers == 0)
                 {
                     IsReprintEnabled = false;
