@@ -52,7 +52,7 @@
                                 Text="{Binding CashDrawerViewModel.CurrentBalance, StringFormat={x:Static resx:POSResources.UICashDrawerFormatCurrentBalance}}" 
                                 Foreground="{StaticResource DgWhite}"
                                 FontWeight="Bold" 
-                                FontSize="35" 
+                                FontSize="34" 
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Bottom"
                                 />

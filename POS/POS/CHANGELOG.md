@@ -289,3 +289,8 @@ Implement new POS Theme
 	 - Added 'TestDbRetryConfiguration' to application config
 ## Updated
 - Changed query after nuget package update for Cash Drawer History
+
+##04/09/2021
+##Updated
+- Reduce font size of Current balance to fit the max value
+- Removed Promo Entry Report

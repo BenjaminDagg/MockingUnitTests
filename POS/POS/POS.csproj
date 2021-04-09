@@ -29,7 +29,6 @@
 		<None Remove="Resources\Reports\Cashier Balance.rdl" />
 		<None Remove="Resources\Reports\Daily Cashier Activity.rdl" />
 		<None Remove="Resources\Reports\Drop by Date Range Report.rdl" />
-		<None Remove="Resources\Reports\Promo Entry Schedule Report.rdl" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,9 +54,6 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Reports\Drop by Date Range Report.rdl" />
-		<Content Include="Resources\Reports\Promo Entry Schedule Report.rdl">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
 		<Content Update="Resources\Reports\Drop by Date Range Report.rdl">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -107,6 +103,12 @@
 
 	<ItemGroup>
 	  <Resource Include="dg.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Resources\Reports\Promo Entry Schedule Report.rdl">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
