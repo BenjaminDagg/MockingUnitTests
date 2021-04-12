@@ -30,7 +30,7 @@ Date       By                Database Version
   This was due to confusion / conflicts when replication DBInfo from retail sites.
 --------------------------------------------------------------------------------
 */
-CREATE PROCEDURE [dbo].[InsertDbInfo] (@UpgradeVersion VarChar(8))
+CREATE PROCEDURE [dbo].[InsertDbInfo] (@UpgradeVersion VarChar(16))
 AS
 
 
