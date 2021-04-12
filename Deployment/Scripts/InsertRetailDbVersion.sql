@@ -1,0 +1,1 @@
+EXECUTE [dbo].[InsertDbInfo] '#{DatabaseBuildNumber}#'
