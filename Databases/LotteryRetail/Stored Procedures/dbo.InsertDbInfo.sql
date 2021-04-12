@@ -29,7 +29,7 @@ Date       By                Database Version
   Added LocationID and DatabaseName to update query.
 --------------------------------------------------------------------------------
 */
-CREATE PROCEDURE [dbo].[InsertDbInfo] (@UpgradeVersion VarChar(8))
+CREATE PROCEDURE [dbo].[InsertDbInfo] (@UpgradeVersion VarChar(16))
 AS
 
 
