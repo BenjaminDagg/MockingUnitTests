@@ -15,3 +15,7 @@ CHECK_POLICY = OFF
 IF SUSER_ID('tp') IS NULL
 CREATE LOGIN [tp] WITH PASSWORD = '#{UserTpPassword}#',
 CHECK_POLICY = OFF
+
+
+EXEC master..sp_addsrvrolemember @loginame = N'mas', @rolename = N'bulkadmin'
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'AuditLevel', REG_DWORD, 3
