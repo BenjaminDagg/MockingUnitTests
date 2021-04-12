@@ -109,7 +109,7 @@ SET @CentralSQLUserPassword = '#{CentralLinkedServerPassword}#'											--<<<<
 SET @CentralServerName = '#{CentralServerName}#'											--<<<<<<<<		MANDATORY SETTINGS			<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 SET @CentralDatabaseName = 'LotteryCentral'									--<<<<<<<<		MANDATORY SETTINGS			<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 SET @CentralWebServerName = ''												--<<<<<<<<		MANDATORY SETTINGS			<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-SET @expectedCentralVersion = '5.3.0'										--<<<<<<<<		MANDATORY SETTINGS			<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+SET @expectedCentralVersion = '#{DatabaseBuildNumber}#'										--<<<<<<<<		MANDATORY SETTINGS			<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 SET @versionSuffix = '_441'													--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 																			--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 --===========================================================================================================================================================
