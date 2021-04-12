@@ -1,8 +1,7 @@
 ﻿param ([string] $folderpath, [string] $username );
 
-
-$fullpath = Resolve-Path -Path "$($folderpath)" -Relative
+New-Item -ItemType Directory -Force -Path $folderpath
 
 $permissionsvar = """$($username)"":(OI)(CI)F"
 
-& icacls $fullpath /grant $permissionsvar
+& icacls $folderpath /grant $permissionsvar
