@@ -162,3 +162,17 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
       ArtifactName: 'CentroLink'
       publishLocation: 'Container'
+- task: ArchiveFiles@2
+  displayName: 'Archive Powershell Scripts'
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/Deployment/Scripts'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
+    replaceExistingArchive: true 
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact Scripts'
+  inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
+      ArtifactName: 'Scripts'
+      publishLocation: 'Container'
