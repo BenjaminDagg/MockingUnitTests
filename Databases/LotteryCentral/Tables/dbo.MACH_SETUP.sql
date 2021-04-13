@@ -31,7 +31,10 @@ CREATE TABLE [dbo].[MACH_SETUP]
 [SYSTEM_LIB_A_VERSION] [varchar] (16) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 [SYSTEM_CORE_LIB_VERSION] [varchar] (16) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 [InstallDate] [datetime] NULL,
-[RemoveDate] [datetime] NULL
+[RemoveDate] [datetime] NULL,
+[MultiGameEnabled] [bit] NOT NULL CONSTRAINT [DF_MACH_SETUP_MultiGameEnabled] DEFAULT ((0)),
+[TransactionPortalIpAddress] [varchar] (24) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TransactionPortalControlPort] [int] NULL
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[MACH_SETUP] ADD CONSTRAINT [PK_MACH_SETUP] PRIMARY KEY CLUSTERED  ([MACH_NO], [LOCATION_ID]) WITH (FILLFACTOR=80) ON [PRIMARY]
