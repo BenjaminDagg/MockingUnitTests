@@ -77,5 +77,10 @@ namespace CentroLink.LocationSetupModule.ViewModels.DesignTime
         {
             return true;
         }
+
+        public void CreateLocation(AddLocationValidationModel locationbool, bool autoRetailSetup = false, byte siteStatus = 1, string statusCode = "1", string statusComment = "Initial Status")
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

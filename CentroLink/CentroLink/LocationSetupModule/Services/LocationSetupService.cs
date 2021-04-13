@@ -85,10 +85,13 @@ namespace CentroLink.LocationSetupModule.Services
             return result;
         }
 
-        public void CreateLocation(AddLocationValidationModel location)
-        {
-           
-
+        public void CreateLocation(
+            AddLocationValidationModel location,
+            bool autoRetailSetup = false,
+            byte siteStatus = 1,
+            string statusCode = "1",
+            string statusComment = "Initial Status")
+        {          
             var phoneNumber = SanitizePhoneNumber(location.Phone);
             var locationId = int.Parse(location.LocationId);
             var faxNumber = SanitizePhoneNumber(location.Fax);
@@ -100,8 +103,8 @@ namespace CentroLink.LocationSetupModule.Services
                 faxNumber, location.SelectedTpi.TpiId, location.CashoutTimeout, location.SweepAccount,
                 location.MaxBalanceAdjustment, location.PayoutAuthorizationAmount, location.SetLocationAsDefault,
                 location.JackpotLockup, location.PrintPromoTickets, location.AllowTicketReprint,
-                location.SummarizePlay, location.AutoDrop);
-
+                location.SummarizePlay, location.AutoDrop, 
+                autoRetailSetup, siteStatus, _userSession.User.UserName, statusCode, statusComment);
         }
 
         public void UpdateLocation(AddLocationValidationModel location)

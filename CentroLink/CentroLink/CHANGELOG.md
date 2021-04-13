@@ -83,3 +83,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
  - 54193 - Centrolink and POS – Integration Testing
 	 - Modified location Id and Retail Number to have a range between 000000 and 999999
      - Added TestDbRetryConfiguration section to appsettings json file
+
+## 04/13/2021
+### Fixed
+ - 54193 - Centrolink and POS – Integration Testing
+     - Update RetailSiteStatus table when creating location
