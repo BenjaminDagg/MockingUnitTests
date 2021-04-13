@@ -6,7 +6,7 @@ $sqlQuery = "IF EXISTS (select [NAME] from sysobjects where type = 'P' and categ
 
 $result= Invoke-Sqlcmd -ServerInstance $server -Database $database -Username $sqluser -Password $sqlpass -Query $sqlQuery 
 
-if ($result.SPExists -eq 0 -Or $forceadd = "1") { 
+if ($result.SPExists -eq 0 -Or $forceadd -eq "1") { 
 
 $sqlQuery = "IF object_id('$($sptoadd)') IS NOT NULL BEGIN DROP PROCEDURE $($sptoadd) END"
 
