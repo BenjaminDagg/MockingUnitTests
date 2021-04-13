@@ -8,6 +8,10 @@ $result= Invoke-Sqlcmd -ServerInstance $server -Database $database -Username $sq
 
 if ($result.SPExists -eq 0 -Or $forceadd = "1") { 
 
+$sqlQuery = "IF object_id('$($sptoadd)') IS NOT NULL BEGIN DROP PROCEDURE $($sptoadd) END"
+
+Invoke-Sqlcmd -ServerInstance $server -Database $database -Username $sqluser -Password $sqlpass -Query $sqlQuery 
+
 $sppath = "$($extractpath)\$($database)\db\state\Stored Procedures\dbo.$($sptoadd).sql"
 
 Invoke-Sqlcmd -ServerInstance $server -Database $database -Username $sqluser -Password $sqlpass -InputFile "$($sppath)"
