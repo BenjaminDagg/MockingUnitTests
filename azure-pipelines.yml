@@ -190,7 +190,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $builddir = "$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1"
+      $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\POS\POS\bin\Release\netcoreapp3.1"
       $installfolder = "...\POS"
       Write-Host  $builddir
       Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
