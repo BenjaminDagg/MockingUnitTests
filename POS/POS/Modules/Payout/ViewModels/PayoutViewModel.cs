@@ -25,7 +25,7 @@ namespace POS.Modules.Payout.ViewModels
         private readonly ILastReceiptService _lastReceiptService;
         private readonly SystemContext _systemContext;
         public bool HasCashDrawer => _payoutViewServices?.Session?.HasCashDrawer ?? false;
-        public string SessionId => _payoutViewServices?.Session?.Id.Value ?? string.Empty;
+        
 
 
         public PayoutViewModel(IScreenServices screenManagementServices, IPayoutViewServices payoutViewServices, IMessageBoxService messageBoxService, ILastReceiptService lastReceiptService, SystemContext systemContext) : base(screenManagementServices)

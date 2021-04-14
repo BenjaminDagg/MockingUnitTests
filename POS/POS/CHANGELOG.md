@@ -297,3 +297,6 @@ Implement new POS Theme
 - Enable disable Last recipt button on payout
 - 54193 - Centrolink and POS – Integration Testing
         - Retrieved Last Printed Receipt using the user session id.
+##04/14/2021
+##Update
+- Retrieved Last Printed Receipt using the user

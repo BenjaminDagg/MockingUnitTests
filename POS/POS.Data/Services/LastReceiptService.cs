@@ -16,10 +16,10 @@ namespace POS.Infrastructure.Services
         }
 
 
-        public LastTransaction GetLastReceipt(string sessionId)
+        public LastTransaction GetLastReceipt(string sessionUser)
         {
 
-            var LastTransctionDetails =_lastReceiptRepository.GetLastTransactionDetails(sessionId);
+            var LastTransctionDetails =_lastReceiptRepository.GetLastTransactionDetails(sessionUser);
             if (LastTransctionDetails == null) return null;
             LastTransaction lastTrnsaction = new LastTransaction
             {
