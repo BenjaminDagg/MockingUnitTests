@@ -108,7 +108,7 @@
       </ServiceBinding>
       <StoredProcedure version="1">
         <Include>False</Include>
-        <Expression>(@NAME = 'dbo.DailyGeneralLedger') OR (@NAME LIKE '%IntralotCombinedReporting%') OR (@NAME LIKE '%ProcessGLInfo%') OR (@NAME LIKE '%rpt[_]WeeklySweep%') OR (@NAME LIKE '%dbo.SyncVoucherData%') OR (@NAME LIKE '%UnlockAppUser%') OR (@NAME LIKE '%UpdateAppUserPassword%') OR (@NAME LIKE '%wsICVoucherInfo%') OR (@NAME LIKE '%AuthenticateUser%') OR (@NAME LIKE '%MD[_]%') OR (@NAME LIKE '%MO[_]%') OR (@NAME LIKE '%OL[_]%') OR (@NAME LIKE '%QCL[_]%') OR (@NAME LIKE '%rpt[_]CashierActivity%') OR (@NAME LIKE '%rpt[_]Security_Audit%')</Expression>
+        <Expression>(@NAME = 'dbo.DailyGeneralLedger') OR (@NAME LIKE '%IntralotCombinedReporting%') OR (@NAME LIKE '%ProcessGLInfo%') OR (@NAME LIKE '%rpt[_]WeeklySweep%') OR (@NAME LIKE '%dbo.SyncVoucherData%') OR (@NAME LIKE '%UnlockAppUser%') OR (@NAME LIKE '%UpdateAppUserPassword%') OR (@NAME LIKE '%wsICVoucherInfo%') OR (@NAME LIKE '%AuthenticateUser%') OR (@NAME LIKE '%MD[_]%') OR (@NAME LIKE '%OL[_]%') OR (@NAME LIKE '%QCL[_]%') OR (@NAME LIKE '%rpt[_]CashierActivity%') OR (@NAME LIKE '%rpt[_]Security_Audit%')</Expression>
       </StoredProcedure>
       <SymmetricKey version="1">
         <Include>True</Include>
