@@ -17,56 +17,56 @@ steps:
 - checkout: git://AppDev_CommonLite
 - checkout: self
 
-- task: PowerShell@2
-  displayName: 'Build and Publish Database $(RetailDatabaseId)'
-  inputs:
-    targetType: 'inline'
-    script: |
-      #Importing the SQL Change libraries         
+# - task: PowerShell@2
+#   displayName: 'Build and Publish Database $(RetailDatabaseId)'
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       #Importing the SQL Change libraries         
         
-        Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
+#         Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
          
-         $dbScripts = "$(RetailDbSourcePath)"
+#          $dbScripts = "$(RetailDbSourcePath)"
          
-         Write-Host "Building and validating the database"
-         $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts
+#          Write-Host "Building and validating the database"
+#          $validatedDb = Invoke-DatabaseBuild -FilterPath $(RetailFilterPath) -InputObject $dbScripts
          
-         Write-Host "Packaging the database scripts"                                     
-         $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
+#          Write-Host "Packaging the database scripts"                                     
+#          $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(RetailDatabaseId) -PackageVersion $(DatabasePackageVersion)
          
-         Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
-         Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip
+#          Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
+#          Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip
                 
-- task: PowerShell@2
-  displayName: 'Build and Publish Database $(CentralDatabaseId)'
-  inputs:
-    targetType: 'inline'
-    script: |
-      #Importing the SQL Change libraries         
+# - task: PowerShell@2
+#   displayName: 'Build and Publish Database $(CentralDatabaseId)'
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       #Importing the SQL Change libraries         
         
-        Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
+#         Install-Module SqlChangeAutomation -Scope CurrentUser -AcceptLicense -Force
          
-         $dbScripts = "$(CentralDbSourcePath)"
+#          $dbScripts = "$(CentralDbSourcePath)"
          
-         Write-Host "Building and validating the database"
-         $validatedDb = Invoke-DatabaseBuild -FilterPath $(CentralFilterPath) -InputObject $dbScripts 
+#          Write-Host "Building and validating the database"
+#          $validatedDb = Invoke-DatabaseBuild -FilterPath $(CentralFilterPath) -InputObject $dbScripts 
          
-         Write-Host "Packaging the database scripts"
-         $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(CentralDatabaseId) -PackageVersion $(DatabasePackageVersion)
+#          Write-Host "Packaging the database scripts"
+#          $dbArtifact = New-DatabaseBuildArtifact -InputObject $validatedDb -PackageId $(CentralDatabaseId) -PackageVersion $(DatabasePackageVersion)
          
-         Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
-         Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip 
+#          Write-Host "Copying the packaged database scripts into the artifacts directory as a Zip File"
+#          Export-DatabaseBuildArtifact -InputObject $dbArtifact -path "$(DatabaseOutputDirectory)" -OutputFormat Zip 
         
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: $(RetailDatabaseId) '
-  inputs:
-    PathtoPublish: '$(DatabaseOutputDirectory)/$(RetailDatabaseId).Zip'
-    ArtifactName: '$(RetailDatabaseId) '
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: $(CentralDatabaseId) '
-  inputs:
-    PathtoPublish: '$(DatabaseOutputDirectory)/$(CentralDatabaseId).Zip'
-    ArtifactName: '$(CentralDatabaseId) '  
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact: $(RetailDatabaseId) '
+#   inputs:
+#     PathtoPublish: '$(DatabaseOutputDirectory)/$(RetailDatabaseId).Zip'
+#     ArtifactName: '$(RetailDatabaseId) '
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact: $(CentralDatabaseId) '
+#   inputs:
+#     PathtoPublish: '$(DatabaseOutputDirectory)/$(CentralDatabaseId).Zip'
+#     ArtifactName: '$(CentralDatabaseId) '  
 
 
 - task: Assembly-Info-NetCore@2
