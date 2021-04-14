@@ -290,10 +290,15 @@ Implement new POS Theme
 ## Updated
 - Changed query after nuget package update for Cash Drawer History
 
-##04/09/2021
-##Updated
+## 04/09/2021
+## Updated
 - Reduce font size of Current balance to fit the max value
 - Removed Promo Entry Report
 - Enable disable Last recipt button on payout
 - 54193 - Centrolink and POS – Integration Testing
         - Retrieved Last Printed Receipt using the user session id.
+
+## 04/14/2021
+## Fixed
+- 54193 - Centrolink and POS – Integration Testing
+        - Fixed Syncgronization issue with Device Management Actions

@@ -328,7 +328,13 @@ namespace POS.Modules.DeviceManagement.ViewModels
                         {
                             if (CheckDeviceForChanges(deviceToUpdate, device))
                             {
-                                deviceToUpdate.ActionEnabled = (deviceToUpdate.OnlineStatus != device.OnlineStatus) || !deviceToUpdate.ActionEnabled;
+                                var enableAction = ((deviceToUpdate.OnlineStatus != device.OnlineStatus) ||
+                                    (!deviceToUpdate.ActionEnabled && deviceToUpdate.GetTimeSinceLastActionDisabled() > _deviceManagerSettings.PollingInterval * 1.5));
+
+                                if (enableAction)
+                                {
+                                    deviceToUpdate.ActionEnabled = enableAction;
+                                }
                                 deviceToUpdate.Connected = device.Connected;
                                 deviceToUpdate.Balance = device.Balance;
                                 deviceToUpdate.Description = device.Description;

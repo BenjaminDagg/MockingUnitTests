@@ -81,7 +81,23 @@ namespace POS.Modules.DeviceManagement.Models
         public bool ActionEnabled
         {
             get => _actionEnabled;
-            set => Set(ref _actionEnabled, value);
+            set {
+                if(!value)
+                {
+                    lastActionDisabledTime = DateTime.Now;
+                }
+                Set(ref _actionEnabled, value);
+            }
+        }
+        private DateTime lastActionDisabledTime;
+        public double GetTimeSinceLastActionDisabled()
+        {
+            DateTime now = DateTime.Now;
+            TimeSpan result;
+
+            result = now - lastActionDisabledTime;
+
+            return result.TotalSeconds;
         }
     }
 }
