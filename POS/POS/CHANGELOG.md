@@ -15,7 +15,7 @@ Converted POS to .Net Core
 Implement new POS Theme
 - 46663 - Implement New theme: code & UI updates - gid rid of side menu, use big buttons on home menu after login. Possibly getting rid of pop ups
 
-##[1.0.0.0] 02/09/2021
+## [1.0.0.0] 02/09/2021
 - 48991 - Load Machines Connected and Not Connected
 - 48987 - Device Management UI Layout
 - 48988 - Device Management Settings
@@ -26,7 +26,7 @@ Implement new POS Theme
 - 50451 - Report Viewer - Clean up styles in Report Viewer Styles .xaml resource dictionary
 - 50453 - Report Viewer - Test replacing RDL after a build to prove you don’t need to recompile code for RDL changes
 
-### fixed
+### Fixed
 - Log session id issue (was storing object type name instead of session id)
 - Minor issues to styles and Device Management after merge
 - Issue with Device Manager when connected to same endpoint as the clients
@@ -80,7 +80,7 @@ Implement new POS Theme
 - 51120 - Added hide functionalilty of needs Approval
 
 
-### fixed
+### Fixed
 - adjusted the CashdrawerHistoryPropmtView to fix grid header and button margin
 - added pos.ico as resource
 
@@ -88,7 +88,7 @@ Implement new POS Theme
 - 51147 - POS Device Management Tab - Offline / Online format changes & refresh settings
 
 ## 03/01/2021
-### fixed 
+### Fixed 
 - merge issue in CurrentTransationView.xaml
 
 ## 03/02/2021
@@ -114,11 +114,11 @@ Implement new POS Theme
 - 51143 utilized MVVM patterns to set/trigger the color changes in the AddRemoveCashPromptView view. 
 
 ## 03/10/2021
-### fixed
+### Fixed
 - Update report views to adjust the run date cut off in the datagrid view
 - Update report properties and datasource
 
-### updated
+### Updated
 - Removed 'Daily Cashier Activity' from the application execution folder
 
 ## 03/11/2021
@@ -130,7 +130,7 @@ Implement new POS Theme
 	- Changes to UI for consistency 
 
 ## 03/12/2021
-### fixed
+### Fixed
 - Fixed Issue with error handling in LastPrintedRecieptViewModel
 - Fixed currency formatting on LastPrintedReceiptView
 
@@ -239,11 +239,11 @@ Implement new POS Theme
 - 51143 utilized MVVM patterns to set/trigger the color changes in the AddRemoveCashPromptView view. 
 
 ## 03/10/2021
-### fixed
+### Fixed
 - Update report views to adjust the run date cut off in the datagrid view
 - Update report properties and datasource
 
-### updated
+### Updated
 - Removed 'Daily Cashier Activity' from the application execution folder
 
 ## 03/11/2021
@@ -253,7 +253,7 @@ Implement new POS Theme
 - Changes to UI for consistency 
 
 ## 03/12/2021
-### fixed
+### Fixed
 - Fixed Issue with error handling in LastPrintedRecieptViewModel
 - Fixed currency formatting on LastPrintedReceiptView
 
