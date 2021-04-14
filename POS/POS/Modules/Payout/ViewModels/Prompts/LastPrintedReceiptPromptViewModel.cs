@@ -100,7 +100,7 @@ namespace POS.Modules.Payout.ViewModels.Prompts
         {
             try
             {
-                var lastReceipt = _lastReceiptService.GetLastReceipt(_session.Id.Value);
+                var lastReceipt = _lastReceiptService.GetLastReceipt(_userSession.User.UserName);
                 if (lastReceipt == null || lastReceipt.LastReceiptNumbers == 0)
                 {
                     IsReprintEnabled = false;

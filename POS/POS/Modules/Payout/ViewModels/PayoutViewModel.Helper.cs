@@ -100,7 +100,7 @@ namespace POS.Modules.Payout.ViewModels
             try
             {
                 IsReprintEnabled = _systemContext?.PayoutSettings?.AllowReceiptReprint ?? false;
-                var lastReceipt = _lastReceiptService.GetLastReceipt(SessionId);
+                var lastReceipt = _lastReceiptService.GetLastReceipt(_payoutViewServices.User.User.UserName);
                 if (lastReceipt == null || lastReceipt.LastReceiptNumbers == 0)
                 {
                     IsReprintEnabled = false;
@@ -241,6 +241,7 @@ namespace POS.Modules.Payout.ViewModels
             }
 
             await Task.CompletedTask;
+           
         }
         private async Task<PromptOptions> ConfirmAreYouSureRemoveTransaction(VoucherItem voucher = default)
         {

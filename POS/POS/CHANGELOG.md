@@ -299,6 +299,8 @@ Implement new POS Theme
         - Retrieved Last Printed Receipt using the user session id.
 
 ## 04/14/2021
+## Update
+- Retrieved Last Printed Receipt using the user
 ## Fixed
 - 54193 - Centrolink and POS – Integration Testing
         - Fixed Syncgronization issue with Device Management Actions
