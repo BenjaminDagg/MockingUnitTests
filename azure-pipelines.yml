@@ -14,16 +14,8 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-  resources:
-  repositories:
-  - repository: DeploymentScripts
-    type: git
-    name: AppDev_DeploymentScripts
-    ref: MOLite
-
 steps:
 - checkout: git://AppDev_CommonLite
-- checkout: DeploymentScripts
 - checkout: self
 
 - task: PowerShell@2
@@ -174,7 +166,7 @@ steps:
 - task: ArchiveFiles@2
   displayName: 'Archive Powershell Scripts'
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/DeploymentScripts/Deployment/Scripts'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_MOLite/Deployment/Scripts'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
