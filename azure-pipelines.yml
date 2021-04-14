@@ -16,10 +16,7 @@ variables:
 
 steps:
 - checkout: git://AppDev_CommonLite
-- checkout: git://AppDev_DeploymentScripts@MOLite
 - checkout: self
-
-- script: dir $(Build.SourcesDirectory)
 
 - task: PowerShell@2
   displayName: 'Build and Publish Database $(RetailDatabaseId)'
@@ -166,20 +163,20 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
       ArtifactName: 'CentroLink'
       publishLocation: 'Container'
-- task: ArchiveFiles@2
-  displayName: 'Archive Powershell Scripts'
-  inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_DeploymentScripts/Deployment/Scripts'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
-    replaceExistingArchive: true 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact Scripts'
-  inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
-      ArtifactName: 'Scripts'
-      publishLocation: 'Container'
+# - task: ArchiveFiles@2
+#   displayName: 'Archive Powershell Scripts'
+#   inputs:
+#     rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_DeploymentScripts/Deployment/Scripts'
+#     includeRootFolder: false
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
+#     replaceExistingArchive: true 
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact Scripts'
+#   inputs:
+#       PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
+#       ArtifactName: 'Scripts'
+#       publishLocation: 'Container'
 - task: ArchiveFiles@2
   displayName: 'Archive POS Source Code'
   inputs:
