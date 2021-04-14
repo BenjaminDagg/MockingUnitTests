@@ -193,6 +193,18 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/CentroLink_Source.zip'
     replaceExistingArchive: true 
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact POS Source'
+  inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/POS_Source.zip'
+      ArtifactName: 'Source'
+      publishLocation: 'Container'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact CentroLink Source'
+  inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink_Source.zip'
+      ArtifactName: 'Source'
+      publishLocation: 'Container'
       
 - task: PowerShell@2
   displayName: 'Create Signatures file'
@@ -272,5 +284,5 @@ steps:
   displayName: 'Publish Artifact Scripts'
   inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)\Signatures.csv'
-      ArtifactName: 'Scripts'
+      ArtifactName: 'Signatures'
       publishLocation: 'Container'
