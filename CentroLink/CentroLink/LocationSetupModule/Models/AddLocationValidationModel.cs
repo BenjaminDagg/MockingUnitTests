@@ -74,8 +74,8 @@ namespace CentroLink.LocationSetupModule.Models
         }
 
         [Required(ErrorMessage = "Retailer Number is required.")]
-        [Range(000000, 999999, ErrorMessage = "Retailer Number must be a value between 000000 and 999999.")]
-        [MinLength(4, ErrorMessage = "Retailer number must be exactly digits in length.")]
+        [Range(1000, 9999, ErrorMessage = "Retailer Number must be a value between 1000 and 9999.")]
+        [MinLength(4, ErrorMessage = "Retailer number must be exactly 4 digits in length.")]
         public string RetailerNumber
         {
             get => _retailerNumber;

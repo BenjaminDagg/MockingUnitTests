@@ -88,3 +88,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### Fixed
  - 54193 - Centrolink and POS – Integration Testing
      - Update RetailSiteStatus table when creating location
+
+## 04/14/2021
+### Updated
+ - Changed back RetailerNumber to be 4 digits in length as it originally was.
