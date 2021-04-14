@@ -176,3 +176,44 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
       ArtifactName: 'Scripts'
       publishLocation: 'Container'
+      
+- task: PowerShell@2
+  displayName: 'Create Signatures file'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $hashline = "File Path`tFile Version`tSHA1 Signature`tMD5 Signature`n"
+      Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashline
+      
+- task: PowerShell@2
+  displayName: 'Add POS signatures'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $builddir = "$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1"
+      $installfolder = "...\POS"
+
+      Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
+      Foreach-Object {
+        $fileName = $_.FullName
+        $shortenedPath = $fileName -replace [Regex]::Escape($builddir), [Regex]::Escape($installfolder)
+        $fileVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).FileVersion
+        if ([string]::IsNullOrEmpty($fileVersion)){
+          $fileVersion = "N/A"
+        }
+        $filehash = Get-FileHash $fileName -Algorithm SHA1
+        $filehash2 = Get-FileHash $fileName -Algorithm MD5
+        $lineitem = "$($shortenedPath)`t$($fileVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
+    
+        $hashlines = "$($hashlines)$($lineitem)`n"
+        Write-Host  $lineitem
+      }
+      Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashlines -Append
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Signatures'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Signatures.csv'
+    ArtifactName: '$(ArtifactGameReference)Signatures'
+    publishLocation: FilePath
+    TargetPath: '$(SharedReleaseDir)\$(Build.DefinitionName)\$(Build.SourceBranchName)\$(Build.BuildNumber)\Signatures.csv'
