@@ -29,5 +29,4 @@ INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimVa
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (38, 1, N'http://diamondgame.com/claims/permission', N'VoucherApproval')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (41, 1, N'http://diamondgame.com/claims/permission', N'AddLocation')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (43, 1, N'http://diamondgame.com/claims/permission', N'EditLocation')
-INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (44, 1, N'http://diamondgame.com/claims/permission', N'Payout')
 SET IDENTITY_INSERT [dbo].[AppRoleClaim] OFF
