@@ -192,7 +192,7 @@ steps:
     script: |
       $builddir = "$(Build.SourcesDirectory)/AppDev_MOLite/POS/POS/bin/Release/netcoreapp3.1"
       $installfolder = "...\POS"
-
+      Write-Host  $builddir
       Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
       Foreach-Object {
         $fileName = $_.FullName
@@ -210,10 +210,3 @@ steps:
       }
       Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashlines -Append
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Signatures'
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Signatures.csv'
-    ArtifactName: '$(ArtifactGameReference)Signatures'
-    publishLocation: FilePath
-    TargetPath: '$(SharedReleaseDir)\$(Build.DefinitionName)\$(Build.SourceBranchName)\$(Build.BuildNumber)\Signatures.csv'
