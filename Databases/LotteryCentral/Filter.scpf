@@ -119,8 +119,8 @@
         <Expression>TRUE</Expression>
       </Synonym>
       <Table version="1">
-        <Include>True</Include>
-        <Expression>TRUE</Expression>
+        <Include>False</Include>
+        <Expression>(@NAME = 'dbo.EventLog')</Expression>
       </Table>
       <User version="1">
         <Include>True</Include>
