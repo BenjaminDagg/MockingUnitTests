@@ -304,3 +304,8 @@ Implement new POS Theme
 ## Fixed
 - 54193 - Centrolink and POS – Integration Testing
         - Fixed Syncgronization issue with Device Management Actions
+
+
+## 04/15/2021
+- 50450 - Report Viewer - Problem with registering Bold Reports license key, still shows trial popup
+        - Fixed by addin the Licence Key in the ReportsModule class which is called on registration when the app starts
