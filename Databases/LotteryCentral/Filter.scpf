@@ -120,7 +120,7 @@
       </Synonym>
       <Table version="1">
         <Include>False</Include>
-        <Expression>(@NAME = 'dbo.EventLog')</Expression>
+        <Expression>(@NAME LIKE '%EventLog%')</Expression>
       </Table>
       <User version="1">
         <Include>True</Include>
