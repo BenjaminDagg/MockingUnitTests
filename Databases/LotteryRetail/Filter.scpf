@@ -108,7 +108,7 @@
       </ServiceBinding>
       <StoredProcedure version="1">
         <Include>False</Include>
-        <Expression>(@NAME = 'Create_Daily_Job') OR (@NAME = 'Delete_Job_By_Name') OR (@NAME = 'InsertDbInfo') OR (@NAME = 'rpt_Daily_SC_Sessions_MV')</Expression>
+        <Expression>(@NAME = 'Create_Daily_Job') OR (@NAME = 'Delete_Job_By_Name') OR (@NAME = 'rpt_Daily_SC_Sessions_MV')</Expression>
       </StoredProcedure>
       <SymmetricKey version="1">
         <Include>True</Include>
