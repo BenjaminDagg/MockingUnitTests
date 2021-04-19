@@ -1,5 +1,0 @@
-INSERT INTO [dbo].[AppConfig] ([ConfigKey], [ConfigValue], [Description], [Protected]) VALUES ('CentroLinkAllowRemoteConnection', 'true', '.', 0)
-INSERT INTO [dbo].[AppConfig] ([ConfigKey], [ConfigValue], [Description], [Protected]) VALUES ('FirstAccountingDayOfWeek', '7', 'Used to calculate the first accounting day of the week. 1=MON 2=TUE 3=WED 4= THUR 5=FRI 6=SAT 7=SUN', 0)
-INSERT INTO [dbo].[AppConfig] ([ConfigKey], [ConfigValue], [Description], [Protected]) VALUES ('VoucherExpirationAdditionalSeconds', '0', 'Number of additional seconds past the expiration date a voucher is to be considered active/valid.', 0)
-INSERT INTO [dbo].[AppConfig] ([ConfigKey], [ConfigValue], [Description], [Protected]) VALUES ('VoucherExpirationDays', '30', 'Number of days that a voucher is cashable.', 0)
-INSERT INTO [dbo].[AppConfig] ([ConfigKey], [ConfigValue], [Description], [Protected]) VALUES ('VoucherExpirationNormalizeAccountingTime', 'true', 'Indicates whether to normalize the voucher expiration dates to the next accounting date end.', 0)
