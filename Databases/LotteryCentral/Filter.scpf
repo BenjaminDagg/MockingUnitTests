@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!---->
 <NamedFilter version="1" type="SQLCompareFilter">
   <!--This filter can be loaded using the SQL Compare UI or used with a SQL Compare command line session using the /filter switch-->
@@ -7,8 +7,8 @@
     <FilterCaseSensitive>False</FilterCaseSensitive>
     <Filters version="1">
       <None version="1">
-        <Include>False</Include>
-        <Expression>(@NAME LIKE '%InsertDbInfo%') OR (@NAME LIKE '%SyncVoucherData%') OR (@NAME LIKE '%InsertGLInfoCentral%') OR (@NAME LIKE '%UpdateAppUser%')</Expression>
+        <Include>True</Include>
+        <Expression>TRUE</Expression>
       </None>
       <Assembly version="1">
         <Include>True</Include>
@@ -107,8 +107,8 @@
         <Expression>TRUE</Expression>
       </ServiceBinding>
       <StoredProcedure version="1">
-        <Include>False</Include>
-        <Expression>(@NAME = 'dbo.DailyGeneralLedger') OR (@NAME LIKE '%IntralotCombinedReporting%') OR (@NAME LIKE '%ProcessGLInfo%') OR (@NAME LIKE '%rpt[_]WeeklySweep%') OR (@NAME LIKE '%dbo.SyncVoucherData%') OR (@NAME LIKE '%UnlockAppUser%') OR (@NAME LIKE '%UpdateAppUserPassword%') OR (@NAME LIKE '%wsICVoucherInfo%') OR (@NAME LIKE '%AuthenticateUser%') OR (@NAME LIKE '%MD[_]%') OR (@NAME LIKE '%MO[_]%') OR (@NAME LIKE '%OL[_]%') OR (@NAME LIKE '%QCL[_]%') OR (@NAME LIKE '%rpt[_]CashierActivity%') OR (@NAME LIKE '%rpt[_]Security_Audit%')</Expression>
+        <Include>True</Include>
+        <Expression>TRUE</Expression>
       </StoredProcedure>
       <SymmetricKey version="1">
         <Include>True</Include>
@@ -119,8 +119,8 @@
         <Expression>TRUE</Expression>
       </Synonym>
       <Table version="1">
-        <Include>False</Include>
-        <Expression>(@NAME LIKE '%EventLog%')</Expression>
+        <Include>True</Include>
+        <Expression>TRUE</Expression>
       </Table>
       <User version="1">
         <Include>True</Include>
@@ -131,8 +131,8 @@
         <Expression>TRUE</Expression>
       </UserDefinedType>
       <View version="1">
-        <Include>False</Include>
-        <Expression>(@NAME LIKE '%uvwVoucherInfo%') OR (@NAME LIKE '%CheckInfo%')</Expression>
+        <Include>True</Include>
+        <Expression>TRUE</Expression>
       </View>
       <XmlSchemaCollection version="1">
         <Include>True</Include>
