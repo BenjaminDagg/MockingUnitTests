@@ -59,7 +59,7 @@
     <DataWriteAllFilesInOneDirectory>True</DataWriteAllFilesInOneDirectory>
   </WriteToFileOptions>
   <DataFileSet>
-    <Count>11</Count>
+    <Count>14</Count>
     <DataFile>dbo.AppPermission_Data.sql</DataFile>
     <DataFile>dbo.AppRole_Data.sql</DataFile>
     <DataFile>dbo.AppRoleRetailGroup_Data.sql</DataFile>
@@ -71,5 +71,8 @@
     <DataFile>dbo.MachineStatus_Data.sql</DataFile>
     <DataFile>dbo.PRODUCT_Data.sql</DataFile>
     <DataFile>dbo.PRODUCT_LINE_Data.sql</DataFile>
+    <DataFile>dbo.AccountingConfig_Data.sql</DataFile>
+    <DataFile>dbo.AppSetting_Data.sql</DataFile>
+    <DataFile>dbo.EventCode_Data.sql</DataFile>
   </DataFileSet>
 </DatabaseInformation>

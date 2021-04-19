@@ -1,0 +1,1 @@
+INSERT INTO [dbo].[AccountingConfig] ([ConfigKey], [Description], [ConfigValue], [ConfigType]) VALUES ('FirstDayOfWeek', 'Used to calculate the first accounting day of the week. MON=1 TUE=2 WED=3 THUR=4 FRI=5 SAT=6 SUN=7', N'7', 'int')
