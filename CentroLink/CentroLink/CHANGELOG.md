@@ -92,3 +92,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ## 04/14/2021
 ### Updated
  - Changed back RetailerNumber to be 4 digits in length as it originally was.
+
+ ## 04/21/2021
+ - 54193 - Centrolink and POS – Integration Testing
+ ### Fixed
+    - Added password to database when user is created
+    - Allowing admin user to edit password if its not theirs
