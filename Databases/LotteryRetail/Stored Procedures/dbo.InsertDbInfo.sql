@@ -27,6 +27,9 @@ Date       By                Database Version
   
 2014-05-15 Louis Epstein
   Added LocationID and DatabaseName to update query.
+  
+2021-04-19 Edris Khestoo
+  Set memory values to zero because the commands are no longer available after SQL 2008 R2
 --------------------------------------------------------------------------------
 */
 CREATE PROCEDURE [dbo].[InsertDbInfo] (@UpgradeVersion VarChar(16))
@@ -59,11 +62,12 @@ SELECT
 SELECT @LocationID = LOCATION_ID FROM CASINO WHERE SETASDEFAULT = 1
 SELECT @LocationID = ISNULL(@LocationID, 0)
 
+
 -- Retrieve number of CPUs and Physical Memory...
 SELECT
    @CpuCount    = cpu_count,
-   @PhysicalMemoryBytes = physical_memory_in_bytes,
-   @VirtualMemoryBytes  = virtual_memory_in_bytes
+   @PhysicalMemoryBytes = 0,  --physical_memory_in_bytes no longer available in SQL 2012+,
+   @VirtualMemoryBytes  = 0 --virtual_memory_in_bytes no longer available in SQL 2012+
 FROM sys.dm_os_sys_info
 
 -- Convert bytes to MegaBytes...
