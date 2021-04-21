@@ -95,7 +95,32 @@ namespace POS.Modules.Reports.ViewModels
             DisplayName = POSResources.UITabReports;
         }
 
+        protected override async void OnViewLoaded(object view)
+        {
+            base.OnViewLoaded(view);
+
+            await LoadReports();
+        }
+
         protected override async Task OnActivateAsync(CancellationToken cancellationToken)
+        {
+            await LoadReports();
+
+            await base.OnActivateAsync(cancellationToken);
+        }
+
+        public void OnReportSelectionChangedAction()
+        {
+            if (_selectedReport == null)
+            {
+                return;
+            }
+
+            _reportContext.SelectedReport = ReportTranslator.Translate(_selectedReport);
+            _eventAggregator.PublishOnUIThreadAsync(new ReportNavigationEvent(_serviceLocator.Resolve<ReportViewModel>()));
+        }
+
+        private async Task LoadReports()
         {
             try
             {
@@ -116,19 +141,6 @@ namespace POS.Modules.Reports.ViewModels
             {
                 await HandleErrorAsync(exception.Message, exception, userId: _userSession.UserId);
             }
-
-            await base.OnActivateAsync(cancellationToken);
         }
-
-        public void OnReportSelectionChangedAction()
-        {
-            if (_selectedReport == null)
-            {
-                return;
-            }
-
-            _reportContext.SelectedReport = ReportTranslator.Translate(_selectedReport);
-            _eventAggregator.PublishOnUIThreadAsync(new ReportNavigationEvent(_serviceLocator.Resolve<ReportViewModel>()));
-        }        
     }
 }
