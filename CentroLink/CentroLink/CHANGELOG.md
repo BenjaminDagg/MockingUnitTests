@@ -98,3 +98,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
  ### Fixed
     - Added password to database when user is created
     - Allowing admin user to edit password if its not theirs
+    - Fixed Unlock User functionality - Function wasnt being called when the button in the view was pressed
