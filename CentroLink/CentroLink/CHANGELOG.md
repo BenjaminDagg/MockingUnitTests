@@ -99,3 +99,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
     - Added password to database when user is created
     - Allowing admin user to edit password if its not theirs
     - Fixed Unlock User functionality - Function wasnt being called when the button in the view was pressed
+
+## 05/05/2021
+## Fixed
+ - 57791: Fix - Bug 57539: CENTROLINK - Username field has no minimum character requirements - Minimum of 3 character is required
+ - 57792: Fix - Bug 57558: CENTROLINK - First and Last name fields can have spaces and special characters
