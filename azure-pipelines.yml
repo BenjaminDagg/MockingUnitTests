@@ -246,7 +246,7 @@ steps:
     targetType: 'inline'
     script: |
       $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\CentroLink\CentroLink\bin\Release\netcoreapp3.1"
-      $installfolder = "...\POS"
+      $installfolder = "...\CentroLink"
       Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
       Foreach-Object {
         $fileName = $_.FullName
@@ -282,7 +282,7 @@ steps:
       }
       Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashlines -Append
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact Scripts'
+  displayName: 'Publish Artifact Signatures'
   inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)\Signatures.csv'
       ArtifactName: 'Signatures'
