@@ -1,4 +1,7 @@
 SET IDENTITY_INSERT [dbo].[AppRoleClaim] ON
+INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (45, 1, N'http://diamondgame.com/claims/permission', N'TogglePromoTicket')
+SET IDENTITY_INSERT [dbo].[AppRoleClaim] OFF
+SET IDENTITY_INSERT [dbo].[AppRoleClaim] ON
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (1, 1, N'http://diamondgame.com/claims/permission', N'UserAdministration')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (2, 1, N'http://diamondgame.com/claims/permission', N'MachineSetup')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (3, 1, N'http://diamondgame.com/claims/permission', N'BankSetup')
@@ -16,12 +19,9 @@ INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimVa
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (16, 1, N'http://diamondgame.com/claims/permission', N'Settings')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (17, 1, N'http://diamondgame.com/claims/permission', N'DeviceManagement')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (18, 1, N'http://diamondgame.com/claims/permission', N'Reports')
-INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (20, 2, N'http://diamondgame.com/claims/permission', N'Settings')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (21, 2, N'http://diamondgame.com/claims/permission', N'DeviceManagement')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (22, 2, N'http://diamondgame.com/claims/permission', N'Reports')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (23, 3, N'http://diamondgame.com/claims/permission', N'Payout')
-INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (24, 3, N'http://diamondgame.com/claims/permission', N'Settings')
-INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (26, 3, N'http://diamondgame.com/claims/permission', N'Reports')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (30, 1, N'http://diamondgame.com/claims/permission', N'PromoTicketSetup')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (31, 1, N'http://diamondgame.com/claims/permission', N'AddPromoTicket')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (32, 1, N'http://diamondgame.com/claims/permission', N'EditPromoTicket')
@@ -29,4 +29,7 @@ INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimVa
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (38, 1, N'http://diamondgame.com/claims/permission', N'VoucherApproval')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (41, 1, N'http://diamondgame.com/claims/permission', N'AddLocation')
 INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (43, 1, N'http://diamondgame.com/claims/permission', N'EditLocation')
+SET IDENTITY_INSERT [dbo].[AppRoleClaim] OFF
+SET IDENTITY_INSERT [dbo].[AppRoleClaim] ON
+INSERT INTO [dbo].[AppRoleClaim] ([RoleClaimId], [RoleId], [ClaimType], [ClaimValue]) VALUES (24, 3, N'http://diamondgame.com/claims/permission', N'DeviceManagement')
 SET IDENTITY_INSERT [dbo].[AppRoleClaim] OFF

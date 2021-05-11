@@ -50,6 +50,12 @@ namespace POS.Modules.DeviceManagement.ViewModels
         {
             get => (IsPromoTicketOff ? POSResources.UIDeviceManagerSettingsPromoTicketOn : POSResources.UIDeviceManagerSettingsPromoTicketOff);
         }
+
+        public bool HasAccessToTogglePromoTicket
+        {
+            get => _userSession.HasPermission("TogglePromoTicket");
+        }
+
         private async Task Initialize()
         {
             if (!await _semaphoreSlimInitialize.WaitAsync(0))
@@ -113,6 +119,8 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 finally
                 {
                     _semaphoreSlimInitialize.Release();
+
+                    NotifyOfPropertyChange(nameof(HasAccessToTogglePromoTicket));
                 }
             }
         }

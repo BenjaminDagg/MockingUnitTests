@@ -68,7 +68,8 @@
                                               HorizontalAlignment="Right"
                                               Grid.Column="0"
                                               Grid.Row="0" 
-                                              Margin="0 40 50 0">
+                                              Margin="0 40 50 0"
+                                              Visibility="{Binding Path=HasAccessToTogglePromoTicket, Converter={StaticResource BooleanToVisibility}}">
                 <dgmaterial:CustomButtonControlEx.Style>
                     <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource DgCustomButtonControlExStyle}">
                         <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagerSettingsTurnPromoTicketOn}"/>

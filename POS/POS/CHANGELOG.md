@@ -308,11 +308,19 @@ Implement new POS Theme
 
 ## 04/15/2021
 - 50450 - Report Viewer - Problem with registering Bold Reports license key, still shows trial popup
-        - Fixed by addin the Licence Key in the ReportsModule class which is called on registration when the app starts
-
- ## 04/21/2021
+## 04/21/2021
  - 54193 - Centrolink and POS – Integration Testing
- ### Fixed
+### Fixed
     - Added Validation on ChangePasswordViewModel to disable 'Change Password' button when the form is invalidated
     - Fixed when ChangePasswordViewModel is invalidated users should not be redirected to Login Screen.
     - Fixed Reports View - modified OnViewLoaded to load reports when user is navigated to Reports screen from LoginView
+## 05/11/2021
+## Update
+
+Including these changes to our release to QA.
+1. Permissions:
+	   Cashier Tabs - Payout, Device Management
+	   Supervisor Tabs - Device Management, Reports
+	   Admin Tabs - Device Management, Reports, Settings
+2. Permissions - Admins should only have access to Promo-Ticket On/Off
+3. Remove word "casino" from all views in the Missouri market

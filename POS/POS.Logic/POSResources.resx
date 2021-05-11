@@ -680,7 +680,7 @@ Scan Voucher.</value>
     <value>Are you sure?</value>
   </data>
   <data name="UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg" xml:space="preserve">
-    <value>Are you sure you would like to set Casino Machine ID {0} {1}?</value>
+    <value>Are you sure you would like to set Machine ID {0} {1}?</value>
   </data>
   <data name="UIDeviceManagerSettingsTogglePromoTicketConfirm" xml:space="preserve">
     <value>Please Confirm</value>

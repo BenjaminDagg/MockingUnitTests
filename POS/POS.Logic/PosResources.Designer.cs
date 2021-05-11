@@ -1739,7 +1739,7 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you would like to set Casino Machine ID {0} {1}?.
+        ///   Looks up a localized string similar to Are you sure you would like to set Machine ID {0} {1}?.
         /// </summary>
         public static string UIDeviceManagerSettingsSetAllOnlineOfflineConfirmMsg {
             get {
