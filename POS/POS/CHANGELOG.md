@@ -314,9 +314,9 @@ Implement new POS Theme
     - Added Validation on ChangePasswordViewModel to disable 'Change Password' button when the form is invalidated
     - Fixed when ChangePasswordViewModel is invalidated users should not be redirected to Login Screen.
     - Fixed Reports View - modified OnViewLoaded to load reports when user is navigated to Reports screen from LoginView
+
 ## 05/11/2021
 ## Update
-
 Including these changes to our release to QA.
 1. Permissions:
 	   Cashier Tabs - Payout, Device Management
@@ -324,3 +324,8 @@ Including these changes to our release to QA.
 	   Admin Tabs - Device Management, Reports, Settings
 2. Permissions - Admins should only have access to Promo-Ticket On/Off
 3. Remove word "casino" from all views in the Missouri market
+
+## 05/12/2021
+##Updated
+Refresh Device Management View within polling time when machine status and ip address is updated in database
+

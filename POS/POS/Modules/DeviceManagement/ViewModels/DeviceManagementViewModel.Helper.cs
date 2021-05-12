@@ -343,6 +343,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
                                 {
                                     deviceToUpdate.ActionEnabled = enableAction;
                                 }
+                                deviceToUpdate.IP = device.IP;
                                 deviceToUpdate.Connected = device.Connected;
                                 deviceToUpdate.Balance = device.Balance;
                                 deviceToUpdate.Description = device.Description;
@@ -351,6 +352,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
                                 deviceToUpdate.LastPlayed = device.LastPlayed;
                                 deviceToUpdate.Online = device.Online;
                                 deviceToUpdate.TransType = device.TransType;
+                                deviceToUpdate.MachineStatus = device.MachineStatus;
                                 deviceToUpdate.Online = device.Online;
                                 deviceToUpdate.OnlineStatus = device.OnlineStatus;
                             }
@@ -417,6 +419,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
         }
         private bool CheckDeviceForChanges(Device currentDevice, Device newDevice)
         {
+            if (currentDevice.IP != newDevice.IP) return true;
             if (currentDevice.ActionEnabled != newDevice.ActionEnabled) return true;
             if (currentDevice.Connected != newDevice.Connected) return true;
             if (currentDevice.Balance != newDevice.Balance) return true;
@@ -426,6 +429,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
             if (currentDevice.LastPlayed != newDevice.LastPlayed) return true;
             if (currentDevice.Online != newDevice.Online) return true;
             if (currentDevice.TransType != newDevice.TransType) return true;
+            if (currentDevice.MachineStatus != newDevice.MachineStatus) return true;
             if (currentDevice.Online != newDevice.Online) return true;
             if (currentDevice.OnlineStatus != newDevice.OnlineStatus) return true;
 
