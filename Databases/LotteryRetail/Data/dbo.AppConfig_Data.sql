@@ -9,7 +9,7 @@ INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Categor
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('DealInventoryCheckOnStartup', 0, 'true', 'DealManagement', 'If true will perform a low deal inventory check.')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('DefaultBankDbaLockupAmount', 0, '0', 'BankSetup', 'Default bank dba lockup amount.')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('DefaultBankLockupAmount', 0, '600', 'BankSetup', 'Default bank lockup amount.')
-INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('DefaultPromoEntryScheduleDayLimit', 0, '14', 'PromoTicketSetup', 'Number of days that limit the list of Promotional Entries')
+INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('DefaultPromoEntryScheduleDayLimit', 0, '15', 'PromoTicketSetup', 'Number of days that limit the list of Promotional Entries')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('IsSupervisorApprovalActive', 0, 'True', 'Payout', 'Hides Or Shows Supervisor approval column')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('MultiGameEnabled', 0, 'True', 'MachineSetup', 'Enables or Disables MultiGame on Location.')
 INSERT INTO [dbo].[AppConfig] ([ConfigKey], [Protected], [ConfigValue], [Category], [Description]) VALUES ('PaperProductsById', 0, '1', 'BankSetup', 'Comma delimited list of product_ids that are paper.')
