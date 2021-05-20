@@ -87,6 +87,9 @@ steps:
     LogLevel: 'verbose'
     FailOnWarning: false
     DisableTelemetry: false
+    VersionNumber: '$(Build.BuildNumber)'
+    FileVersionNumber: '$(Build.BuildNumber)'
+    PackageVersion: '$(Build.BuildNumber)'
 
 - task: Assembly-Info-NetCore@2
   displayName: 'Set Assembly Info for POS'
@@ -105,6 +108,9 @@ steps:
     LogLevel: 'verbose'
     FailOnWarning: false
     DisableTelemetry: false
+    VersionNumber: '$(Build.BuildNumber)'
+    FileVersionNumber: '$(Build.BuildNumber)'
+    PackageVersion: '$(Build.BuildNumber)'
     
 - task: NuGetToolInstaller@1
 
