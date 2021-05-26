@@ -1,8 +1,0 @@
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (1, 'Administration', 128, 'Administration')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (2, 'Reporting', 16, 'Reporting')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (3, 'Payout', 8, 'Payout')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9001, 'RetailAdmin', 16, 'RetailAdmin')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9002, 'RetailCashier', 16, 'RetailCashier')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9003, 'RetailDiamondTech', 16, 'RetailDiamondTech')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9005, 'RetailReporting', 16, 'RetailReporting')
-INSERT INTO [dbo].[AppRole] ([AppRoleId], [RoleName], [RoleLevel], [RoleDescription]) VALUES (9006, 'RetailSupervisor', 16, 'RetailSupervisor')
