@@ -21,9 +21,11 @@
                 <ColumnDefinition Width="2045"/>
             </Grid.ColumnDefinitions>
 
-                <local:PrinterSettingsView DataContext="{Binding PrinterSettingsViewModel}"/>
+            <local:PrinterSettingsView DataContext="{Binding PrinterSettingsViewModel}" 
+                                       Visibility="{Binding Path=PrinterSettingsAccess, Converter={StaticResource BooleanToVisibility}}" />
 
-                <local:DeviceManagementSettingsView Grid.Row="1" DataContext="{Binding DeviceManagementSettingsViewModel}"/>
+            <local:DeviceManagementSettingsView Grid.Row="1" DataContext="{Binding DeviceManagementSettingsViewModel}" 
+                                                Visibility="{Binding Path=DeviceManagementSettingsAccess, Converter={StaticResource BooleanToVisibility}}"/>
 
             
         </Grid>

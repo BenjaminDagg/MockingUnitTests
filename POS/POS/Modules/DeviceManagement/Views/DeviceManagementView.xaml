@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:common="clr-namespace:POS.Common"
              xmlns:dgmaterial="clr-namespace:Framework.WPF.UI.DGMaterial.Theme.Controls;assembly=Framework.WPF.UI.DGMaterial.Theme"
              xmlns:resx="clr-namespace:POS.Core;assembly=POS.Core"
              mc:Ignorable="d" 
@@ -16,6 +17,12 @@
         Height="{Binding SystemParameters.PrimaryScreenHeight}">
 
         <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsEnabled="{Binding DeviceManagementInitializedSuccessfully, TargetNullValue=false, FallbackValue=false}" >
+
+            <Grid.Resources>
+                <FrameworkElement x:Key="ProxyElement"
+                         DataContext="{Binding}"/>
+            </Grid.Resources>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="{Binding SystemParameters.PrimaryScreenHeight}"/>
                 <RowDefinition Height="1300"/>
@@ -26,8 +33,21 @@
             </Grid.ColumnDefinitions>
 
             <Border Background="#15191C" BorderThickness="0" Margin="20 10 20 5" Padding="6" HorizontalAlignment="Left">
-                
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding SetDeviceOnlineAccess, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                    <Condition Binding="{Binding SetDeviceOfflineAccess, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
 
                     <dgmaterial:CustomButtonControlEx  
                                     cal:Message.Attach="SetAllOnLine"
@@ -40,7 +60,8 @@
                                     IsEnabled="{Binding SelectAllOnLineActionEnabled}"
                                     Width="170" 
                                     Height="74"
-                                    Margin="5"/>
+                                    Margin="5"
+                         Visibility="{Binding Path=SetDeviceOnlineAccess, Converter={StaticResource BooleanToVisibility}}"/>
                     <dgmaterial:CustomButtonControlEx            
                                     cal:Message.Attach="SetAllOffline"
                                     Content="{x:Static resx:POSResources.UIDeviceManagementSetAllOffline}" 
@@ -52,7 +73,8 @@
                                     IsEnabled="{Binding SelectAllOffLineActionEnabled}"
                                     Width="170" 
                                     Height="74"
-                                    Margin="5"/>
+                                    Margin="5"
+                         Visibility="{Binding Path=SetDeviceOfflineAccess, Converter={StaticResource BooleanToVisibility}}"/>
 
                 </StackPanel>
                     
@@ -69,7 +91,7 @@
                                               Grid.Column="0"
                                               Grid.Row="0" 
                                               Margin="0 40 50 0"
-                                              Visibility="{Binding Path=HasAccessToTogglePromoTicket, Converter={StaticResource BooleanToVisibility}}">
+                                              Visibility="{Binding Path=TogglePromoTicketAcess, Converter={StaticResource BooleanToVisibility}}">
                 <dgmaterial:CustomButtonControlEx.Style>
                     <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource DgCustomButtonControlExStyle}">
                         <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagerSettingsTurnPromoTicketOn}"/>
@@ -117,6 +139,7 @@
                 </DataGrid.RowStyle>
                 <DataGrid.Resources>
                     <Style TargetType="ScrollBar" BasedOn="{StaticResource DgScrollBarStyle}" />
+                    <common:BindingProxy x:Key="proxy" Data="{Binding}"/>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="{x:Static resx:POSResources.UIDeviceManagementCasinoMachID}" Width="180" >
@@ -248,25 +271,39 @@
                                                     FontWeight="Bold"
                                                     Foreground="{StaticResource DgWhite}"             
                                                     Width="170" 
-                                                    Height="70" 
-                                                    Visibility="{Binding Connected, Converter={StaticResource BooleanToVisibility}}"
+                                                    Height="70"                                                     
                                                     IsEnabled="{Binding ActionEnabled}"
                                 >
                                     <dgmaterial:CustomButtonControlEx.Style>
                                         <Style TargetType="{x:Type dgmaterial:CustomButtonControlEx}" BasedOn="{StaticResource POSOfflineCustomButtonControlExStyle}">
+                                            <Setter Property="Visibility" Value="{Binding Connected, Converter={StaticResource BooleanToVisibility}}"/>                    
                                             <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagementSetOnline}"/>
                                             <Setter Property="Background" Value="{StaticResource DgDefaultButtonBackground}"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Online">
+                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static resx:POSResources.UIDeviceManagementOnline}">
                                                     <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagementSetOffline}"/>
                                                     <Setter Property="Background" Value="{StaticResource DgRed}"/>
                                                     <Setter Property="HoverColor" Value="{StaticResource DgHoverRed}"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="Offline">
+                                                <DataTrigger Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static resx:POSResources.UIDeviceManagementOffline}">
                                                     <Setter Property="Content" Value="{x:Static resx:POSResources.UIDeviceManagementSetOnline}"/>
                                                     <Setter Property="Background" Value="{StaticResource DgGreen}"/>
                                                     <Setter Property="HoverColor" Value="{StaticResource DgHoverGreen}"/>
                                                 </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static resx:POSResources.UIDeviceManagementOffline}" />
+                                                        <Condition Binding="{Binding Data.SetDeviceOnlineAccess, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding OnlineStatus, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static resx:POSResources.UIDeviceManagementOnline}" />
+                                                        <Condition Binding="{Binding Data.SetDeviceOfflineAccess, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </dgmaterial:CustomButtonControlEx.Style>

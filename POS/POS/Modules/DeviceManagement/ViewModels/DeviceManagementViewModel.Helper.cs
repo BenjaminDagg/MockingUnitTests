@@ -23,6 +23,10 @@ namespace POS.Modules.DeviceManagement.ViewModels
 {
     public partial class DeviceManagementViewModel
     {
+        private const string TOGGLE_PROMO_TICKET_PERMISSION = "TogglePromoTicket";
+        private const string SET_DEVICE_ONLINE_PERMISSION = "Set Device Online";
+        private const string SET_DEVICE_OFFLINE_PERMISSION = "Set Device Offline";
+
         private static readonly SemaphoreSlim _semaphoreSlimConnectionTimer = new SemaphoreSlim(1, 1);
         private static readonly SemaphoreSlim _semaphoreSlimSendMessage = new SemaphoreSlim(1, 1);
         private static readonly SemaphoreSlim _semaphoreSlimUpdateMachines = new SemaphoreSlim(1, 1);
@@ -51,9 +55,17 @@ namespace POS.Modules.DeviceManagement.ViewModels
             get => (IsPromoTicketOff ? POSResources.UIDeviceManagerSettingsPromoTicketOn : POSResources.UIDeviceManagerSettingsPromoTicketOff);
         }
 
-        public bool HasAccessToTogglePromoTicket
+        public bool TogglePromoTicketAcess
         {
-            get => _userSession.HasPermission("TogglePromoTicket");
+            get => _userSession.HasPermission(TOGGLE_PROMO_TICKET_PERMISSION);
+        }
+        public bool SetDeviceOnlineAccess
+        {
+            get => _userSession.HasPermission(SET_DEVICE_ONLINE_PERMISSION);
+        }
+        public bool SetDeviceOfflineAccess
+        {
+            get => _userSession.HasPermission(SET_DEVICE_OFFLINE_PERMISSION);
         }
 
         private async Task Initialize()
@@ -120,7 +132,7 @@ namespace POS.Modules.DeviceManagement.ViewModels
                 {
                     _semaphoreSlimInitialize.Release();
 
-                    NotifyOfPropertyChange(nameof(HasAccessToTogglePromoTicket));
+                    NotifyOfPropertyChange(nameof(TogglePromoTicketAcess));
                 }
             }
         }

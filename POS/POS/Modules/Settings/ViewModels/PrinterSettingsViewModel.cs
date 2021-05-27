@@ -19,6 +19,8 @@ namespace POS.Modules.Settings.ViewModels
 {
     public class PrinterSettingsViewModel : PropertyChangedBaseWithValidation
     {
+        private const string PRINTER_SETTINGS_PERMISSION = "Printer Settings";
+
         private readonly IPrinterSettings _printerSettings;
         private readonly IEventAggregator _eventAggregator;
         private readonly IErrorHandlingService _errorHandlingService;
@@ -27,6 +29,11 @@ namespace POS.Modules.Settings.ViewModels
 
         public ICommand SaveCommand => new RelayCommand<object>(async (o) => await Save(o));
         public ObservableCollection<TaskAlert> Alerts { get; set; }
+
+        public bool PrinterSettingsAccess
+        {
+            get => _userSession.HasPermission(PRINTER_SETTINGS_PERMISSION);
+        }
 
         private string _reportPrinter;
         public string ReportPrinter

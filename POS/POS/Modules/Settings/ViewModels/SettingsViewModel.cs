@@ -7,23 +7,27 @@ using POS.Modules.Payout.Services.ViewModels;
 using System.Threading;
 using System.Threading.Tasks;
 using POS.Modules.Payout.ViewModels;
+using Framework.Infrastructure.Identity.Services;
 
 namespace POS.Modules.Settings.ViewModels
 {
     public class SettingsViewModel : ExtendedScreenBase, ITabItem
-    {
+    {       
         private readonly Session _session;
         private readonly IPayoutViewServices _payoutViewServices;
+        private readonly IUserSession _userSession;
+
         public SettingsViewModel(
             IScreenServices screenManagementServices,
             Session session,
-            IPayoutViewServices payoutViewServices
+            IPayoutViewServices payoutViewServices,
+            IUserSession userSession
             ) : base(screenManagementServices)
         {
             DisplayName = POSResources.UITabSettings;
             _session = session;
             _payoutViewServices = payoutViewServices;
-
+            _userSession = userSession;
             PrinterSettingsViewModel = _payoutViewServices.PrinterSettingsViewModel;
             CashDrawerViewModel = _payoutViewServices.CashDrawerViewModel;
             DeviceManagementSettingsViewModel = _payoutViewServices.DeviceManagementSettingsViewModel;
@@ -42,6 +46,7 @@ namespace POS.Modules.Settings.ViewModels
 
             await base.OnActivateAsync(cancellationToken);           
         }
+
         #region ITabItem
         private int _indexPriority = 1004;
         public int IndexPriority

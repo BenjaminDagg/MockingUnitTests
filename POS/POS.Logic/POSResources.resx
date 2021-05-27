@@ -604,6 +604,12 @@ Scan Voucher.</value>
   <data name="UIDeviceManagementMachNo" xml:space="preserve">
     <value>Mach NO</value>
   </data>
+  <data name="UIDeviceManagementOffline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="UIDeviceManagementOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
   <data name="UIDeviceManagementPromoTicketOff" xml:space="preserve">
     <value>TurnPromo Ticket Off</value>
   </data>

@@ -130,11 +130,15 @@ namespace POS.Modules.Reports.ViewModels
                 {
                     var reportName = _fileSystemService.Path.GetFileNameWithoutExtension(report);
                     var lastRun = _reportEventService.GetReportEventLastRunDate(reportName);
-                    Reports.Add(new Report
+                    var hasPermission = _userSession.HasPermission(reportName);
+                    if (hasPermission)
                     {
-                        Name = reportName,
-                        LastRun = lastRun
-                    });
+                        Reports.Add(new Report
+                        {
+                            Name = reportName,
+                            LastRun = lastRun
+                        });
+                    }
                 });
             }
             catch (Exception exception)
