@@ -329,9 +329,3 @@ Including these changes to our release to QA.
 ##Updated
 Refresh Device Management View within polling time when machine status and ip address is updated in database
 
-
-## [2.0.0.0] 05/27/2021
-- 59480: MOL PC - BO - Create granular permissions in POS - Reports, Settings and Device Management
-
-
-

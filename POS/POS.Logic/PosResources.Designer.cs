@@ -1514,24 +1514,6 @@ namespace POS.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Offline.
-        /// </summary>
-        public static string UIDeviceManagementOffline {
-            get {
-                return ResourceManager.GetString("UIDeviceManagementOffline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Online.
-        /// </summary>
-        public static string UIDeviceManagementOnline {
-            get {
-                return ResourceManager.GetString("UIDeviceManagementOnline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to TurnPromo Ticket Off.
         /// </summary>
         public static string UIDeviceManagementPromoTicketOff {

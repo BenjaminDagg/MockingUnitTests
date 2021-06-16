@@ -18,8 +18,6 @@ namespace POS.Modules.Settings.ViewModels
 {
     public class DeviceManagementSettingsViewModel : PropertyChangedBaseWithValidation
     {
-        private const string DEVICE_MANAGEMENT_SETTINGS_PERMISSION = "Device Management Settings";
-
         private readonly IEventAggregator _eventAggregator;
         private readonly IErrorHandlingService _errorHandlingService;
         private readonly IDeviceManagerSettings _deviceManagerSettings;
@@ -51,11 +49,6 @@ namespace POS.Modules.Settings.ViewModels
 
         public ICommand SaveCommand => new RelayCommand<object>(async (o) => await Save(o));
         public ObservableCollection<TaskAlert> Alerts { get; set; }
-
-        public bool DeviceManagementSettingsAccess
-        {
-            get => _userSession.HasPermission(DEVICE_MANAGEMENT_SETTINGS_PERMISSION);
-        }
 
         private string _serverIPAddress;
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "UIErrorServerIPAddressValidationMsg", ErrorMessageResourceType = typeof(POSResources))]

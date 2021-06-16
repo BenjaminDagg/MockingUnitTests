@@ -1151,7 +1151,7 @@
     <DataSource Name="LotteryRetail">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>;</ConnectString>
+        <ConnectString>Data Source=BOTRetail;Initial Catalog=LotteryRetail</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
