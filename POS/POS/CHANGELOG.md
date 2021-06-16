@@ -329,3 +329,7 @@ Including these changes to our release to QA.
 ##Updated
 Refresh Device Management View within polling time when machine status and ip address is updated in database
 
+## 06/16/2021
+## Update
+   - Added assembly version to Project file
+
