@@ -163,20 +163,8 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink.zip'
       ArtifactName: 'CentroLink'
       publishLocation: 'Container'
-# - task: ArchiveFiles@2
-#   displayName: 'Archive Powershell Scripts'
-#   inputs:
-#     rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_DeploymentScripts/Deployment/Scripts'
-#     includeRootFolder: false
-#     archiveType: 'zip'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
-#     replaceExistingArchive: true 
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact Scripts'
-#   inputs:
-#       PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scripts.zip'
-#       ArtifactName: 'Scripts'
-#       publishLocation: 'Container'
+
+
 - task: ArchiveFiles@2
   displayName: 'Archive POS Source Code'
   inputs:
@@ -194,6 +182,14 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/CentroLink_Source.zip'
     replaceExistingArchive: true 
+- task: ArchiveFiles@2
+  displayName: 'Archive CommonLite Source Code'
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/AppDev_CommonLite/Framework'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/CommonLite_Framework_Source.zip'
+    replaceExistingArchive: true 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact POS Source'
   inputs:
@@ -206,13 +202,19 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/CentroLink_Source.zip'
       ArtifactName: 'Source'
       publishLocation: 'Container'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact CommonLite Source'
+  inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/CommonLite_Framework_Source.zip'
+      ArtifactName: 'Source'
+      publishLocation: 'Container'
       
 - task: PowerShell@2
   displayName: 'Create Signatures file'
   inputs:
     targetType: 'inline'
     script: |
-      $hashline = "File Path`tFile Version`tSHA1 Signature`tMD5 Signature`n"
+      $hashline = "File Path`tFile Version`tProduct Version`tSHA1 Signature`tMD5 Signature`n"
       Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashline
       
 - task: PowerShell@2
@@ -221,18 +223,22 @@ steps:
     targetType: 'inline'
     script: |
       $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\POS\POS\bin\Release\netcoreapp3.1"
-      $installfolder = "...\POS"
+      $installfolder = "[ProgramFiles]\POS"
       Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
       Foreach-Object {
         $fileName = $_.FullName
         $shortenedPath = $fileName -replace [Regex]::Escape($builddir), ("...\" + [Regex]::Escape($installfolder))
         $fileVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).FileVersion
+        $productVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).ProductVersion
         if ([string]::IsNullOrEmpty($fileVersion)){
           $fileVersion = "N/A"
         }
+        if ([string]::IsNullOrEmpty($productVersion)){
+          $productVersion = "N/A"
+        }
         $filehash = Get-FileHash $fileName -Algorithm SHA1
         $filehash2 = Get-FileHash $fileName -Algorithm MD5
-        $lineitem = "$($shortenedPath)`t$($fileVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
+        $lineitem = "$($shortenedPath)`t$($fileVersion)`t$($productVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
     
         $hashlines = "$($hashlines)$($lineitem)`n"
         Write-Host  $lineitem
@@ -246,18 +252,22 @@ steps:
     targetType: 'inline'
     script: |
       $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\CentroLink\CentroLink\bin\Release\netcoreapp3.1"
-      $installfolder = "...\CentroLink"
+      $installfolder = "[ProgramFiles]\CentroLink"
       Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
       Foreach-Object {
         $fileName = $_.FullName
         $shortenedPath = $fileName -replace [Regex]::Escape($builddir), ("...\" + [Regex]::Escape($installfolder))
         $fileVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).FileVersion
+        $productVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).ProductVersion
         if ([string]::IsNullOrEmpty($fileVersion)){
           $fileVersion = "N/A"
         }
+        if ([string]::IsNullOrEmpty($productVersion)){
+          $productVersion = "N/A"
+        }
         $filehash = Get-FileHash $fileName -Algorithm SHA1
         $filehash2 = Get-FileHash $fileName -Algorithm MD5
-        $lineitem = "$($shortenedPath)`t$($fileVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
+        $lineitem = "$($shortenedPath)`t$($fileVersion)`t$($productVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
     
         $hashlines = "$($hashlines)$($lineitem)`n"
         Write-Host  $lineitem
@@ -273,9 +283,10 @@ steps:
       Foreach-Object {
         $fileName = $_.FullName
         $fileVersion = "N/A"
+        $productVersion = "N/A"
         $filehash = Get-FileHash $fileName -Algorithm SHA1
         $filehash2 = Get-FileHash $fileName -Algorithm MD5
-        $lineitem = "$($_.Name)`t$($fileVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
+        $lineitem = "$($_.Name)`t$($fileVersion)`t$($productVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
     
         $hashlines = "$($hashlines)$($lineitem)`n"
         Write-Host  $lineitem
