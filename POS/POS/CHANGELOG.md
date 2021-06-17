@@ -331,5 +331,5 @@ Refresh Device Management View within polling time when machine status and ip ad
 
 ## 06/16/2021
 ## Update
-   - Added assembly version to Project file
+   - Added assembly information to Project file
 
