@@ -73,7 +73,7 @@ steps:
 - task: Assembly-Info-NetCore@2
   displayName: 'Set Assembly Info for CentroLink'
   inputs:
-    Path: '$(Build.SourcesDirectory)/AppDev_MOLite'
+    Path: '$(Build.SourcesDirectory)/AppDev_MOLite/CentroLink'
     FileNames: '**/*.csproj'
     InsertAttributes: true
     FileEncoding: 'auto'
@@ -91,7 +91,7 @@ steps:
 - task: Assembly-Info-NetCore@2
   displayName: 'Set Assembly Info for POS'
   inputs:
-    Path: '$(Build.SourcesDirectory)/AppDev_MOLite'
+    Path: '$(Build.SourcesDirectory)/AppDev_MOLite/POS'
     FileNames: '**/*.csproj'
     InsertAttributes: true
     FileEncoding: 'auto'
