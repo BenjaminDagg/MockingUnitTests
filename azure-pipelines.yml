@@ -74,7 +74,7 @@ steps:
   displayName: 'Set Assembly Info for CentroLink'
   inputs:
     Path: '$(Build.SourcesDirectory)/AppDev_MOLite/CentroLink'
-    FileNames: '**/*.csproj'
+    FileNames: '**/*CentroLink*.csproj'
     InsertAttributes: true
     FileEncoding: 'auto'
     InformationalVersion: '$(Build.BuildNumber)'
@@ -92,7 +92,7 @@ steps:
   displayName: 'Set Assembly Info for POS'
   inputs:
     Path: '$(Build.SourcesDirectory)/AppDev_MOLite/POS'
-    FileNames: '**/*.csproj'
+    FileNames: '**/*POS*.csproj'
     InsertAttributes: true
     FileEncoding: 'auto'
     InformationalVersion: '$(Build.BuildNumber)'
