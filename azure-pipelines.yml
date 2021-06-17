@@ -74,7 +74,7 @@ steps:
   displayName: 'Set Assembly Info for CentroLink'
   inputs:
     Path: '$(Build.SourcesDirectory)/AppDev_MOLite'
-    FileNames: '**/CentroLink.csproj'
+    FileNames: '**/*.csproj'
     InsertAttributes: true
     FileEncoding: 'auto'
     InformationalVersion: '$(Build.BuildNumber)'
@@ -92,7 +92,7 @@ steps:
   displayName: 'Set Assembly Info for POS'
   inputs:
     Path: '$(Build.SourcesDirectory)/AppDev_MOLite'
-    FileNames: '**/POS.csproj'
+    FileNames: '**/*.csproj'
     InsertAttributes: true
     FileEncoding: 'auto'
     InformationalVersion: '$(Build.BuildNumber)'
@@ -216,6 +216,15 @@ steps:
     script: |
       $hashline = "File Path`tFile Version`tProduct Version`tSHA1 Signature`tMD5 Signature`n"
       Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashline
+
+      
+- task: PowerShell@2
+  displayName: 'Create Critical Signatures file'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $hashline = "File Path`tFile Version`tProduct Version`tSHA1 Signature`tMD5 Signature`n"
+      Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures_Critical.csv" -InputObject $hashline
       
 - task: PowerShell@2
   displayName: 'Add POS signatures'
@@ -223,7 +232,7 @@ steps:
     targetType: 'inline'
     script: |
       $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\POS\POS\bin\Release\netcoreapp3.1"
-      $installfolder = "[ProgramFiles]\POS"
+      $installfolder = "POS"
       Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
       Foreach-Object {
         $fileName = $_.FullName
@@ -245,6 +254,33 @@ steps:
       }
       Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashlines -Append
 
+- task: PowerShell@2
+  displayName: 'Add POS critical signatures'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\POS\POS\bin\Release\netcoreapp3.1"
+      $installfolder = "POS"
+      Get-ChildItem "$($builddir)\*" -Include *Framework.Core.dll, *Framework.Domain.dll, *Framework.Infrastructure.Data.dll, *Framework.Infrastructure.dll, *Framework.Infrastructure.Identity.dll, *Framework.WPF.dll, *Framework.WPF.Modules.dll, *Framework.WPF.UI.DGMaterial.Theme.dll, *Framework.WPF.UI.dll, *Framework.WPF.UI.Theme.dll, *POS.Core.dll, *POS.dll, *POS.exe, *POS.Infrastructure.dll  -Recurse | 
+      Foreach-Object {
+        $fileName = $_.FullName
+        $shortenedPath = $fileName -replace [Regex]::Escape($builddir), ("...\" + [Regex]::Escape($installfolder))
+        $fileVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).FileVersion
+        $productVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).ProductVersion
+        if ([string]::IsNullOrEmpty($fileVersion)){
+          $fileVersion = "N/A"
+        }
+        if ([string]::IsNullOrEmpty($productVersion)){
+          $productVersion = "N/A"
+        }
+        $filehash = Get-FileHash $fileName -Algorithm SHA1
+        $filehash2 = Get-FileHash $fileName -Algorithm MD5
+        $lineitem = "$($shortenedPath)`t$($fileVersion)`t$($productVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
+    
+        $hashlines = "$($hashlines)$($lineitem)`n"
+        Write-Host  $lineitem
+      }
+      Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures_Critical.csv" -InputObject $hashlines -Append
 
 - task: PowerShell@2
   displayName: 'Add CentroLink signatures'
@@ -252,7 +288,7 @@ steps:
     targetType: 'inline'
     script: |
       $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\CentroLink\CentroLink\bin\Release\netcoreapp3.1"
-      $installfolder = "[ProgramFiles]\CentroLink"
+      $installfolder = "CentroLink"
       Get-ChildItem "$($builddir)\*" -Include *.exe, *.dll, *.dat -Recurse | 
       Foreach-Object {
         $fileName = $_.FullName
@@ -273,6 +309,34 @@ steps:
         Write-Host  $lineitem
       }
       Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures.csv" -InputObject $hashlines -Append
+
+- task: PowerShell@2
+  displayName: 'Add CentroLink critical signatures'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $builddir = "$(Build.SourcesDirectory)\AppDev_MOLite\CentroLink\CentroLink\bin\Release\netcoreapp3.1"
+      $installfolder = "CentroLink"
+      Get-ChildItem "$($builddir)\*" -Include *Framework.Core.dll, *Framework.Domain.dll, *Framework.Infrastructure.Data.dll, *Framework.Infrastructure.dll, *Framework.Infrastructure.Identity.dll, *Framework.WPF.dll, *Framework.WPF.Modules.dll, *Framework.WPF.UI.DGMaterial.Theme.dll, *Framework.WPF.UI.dll, *Framework.WPF.UI.Theme.dll, *CentroLink.dll, *CentroLink.exe -Recurse | 
+      Foreach-Object {
+        $fileName = $_.FullName
+        $shortenedPath = $fileName -replace [Regex]::Escape($builddir), ("...\" + [Regex]::Escape($installfolder))
+        $fileVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).FileVersion
+        $productVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($fileName).ProductVersion
+        if ([string]::IsNullOrEmpty($fileVersion)){
+          $fileVersion = "N/A"
+        }
+        if ([string]::IsNullOrEmpty($productVersion)){
+          $productVersion = "N/A"
+        }
+        $filehash = Get-FileHash $fileName -Algorithm SHA1
+        $filehash2 = Get-FileHash $fileName -Algorithm MD5
+        $lineitem = "$($shortenedPath)`t$($fileVersion)`t$($productVersion)`t$($filehash.Hash)`t$($filehash2.Hash)"
+    
+        $hashlines = "$($hashlines)$($lineitem)`n"
+        Write-Host  $lineitem
+      }
+      Out-File -FilePath "$(Build.ArtifactStagingDirectory)\Signatures_Critical.csv" -InputObject $hashlines -Append
 - task: PowerShell@2
   displayName: 'Add Source signatures'
   inputs:
@@ -296,5 +360,11 @@ steps:
   displayName: 'Publish Artifact Signatures'
   inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)\Signatures.csv'
+      ArtifactName: 'Signatures'
+      publishLocation: 'Container'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact Critical Signatures'
+  inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)\Signatures_Critical.csv'
       ArtifactName: 'Signatures'
       publishLocation: 'Container'
