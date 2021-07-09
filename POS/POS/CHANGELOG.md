@@ -335,6 +335,7 @@ Refresh Device Management View within polling time when machine status and ip ad
 
 ## 07/09/2021
 ## Update
- - Meeting 61844: 7/8/21 - Device Management Bug Fix
+ - 61844: 7/8/21 - Device Management Bug Fix
    Device Manager wasnt able to work when more than 4 devices were connected. There was a fix in the way we process large messages from the TP.
+ - Changed accessibility of privetely used members to private.
 

@@ -10,11 +10,11 @@ namespace POS.Infrastructure.TransactionPortal
     public class ServiceInteraction : IServiceInteraction
     {
         private static readonly SemaphoreSlim _semaphoreSlimSend = new SemaphoreSlim(1, 1);
-        public const int _bufferSize = 256;
-        public byte[] _buffer = new byte[_bufferSize];
+        private const int _bufferSize = 256;
+        private byte[] _buffer = new byte[_bufferSize];
 
-        public IServiceConnection _serviceConnection;
-        public IPollingMachineTimer _pollingMachineTimer;
+        private IServiceConnection _serviceConnection;
+        private IPollingMachineTimer _pollingMachineTimer;
         private StringBuilder _stringBuilder = null;
 
         public Action<string> MessageReceived { get; set; }
