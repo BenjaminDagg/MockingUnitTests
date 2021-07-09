@@ -15,7 +15,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- checkout: git://AppDev_CommonLite
+- checkout: git://AppDev_CommonLite@MOLite_POS_Production_Build_20210709.3
 - checkout: self
 
 - task: PowerShell@2
