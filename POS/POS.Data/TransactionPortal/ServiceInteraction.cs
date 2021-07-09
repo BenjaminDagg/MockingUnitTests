@@ -15,6 +15,7 @@ namespace POS.Infrastructure.TransactionPortal
 
         public IServiceConnection _serviceConnection;
         public IPollingMachineTimer _pollingMachineTimer;
+        private StringBuilder _stringBuilder = null;
 
         public Action<string> MessageReceived { get; set; }
         public Action PollingAction { get; set; }
@@ -23,6 +24,7 @@ namespace POS.Infrastructure.TransactionPortal
         {
             _serviceConnection = serviceConnection;
             _pollingMachineTimer = pollingMachineTimer;
+            _stringBuilder = new StringBuilder();
         }
         public async Task<IServiceConnection> StartRecieving()
         {
@@ -45,7 +47,7 @@ namespace POS.Infrastructure.TransactionPortal
             {
                 _pollingMachineTimer.ActionToExecute = null;
                 throw new Exception("Cannot connect to Transaction Portal Server.");
-            }            
+            }
         }
         public async Task Send(byte[] message)
         {
@@ -92,8 +94,6 @@ namespace POS.Infrastructure.TransactionPortal
             {
                 if (_serviceConnection.Socket != null && _serviceConnection.Socket.Connected)
                 {
-                    StringBuilder stringBuilder = new StringBuilder();
-
                     int nBytesRec = _serviceConnection.Socket.EndReceive(result);
 
                     if (nBytesRec <= 0)
@@ -102,9 +102,9 @@ namespace POS.Infrastructure.TransactionPortal
                     }
 
                     var dataStringReceived = Encoding.UTF8.GetString(_buffer, 0, nBytesRec);
-                    stringBuilder.Append(dataStringReceived);
+                    _stringBuilder.Append(dataStringReceived);
 
-                    dataStringReceived = stringBuilder.ToString();
+                    dataStringReceived = _stringBuilder.ToString();
                     if (dataStringReceived.IndexOf(Environment.NewLine) > -1)
                     {
                         while (dataStringReceived.IndexOf(Environment.NewLine) > -1)
@@ -113,11 +113,10 @@ namespace POS.Infrastructure.TransactionPortal
                             {
                                 MessageReceived.Invoke(dataStringReceived.Substring(0, dataStringReceived.IndexOf(Environment.NewLine)));
                             }
-                            stringBuilder.Remove(0, dataStringReceived.IndexOf(Environment.NewLine) + 2);
-                            dataStringReceived = stringBuilder.ToString();
+                            _stringBuilder.Remove(0, dataStringReceived.IndexOf(Environment.NewLine) + 2);
+                            dataStringReceived = _stringBuilder.ToString();
                         }
                     }
-
 
                     _serviceConnection.Socket.BeginReceive(
                         _buffer, 0,
@@ -130,8 +129,8 @@ namespace POS.Infrastructure.TransactionPortal
             }
             catch
             {
-                if(_serviceConnection != null)
-                    {
+                if (_serviceConnection != null)
+                {
                     _serviceConnection.DisConnect();
                 }
             }
