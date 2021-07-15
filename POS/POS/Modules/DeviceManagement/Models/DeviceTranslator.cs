@@ -54,6 +54,20 @@ namespace POS.Modules.DeviceManagement.Models
                 {
                     device.OnlineStatus = POSResources.UIDeviceUnknownStatus;
                 }
+
+                if(machineDto != null)
+                {
+                    if(device.OnlineStatus == POSResources.UIDeviceOnlineStatus && machineDto.ActiveFlag == 0)
+                    {
+                        device.OnlineStatus = POSResources.UIDeviceOfflineStatus;
+                        device.Online = false;
+                    }
+                    else if(device.OnlineStatus == POSResources.UIDeviceOfflineStatus && machineDto.ActiveFlag == 1)
+                    {
+                        device.OnlineStatus = POSResources.UIDeviceOnlineStatus;
+                        device.Online = true;
+                    }
+                }
             }
 
             return device;

@@ -6,6 +6,7 @@ namespace POS.Core.DeviceManager
 {
     public class MachineDto
     {
+        public int ActiveFlag { get; set; }
         public string MachineNo { get; set; }
         public string CasinoMachNo { get; set; }
         public string ModelDesc { get; set; }

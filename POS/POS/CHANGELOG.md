@@ -339,3 +339,7 @@ Refresh Device Management View within polling time when machine status and ip ad
    Device Manager wasnt able to work when more than 4 devices were connected. There was a fix in the way we process large messages from the TP.
  - Changed accessibility of privetely used members to private.
 
+## 07/15/2021
+## Fix
+62452: POS Machines stay as online when initially set offline
+ - Updated check to Active Flag for correct status
