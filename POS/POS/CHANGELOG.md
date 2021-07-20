@@ -343,3 +343,7 @@ Refresh Device Management View within polling time when machine status and ip ad
 ## Fix
 62452: POS Machines stay as online when initially set offline
  - Updated check to Active Flag for correct status
+
+## 07/20/2021
+## Update
+63035 - Update data flag 'PrintDuplicateCustomerReceipt' in Retail DB to affect the pipeline which should remove duplicate customer receipts from being printed
