@@ -71,8 +71,8 @@
         <Expression>TRUE</Expression>
       </Queue>
       <Role version="1">
-        <Include>True</Include>
-        <Expression>TRUE</Expression>
+        <Include>False</Include>
+        <Expression>(@NAME LIKE '%%')</Expression>
       </Role>
       <Route version="1">
         <Include>True</Include>
@@ -123,8 +123,8 @@
         <Expression>TRUE</Expression>
       </Table>
       <User version="1">
-        <Include>True</Include>
-        <Expression>TRUE</Expression>
+        <Include>False</Include>
+        <Expression>(@NAME LIKE '%%')</Expression>
       </User>
       <UserDefinedType version="1">
         <Include>True</Include>
