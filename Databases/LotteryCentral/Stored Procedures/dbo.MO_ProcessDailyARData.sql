@@ -2,6 +2,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
 /*
 --------------------------------------------------------------------------------
 Procedure: MO_ProcessDailyARData user stored procedure.
@@ -82,7 +83,7 @@ SELECT @VoucherEpirationDays = ItemValueInt
 FROM dbo.AppSetting
 WHERE ItemKey = 'VoucherExpirationDays'
 
-SET @Date = DATEADD(day, -1, GETDATE())
+SET @Date = GETDATE()
 SET @AccountingDate = DATEADD(DAY, DATEDIFF(DAY, 0, @Date), 0)
 SET @VoucherTransferDate = DATEADD(DAY, -@VoucherEpirationDays, GETDATE())
 SET @EpochDays = DATEDIFF(D, '1970-01-01 00:00:00', GETUTCDATE())
@@ -207,6 +208,14 @@ END CATCH
    Collect data from all locations and insert into MO tables.
 --------------------------------------------------------------------------------
 */
+----------------------------------
+----Log Execution Time Variables--
+----------------------------------
+--Declare @StartTime as DateTime
+--Declare @EndTime as DateTime
+--Declare @LogMessage as Varchar(200)
+----------------------------------
+
 BEGIN TRY    
    INSERT INTO @Location
       SELECT
@@ -232,10 +241,28 @@ BEGIN TRY
          WHERE RowID = @RowID
 
          SET @RemoteServer = @ServerName + '.' + @DatabaseName
-         
+
+-- --------------------------------
+----Log Execution Time StartTime--
+----------------------------------
+--set @StartTime = getdate()
+----------------------------------
+        
          EXEC dbo.MO_RetrieveRemoteDailyARData
               @RemoteServer = @RemoteServer
               ,@LocationID = @LocationID
+
+----------------------------------
+----Log Execution Time Insertlog--
+----------------------------------
+--set @EndTime = getdate()
+--set @LogMessage= 'ExecutionTime Start: ' +  CONVERT(VARCHAR(30),@StartTime,120) + ' End: ' + CONVERT(VARCHAR(30),@EndTime,120) 
+  
+--   INSERT INTO EventLog
+--      (PartionKey, EventDate, EventTypeID, [Description], Details, EventSource, UserId, LocationID)
+--   VALUES
+--      (@EpochDays, @Date, @EventTypeID, @LogMessage,  CONVERT(VARCHAR(10),DATEDIFF(MINUTE,@StartTime,@EndTime)), 'MO_ProcessDailyARData', -1, @LocationID)
+-----------------------------------
       
          SET @RowID = @RowID - 1
       END

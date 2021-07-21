@@ -347,3 +347,9 @@ Refresh Device Management View within polling time when machine status and ip ad
 ## 07/20/2021
 ## Update
 63035 - Update data flag 'PrintDuplicateCustomerReceipt' in Retail DB to affect the pipeline which should remove duplicate customer receipts from being printed
+
+## 07/20/2021
+## Update
+63095 - Add Modified Report RDL in POS
+63094 - Modify Lottery Central DB script to accommodate Report changes on Central
+

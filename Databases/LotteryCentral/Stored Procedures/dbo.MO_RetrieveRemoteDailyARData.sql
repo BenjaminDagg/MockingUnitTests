@@ -2,6 +2,7 @@ SET QUOTED_IDENTIFIER OFF
 GO
 SET ANSI_NULLS ON
 GO
+
 /*
 --------------------------------------------------------------------------------
 Procedure: MO_RetrieveRemoteDailyARData user stored procedure.
@@ -39,6 +40,18 @@ CREATE PROCEDURE [dbo].[MO_RetrieveRemoteDailyARData]
    ,@Date DATETIME = NULL
 
 AS
+--------------------------------
+--Log Execution Time Variables--
+--------------------------------
+Declare @StartTime as DateTime
+Declare @EndTime as DateTime
+Declare @LogMessage as Varchar(200)
+--------------------------------
+--------------------------------
+--Log Execution Time StartTime--
+--------------------------------
+set @StartTime = getdate()
+--------------------------------
 
 /*
 --------------------------------------------------------------------------------
@@ -89,7 +102,7 @@ DECLARE @PulltabSales TABLE
 */
 IF @Date IS NULL
 BEGIN
-	SET @Date = DATEADD(DAY, -1, GETDATE())
+	SET @Date = GETDATE()
 END
 
 SET @ErrorID = 0
@@ -294,4 +307,16 @@ BEGIN CATCH
    VALUES
       (@EpochDays, @Date, @EventTypeID, 'SQL Error Number: ' + CONVERT(VARCHAR(10), @ErrorID),  @ErrorDescription, @EventSource, -1, @LocationID)
 END CATCH
+
+--------------------------------
+--Log Execution Time Insertlog--
+--------------------------------
+set @EndTime = getdate()
+set @LogMessage= 'ExecutionTime Start: ' +  CONVERT(VARCHAR(30),@StartTime,120) + ' End: ' + CONVERT(VARCHAR(30),@EndTime,120) 
+  
+   INSERT INTO EventLog
+      (PartionKey, EventDate, EventTypeID, [Description], Details, EventSource, UserId, LocationID)
+   VALUES
+      (@EpochDays, @Date, @EventTypeID, @LogMessage,  CONVERT(VARCHAR(10),DATEDIFF(MINUTE,@StartTime,@EndTime)), 'MO_ProcessDailyARData', -1, @LocationID)
+---------------------------------
 GO
