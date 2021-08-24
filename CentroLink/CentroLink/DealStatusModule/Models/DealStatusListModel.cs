@@ -11,7 +11,7 @@ namespace CentroLink.DealStatusModule.Models
         
         public int DealNumber { get; set; }
 
-        public bool  RecommendedClose { get; set; }
+        public bool CloseRecommended { get; set; }
 
         public string Description { get; set; }
 

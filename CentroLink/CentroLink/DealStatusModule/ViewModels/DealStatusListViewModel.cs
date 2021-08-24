@@ -37,7 +37,7 @@ namespace CentroLink.DealStatusModule.ViewModels
             {
                 return SelectedDealItems != null &&
                        SelectedDealItems.Count > 0 &&
-                       SelectedDealItems.Any(x => x.IsOpen || x.RecommendedClose);
+                       SelectedDealItems.Any(x => x.IsOpen || x.CloseRecommended);
             }
         }
         public List<DealStatusFilterItem> FilterList { get; set; }
