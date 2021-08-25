@@ -12,7 +12,7 @@
 
         public bool IsPaper { get; set; }
 
-        public int NumberOfRolls { get; set; }
+        public int NumberOfRows { get; set; }
 
         public int TabsPerRoll { get; set; }
 
@@ -22,7 +22,7 @@
 
         public string FormNumber { get; set; }
 
-        public decimal TabAmount { get; set; }
+        public int TabAmount { get; set; }
 
         public string TypeId { get; set; }
 

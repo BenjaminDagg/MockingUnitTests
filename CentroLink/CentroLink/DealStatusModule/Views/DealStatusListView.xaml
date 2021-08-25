@@ -74,9 +74,9 @@
                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
+                            </DataGridTextColumn>
 
-                        <DataGridTextColumn Binding="{Binding Path=CloseRecommended, 
+                        <DataGridTextColumn Binding="{Binding Path=RecommendedClose, 
                             Converter={StaticResource BoolToYesNoConverter}}"
                                             Header="Recommend&#x0a;Close"
                                             IsReadOnly="True">
@@ -91,7 +91,7 @@
                                             Header="Description"
                                             IsReadOnly="True" />
 
-                        <DataGridTextColumn Binding="{Binding Path=TabAmount, StringFormat={}{0:C}}"
+                        <DataGridTextColumn Binding="{Binding Path=TabAmount, StringFormat={}{0:C0}.00}"
                                             Header="Tab&#x0a;Amount"
                                             
                                             IsReadOnly="True">

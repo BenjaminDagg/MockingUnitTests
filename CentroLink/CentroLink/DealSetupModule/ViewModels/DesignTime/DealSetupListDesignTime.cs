@@ -19,7 +19,7 @@ namespace CentroLink.DealSetupModule.ViewModels.DesignTime
                 {
                     DealNumber = 1000 + i,
                     Description = "Deal " + (1000 + i),
-                    NumberOfRolls = 12,
+                    NumberOfRows = 12,
                     TabsPerRoll = 4000,
                     CostPerTab = 1.00m,
                     JackpotAmount = 1800.00m,

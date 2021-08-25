@@ -22,7 +22,7 @@ namespace CentroLink.DealStatusModule.ViewModels.DesignTime
                 {
                     DealNumber = 1000 + i,
                     IsOpen = i % 5 == 0,
-                    CloseRecommended = i % 3 == 0,
+                    RecommendedClose = i % 3 == 0,
                     Description = "9R12L Finishin Riches 1 Dollar " + (1000 + i),
                     TabAmount = 1.00m,
                     TabsDispensed = (i * 1500) + i*10,
