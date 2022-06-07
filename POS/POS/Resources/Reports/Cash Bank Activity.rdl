@@ -6,7 +6,6 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>;</ConnectString>
-        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>16779642-86a0-4378-8276-860c76e7bd7d</rd:DataSourceID>
@@ -231,6 +230,37 @@ ORDER BY SessionId,CreatedBy,CreateDate ASC</CommandText>
         <Field Name="LevelCode">
           <DataField>LevelCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="AvailableDate">
+      <Query>
+        <DataSourceName>LotteryRetail</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDatePrompt">
+            <Value>=Parameters!StartDatePrompt.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDatePrompt">
+            <Value>=Parameters!EndDatePrompt.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>--Declare @StartDatePrompt as datetime ='20210101'
+--Declare @EndDatePrompt as datetime ='20210101'
+Declare @CutoffSeconds as int
+
+ SET @CutoffSeconds = dbo.ufnGetCutoffSeconds()
+
+select StartDate = dateadd(ss,@CutoffSeconds,@StartDatePrompt)
+,EndDate = dateadd(dd,1, dateadd(ss,@CutoffSeconds-1,@EndDatePrompt))</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -1913,6 +1943,7 @@ ORDER BY SessionId,CreatedBy,CreateDate ASC</CommandText>
                     </TablixMember>
                   </TablixMembers>
                   <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <Group Name="CreatedBy">
@@ -2302,7 +2333,7 @@ ORDER BY SessionId,CreatedBy,CreateDate ASC</CommandText>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>= "Reporting Period: " &amp; Parameters!StartDate.Value &amp; " to " &amp; DateValue(Parameters!EndDate.Value)</Value>
+                      <Value>= "Reporting Period: " &amp; Parameters!StartDate.Value &amp; " to " &amp; Parameters!EndDate.Value</Value>
                       <Style>
                         <FontFamily>Tahoma</FontFamily>
                       </Style>
@@ -2467,52 +2498,52 @@ ORDER BY SessionId,CreatedBy,CreateDate ASC</CommandText>
       <DataType>DateTime</DataType>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd(DateInterval.Day,-1,Today)</Value>
+          <Value>=IIF(IsNothing(Parameters!StartDateOffsetDays.Value),DateAdd(DateInterval.Day,-1,Today),DateAdd("d",-1*Parameters!StartDateOffsetDays.Value,Today))</Value>
         </Values>
       </DefaultValue>
-      <AllowBlank>true</AllowBlank>
       <Prompt>Start Date</Prompt>
     </ReportParameter>
     <ReportParameter Name="EndDatePrompt">
       <DataType>DateTime</DataType>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd(DateInterval.Day,-1,Today)</Value>
+          <Value>=CDate(IIF(IsNothing(Parameters!EndDateOffsetDays.Value),DateAdd(DateInterval.Day,-1,Today),DateAdd("d",-1*Parameters!EndDateOffsetDays.Value,Today)))</Value>
         </Values>
       </DefaultValue>
-      <AllowBlank>true</AllowBlank>
       <Prompt>End Date</Prompt>
     </ReportParameter>
     <ReportParameter Name="StartDate">
       <DataType>DateTime</DataType>
       <DefaultValue>
-        <Values>
-          <Value>=IIF(IsNothing(Parameters!StartDateOffsetDays.Value),Parameters!StartDatePrompt.Value,DateAdd("d",-1*Parameters!StartDateOffsetDays.Value,Today))</Value>
-        </Values>
+        <DataSetReference>
+          <DataSetName>AvailableDate</DataSetName>
+          <ValueField>StartDate</ValueField>
+        </DataSetReference>
       </DefaultValue>
       <Hidden>true</Hidden>
       <ValidValues>
-        <ParameterValues>
-          <ParameterValue>
-            <Value>=IIF(IsNothing(Parameters!StartDateOffsetDays.Value),Parameters!StartDatePrompt.Value,DateAdd("d",-1*Parameters!StartDateOffsetDays.Value,Today))</Value>
-          </ParameterValue>
-        </ParameterValues>
+        <DataSetReference>
+          <DataSetName>AvailableDate</DataSetName>
+          <ValueField>StartDate</ValueField>
+          <LabelField>StartDate</LabelField>
+        </DataSetReference>
       </ValidValues>
     </ReportParameter>
     <ReportParameter Name="EndDate">
       <DataType>DateTime</DataType>
       <DefaultValue>
-        <Values>
-          <Value>=DateAdd("s",-1,DateAdd("d",1,CDate(IIF(IsNothing(Parameters!EndDateOffsetDays.Value),Parameters!EndDatePrompt.Value,DateAdd("d",-1*Parameters!EndDateOffsetDays.Value,Today)))))</Value>
-        </Values>
+        <DataSetReference>
+          <DataSetName>AvailableDate</DataSetName>
+          <ValueField>EndDate</ValueField>
+        </DataSetReference>
       </DefaultValue>
       <Hidden>true</Hidden>
       <ValidValues>
-        <ParameterValues>
-          <ParameterValue>
-            <Value>=DateAdd("s",-1,DateAdd("d",1,CDate(IIF(IsNothing(Parameters!EndDateOffsetDays.Value),Parameters!EndDatePrompt.Value,DateAdd("d",-1*Parameters!EndDateOffsetDays.Value,Today)))))</Value>
-          </ParameterValue>
-        </ParameterValues>
+        <DataSetReference>
+          <DataSetName>AvailableDate</DataSetName>
+          <ValueField>EndDate</ValueField>
+          <LabelField>EndDate</LabelField>
+        </DataSetReference>
       </ValidValues>
     </ReportParameter>
     <ReportParameter Name="Location">
@@ -2526,7 +2557,7 @@ ORDER BY SessionId,CreatedBy,CreateDate ASC</CommandText>
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
-          <Value>="Version 3.3.0.4"</Value>
+          <Value>="Version 3.3.0.5"</Value>
         </Values>
       </DefaultValue>
       <Hidden>true</Hidden>
