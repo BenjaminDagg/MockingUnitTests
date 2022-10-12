@@ -8,6 +8,7 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
     <AssemblyVersion>2.0.0.1</AssemblyVersion>
     <FileVersion>1.0.0.1</FileVersion>
+    <Configurations>Debug;Release;local</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -54,8 +55,15 @@
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="Moq" Version="4.18.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.7.2" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit.ConsoleRunner" Version="3.15.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -100,8 +108,6 @@
     </Compile>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="&quot;$(SolutionDir)..\..\AppDev_CommonLite\SystemValidator\Release_2_0_0_0\SystemValidator.exe&quot;  /validationsearchpath:$(TargetDir) /include:*.exe,*.dll  /manifestfilepath:checksum" />
-  </Target>
+	
 
 </Project>
