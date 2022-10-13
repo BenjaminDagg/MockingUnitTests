@@ -1,2 +1,0 @@
-CREATE USER [mas] FOR LOGIN [mas]
-GO

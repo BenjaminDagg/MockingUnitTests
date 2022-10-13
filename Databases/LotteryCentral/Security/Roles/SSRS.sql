@@ -1,5 +1,0 @@
-CREATE ROLE [SSRS]
-AUTHORIZATION [db_datareader]
-GO
-ALTER ROLE [SSRS] ADD MEMBER [reports]
-GO
